@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_router.dart';
 
 void main() {
-  runApp(MyApp(appRouter:  AppRouter(),));
+  runApp(
+      MyApp(
+          appRouter:  AppRouter()
+      ));
 }
 
 class MyApp extends StatelessWidget {

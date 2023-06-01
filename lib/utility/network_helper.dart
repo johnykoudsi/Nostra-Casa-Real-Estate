@@ -1,11 +1,10 @@
-
-
 import 'dart:convert';
 import 'dart:io';
-
 import 'endpoints.dart';
 import 'enums.dart';
 import 'package:http/http.dart' as http;
+
+
 class HelperResponse {
   String response;
   ServicesResponseStatues servicesResponse;
@@ -44,13 +43,16 @@ class NetworkHelpers {
 
       request.headers.addAll(headers);
 
-      request.body = body;
+      if(body != null){
+        request.body = body;
+      }
 
       http.StreamedResponse response = await request.send();
 
       String streamRes = await response.stream.bytesToString();
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
+      if (response.statusCode == 200
+          || response.statusCode == 201) {
         return HelperResponse(
             response: streamRes,
             servicesResponse: ServicesResponseStatues.success
@@ -58,7 +60,8 @@ class NetworkHelpers {
       } else {
         Map<String, dynamic> jsonError = json.decode(streamRes);
 
-        if (jsonError.containsKey("code") && jsonError["code"] == 209) {
+        if (jsonError.containsKey("code")
+            && jsonError["code"] == 209 ) {
           //todo: delete user from local storage
         }
         String? error =  jsonError["error"];

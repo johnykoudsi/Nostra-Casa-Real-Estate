@@ -9,3 +9,7 @@ enum ServicesResponseStatues {
   wrongData,
   locationError,
 }
+
+enum GetRequestType{
+  contactInfo,
+}
