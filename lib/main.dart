@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_router.dart';
+import 'package:nostra_casa/utility/app_style.dart';
 
 void main() {
   runApp(
@@ -17,9 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: AppStyle.theme,
       onGenerateRoute: appRouter.onGenerateRoute,
     );
   }

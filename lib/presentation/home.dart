@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/data/models/contact_info_model.dart';
 import 'package:nostra_casa/utility/enums.dart';
-
 import '../business_logic/get_bloc/get_bloc.dart';
 
 
@@ -47,8 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       );
                     }
                   }
-                  return const Text(
+                  return Text(
                     'loading',
+                    style: Theme.of(context).textTheme.bodyText1!.copyWith(color: Colors.white),
                   );
                 },
               ),
