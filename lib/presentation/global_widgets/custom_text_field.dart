@@ -88,7 +88,7 @@ class CustomTextField extends StatelessWidget {
             hintText: hintText,
             hintStyle: const TextStyle(
                 color: Color(0xffbdbdbd),
-                fontFamily: "",
+                fontFamily: "Cairo",
                 fontSize:18),
             filled: true,
             fillColor: Colors.white,

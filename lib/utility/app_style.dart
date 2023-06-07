@@ -29,11 +29,11 @@ class AppStyle {
         titleTextStyle: TextStyle(
           fontSize: 20,
           color: blackColor,
-          fontFamily: "ExpoArabic",
+          fontFamily: "Cairo",
           fontWeight: FontWeight.w800,
         )),
     dividerColor: const Color(0xFFD9D9D9),
-    fontFamily: 'ExpoArabic',
+    fontFamily: 'Cairo',
     textTheme: TextTheme(
       // headline1: TextStyle(),
       headline2: TextStyle(

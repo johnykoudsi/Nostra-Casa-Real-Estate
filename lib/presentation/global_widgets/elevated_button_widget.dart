@@ -8,7 +8,7 @@ class ElevatedButtonWidget extends StatelessWidget {
 
   ElevatedButtonWidget(
       {this.color = AppStyle.darkBlueColor,
-      this.fontFamily = "",
+      this.fontFamily = "Cairo",
       this.fontSize = 18,
       this.title = '',
       this.onPressed,
