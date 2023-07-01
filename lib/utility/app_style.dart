@@ -7,6 +7,7 @@ class AppStyle {
   static const Color kGreyColor = Color(0xFFb5b5b5);
   static const Color redColor = Color(0xFFD81721);
   static const Color kGreenColor = Color(0xff4BBCA7);
+  static const String fontName = "Cairo";
 
   static ThemeData theme = ThemeData(
     primaryColor: darkBlueColor,
@@ -29,11 +30,12 @@ class AppStyle {
         titleTextStyle: TextStyle(
           fontSize: 20,
           color: blackColor,
-          fontFamily: "Cairo",
+          fontFamily: fontName,
           fontWeight: FontWeight.w800,
-        )),
+        ),
+    ),
     dividerColor: const Color(0xFFD9D9D9),
-    fontFamily: 'Cairo',
+    fontFamily: fontName,
     textTheme: TextTheme(
       // headline1: TextStyle(),
       headline2: TextStyle(
@@ -51,12 +53,12 @@ class AppStyle {
         color: blackColor,
         fontWeight: AppFontWeight.bold,
       ),
-      headline5: TextStyle(fontSize: 18, color: blackColor),
+      headline5: const TextStyle(fontSize: 18, color: blackColor),
       headline6: TextStyle(
           fontSize: 16, color: blackColor, fontWeight: AppFontWeight.medium),
 
-      bodyText1: TextStyle(fontSize: 14, color: blackColor),
-      bodyText2: TextStyle(fontSize: 14, color: blackColor),
+      bodyText1: const TextStyle(fontSize: 14, color: blackColor),
+      bodyText2: const TextStyle(fontSize: 14, color: blackColor),
       // bodyText1: TextStyle(),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

@@ -4,9 +4,7 @@ import 'package:nostra_casa/utility/app_style.dart';
 
 void main() {
   runApp(
-      MyApp(
-          appRouter:  AppRouter()
-      ));
+      MyApp(appRouter:  AppRouter()));
 }
 
 class MyApp extends StatelessWidget {
