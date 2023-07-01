@@ -2,6 +2,9 @@
 
 class AppRoutes {
 
-  static const String home ="/";
+  static const String welcome ="/";
+  static const String policy ="/policy";
+
+
 
 }
