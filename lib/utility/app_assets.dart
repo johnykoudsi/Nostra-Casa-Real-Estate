@@ -8,4 +8,8 @@ class AppAssets{
   static const heart = "assets/images/heart.svg";
   static const more = "assets/images/more.svg";
 
+
+
+  static const welcome = "assets/images/welc.jpg";
+
 }

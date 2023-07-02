@@ -39,9 +39,9 @@ class ElevatedButtonWidget extends StatelessWidget {
         animationDuration: const Duration(milliseconds: 250),
         minimumSize: Size(double.infinity, getHeight * 0.045),
         maximumSize: Size(double.infinity, getHeight * 0.1),
-        // shape: const RoundedRectangleBorder(
-        //   borderRadius: kButtonRadius, // <-- Radius
-        // ),
+        shape: const RoundedRectangleBorder(
+          borderRadius: AppStyle.k4RadiusLowerPadding, // <-- Radius
+        ),
       ),
       onPressed: onPressed,
       child: Text(

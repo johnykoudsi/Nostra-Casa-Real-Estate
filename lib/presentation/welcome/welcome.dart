@@ -1,60 +1,115 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostra_casa/data/models/contact_info_model.dart';
-import 'package:nostra_casa/utility/enums.dart';
+import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
+import 'package:nostra_casa/utility/app_assets.dart';
+import 'package:nostra_casa/utility/app_style.dart';
+import '../global_widgets/elevated_button_widget.dart';
 
-import '../../business_logic/get_bloc/get_bloc.dart';
-import '../../utility/app_routes.dart';
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({Key? key}) : super(key: key);
 
-
-class Welcome extends StatefulWidget {
-  const Welcome({super.key, required this.title});
-
-  final String title;
-
-
-  @override
-  State<Welcome> createState() => _WelcomeState();
-}
-
-class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final screenWidth = screenSize.width;
-    final screenHeight = screenSize.height;
-    return BlocProvider(
-      create: (context) => GetBloc()..add(GetRequestApiEvent(getRequestType: GetRequestType.contactInfo)),
+    double getWidth = MediaQuery.of(context).size.width;
+    double getHeight = MediaQuery.of(context).size.height;
 
-      child: SafeArea(
-        child: Scaffold(
-          body: Stack(
-            children: [
-
-              Opacity(
-                opacity: 0.7,
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/images/home.jpg"),
-                      fit: BoxFit.cover,
-                    ),
+    return Scaffold(
+      body: Stack(
+        children: [
+          Container(
+            decoration:  BoxDecoration(
+                image: DecorationImage(
+                    image: const AssetImage(AppAssets.welcome),
+                    fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      AppStyle.darkBlueColor.withOpacity(0.55),
+                      BlendMode.darken
                   ),
                 ),
-              ),
-            Padding(
-                padding:  EdgeInsets.only(left: screenWidth*0.1,top: screenHeight*0.2),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).pushNamed(AppRoutes.policy);
-                  },
-                  child: Text('Welcome to Nostra Casa',style: TextStyle(color: Colors.black87,fontSize: 50,fontWeight: FontWeight.bold,
-                    fontFamily: "Cairo",),),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(getWidth * 0.038, getHeight * 0.5,
+                getWidth * 0.038, getWidth * 0.038
+            ),
+            child: Column(
+              children: [
+                Text('Hello !'.tr(),
+                    style: Theme.of(context).textTheme.headline2!.copyWith(color: AppStyle.kBackGroundColor)
+                ),
+                Text('Welcome to NostraCasa'.tr(),
+                    style: Theme.of(context).textTheme.headline4!.copyWith(color:  AppStyle.kBackGroundColor)
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: getHeight * 0.04),
+                  child: Column(
+                    children: [
+                      ElevatedButtonWidget(
+                        title: 'Login'.tr(),
+                        onPressed: () {},
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: ElevatedButtonWidget(
+                          title: 'Signup'.tr(),
+                          onPressed: () {},
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Continue as a '.tr(),
+                                style: Theme.of(context).textTheme.headline6!.copyWith(color:  AppStyle.kBackGroundColor)
+                            ),
+                            Text(
+                              'Guest'.tr(),
+                                style: Theme.of(context).textTheme.headline6!.copyWith(color:  AppStyle.kBackGroundColor)
+
+                            ),
+                          ],
+                        ),
+                      ),
+                      // Divider(
+                      //   height: 25 * SizeConfig.blockSizeHorizontal,
+                      // ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          DialogsWidgetsYesNo.showLanguageBottomSheet(context);
+                        },
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30 / 2),
+                            color: AppStyle.kGreyColor,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 25,
+                                color: Colors.black.withOpacity(0.2),
+                                offset: const Offset(0, 10),
+                              )
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.translate_outlined,
+                            color: Colors.black,
+                            size: 20,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
