@@ -98,9 +98,9 @@ class _PolicyState extends State<Policy> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: screenHeight * 0.03,
-              ),
+              // SizedBox(
+              //   height: screenHeight * 0.03,
+              // ),
               // todo : johny : don't use width and height for the button use padding in the columns more responsive and clean
               const CustomElevatedButton(
                   color: AppStyle.darkBlueColor,

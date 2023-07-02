@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
-import '../../utility/enums.dart';
+import '../../../utility/enums.dart';
+import '../elevated_button_widget.dart';
 
-class DialogsWidgets {
+class DialogsWidgetsSnackBar {
 
   static void showScaffoldSnackBar({
     required String title,
@@ -36,20 +37,20 @@ class DialogsWidgets {
     required ServicesResponseStatues servicesResponseStatues,
   }) {
     if (servicesResponseStatues == ServicesResponseStatues.success) {
-      return DialogsWidgets.showScaffoldSnackBar(
+      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
           title: "${serviceValues.reverse[servicesResponseStatues]}" ,
           color: AppStyle.kGreenColor,
           context: context
       );
     }
     if (servicesResponseStatues == ServicesResponseStatues.networkError){
-      return DialogsWidgets.showScaffoldSnackBar(
+      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
         title: "${serviceValues.reverse[servicesResponseStatues]}" ,
         context: context,
       );
     }
     else {
-      return DialogsWidgets.showScaffoldSnackBar(
+      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
         title: "${serviceValues.reverse[servicesResponseStatues]}" ,
         context: context,
       );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
+import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
 import '../presentation/home.dart';
 import '../presentation/policy.dart';
 import 'app_routes.dart';
@@ -11,10 +12,15 @@ class AppRouter {
     return MaterialPageRoute(builder: (context) {
 
       switch (settings.name) {
+
         case AppRoutes.welcome:
-          return const Welcome(title: 'welcome');
+          return const WelcomeScreen();
+
         case AppRoutes.policy:
           return  Policy(title: 'Usage and Privacy Policy');
+
+          case AppRoutes.bottomNavBar:
+          return const BottomNavBar();
 
         default:
           return const Scaffold(
