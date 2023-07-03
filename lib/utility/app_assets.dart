@@ -9,4 +9,6 @@ class AppAssets{
   static const more = "assets/images/more.svg";
   static const welcome = "assets/images/welc.jpg";
 
+  static const homeLocation = "assets/images/home_location.png";
+
 }

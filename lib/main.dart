@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/presentation/map_screen/widgets/markers.dart';
 import 'package:nostra_casa/utility/app_router.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
@@ -13,11 +14,21 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({required this.appRouter, super.key});
 
   final AppRouter appRouter;
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+@override
+  void initState() {
+    MapsMarkers.initMarkers();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,7 +37,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       debugShowCheckedModeBanner: false,
       theme: AppStyle.theme,
-      onGenerateRoute: appRouter.onGenerateRoute,
+      onGenerateRoute: widget.appRouter.onGenerateRoute,
     );
   }
 }
