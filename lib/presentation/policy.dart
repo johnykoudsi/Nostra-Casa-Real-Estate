@@ -52,7 +52,6 @@ class _PolicyState extends State<Policy> {
                   SizedBox(
                     width: screenWidth * 0.05,
                   ),
-                  // todo : johny : there is no need to add "Cario" as font family since it's already add to the whole theme app.
                   // todo : johny : replace "FontWeight.bold" with the AppFontWeight in app style please .
 
                   Text(
