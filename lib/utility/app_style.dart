@@ -97,9 +97,9 @@ class AppStyle {
 }
 
 abstract class AppFontWeight {
-  static FontWeight light = FontWeight.w200;
-  static FontWeight medium = FontWeight.w400;
-  static FontWeight book = FontWeight.w600;
-  static FontWeight semiBold = FontWeight.w700;
-  static FontWeight bold = FontWeight.w800;
+  static const FontWeight light = FontWeight.w200;
+  static const FontWeight medium = FontWeight.w400;
+  static const FontWeight book = FontWeight.w600;
+  static const FontWeight semiBold = FontWeight.w700;
+  static const FontWeight bold = FontWeight.w800;
 }

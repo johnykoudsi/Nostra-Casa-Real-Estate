@@ -52,7 +52,7 @@ class WelcomeScreen extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: ElevatedButtonWidget(
                           title: 'Signup'.tr(),
-                          onPressed: () {},
+                          onPressed: () {Navigator.pushNamed(context, "/policy");},
                         ),
                       ),
                       GestureDetector(

@@ -23,11 +23,12 @@ class CustomElevatedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         elevation: 0,
-        padding: const EdgeInsets.all(kIsWeb?15:8),
+        padding: const EdgeInsets.all(kIsWeb ? 15 : 8),
         disabledBackgroundColor: AppStyle.kGreyColor,
         animationDuration: const Duration(milliseconds: 250),
         minimumSize: Size(double.infinity, getHeight * 0.045),
-        maximumSize: Size(double.infinity, kIsWeb?getHeight * 0.2:getHeight * 0.1),
+        maximumSize:
+            Size(double.infinity, kIsWeb ? getHeight * 0.2 : getHeight * 0.1),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
@@ -37,9 +38,8 @@ class CustomElevatedButton extends StatelessWidget {
         title,
         style: TextStyle(
             color: Colors.white,
-            fontFamily: AppStyle.fontName ,
-            fontWeight: AppFontWeight.bold
-        ),
+            fontFamily: AppStyle.fontName,
+            fontWeight: AppFontWeight.bold),
       ),
     );
   }

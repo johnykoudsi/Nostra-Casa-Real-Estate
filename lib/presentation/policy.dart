@@ -21,6 +21,7 @@ class _PolicyState extends State<Policy> {
   void changeAcceptance() {
     setState(() {
       accept = !accept;
+
     });
   }
 
@@ -34,79 +35,67 @@ class _PolicyState extends State<Policy> {
         ..add(GetRequestApiEvent(getRequestType: GetRequestType.contactInfo)),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            // todo : johny : there is no need for back button since flutter will add it automatically for the app bar when there is a previous page
-            leading: Padding(
-              padding: EdgeInsets.only(top: screenHeight * 0.02),
-              child: const Icon(
-                Icons.arrow_back,
-                size: 35,
-              ),
+          appBar: AppBar(),
+          body: Padding(
+            padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
+                screenWidth * 0.038, screenWidth * 0.038
             ),
-          ),
-          // todo : johny : replace all sized boxes with width with padding for the entire column
-          body: Column(
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.05,
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      widget.title,
+                      style: const TextStyle(
+                          fontWeight: AppFontWeight.bold,
+                          fontSize: 22,
+                          fontFamily: "Cairo"),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: screenHeight * 0.1,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                      "you should only contact with the real estate owners in the available hours"),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.5,
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
+                      screenWidth * 0.038, screenWidth * 0.038
                   ),
-                  // todo : johny : replace "FontWeight.bold" with the AppFontWeight in app style please .
-
-                  Text(
-                    widget.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 22,
-                        fontFamily: "Cairo"),
+                  child: Row(
+                    children: [
+                      CustomCheckbox(
+                        isSelected: accept,
+                        iconSize: 20,
+                        size: 25,
+                        color: Colors.grey,
+                        onTap: () {
+                          changeAcceptance();
+                        },
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: screenWidth * 0.038,right: screenWidth * 0.038),
+                        child: Text(
+                          "I agree to all terms",
+                          style: Theme.of(context).textTheme.headline5!,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              SizedBox(
-                height: screenHeight * 0.1,
-              ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                    "you should only contact with the real estate owners in the available hours"),
-              ),
-              SizedBox(
-                height: screenHeight * 0.5,
-              ),
-              Row(
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.05,
-                  ),
-                  CustomCheckbox(
-                    isSelected: accept,
-                    iconSize: 20,
-                    size: 25,
-                    color: Colors.grey,
-                    onTap: () {
-                      changeAcceptance();
-                    },
-                  ),
-                  SizedBox(
-                    width: screenWidth * 0.02,
-                  ),
-                  Text(
-                    "I agree to all terms",
-                    style: Theme.of(context).textTheme.headline5!,
-                  ),
-                ],
-              ),
-              // SizedBox(
-              //   height: screenHeight * 0.03,
-              // ),
-              // todo : johny : don't use width and height for the button use padding in the columns more responsive and clean
-              const CustomElevatedButton(
+                ),
+                 CustomElevatedButton(
                   color: AppStyle.darkBlueColor,
                   title: 'Next',
-                  onPressed: null,
-              ),
-            ],
+                  onPressed: accept ? (){Navigator.pushNamed(context, "/signup");} : null
+                ),
+              ],
+            ),
           ),
         ),
       ),
