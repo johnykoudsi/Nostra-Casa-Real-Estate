@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
 import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
-import '../presentation/home.dart';
 import '../presentation/policy.dart';
 import 'app_routes.dart';
 

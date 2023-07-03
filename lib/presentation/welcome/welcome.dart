@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../global_widgets/elevated_button_widget.dart';
 
@@ -17,29 +18,30 @@ class WelcomeScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration:  BoxDecoration(
-                image: DecorationImage(
-                    image: const AssetImage(AppAssets.welcome),
-                    fit: BoxFit.cover,
-                  colorFilter: ColorFilter.mode(
-                      AppStyle.darkBlueColor.withOpacity(0.3),
-                      BlendMode.darken
-                  ),
-                ),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: const AssetImage(AppAssets.welcome),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    AppStyle.darkBlueColor.withOpacity(0.6), BlendMode.darken),
+              ),
             ),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(getWidth * 0.038, getHeight * 0.5,
-                getWidth * 0.038, getWidth * 0.038
-            ),
+                getWidth * 0.038, getWidth * 0.038),
             child: Column(
               children: [
                 Text('Hello !'.tr(),
-                    style: Theme.of(context).textTheme.headline2!.copyWith(color: AppStyle.kBackGroundColor)
-                ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(color: AppStyle.kBackGroundColor)),
                 Text('Welcome to NostraCasa'.tr(),
-                    style: Theme.of(context).textTheme.headline4!.copyWith(color:  AppStyle.kBackGroundColor)
-                ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: AppStyle.kBackGroundColor)),
                 Padding(
                   padding: EdgeInsets.only(top: getHeight * 0.04),
                   child: Column(
@@ -49,26 +51,38 @@ class WelcomeScreen extends StatelessWidget {
                         onPressed: () {},
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         child: ElevatedButtonWidget(
                           title: 'Signup'.tr(),
-                          onPressed: () {Navigator.pushNamed(context, "/policy");},
+                          onPressed: () {
+                            //todo : johny use app router class to navigate instead
+                            Navigator.pushNamed(context, "/policy");
+                          },
                         ),
                       ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.of(context).pushNamed(AppRoutes.bottomNavBar);
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              'Continue as a '.tr(),
-                                style: Theme.of(context).textTheme.headline6!.copyWith(color:  AppStyle.kBackGroundColor)
-                            ),
-                            Text(
-                              'Guest'.tr(),
-                                style: Theme.of(context).textTheme.headline6!.copyWith(color:  AppStyle.kBackGroundColor)
+                            Text('Continue as a '.tr(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(
+                                        color: AppStyle.kBackGroundColor)),
+                            Text('Guest'.tr(),
 
-                            ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headline6!
+                                    .copyWith(
+                                        color: AppStyle.kBackGroundColor)),
                           ],
                         ),
                       ),

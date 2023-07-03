@@ -37,5 +37,5 @@ flutter:
   fonts:
     - family: Cairo
       fonts:
-        - asset: fonts/Cairo-Regular.ttf
+        - asset: fonts/CAIRO-REGULAR.OTF
   uses-material-design: true

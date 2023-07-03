@@ -45,7 +45,7 @@ class DialogsWidgetsYesNo {
                     Expanded(
                       child: ElevatedButtonWidget(
                         title: noTitle,
-                        color: AppStyle.kGreyColor,
+                        mainColor: AppStyle.kGreyColor,
                         onPressed: onNoTap,
                       ),
                     ),
@@ -104,7 +104,8 @@ class DialogsWidgetsYesNo {
                       flex: 6,
                       child: ElevatedButtonWidget(
                         title: "Cancel",
-                        color: AppStyle.kGreyColor,
+                        mainColor: AppStyle.kGreyColor,
+                        gradientColor: AppStyle.kGreyColor,
                         onPressed: () => Navigator.of(context).pop(false),
                       ),
                     ),

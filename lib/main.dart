@@ -4,16 +4,13 @@ import 'package:nostra_casa/utility/app_router.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 void main() {
-  runApp(
-      EasyLocalization(
-      supportedLocales: const [Locale('en'), Locale('ar')],
-      path: 'assets/translation',
-      startLocale: const Locale('en'),
-      // <-- change the path of the translation files
-      fallbackLocale: const Locale('en'),
-      child: MyApp(appRouter: AppRouter()),
-      ),
-  );
+  runApp(EasyLocalization(
+    supportedLocales: const [Locale('en'), Locale('ar')],
+    path: 'assets/translation',
+    startLocale: const Locale('en'),
+    fallbackLocale: const Locale('en'),
+    child: MyApp(appRouter: AppRouter()),
+  ));
 }
 
 class MyApp extends StatelessWidget {

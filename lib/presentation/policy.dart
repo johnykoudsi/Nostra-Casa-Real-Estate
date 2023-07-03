@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/custom_check_box.dart';
-import 'package:nostra_casa/presentation/global_widgets/custom_elevated_button.dart';
+import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:nostra_casa/utility/enums.dart';
 import '../../business_logic/get_bloc/get_bloc.dart';
@@ -21,7 +21,6 @@ class _PolicyState extends State<Policy> {
   void changeAcceptance() {
     setState(() {
       accept = !accept;
-
     });
   }
 
@@ -35,27 +34,14 @@ class _PolicyState extends State<Policy> {
         ..add(GetRequestApiEvent(getRequestType: GetRequestType.contactInfo)),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(),
+          appBar: AppBar(
+            title: Text(widget.title),
+          ),
           body: Padding(
             padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
-                screenWidth * 0.038, screenWidth * 0.038
-            ),
+                screenWidth * 0.038, screenWidth * 0.038),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                          fontWeight: AppFontWeight.bold,
-                          fontSize: 22,
-                          fontFamily: "Cairo"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: screenHeight * 0.1,
-                ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -64,10 +50,10 @@ class _PolicyState extends State<Policy> {
                 SizedBox(
                   height: screenHeight * 0.5,
                 ),
+
                 Padding(
                   padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
-                      screenWidth * 0.038, screenWidth * 0.038
-                  ),
+                      screenWidth * 0.038, screenWidth * 0.038),
                   child: Row(
                     children: [
                       CustomCheckbox(
@@ -80,7 +66,9 @@ class _PolicyState extends State<Policy> {
                         },
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: screenWidth * 0.038,right: screenWidth * 0.038),
+                        padding: EdgeInsets.only(
+                            left: screenWidth * 0.038,
+                            right: screenWidth * 0.038),
                         child: Text(
                           "I agree to all terms",
                           style: Theme.of(context).textTheme.headline5!,
@@ -89,14 +77,18 @@ class _PolicyState extends State<Policy> {
                     ],
                   ),
                 ),
-                 CustomElevatedButton(
-                  color: AppStyle.darkBlueColor,
-                  title: 'Next',
-                  onPressed: accept ? (){Navigator.pushNamed(context, "/signup");} : null
-                ),
+                ElevatedButtonWidget(
+                    mainColor: AppStyle.darkBlueColor,
+                    title: 'Next',
+                    onPressed: accept
+                        ? () {
+                            Navigator.pushNamed(context, "/signup");
+                          }
+                        : null),
               ],
             ),
           ),
+
         ),
       ),
     );
