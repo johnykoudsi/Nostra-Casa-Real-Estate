@@ -20,7 +20,7 @@ class DialogsWidgetsSnackBar {
           dismissDirection: DismissDirection.none,
           content: Text(
             title,
-            style: Theme.of(context).textTheme.headline5,
+            style: Theme.of(context).textTheme.headline5!.copyWith(color: AppStyle.kBackGroundColor),
           ),
           margin: const EdgeInsets.fromLTRB(20, 0, 20, 70),
           backgroundColor: color,

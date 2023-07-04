@@ -3,14 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 class CustomTextField extends StatelessWidget {
+
   String hintText;
-  IconData? icon;
   TextInputType? textInputType;
   int? fontSize;
   TextEditingController? controller;
   String? Function(String?)? validator;
-  IconData? icon2;
-  Function()? secureText;
   bool onlyNumber;
   bool passwordBool;
   Function(String)? onChanged;
@@ -31,13 +29,10 @@ class CustomTextField extends StatelessWidget {
       this.action = TextInputAction.none,
       required this.hintText,
       this.onChanged,
-      this.icon,
       this.textInputType,
       this.fontSize,
       this.controller,
       this.validator,
-      this.icon2,
-      this.secureText,
       required this.passwordBool,
       this.onlyNumber = false,
       this.onSubmit,
@@ -52,11 +47,9 @@ class CustomTextField extends StatelessWidget {
       children: [
         Text(
           label,
-          style:
-              TextStyle(
-                  fontSize: 18,
-                  color: labelColor,
-              ),
+          style:Theme.of(context).textTheme.bodyText1!.copyWith(
+            color: labelColor,
+          )
         ),
         const SizedBox(
           height: 6,
@@ -81,38 +74,36 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           obscureText: passwordBool,
           keyboardType: textInputType,
-          cursorColor: AppStyle.blackColor,
+          cursorColor: AppStyle.darkBlueColor,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.only(left: 15, bottom: 0, top: 0, right: 15),
             hintText: hintText,
             hintStyle: const TextStyle(
-                color: Color(0xffbdbdbd),
-                fontFamily: "Cairo",
-                fontSize:18),
+                color: Color(0xffbdbdbd), fontFamily: "Cairo", fontSize: 18),
             filled: true,
             fillColor: Colors.white,
             enabledBorder: const OutlineInputBorder(
-                 borderRadius: AppStyle.k4RadiusLowerPadding,
+                borderRadius: AppStyle.k4RadiusLowerPadding,
                 borderSide: BorderSide(
                   color: Colors.transparent,
                 )),
-            disabledBorder:  const OutlineInputBorder(
-                borderRadius:  AppStyle.k4RadiusLowerPadding,
+            disabledBorder: const OutlineInputBorder(
+                borderRadius: AppStyle.k4RadiusLowerPadding,
                 borderSide: BorderSide(
                   color: Colors.transparent,
                 )),
             enabled: true,
             focusedBorder: const OutlineInputBorder(
-                borderRadius:  AppStyle.k4RadiusLowerPadding,
+                borderRadius: AppStyle.k4RadiusLowerPadding,
                 borderSide: BorderSide(
                   width: 2,
-                  color:  AppStyle.blackColor,
+                  color: AppStyle.darkBlueColor,
                 )),
             border: const OutlineInputBorder(
-                borderRadius:  AppStyle.k4RadiusLowerPadding,
+                borderRadius: AppStyle.k4RadiusLowerPadding,
                 borderSide: BorderSide(
-                  color: AppStyle.blackColor,
+                  color: AppStyle.darkBlueColor,
                 )),
           ),
           textInputAction: action,

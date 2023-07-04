@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../global_widgets/custom_text_field.dart';
 import '../global_widgets/elevated_button_widget.dart';
@@ -18,13 +19,12 @@ class _LoginScreenState extends State<LoginScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  PhoneNumber phoneNumber = PhoneNumber(isoCode: "IQ");
+  PhoneNumber phoneNumber = PhoneNumber(isoCode: "SY");
 
   @override
   Widget build(BuildContext context) {
     double getWidth = MediaQuery.of(context).size.width;
     double getHeight = MediaQuery.of(context).size.height;
-    final double heightBetweenHeaderAndTextField = getHeight * 0.002;
     final double heightBetweenFields = getHeight * 0.015;
 
     return ColoredBox(
@@ -67,8 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: Theme.of(context).textTheme.bodyText1,
                       ),
 
-                      SizedBox(
-                        height: heightBetweenHeaderAndTextField,
+                      const SizedBox(
+                        height: 6,
                       ),
 
                       Container(
@@ -81,22 +81,19 @@ class _LoginScreenState extends State<LoginScreen> {
                           onInputChanged: (PhoneNumber value) {
                             phoneNumber = value;
                           },
-                          hintText: "77X XXX XXXX",
                           searchBoxDecoration: const InputDecoration(
                             contentPadding: EdgeInsets.only(top: 30),
                             // hintText: "Search by country name or dial code",
-                            labelText:
-                                "Search by country name or dial code",
+                            labelText: "Search by country name or dial code",
                           ),
-                          textStyle:
-                              const TextStyle(color: AppStyle.blackColor),
+                          textStyle: Theme.of(context).textTheme.headline5!.copyWith(height:2.5),
                           initialValue: phoneNumber,
                           keyboardAction: TextInputAction.next,
-                          cursorColor: AppStyle.blackColor,
+                          cursorColor: AppStyle.darkBlueColor,
                           textFieldController: phoneNumberController,
                           selectorConfig: const SelectorConfig(
-                              selectorType:
-                                  PhoneInputSelectorType.BOTTOM_SHEET),
+                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET
+                          ),
                         ),
                       ),
 
@@ -104,18 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: heightBetweenFields,
                       ),
-                      Text(
-                        "Password".tr(),
-                        style: Theme.of(context).textTheme.bodyText2,
-                      ),
-                      SizedBox(
-                        height: heightBetweenHeaderAndTextField,
-                      ),
                       CustomTextField(
                         action: TextInputAction.done,
                         controller: passwordController,
-                        // maxLength: 15,
-
+                        label: "Password",
                         onlyNumber: false,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -131,33 +120,28 @@ class _LoginScreenState extends State<LoginScreen> {
                         textInputType: TextInputType.visiblePassword,
                         passwordBool: true,
                       ),
+
                       SizedBox(
                         height: heightBetweenFields,
                       ),
                       GestureDetector(
                         onTap: () async {
-
                           if (phoneNumberController.text.isEmpty) {
                             DialogsWidgetsSnackBar.showScaffoldSnackBar(
-                                title: "Please enter phone number first !"
-                                    .tr(),
+                                title: "Please enter phone number first !".tr(),
                                 context: context);
-                          }
-                          else {
+                          } else {
                             DialogsWidgetsYesNo.showYesNoDialog(
                                 title:
                                     "${"Verification code will be send to this number :".tr()}"
                                     "\n ${phoneNumber.phoneNumber?.replaceAllMapped(RegExp(r'(\d{3})(\d{3})(\d+)'), (Match m) => "(${m[1]}) ${m[2]}-${m[3]}")}",
                                 noTitle: "Cancel".tr(),
                                 yesTitle: "Send".tr(),
-                                onYesTap: () {
-
-                                },
+                                onYesTap: () {},
                                 context: context,
                                 onNoTap: () {
                                   Navigator.of(context).pop();
-                                }
-                            );
+                                });
                           }
                         },
                         child: Padding(
@@ -165,12 +149,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('Forgot Password '.tr(),
-                            style: Theme.of(context).textTheme.bodyText2,
+                              Text(
+                                'Forgot Password '.tr(),
+                                style: Theme.of(context).textTheme.bodyText2,
                               ),
                               Text(
                                 'Send a code'.tr(),
-                                style: Theme.of(context).textTheme.headline5,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontWeight: AppFontWeight.bold),
                               ),
                             ],
                           ),
@@ -178,32 +166,30 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
+
                   SizedBox(height: getHeight * 0.06),
                   ElevatedButtonWidget(
                     title: 'Login'.tr(),
                     onPressed: () {
-                      if (_key.currentState!.validate()) {
-
-                      }
+                      if (_key.currentState!.validate()) {}
                     },
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushReplacementNamed('/signup');
+                      Navigator.of(context).pushReplacementNamed(AppRoutes.signup);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("Don't have an account ? ".tr(),
+                          Text(
+                            "Don't have an account ? ".tr(),
                             style: Theme.of(context).textTheme.bodyText2,
-
                           ),
                           Text(
                             'Signup'.tr(),
-                            style: Theme.of(context).textTheme.headline5,
-
+                            style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: AppFontWeight.bold),
                           ),
                         ],
                       ),

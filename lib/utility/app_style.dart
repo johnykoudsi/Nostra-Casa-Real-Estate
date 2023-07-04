@@ -62,11 +62,21 @@ class AppStyle {
       ),
       headline5: TextStyle(fontSize: 18, color: blackColor),
       headline6: TextStyle(
-          fontSize: 16, color: blackColor, fontWeight: AppFontWeight.medium),
+          fontSize: 16,
+          color: blackColor,
+          fontWeight: AppFontWeight.medium
+      ),
 
-      bodyText1: TextStyle(fontSize: 14, color: blackColor),
-      bodyText2: TextStyle(fontSize: 14, color: blackColor),
-      // bodyText1: TextStyle(),
+      bodyText1: TextStyle(
+          fontSize: 18,
+          color: blackColor,
+          fontWeight: AppFontWeight.light
+      ),
+      bodyText2: TextStyle(
+          fontSize: 14,
+          color: blackColor,
+          fontWeight: AppFontWeight.light
+      ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
