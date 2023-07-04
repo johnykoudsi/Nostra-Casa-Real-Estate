@@ -173,7 +173,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         SizedBox(height: heightBetweenFields),
                         ElevatedButtonWidget(
-                          title: 'Login'.tr(),
+                          title: 'Continue'.tr(),
                           //gradientColor: AppStyle.darkBlueColor,
                           onPressed: () {
                             if (_key.currentState!.validate()) {}
