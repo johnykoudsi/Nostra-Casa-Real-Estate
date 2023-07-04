@@ -16,12 +16,11 @@ class Policy extends StatefulWidget {
 }
 
 class _PolicyState extends State<Policy> {
-  bool accept = false;
+  bool? accept = false;
 
   void changeAcceptance() {
     setState(() {
-      accept = !accept;
-
+      accept = !accept!;
     });
   }
 
@@ -38,8 +37,7 @@ class _PolicyState extends State<Policy> {
           appBar: AppBar(),
           body: Padding(
             padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
-                screenWidth * 0.038, screenWidth * 0.038
-            ),
+                screenWidth * 0.038, screenWidth * 0.038),
             child: Column(
               children: [
                 Row(
@@ -64,35 +62,30 @@ class _PolicyState extends State<Policy> {
                 SizedBox(
                   height: screenHeight * 0.5,
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
-                      screenWidth * 0.038, screenWidth * 0.038
+                BottomAppBar(
+                  color: AppStyle.kBackGroundColor,
+                  elevation: 0,
+                  child: Padding(
+                    padding:  EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        CustomCheckbox(
+                          value: accept,
+                            onChange: (accept) {
+                              changeAcceptance();
+                            },
+                            text: "I agree"),
+                        CustomElevatedButton(
+                            color: AppStyle.darkBlueColor,
+                            title: 'Next',
+                            onPressed: accept!
+                                ? () {
+                                    Navigator.pushNamed(context, "/signup");
+                                  }
+                                : null),
+                      ],
+                    ),
                   ),
-                  child: Row(
-                    children: [
-                      CustomCheckbox(
-                        isSelected: accept,
-                        iconSize: 20,
-                        size: 25,
-                        color: Colors.grey,
-                        onTap: () {
-                          changeAcceptance();
-                        },
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: screenWidth * 0.038,right: screenWidth * 0.038),
-                        child: Text(
-                          "I agree to all terms",
-                          style: Theme.of(context).textTheme.headline5!,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                 CustomElevatedButton(
-                  color: AppStyle.darkBlueColor,
-                  title: 'Next',
-                  onPressed: accept ? (){Navigator.pushNamed(context, "/signup");} : null
                 ),
               ],
             ),

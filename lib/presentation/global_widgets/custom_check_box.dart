@@ -3,39 +3,27 @@ import 'package:nostra_casa/utility/app_style.dart';
 
 
 class CustomCheckbox extends StatelessWidget {
-  final double? size;
-  final double? iconSize;
-  late  bool? isSelected;
-  final Function() onTap;
-  final Color color;
 
 
-  CustomCheckbox({ this.size, this.iconSize,this.isSelected=false ,  required this.onTap,required this.color});
+  late  bool? value;
+  final Function(bool?) onChange;
+  final String text;
+
+
+  CustomCheckbox({this.value=false ,required this.onChange,required this.text});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: AnimatedContainer(
-        duration: Duration(milliseconds: 500),
-        curve: Curves.fastLinearToSlowEaseIn,
-        decoration: BoxDecoration(
-            color: isSelected! ? AppStyle.darkBlueColor : Colors.transparent,
-            borderRadius: BorderRadius.circular(5.0),
-            border: isSelected! ? null : Border.all(
-              color: color,
-              width: 1.5,
-            )
-        ),
-        width: size,
-        height: size,
-
-        child: isSelected!  ? Icon(
-          Icons.check,
-          color: Colors.white,
-          size: iconSize,
-        ) :null,
+    return CheckboxListTile(
+      controlAffinity: ListTileControlAffinity.leading,
+      title: Text(text),
+      value: value, onChanged: onChange,
+      side: const BorderSide(color: AppStyle.kGreyColor,),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(3.5),
       ),
+
+      activeColor: AppStyle.darkBlueColor,
     );
   }
 }
