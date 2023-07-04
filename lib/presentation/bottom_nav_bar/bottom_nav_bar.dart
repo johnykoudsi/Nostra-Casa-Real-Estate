@@ -31,84 +31,87 @@ class _BottomNavBarState extends State<BottomNavBar> {
       return DialogsWidgetsYesNo.onWillPopMethod(context);
     }
 
-    return SafeArea(
-      bottom: false,
-      child: WillPopScope(
-        onWillPop: onWillPopMethod,
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          bottomNavigationBar: SizedBox(
-            height: getWidth * 0.22,
-            child: BottomNavigationBar(
-              selectedFontSize: 0.0,
-              unselectedFontSize: 0.0,
-              elevation: 0,
-              backgroundColor: AppStyle.kBackGroundColor,
-              type: BottomNavigationBarType.fixed,
-              currentIndex: selectedIndex,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              onTap: onItemTapped,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  icon: CustomNavigatorWidget(
-                    widgetIndex: 0,
-                    svgPath: AppAssets.mkbr,
-                    selectedIndex: selectedIndex,
+    return ColoredBox(
+      color: AppStyle.kBackGroundColor,
+      child: SafeArea(
+        bottom: false,
+        child: WillPopScope(
+          onWillPop: onWillPopMethod,
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            bottomNavigationBar: SizedBox(
+              height: getWidth * 0.22,
+              child: BottomNavigationBar(
+                selectedFontSize: 0.0,
+                unselectedFontSize: 0.0,
+                elevation: 0,
+                backgroundColor: AppStyle.kBackGroundColor,
+                type: BottomNavigationBarType.fixed,
+                currentIndex: selectedIndex,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                onTap: onItemTapped,
+                items: <BottomNavigationBarItem>[
+                  BottomNavigationBarItem(
+                    icon: CustomNavigatorWidget(
+                      widgetIndex: 0,
+                      svgPath: AppAssets.mkbr,
+                      selectedIndex: selectedIndex,
+                    ),
+                    label: 'Explore',
                   ),
-                  label: 'Explore',
-                ),
-                BottomNavigationBarItem(
-                  icon: CustomNavigatorWidget(
-                    widgetIndex: 1,
-                    svgPath: AppAssets.mapLocation,
-                    selectedIndex: selectedIndex,
+                  BottomNavigationBarItem(
+                    icon: CustomNavigatorWidget(
+                      widgetIndex: 1,
+                      svgPath: AppAssets.mapLocation,
+                      selectedIndex: selectedIndex,
+                    ),
+                    label: 'Map',
                   ),
-                  label: 'Map',
-                ),
-                BottomNavigationBarItem(
-                  icon: CustomNavigatorWidget(
-                    widgetIndex: 2,
-                    svgPath: AppAssets.houseAdd,
-                    selectedIndex: selectedIndex,
+                  BottomNavigationBarItem(
+                    icon: CustomNavigatorWidget(
+                      widgetIndex: 2,
+                      svgPath: AppAssets.houseAdd,
+                      selectedIndex: selectedIndex,
+                    ),
+                    label: 'Add Property',
                   ),
-                  label: 'Add Property',
-                ),
-                BottomNavigationBarItem(
-                  icon: CustomNavigatorWidget(
-                    widgetIndex: 3,
-                    svgPath: AppAssets.heart,
-                    selectedIndex: selectedIndex,
+                  BottomNavigationBarItem(
+                    icon: CustomNavigatorWidget(
+                      widgetIndex: 3,
+                      svgPath: AppAssets.heart,
+                      selectedIndex: selectedIndex,
+                    ),
+                    label: 'WishList',
                   ),
-                  label: 'WishList',
-                ),
-                BottomNavigationBarItem(
-                  icon: CustomNavigatorWidget(
-                    widgetIndex: 4,
-                    svgPath: AppAssets.more,
-                    selectedIndex: selectedIndex,
+                  BottomNavigationBarItem(
+                    icon: CustomNavigatorWidget(
+                      widgetIndex: 4,
+                      svgPath: AppAssets.more,
+                      selectedIndex: selectedIndex,
+                    ),
+                    label: 'More',
                   ),
-                  label: 'More',
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          body: PageTransitionSwitcher(
-            duration: const Duration(milliseconds: 600),
-            reverse:
-                context.locale.languageCode == 'ar' ? !isReverse : isReverse,
-            transitionBuilder: (Widget child, Animation<double> animation,
-                Animation<double> secondaryAnimation) {
-              return SharedAxisTransition(
-                animation: animation,
-                secondaryAnimation: secondaryAnimation,
-                transitionType: _transitionType,
-                child: child,
-              );
-            },
-            child: GetSelectedScreenByIndex(
-              screenIndex: selectedIndex,
-              key: Key(selectedIndex.toString()),
+            body: PageTransitionSwitcher(
+              duration: const Duration(milliseconds: 600),
+              reverse:
+                  context.locale.languageCode == 'ar' ? !isReverse : isReverse,
+              transitionBuilder: (Widget child, Animation<double> animation,
+                  Animation<double> secondaryAnimation) {
+                return SharedAxisTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  transitionType: _transitionType,
+                  child: child,
+                );
+              },
+              child: GetSelectedScreenByIndex(
+                screenIndex: selectedIndex,
+                key: Key(selectedIndex.toString()),
+              ),
             ),
           ),
         ),

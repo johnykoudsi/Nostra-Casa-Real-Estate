@@ -40,7 +40,7 @@ class _MapScreenState extends State<MapScreen> {
       body: GoogleMap(
         initialCameraPosition: _defaultLocation,
         zoomGesturesEnabled: true,
-        zoomControlsEnabled: false,
+        zoomControlsEnabled: true,
         tiltGesturesEnabled:false,
         buildingsEnabled: false,
         mapType: MapType.normal,
