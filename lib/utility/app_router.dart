@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
 import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
+import '../presentation/login_screen/login_screen.dart';
 import '../presentation/policy.dart';
 import 'app_routes.dart';
 
@@ -23,6 +24,9 @@ class AppRouter {
 
           case AppRoutes.bottomNavBar:
           return const BottomNavBar();
+
+        case AppRoutes.login:
+          return const LoginScreen();
 
         default:
           return const Scaffold(

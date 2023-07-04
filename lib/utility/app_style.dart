@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppStyle {
-  static const Color blackColor = Color(0xFF000000);
+  static const Color blackColor = Color(0xFF333333);
   static const Color darkBlueColor = Color(0xff20315a);
   static const Color lightBlueColor = Color(0xFF197FB7);
   static const Color kBackGroundColor = Color(0xffF0F0F0);
@@ -25,20 +25,26 @@ class AppStyle {
     checkboxTheme: const CheckboxThemeData().copyWith(
         fillColor: MaterialStateProperty.all<Color>(const Color(0xFF5BBA6F))),
     appBarTheme: const AppBarTheme(
-        backgroundColor: kBackGroundColor,
-        surfaceTintColor: darkBlueColor,
-        centerTitle: true,
-        titleTextStyle: TextStyle(
-          fontSize: 24,
-          color: blackColor,
-          fontFamily: fontName,
-          fontWeight: AppFontWeight.bold,
-        ),
+      backgroundColor: kBackGroundColor,
+      surfaceTintColor: darkBlueColor,
+      centerTitle: true,
+      titleTextStyle: TextStyle(
+        fontSize: 24,
+        color: blackColor,
+        fontFamily: fontName,
+        fontWeight: AppFontWeight.bold,
+      ),
     ),
     dividerColor: const Color(0xFFD9D9D9),
     fontFamily: fontName,
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
       // headline1: TextStyle(),
+      headline1: TextStyle(
+        fontSize: 35,
+        fontWeight: AppFontWeight.bold,
+        fontFamily: fontName,
+        color: blackColor,
+      ),
       headline2: TextStyle(
         fontSize: 28,
         fontWeight: AppFontWeight.bold,
@@ -46,7 +52,7 @@ class AppStyle {
       ),
       headline3: TextStyle(
         fontSize: 24,
-        fontWeight: AppFontWeight.semiBold,
+        fontWeight: AppFontWeight.bold,
         color: blackColor,
       ),
       headline4: TextStyle(
@@ -54,12 +60,12 @@ class AppStyle {
         color: blackColor,
         fontWeight: AppFontWeight.bold,
       ),
-      headline5: const TextStyle(fontSize: 18, color: blackColor),
+      headline5: TextStyle(fontSize: 18, color: blackColor),
       headline6: TextStyle(
           fontSize: 16, color: blackColor, fontWeight: AppFontWeight.medium),
 
-      bodyText1: const TextStyle(fontSize: 14, color: blackColor),
-      bodyText2: const TextStyle(fontSize: 14, color: blackColor),
+      bodyText1: TextStyle(fontSize: 14, color: blackColor),
+      bodyText2: TextStyle(fontSize: 14, color: blackColor),
       // bodyText1: TextStyle(),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
@@ -100,7 +106,5 @@ class AppStyle {
 abstract class AppFontWeight {
   static const FontWeight light = FontWeight.w200;
   static const FontWeight medium = FontWeight.w400;
-  static const FontWeight book = FontWeight.w600;
-  static const FontWeight semiBold = FontWeight.w700;
   static const FontWeight bold = FontWeight.w800;
 }

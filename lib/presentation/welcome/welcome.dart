@@ -48,7 +48,9 @@ class WelcomeScreen extends StatelessWidget {
                     children: [
                       ElevatedButtonWidget(
                         title: 'Login'.tr(),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(AppRoutes.login);
+                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
