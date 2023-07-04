@@ -20,7 +20,7 @@ class AppRouter {
         case AppRoutes.policy:
           return  Policy(title: 'Usage and Privacy Policy');
         case AppRoutes.signup:
-          return const SignUpScreen();
+          return const SignUpScreen(title: 'Welcome');
 
           case AppRoutes.bottomNavBar:
           return const BottomNavBar();

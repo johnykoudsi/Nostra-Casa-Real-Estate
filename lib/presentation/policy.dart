@@ -53,7 +53,6 @@ class _PolicyState extends State<Policy> {
                       "real estate owners in the available hours",
                 style: Theme.of(context).textTheme.headline6,
               ),
-
             ],
           ),
           bottomSheet: Column(
@@ -69,7 +68,6 @@ class _PolicyState extends State<Policy> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
                 child: ElevatedButtonWidget(
-                    //color: AppStyle.darkBlueColor,
                     title: 'Next',
                     onPressed: accept!
                         ? () {

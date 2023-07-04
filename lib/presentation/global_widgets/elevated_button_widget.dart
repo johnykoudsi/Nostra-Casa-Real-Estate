@@ -38,7 +38,7 @@ class ElevatedButtonWidget extends StatelessWidget {
             mainColor
           ],
         ),
-        borderRadius: AppStyle.k4RadiusLowerPadding,
+        borderRadius: AppStyle.k8BorderRadius,
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -51,7 +51,7 @@ class ElevatedButtonWidget extends StatelessWidget {
           minimumSize: Size(double.infinity, getHeight * 0.045),
           maximumSize: Size(double.infinity, getHeight * 0.1),
           shape: const RoundedRectangleBorder(
-            borderRadius: AppStyle.k4RadiusLowerPadding, // <-- Radius
+            borderRadius: AppStyle.k8BorderRadius, // <-- Radius
           ),
         ),
         onPressed: onPressed,

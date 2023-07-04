@@ -7,6 +7,7 @@ import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../global_widgets/custom_text_field.dart';
 import '../global_widgets/elevated_button_widget.dart';
+import '../global_widgets/phone_number_field.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -71,31 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 6,
                       ),
 
-                      Container(
-                        padding: const EdgeInsets.only(left: 12),
-                        decoration: const BoxDecoration(
-                          borderRadius: AppStyle.k4RadiusLowerPadding,
-                          color: Colors.white,
-                        ),
-                        child: InternationalPhoneNumberInput(
-                          onInputChanged: (PhoneNumber value) {
-                            phoneNumber = value;
-                          },
-                          searchBoxDecoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(top: 30),
-                            // hintText: "Search by country name or dial code",
-                            labelText: "Search by country name or dial code",
-                          ),
-                          textStyle: Theme.of(context).textTheme.headline5!.copyWith(height:2.5),
-                          initialValue: phoneNumber,
-                          keyboardAction: TextInputAction.next,
-                          cursorColor: AppStyle.darkBlueColor,
-                          textFieldController: phoneNumberController,
-                          selectorConfig: const SelectorConfig(
-                              selectorType: PhoneInputSelectorType.BOTTOM_SHEET
-                          ),
-                        ),
-                      ),
+                      PhoneNumberField(
+                          phoneNumberController: phoneNumberController),
 
                       // password text field
                       SizedBox(
@@ -177,7 +155,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushReplacementNamed(AppRoutes.signup);
+                      Navigator.of(context)
+                          .pushReplacementNamed(AppRoutes.signup);
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -190,7 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           Text(
                             'Signup'.tr(),
-                            style: Theme.of(context).textTheme.bodyText2!.copyWith(fontWeight: AppFontWeight.bold),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontWeight: AppFontWeight.bold),
                           ),
                         ],
                       ),

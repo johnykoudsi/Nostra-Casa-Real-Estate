@@ -11,6 +11,7 @@ class AppStyle {
   static const String fontName = "Cairo";
 
   static ThemeData theme = ThemeData(
+    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: kBackGroundColor),
     primaryColor: darkBlueColor,
     useMaterial3: true,
     scaffoldBackgroundColor: kBackGroundColor,
@@ -21,9 +22,9 @@ class AppStyle {
     progressIndicatorTheme: const ProgressIndicatorThemeData()
         .copyWith(refreshBackgroundColor: kBackGroundColor),
     radioTheme: const RadioThemeData().copyWith(
-        fillColor: MaterialStateProperty.all<Color>(const Color(0xFF5BBA6F))),
+        fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
     checkboxTheme: const CheckboxThemeData().copyWith(
-        fillColor: MaterialStateProperty.all<Color>(const Color(0xFF5BBA6F))),
+        fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
     appBarTheme: const AppBarTheme(
       backgroundColor: kBackGroundColor,
       surfaceTintColor: darkBlueColor,
