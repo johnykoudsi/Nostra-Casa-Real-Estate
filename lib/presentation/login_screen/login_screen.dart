@@ -170,6 +170,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: getHeight * 0.06),
                   ElevatedButtonWidget(
                     title: 'Login'.tr(),
+                    //gradientColor: AppStyle.darkBlueColor,
                     onPressed: () {
                       if (_key.currentState!.validate()) {}
                     },
