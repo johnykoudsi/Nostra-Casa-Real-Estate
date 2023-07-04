@@ -1,10 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/markers.dart';
+import 'package:google_maps_flutter_platform_interface/google_maps_flutter_platform_interface.dart';
 import 'package:nostra_casa/utility/app_router.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 void main() {
+  final GoogleMapsFlutterPlatform mapsImplementation =
+      GoogleMapsFlutterPlatform.instance;
+
+  if (mapsImplementation is GoogleMapsFlutterAndroid) {
+    mapsImplementation.useAndroidViewSurface = false;
+  }
+
   runApp(EasyLocalization(
     supportedLocales: const [Locale('en'), Locale('ar')],
     path: 'assets/translation',
