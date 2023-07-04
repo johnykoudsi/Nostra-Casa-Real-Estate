@@ -23,6 +23,7 @@ dependencies:
   easy_localization: ^3.0.2
   google_maps_flutter: ^2.3.0
   google_maps_flutter_android: ^2.4.13
+  intl_phone_number_input: ^0.7.2
 
 
 dev_dependencies:
