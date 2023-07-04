@@ -34,61 +34,53 @@ class _PolicyState extends State<Policy> {
         ..add(GetRequestApiEvent(getRequestType: GetRequestType.contactInfo)),
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(),
-          body: Padding(
-            padding: EdgeInsets.fromLTRB(screenWidth * 0.038, 0,
-                screenWidth * 0.038, screenWidth * 0.038),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      widget.title,
-                      style: const TextStyle(
-                          fontWeight: AppFontWeight.bold,
-                          fontSize: 22,
-                          fontFamily: "Cairo"),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: screenHeight * 0.1,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                      "you should only contact with the real estate owners in the available hours"),
-                ),
-                SizedBox(
-                  height: screenHeight * 0.5,
-                ),
-                BottomAppBar(
-                  color: AppStyle.kBackGroundColor,
-                  elevation: 0,
-                  child: Padding(
-                    padding:  EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        CustomCheckbox(
-                          value: accept,
-                            onChange: (accept) {
-                              changeAcceptance();
-                            },
-                            text: "I agree"),
-                        ElevatedButtonWidget(
-                            //color: AppStyle.darkBlueColor,
-                            title: 'Next',
-                            onPressed: accept!
-                                ? () {
-                                    Navigator.pushNamed(context, "/signup");
-                                  }
-                                : null),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+          appBar: AppBar(
+            title:Text(
+              widget.title,
+              style: const TextStyle(
+                fontWeight: AppFontWeight.bold,
+                fontSize: 22,
+              ),
             ),
+          ),
+          body: ListView(
+            padding: EdgeInsets.all(screenWidth * 0.038),
+            children: [
+
+              Text(
+                  "you should only contact with the rea"
+                      "l estate owners in the available hours you should only contact with the "
+                      "real estate owners in the available hours",
+                style: Theme.of(context).textTheme.headline6,
+              ),
+
+            ],
+          ),
+          bottomSheet: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomCheckbox(
+                  value: accept,
+                  onChange: (accept) {
+                    changeAcceptance();
+                  },
+                  text: "I agree"
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
+                child: ElevatedButtonWidget(
+                    //color: AppStyle.darkBlueColor,
+                    title: 'Next',
+                    onPressed: accept!
+                        ? () {
+                            Navigator.pushNamed(context, "/signup");
+                          }
+                        : null),
+              ),
+              SizedBox(
+                height: screenWidth * 0.038,
+              ),
+            ],
           ),
         ),
       ),
