@@ -66,6 +66,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           hintText: 'Johny Koudsi',
                           passwordBool: false,
                           label: "Fulle Name",
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Name is required".tr();
+                            }
+                            return null;
+                          },
                         ),
                         SizedBox(
                           height: heightBetweenFields,
@@ -81,7 +87,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(
                           height: heightBetweenFields,
                         ),
-                        CustomTextField(hintText: "johnykoudsi@gmail.com", passwordBool: false,label: "Email",textInputType: TextInputType.emailAddress,),
+                        CustomTextField(hintText: "johnykoudsi@gmail.com", passwordBool: false,label: "Email",textInputType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return "Email is required".tr();
+                            }
+                            return null;
+                          },
+                        ),
                         SizedBox(
                           height: heightBetweenFields,
                         ),
@@ -178,6 +191,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: () {
                             if (_key.currentState!.validate()) {}
                           },
+                        ),
+                        SizedBox(height: screenHeight * 0.04),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed('/policy');
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("By signing up,you agree to our ".tr(),
+                                   style:Theme.of(context).textTheme.bodyText2,),
+                              Text(
+                                'Terms & Privacy Policy.'.tr(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .copyWith(fontWeight: AppFontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushReplacementNamed('/login');
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Already have an account ? ".tr(),
+                                  style:Theme.of(context).textTheme.bodyText2,),
+                                Text(
+                                  'Login'.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2!
+                                        .copyWith(fontWeight: AppFontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       ],
                     ),

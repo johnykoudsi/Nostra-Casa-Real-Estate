@@ -55,31 +55,31 @@ class _PolicyState extends State<Policy> {
               ),
             ],
           ),
-          bottomSheet: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              CustomCheckbox(
-                  value: accept,
-                  onChange: (accept) {
-                    changeAcceptance();
-                  },
-                  text: "I agree"
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
-                child: ElevatedButtonWidget(
-                    title: 'Next',
-                    onPressed: accept!
-                        ? () {
-                            Navigator.pushNamed(context, "/signup");
-                          }
-                        : null),
-              ),
-              SizedBox(
-                height: screenWidth * 0.038,
-              ),
-            ],
-          ),
+          // bottomSheet: Column(
+          //   mainAxisSize: MainAxisSize.min,
+          //   children: [
+          //     CustomCheckbox(
+          //         value: accept,
+          //         onChange: (accept) {
+          //           changeAcceptance();
+          //         },
+          //         text: "I agree"
+          //     ),
+          //     Padding(
+          //       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
+          //       child: ElevatedButtonWidget(
+          //           title: 'Next',
+          //           onPressed: accept!
+          //               ? () {
+          //                   Navigator.pushNamed(context, "/signup");
+          //                 }
+          //               : null),
+          //     ),
+          //     SizedBox(
+          //       height: screenWidth * 0.038,
+          //     ),
+          //   ],
+          // ),
         ),
       ),
     );

@@ -26,6 +26,7 @@ class AppStyle {
     checkboxTheme: const CheckboxThemeData().copyWith(
         fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
     appBarTheme: const AppBarTheme(
+      scrolledUnderElevation: 0,
       backgroundColor: kBackGroundColor,
       surfaceTintColor: darkBlueColor,
       centerTitle: true,

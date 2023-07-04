@@ -57,8 +57,7 @@ class WelcomeScreen extends StatelessWidget {
                         child: ElevatedButtonWidget(
                           title: 'Signup'.tr(),
                           onPressed: () {
-                            //todo : johny use app router class to navigate instead
-                            Navigator.pushNamed(context, "/policy");
+                            Navigator.of(context).pushNamed(AppRoutes.signup);
                           },
                         ),
                       ),
@@ -67,7 +66,8 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).pushNamed(AppRoutes.bottomNavBar);
+                          Navigator.of(context)
+                              .pushNamed(AppRoutes.bottomNavBar);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -79,7 +79,6 @@ class WelcomeScreen extends StatelessWidget {
                                     .copyWith(
                                         color: AppStyle.kBackGroundColor)),
                             Text('Guest'.tr(),
-
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline6!
