@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import '../../map_screen/map_screen.dart';
 import '../../policy.dart';
 
 
@@ -13,6 +14,9 @@ class GetSelectedScreenByIndex extends StatelessWidget {
         builder: (context) {
           if(screenIndex == 0){
             return Policy(title: 'From nav bar',);
+          }
+          if(screenIndex == 1){
+            return MapScreen();
           }
           return const Scaffold(
             body: Center(

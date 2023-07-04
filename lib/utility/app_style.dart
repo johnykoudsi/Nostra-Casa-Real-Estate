@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppStyle {
   static const Color blackColor = Color(0xFF000000);
   static const Color darkBlueColor = Color(0xff20315a);
+  static const Color lightBlueColor = Color(0xFF197FB7);
   static const Color kBackGroundColor = Color(0xffF0F0F0);
   static const Color kGreyColor = Color(0xFFb5b5b5);
   static const Color redColor = Color(0xFFD81721);
@@ -28,10 +29,10 @@ class AppStyle {
         surfaceTintColor: darkBlueColor,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 20,
+          fontSize: 24,
           color: blackColor,
           fontFamily: fontName,
-          fontWeight: FontWeight.w800,
+          fontWeight: AppFontWeight.bold,
         ),
     ),
     dividerColor: const Color(0xFFD9D9D9),

@@ -18,7 +18,8 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final SharedAxisTransitionType _transitionType = SharedAxisTransitionType.horizontal;
+  final SharedAxisTransitionType _transitionType =
+      SharedAxisTransitionType.horizontal;
   int selectedIndex = 0;
   bool isReverse = false;
 
@@ -38,7 +39,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
           resizeToAvoidBottomInset: false,
           bottomNavigationBar: SizedBox(
             height: getWidth * 0.22,
-
             child: BottomNavigationBar(
               selectedFontSize: 0.0,
               unselectedFontSize: 0.0,
@@ -49,7 +49,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
               showSelectedLabels: false,
               showUnselectedLabels: false,
               onTap: onItemTapped,
-
               items: <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
                   icon: CustomNavigatorWidget(
@@ -58,7 +57,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     selectedIndex: selectedIndex,
                   ),
                   label: 'Explore',
-
                 ),
                 BottomNavigationBarItem(
                   icon: CustomNavigatorWidget(
@@ -67,7 +65,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     selectedIndex: selectedIndex,
                   ),
                   label: 'Map',
-
                 ),
                 BottomNavigationBarItem(
                   icon: CustomNavigatorWidget(
@@ -76,7 +73,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     selectedIndex: selectedIndex,
                   ),
                   label: 'Add Property',
-
                 ),
                 BottomNavigationBarItem(
                   icon: CustomNavigatorWidget(
@@ -85,7 +81,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
                     selectedIndex: selectedIndex,
                   ),
                   label: 'WishList',
-
                 ),
                 BottomNavigationBarItem(
                   icon: CustomNavigatorWidget(
@@ -96,44 +91,39 @@ class _BottomNavBarState extends State<BottomNavBar> {
                   label: 'More',
                 ),
               ],
-
             ),
           ),
-
           body: PageTransitionSwitcher(
-              duration: const Duration(milliseconds: 600),
-              reverse: context.locale.languageCode == 'ar'
-                  ? !isReverse
-                  :isReverse,
-              transitionBuilder: (Widget child, Animation<double> animation, Animation<double> secondaryAnimation) {
-                return SharedAxisTransition(
-                  animation: animation,
-                  secondaryAnimation: secondaryAnimation,
-                  transitionType: _transitionType,
-                  child: child,
-                );
-              },
-              child: GetSelectedScreenByIndex(screenIndex: selectedIndex,key: Key(selectedIndex.toString()),),
-
+            duration: const Duration(milliseconds: 600),
+            reverse:
+                context.locale.languageCode == 'ar' ? !isReverse : isReverse,
+            transitionBuilder: (Widget child, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return SharedAxisTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: _transitionType,
+                child: child,
+              );
+            },
+            child: GetSelectedScreenByIndex(
+              screenIndex: selectedIndex,
+              key: Key(selectedIndex.toString()),
             ),
-
-
+          ),
         ),
       ),
     );
   }
+
   void onItemTapped(int index) {
     setState(() {
       if (index > selectedIndex) {
         isReverse = false;
-      }
-      else {
+      } else {
         isReverse = true;
       }
       selectedIndex = index;
     });
   }
-
 }
-
-
