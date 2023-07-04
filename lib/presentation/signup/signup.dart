@@ -65,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CustomTextField(
                           hintText: 'Johny Koudsi',
                           passwordBool: false,
-                          label: "Fulle Name",
+                          label: "Fulle Name".tr(),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Name is required".tr();
@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(
                           height: heightBetweenFields,
                         ),
-                        CustomTextField(hintText: "johnykoudsi@gmail.com", passwordBool: false,label: "Email",textInputType: TextInputType.emailAddress,
+                        CustomTextField(hintText: "johnykoudsi@gmail.com", passwordBool: false,label: "Email".tr(),textInputType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Email is required".tr();
@@ -101,7 +101,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CustomTextField(
                           action: TextInputAction.done,
                           controller: passwordController,
-                          label: "Password",
+                          label: "Password".tr(),
                           onlyNumber: false,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -169,11 +169,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Radio(
                                     activeColor: AppStyle.blackColor,
                                     focusColor: AppStyle.blackColor,
-                                    value: 'female'.tr(),
+                                    value: 'female',
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {
                                       setState(() {
-                                        genderRadioValue = value ?? 'female'.tr();
+                                        genderRadioValue = value ?? 'female';
                                       });
                                     }),
                                 Text(
