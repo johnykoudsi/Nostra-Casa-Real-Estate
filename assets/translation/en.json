@@ -24,5 +24,13 @@
   "By signing up,you agree to our ": "By signing up,you agree to our ",
   "Terms & Privacy Policy.": "Terms & Privacy Policy.",
   "Already have an account ? ":"Already have an account ? ",
-  "Login": "Login"
+  "Welcome Back": "Welcome Back",
+  "Login to Continue": "Login to Continue",
+  "Please enter phone number first !": "Please enter phone number first !",
+  "Verification code will be send to this number :": "Verification code will be send to this number :",
+  "Cancel": "Cancel",
+  "Send": "Send",
+  "Forgot Password ":"Forgot Password ",
+  "Send a code": "Send a code",
+  "Don't have an account ? ": "Don't have an account ? ",
 }

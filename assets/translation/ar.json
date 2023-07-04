@@ -24,7 +24,25 @@
   "By signing up,you agree to our ": "بانشاء حساب أنت توافق على ",
   "Terms & Privacy Policy.": "شروط وسياسة الخصوصية.",
   "Already have an account ? ":"هل لديك حساب سابق ؟",
-  "Login": "تسجيل الدخول"
+  "Login": "تسجيل الدخول",
+  "Welcome Back": "أهلا بك مجدداً",
+  "Login to Continue": "تسجيل الدخول للمتابعة",
+  "Please enter phone number first !": "الرجاء ادخال رقم الهاتف أولا !",
+  "Verification code will be send to this number :": "سيتم ارسال رمز التأكيد الى هذا الرقم :",
+  "Cancel": "الغاء",
+  "Send": "ارسال",
+  "Forgot Password ":"نسيت كلمة المرور ",
+  "Send a code": "ارسال رمز",
+  "Don't have an account ? ": "لست تملك حساب ؟"
+
+
+
+
+
+
+
+
+
 
 
 
