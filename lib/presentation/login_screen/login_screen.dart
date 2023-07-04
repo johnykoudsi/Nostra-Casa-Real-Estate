@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustomTextField(
                         action: TextInputAction.done,
                         controller: passwordController,
-                        label: "Password",
+                        label: "Password".tr(),
                         onlyNumber: false,
                         validator: (value) {
                           if (value == null || value.isEmpty) {

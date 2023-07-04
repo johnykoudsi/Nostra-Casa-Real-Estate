@@ -123,7 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CustomTextField(
                           action: TextInputAction.done,
                           controller: repeatPasswordController,
-                          label: "Repeat Password",
+                          label: "Repeat Password".tr(),
                           onlyNumber: false,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
