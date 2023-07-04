@@ -46,6 +46,7 @@ class DialogsWidgetsYesNo {
                       child: ElevatedButtonWidget(
                         title: noTitle,
                         mainColor: AppStyle.kGreyColor,
+                        gradientColor: AppStyle.kGreyColor,
                         onPressed: onNoTap,
                       ),
                     ),
