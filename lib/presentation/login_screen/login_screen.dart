@@ -73,7 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
 
                       PhoneNumberField(
-                          phoneNumberController: phoneNumberController),
+                        phoneNumberController: phoneNumberController,
+                        phoneNumber: phoneNumber,
+                      ),
 
                       // password text field
                       SizedBox(

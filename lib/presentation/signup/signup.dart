@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:nostra_casa/presentation/global_widgets/custom_text_field.dart';
 import 'package:nostra_casa/presentation/global_widgets/phone_number_field.dart';
+import 'package:nostra_casa/utility/app_router.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
+import '../../utility/app_routes.dart';
 import '../global_widgets/elevated_button_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -19,6 +21,7 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController phoneNumberController = TextEditingController();
+  PhoneNumber phoneNumber = PhoneNumber(isoCode: "SY");
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -65,7 +68,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         CustomTextField(
                           hintText: 'Johny Koudsi',
                           passwordBool: false,
-                          label: "Fulle Name".tr(),
+                          label: "Full Name".tr(),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Name is required".tr();
@@ -83,7 +86,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const SizedBox(
                           height: 6,
                         ),
-                        PhoneNumberField(phoneNumberController: phoneNumberController),
+                        PhoneNumberField(
+                          phoneNumberController: phoneNumberController,
+                          phoneNumber: phoneNumber,
+                        ),
                         SizedBox(
                           height: heightBetweenFields,
                         ),
@@ -148,8 +154,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: [
                                 Radio(
-                                    activeColor: AppStyle.blackColor,
-                                    focusColor: AppStyle.blackColor,
+                                    activeColor: AppStyle.darkBlueColor,
+                                    focusColor: AppStyle.darkBlueColor,
                                     value: 'male',
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {
@@ -167,8 +173,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: [
                                 Radio(
-                                    activeColor: AppStyle.blackColor,
-                                    focusColor: AppStyle.blackColor,
+                                    activeColor: AppStyle.darkBlueColor,
+                                    focusColor: AppStyle.darkBlueColor,
                                     value: 'female',
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {
@@ -187,15 +193,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SizedBox(height: heightBetweenFields),
                         ElevatedButtonWidget(
                           title: 'Continue'.tr(),
-                          //gradientColor: AppStyle.darkBlueColor,
                           onPressed: () {
-                            if (_key.currentState!.validate()) {}
+                            if (_key.currentState!.validate()) {
+                              // todo : add sign up event
+                            }
                           },
                         ),
                         SizedBox(height: screenHeight * 0.04),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushNamed('/policy');
+                            Navigator.of(context).pushNamed(AppRoutes.policy);
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -214,7 +221,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushReplacementNamed('/login');
+                            Navigator.of(context).pushReplacementNamed(AppRoutes.login);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),

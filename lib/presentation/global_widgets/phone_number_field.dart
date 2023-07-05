@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
-PhoneNumber phoneNumber = PhoneNumber(isoCode:"SY");
 class PhoneNumberField extends StatelessWidget {
   PhoneNumberField({
     required this.phoneNumberController,
+    required this.phoneNumber,
     Key? key,
   }) : super(key: key);
 
   TextEditingController phoneNumberController;
+  PhoneNumber phoneNumber;
 
   @override
   Widget build(BuildContext context) {
-    double getWidth = MediaQuery.of(context).size.width;
-    double getHeight = MediaQuery.of(context).size.height;
     return Container(
       padding: const EdgeInsets.only(left: 12),
       decoration: const BoxDecoration(
