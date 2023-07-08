@@ -47,7 +47,7 @@ class _MapScreenState extends State<MapScreen> {
         myLocationButtonEnabled: true,
         onCameraMove: (position){
 
-          // todo : get only visible estates inside boundaries
+          //todo : get only visible estates inside boundaries
           _googleMapController.getVisibleRegion().then((value) => print(value));
         },
         myLocationEnabled: true,

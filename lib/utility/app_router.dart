@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
@@ -27,6 +28,8 @@ class AppRouter {
 
         case AppRoutes.verificationCode:
           return CodeVerificationScreenPage(phoneNumber: "+945057206");
+        case AppRoutes.myProfile:
+          return const MyProfileScreen();
 
         default:
           return const Scaffold(
