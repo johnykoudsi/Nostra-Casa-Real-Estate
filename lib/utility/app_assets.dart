@@ -8,7 +8,14 @@ class AppAssets{
   static const heart = "assets/images/fav.svg";
   static const more = "assets/images/more.svg";
   static const welcome = "assets/images/welc.jpg";
-
   static const homeLocation = "assets/images/home_location.png";
+  static const language = "assets/images/language.svg";
+  static const house = "assets/images/house.svg";
+  static const favorites ="assets/images/fav.svg";
+  static const bell ="assets/images/bell.svg";
+  static const about ="assets/images/about.svg";
+  static const edit="assets/images/edit.svg";
+  static const share ="assets/images/share.svg";
+  static const delete ="assets/images/delete.svg";
 
 }

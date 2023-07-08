@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem.dart';
+import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -66,26 +67,28 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
                 child: ListView(
                   children: [
-                    MyProfileItem(svgPath: 'assets/images/fav.svg', name: "My Favorites", onPressed: (){//todo navigate to my favorite
-                       }, color: AppStyle.kBackGroundColor,borderRad: 40,),
-                    MyProfileItem(svgPath: 'assets/images/bell.svg', name: "Notifications", onPressed: (){
+                    MyProfileItem(svgPath: AppAssets.house, name: "My Estates", onPressed: (){//todo navigate to my estates
+                    }, color: AppStyle.kBackGroundColor,borderRad: 40,),
+                    MyProfileItem(svgPath: AppAssets.favorites, name: "My Favorites", onPressed: (){//todo navigate to my favorite
+                       }, color: AppStyle.kGreyColor),
+                    MyProfileItem(svgPath: AppAssets.bell, name: "Notifications", onPressed: (){
                       //todo navigate to notifications
-                    }, color: AppStyle.kGreyColor),
-                    MyProfileItem(svgPath: 'assets/images/about.svg', name: "About Us", onPressed: (){
+                    }, color: AppStyle.kBackGroundColor),
+                    MyProfileItem(svgPath: AppAssets.about, name: "About Us", onPressed: (){
                       //todo navigate to about us
-                    }, color: AppStyle.kBackGroundColor),
-                    MyProfileItem(svgPath: 'assets/images/language.svg', name: "Language", onPressed: (){
+                    }, color: AppStyle.kGreyColor),
+                    MyProfileItem(svgPath: AppAssets.language, name: "Language", onPressed: (){
                       //todo add language changer
-                    }, color: AppStyle.kGreyColor),
-                    MyProfileItem(svgPath: 'assets/images/edit.svg', name: "Edit Profile", onPressed: (){
-                      //todo navigate to edit profile
                     }, color: AppStyle.kBackGroundColor),
-                    MyProfileItem(svgPath: 'assets/images/share.svg', name: "Sign Out", onPressed: (){
-                      //todo sign out
+                    MyProfileItem(svgPath: AppAssets.edit, name: "Edit Profile", onPressed: (){
+                      //todo navigate to edit profile
                     }, color: AppStyle.kGreyColor),
-                    MyProfileItem(svgPath: 'assets/images/delete.svg', name: "Delete Account", onPressed: (){
+                    MyProfileItem(svgPath: AppAssets.share, name: "Sign Out", onPressed: (){
+                      //todo sign out
+                    }, color: AppStyle.kBackGroundColor),
+                    MyProfileItem(svgPath: AppAssets.delete , name: "Delete Account", onPressed: (){
                       //todo delete account
-                    }, color: AppStyle.kBackGroundColor,isDelete: true,),
+                    }, color: AppStyle.kGreyColor,isDelete: true,),
 
 
 
