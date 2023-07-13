@@ -8,7 +8,8 @@ class AppRoutes {
   static const String signup ="/signup";
   static const String login ="/login";
   static const String verificationCode ="/verification";
-  static const String myProfile ="/";
+  static const String myProfile ="/my_profile";
+  static const String addPropertyWelcome="/";
 
 
 }
