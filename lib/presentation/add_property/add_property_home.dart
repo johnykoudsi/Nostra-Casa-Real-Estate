@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/get_started_step.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_tags.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/progress_bar.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/welcome_step.dart';
+import 'package:nostra_casa/presentation/add_property/screens/welcome_step.dart';
 
 import '../../utility/app_style.dart';
 import '../global_widgets/elevated_button_widget.dart';
@@ -14,9 +14,9 @@ class AddPropertyHome extends StatefulWidget {
 
 class _AddPropertyHomeState extends State<AddPropertyHome> {
   int _currentStep = 0;
-  List<Widget> _steps = [
-    WelcomeStep(),
-    GetStartedStep(),
+  final List<Widget> _steps = [
+    const WelcomeStep(),
+    const ChooseTags(),
   ];
 
   void _goToNextStep() {
@@ -43,7 +43,7 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(_steps[_currentStep].toString()),
+       // title: Text(_steps[_currentStep].toString()),
       ),
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 500),
@@ -59,10 +59,6 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
                 top: screenHeight * 0.01,
                 bottom: screenHeight * 0.04,
               ),
-              // child: MyProgressBar(
-              //   totalSegments: _steps.length,
-              //   currentSegment: _currentStep,
-              // ),
               child: MyProgressBar(progressValue: progress),
             ),
             Row(
