@@ -5,6 +5,7 @@ import 'package:nostra_casa/presentation/add_property/widgets/welcome_step.dart'
 
 import '../../utility/app_style.dart';
 import '../global_widgets/elevated_button_widget.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 class AddPropertyHome extends StatefulWidget {
   @override
@@ -20,13 +21,17 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
 
   void _goToNextStep() {
     setState(() {
-      _currentStep++;
+      if (_currentStep < _steps.length - 1) {
+        _currentStep++;
+      }
     });
   }
 
   void _goToPrevStep() {
     setState(() {
-      _currentStep--;
+      if (_currentStep > 0) {
+        _currentStep--;
+      }
     });
   }
 
@@ -34,6 +39,7 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final progress = (_currentStep * 100) / _steps.length;
 
     return Scaffold(
       appBar: AppBar(
@@ -53,16 +59,18 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
                 top: screenHeight * 0.01,
                 bottom: screenHeight * 0.04,
               ),
-              child: MyProgressBar(
-                totalSegments: _steps.length,
-                currentSegment: _currentStep,
-              ),
+              // child: MyProgressBar(
+              //   totalSegments: _steps.length,
+              //   currentSegment: _currentStep,
+              // ),
+              child: MyProgressBar(progressValue: progress),
             ),
             Row(
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
                     child: ElevatedButtonWidget(
                       title: 'Back',
                       onPressed: _goToPrevStep,
@@ -71,7 +79,8 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
                     child: ElevatedButtonWidget(
                       title: 'Next',
                       onPressed: _goToNextStep,

@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+
+import '../../../utility/app_style.dart';
 
 class MyProgressBar extends StatelessWidget {
-  final int totalSegments;
-  final int currentSegment;
+
+  final double progressValue;
 
   MyProgressBar({
-    required this.totalSegments,
-    required this.currentSegment,
+
+    required this.progressValue,
   });
 
   @override
   Widget build(BuildContext context) {
-    final double progressPercent = (currentSegment / totalSegments).clamp(0, 1).toDouble();
+    final double progressPercent = progressValue;
 
-    return LinearProgressIndicator(
-      backgroundColor: Colors.grey[300],
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-      value: progressPercent,
+    return FAProgressBar(
+      currentValue: progressPercent,
+      size: 5,
+      backgroundColor: Colors.grey.shade400,
+      progressColor: AppStyle.blackColor,
     );
   }
 }
