@@ -17,5 +17,6 @@ class AppAssets{
   static const edit="assets/images/edit.svg";
   static const share ="assets/images/share.svg";
   static const delete ="assets/images/delete.svg";
+  static const internalHouse = "assets/images/internal_house.png";
 
 }

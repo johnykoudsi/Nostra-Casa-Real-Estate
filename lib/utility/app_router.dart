@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/add_property_welcome_screen.dart';
+import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
@@ -32,7 +32,7 @@ class AppRouter {
         case AppRoutes.myProfile:
           return const MyProfileScreen();
         case AppRoutes.addPropertyWelcome:
-          return const AddPropertyWelcomeScreen();
+          return  AddPropertyHome();
 
         default:
           return const Scaffold(
