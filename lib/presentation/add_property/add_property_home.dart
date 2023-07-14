@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_service.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_tags.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/progress_bar.dart';
@@ -19,6 +20,7 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
     const WelcomeStep(),
     const ChooseTags(),
     const ChooseType(),
+    const ChooseService(),
   ];
 
   void _goToNextStep() {

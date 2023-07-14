@@ -71,8 +71,6 @@ class _TypesListState extends State<TypesList> {
                             child: Text(
                               widget.description[index],
                               maxLines: 3,
-                              textAlign:
-                              TextAlign.justify, // Aligns the text to justify
                             ),
                           ),
                         ],

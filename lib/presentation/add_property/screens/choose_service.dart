@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/types_list.dart';
-import 'package:nostra_casa/utility/app_assets.dart';
 
+import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
+import '../widgets/types_list.dart';
 
-class ChooseType extends StatefulWidget {
-  const ChooseType({Key? key}) : super(key: key);
+class ChooseService extends StatefulWidget {
+  const ChooseService({Key? key}) : super(key: key);
 
   @override
-  State<ChooseType> createState() => _ChooseTypeState();
+  State<ChooseService> createState() => _ChooseServiceState();
 }
 
-class _ChooseTypeState extends State<ChooseType> {
+class _ChooseServiceState extends State<ChooseService> {
   @override
   Widget build(BuildContext context) {
-    final List<String> svgPaths =[AppAssets.house,AppAssets.agricultural,AppAssets.commercial];
-    final List<String> title =["Residential","Agricultural","Commercial"];
-    final List<String> description =["Refers to properties that are designed and used primarily for living purposes.","Refers to land that is used or suitable for farming or other agricultural purposes.","Refers to properties that are intended for business or profit-making activities."];
+    final List<String> svgPaths =[AppAssets.sale,AppAssets.rent,AppAssets.holiday];
+    final List<String> title =["Sale","Rent","Holiday"];
+    final List<String> description =["Refers to the transfer of property ownership from one party to another.","Refers to the payment made by a tenant to a landlord in exchange for the use of a property.","Refers to properties that are intended for short-term vacation or leisure use."];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -30,7 +30,7 @@ class _ChooseTypeState extends State<ChooseType> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Define your place',
+              'What service are you offering your property to?',
               style: Theme.of(context).textTheme.headline2,
             ),
             SizedBox(

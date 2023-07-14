@@ -20,5 +20,9 @@ class AppAssets{
   static const internalHouse = "assets/images/internal_house.png";
   static const agricultural="assets/images/farm.svg";
   static const commercial="assets/images/commercial.svg";
+  static const holiday="assets/images/holiday.svg";
+  static const rent="assets/images/rent.svg";
+  static const sale="assets/images/keys.svg";
+
 
 }
