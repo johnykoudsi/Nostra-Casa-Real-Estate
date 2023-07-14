@@ -4,11 +4,10 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 import '../../../utility/app_style.dart';
 
 class MyProgressBar extends StatelessWidget {
-
   final double progressValue;
 
-  MyProgressBar({
-
+  const MyProgressBar({
+    super.key,
     required this.progressValue,
   });
 

@@ -5,7 +5,7 @@ import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class GridItem extends StatefulWidget {
-  GridItem({Key? key}) : super(key: key);
+  const GridItem({Key? key}) : super(key: key);
 
   @override
   State<GridItem> createState() => _GridItemState();

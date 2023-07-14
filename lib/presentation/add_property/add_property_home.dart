@@ -7,10 +7,12 @@ import 'package:nostra_casa/presentation/add_property/screens/welcome_step.dart'
 
 import '../../utility/app_style.dart';
 import '../global_widgets/elevated_button_widget.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 class AddPropertyHome extends StatefulWidget {
+  const AddPropertyHome({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AddPropertyHomeState createState() => _AddPropertyHomeState();
 }
 
@@ -50,7 +52,7 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
        // title: Text(_steps[_currentStep].toString()),
       ),
       body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         child: _steps[_currentStep],
       ),
       bottomNavigationBar: Container(

@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
-import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class TypesList extends StatefulWidget {
-   TypesList({Key? key, required this.svgPaths, required this.description, required this.title}) : super(key: key);
+  const TypesList(
+      {Key? key,
+      required this.svgPaths,
+      required this.description,
+      required this.title})
+      : super(key: key);
 
-   final List<String> svgPaths;
-   final List<String> description;
-   final List<String> title;
+  final List<String> svgPaths;
+  final List<String> description;
+  final List<String> title;
 
-
-
-   @override
+  @override
   State<TypesList> createState() => _TypesListState();
 }
 
 class _TypesListState extends State<TypesList> {
-  List<bool>clicked = [false,false,false];
+  List<bool> clicked = [false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +38,19 @@ class _TypesListState extends State<TypesList> {
           return GestureDetector(
             onTap: () {
               setState(() {
-                clicked=[false,false,false];
+                clicked = [false, false, false];
                 clicked[index] = true;
-
               });
             },
             child: Container(
                 decoration: BoxDecoration(
-                  color: clicked[index] ? AppStyle.kGreyColor : AppStyle.kBackGroundColor,
+                  color: clicked[index]
+                      ? AppStyle.kGreyColor
+                      : AppStyle.kBackGroundColor,
                   border: Border.all(
-                    color: clicked[index]  ? AppStyle.blackColor : AppStyle.kGreyColor,
+                    color: clicked[index]
+                        ? AppStyle.blackColor
+                        : AppStyle.kGreyColor,
                   ),
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -62,11 +66,12 @@ class _TypesListState extends State<TypesList> {
                         children: [
                           Text(
                             widget.title[index],
-                            style: Theme.of(context).textTheme.headline4!.copyWith(
-                              fontSize: 18,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.headline4!.copyWith(
+                                      fontSize: 18,
+                                    ),
                           ),
-                          Container(
+                          SizedBox(
                             width: screenWidth * 0.5,
                             child: Text(
                               widget.description[index],

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/grid_item.dart';
-import 'package:nostra_casa/utility/app_assets.dart';
 
 import '../../../utility/app_style.dart';
 

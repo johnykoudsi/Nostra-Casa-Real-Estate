@@ -44,7 +44,7 @@ class _WelcomeStepState extends State<WelcomeStep> {
                   Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16),
             ),
             Text('Tell us about your place',style: Theme.of(context).textTheme.headline3,),
-            Text('In this step, we\'ll ask you which type of property you have. Then let us know the location.' ),
+            const Text('In this step, we\'ll ask you which type of property you have. Then let us know the location.' ),
           ],
         ),
       ),
