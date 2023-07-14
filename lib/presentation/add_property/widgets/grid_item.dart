@@ -7,35 +7,29 @@ import '../../../utility/app_style.dart';
 class GridItem extends StatefulWidget {
   GridItem({Key? key}) : super(key: key);
 
-
   @override
   State<GridItem> createState() => _GridItemState();
-
 }
 
 class _GridItemState extends State<GridItem> {
   bool clicked = false;
+
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery
-        .of(context)
-        .size
-        .width;
-    double screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         setState(() {
           clicked = !clicked;
-          print(clicked);
         });
       },
       child: Container(
           decoration: BoxDecoration(
-            color: clicked ? AppStyle.kGreyColor:AppStyle.kBackGroundColor,
-            border: Border.all(color: clicked ? AppStyle.blackColor:AppStyle.kGreyColor,),
+            color: clicked ? AppStyle.kGreyColor : AppStyle.kBackGroundColor,
+            border: Border.all(
+              color: clicked ? AppStyle.blackColor : AppStyle.kGreyColor,
+            ),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -49,12 +43,12 @@ class _GridItemState extends State<GridItem> {
                   width: screenWidth * 0.1,
                   height: screenHeight * 0.05,
                 ),
-                SizedBox(height: screenHeight * 0.02,),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
                 Text(
-                  'House', style: Theme
-                    .of(context)
-                    .textTheme
-                    .headline5,
+                  'House',
+                  style: Theme.of(context).textTheme.headline5,
                 )
               ],
             ),
