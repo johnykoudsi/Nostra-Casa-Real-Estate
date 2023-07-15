@@ -15,7 +15,7 @@ class AddPropertyImages extends StatefulWidget {
 }
 
 class _AddPropertyImagesState extends State<AddPropertyImages> {
-  List<File>? _images;
+  List<File>? _images=[];
   File? _cameraImage;
 
   final ImagePicker _picker = ImagePicker();
@@ -23,11 +23,10 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
   Future<void> _chooseImages() async {
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
-      _images = pickedFiles?.map((pickedFile) => File(pickedFile.path)).toList();
-      print(_images?.length);
-
+      _images?.addAll(pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
     });
   }
+
   Future<void> _takeImage() async {
     final pickedFile = await _picker.pickImage(source: ImageSource.camera);
     setState(() {
@@ -40,10 +39,11 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
           _images!.add(cameraImage);
         }
       }
-
     });
   }
-
+  void _removeImage(File image) {
+      _images!.remove(image);
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -64,7 +64,10 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
             ),
             Text(
               'You\'ll need 3 photos to get started. you can add more or make changed later.',
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: AppStyle.kGreyColor),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(color: AppStyle.kGreyColor),
             ),
             SizedBox(
               height: screenHeight * 0.03,
@@ -72,19 +75,29 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
             Expanded(
               child: Column(
                 children: [
-                  CustomElevatedButton(onPress: _chooseImages, title: "Add photos", iconData: Icons.add),
-                  SizedBox(height: screenHeight*0.02,),
-                  CustomElevatedButton(onPress: _takeImage, title: "Take new photos", iconData: Icons.camera_alt_outlined),
-                  SizedBox(height: screenHeight*0.02,),
+                  CustomElevatedButton(
+                      onPress: _chooseImages,
+                      title: "Add photos",
+                      iconData: Icons.add),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+                  CustomElevatedButton(
+                      onPress: _takeImage,
+                      title: "Take new photos",
+                      iconData: Icons.camera_alt_outlined),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
                   Expanded(
                     child: ImagesList(
                       images: _images,
+                        onImageRemoved: _removeImage,
                     ),
                   ),
                 ],
               ),
             ),
-        
           ],
         ),
       ),
