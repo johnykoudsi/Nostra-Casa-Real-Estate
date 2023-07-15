@@ -29,8 +29,12 @@ class _ChooseAmenitiesState extends State<ChooseAmenities> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Which of these best describes your place?',
+              'Tell us what you\'r place has to offer',
               style: Theme.of(context).textTheme.headline2,
+            ),
+            Text(
+              'You can add more amenities after you publish your property.',
+              style: Theme.of(context).textTheme.headline6!.copyWith(color: AppStyle.kGreyColor),
             ),
             SizedBox(
               height: screenHeight * 0.03,
