@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/grid_item.dart';
-import 'package:nostra_casa/utility/app_assets.dart';
 
+import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
+import '../widgets/grid_item.dart';
 
-class ChooseTags extends StatefulWidget {
-  const ChooseTags({Key? key}) : super(key: key);
-
+class ChooseAmenities extends StatefulWidget {
+  const ChooseAmenities({Key? key}) : super(key: key);
 
   @override
-  State<ChooseTags> createState() => _ChooseTagsState();
+  State<ChooseAmenities> createState() => _ChooseAmenitiesState();
 }
 
-class _ChooseTagsState extends State<ChooseTags> {
+class _ChooseAmenitiesState extends State<ChooseAmenities> {
   @override
   Widget build(BuildContext context) {
-    final List<String> svgPaths=[AppAssets.house,AppAssets.house,AppAssets.house];
-    final List<String> title=["House","House","House"];
+    final List<String> _svgPaths=[AppAssets.tv,AppAssets.pool,AppAssets.wifi,AppAssets.airCondition];
+    final List<String> _title=["TV","Pool","Wifi","Air Conditioning"];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -38,7 +37,7 @@ class _ChooseTagsState extends State<ChooseTags> {
             ),
             Expanded(
               child: GridView.builder(
-                  itemCount: title.length,
+                  itemCount: _title.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     childAspectRatio: 1.6,
                     crossAxisCount: 2,
@@ -46,7 +45,7 @@ class _ChooseTagsState extends State<ChooseTags> {
                     mainAxisSpacing: 15,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    return GridItem(svgPaths: svgPaths, title: title,);
+                    return GridItem(svgPaths: _svgPaths, title: _title,);
                   }),
             ),
           ],

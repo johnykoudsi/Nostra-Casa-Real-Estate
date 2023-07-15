@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_amenities.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_location.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_service.dart';
@@ -26,6 +27,7 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
     const ChooseType(),
     const ChooseService(),
     const ChoosePropertyTypeAttributes(),
+    const ChooseAmenities(),
     const ChooseLocation(),
   ];
 

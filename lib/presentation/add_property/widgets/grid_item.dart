@@ -5,14 +5,16 @@ import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class GridItem extends StatefulWidget {
-  const GridItem({Key? key}) : super(key: key);
-
+  const GridItem({Key? key, required this.svgPaths, required this.title}) : super(key: key);
+  final List<String> svgPaths;
+  final List<String> title;
   @override
   State<GridItem> createState() => _GridItemState();
 }
 
 class _GridItemState extends State<GridItem> {
   bool clicked = false;
+
 
   @override
   Widget build(BuildContext context) {

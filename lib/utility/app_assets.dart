@@ -23,6 +23,10 @@ class AppAssets{
   static const holiday="assets/images/holiday.svg";
   static const rent="assets/images/rent.svg";
   static const sale="assets/images/keys.svg";
+  static const airCondition="assets/images/ice.svg";
+  static const pool="assets/images/pool.svg";
+  static const wifi="assets/images/wifi.svg";
+  static const tv="assets/images/tv.svg";
 
 
 }
