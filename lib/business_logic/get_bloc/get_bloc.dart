@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nostra_casa/data/models/GetRequestModel.dart';
-import 'package:nostra_casa/data/services/contact_info_services.dart';
 import 'package:nostra_casa/utility/network_helper.dart';
 
 import '../../utility/enums.dart';
@@ -20,7 +19,7 @@ class GetBloc extends Bloc<GetEvent, GetState> {
       var getRequest;
 
       if(event.getRequestType == GetRequestType.contactInfo){
-        getRequest = await ContactInfoServices.getAboutRequest();
+        //getRequest = await ContactInfoServices.getAboutRequest();
       }
 
       if(getRequest is GetRequestModel){

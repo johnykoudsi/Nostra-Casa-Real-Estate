@@ -17,10 +17,10 @@ class AddPropertyHome extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _AddPropertyHomeState createState() => _AddPropertyHomeState();
+  AddPropertyHomeState createState() => AddPropertyHomeState();
 }
 
-class _AddPropertyHomeState extends State<AddPropertyHome> {
+class AddPropertyHomeState extends State<AddPropertyHome> {
   int _currentStep = 0;
   final List<Widget> _steps = [
     const WelcomeStep(),

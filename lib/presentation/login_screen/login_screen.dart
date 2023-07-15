@@ -74,7 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                       PhoneNumberField(
                         phoneNumberController: phoneNumberController,
-                        phoneNumber: phoneNumber,
+                        onChange: (PhoneNumber value){
+                          phoneNumber = value;
+                        },
                       ),
 
                       // password text field

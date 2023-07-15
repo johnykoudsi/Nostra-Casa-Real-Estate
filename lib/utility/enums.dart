@@ -23,6 +23,11 @@ final serviceValues = EnumValues({
 enum GetRequestType{
   contactInfo,
 }
+enum Gender { male, female }
+final genderValues = EnumValues({
+  "male": Gender.male,
+  "female": Gender.female,
+});
 
 
 class EnumValues<T> {

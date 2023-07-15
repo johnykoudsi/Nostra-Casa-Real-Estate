@@ -1,12 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/custom_text_field.dart';
 import 'package:nostra_casa/presentation/global_widgets/phone_number_field.dart';
 import 'package:nostra_casa/utility/app_router.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 import '../../utility/app_routes.dart';
+import '../../utility/enums.dart';
 import '../global_widgets/elevated_button_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -26,7 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController repeatPasswordController = TextEditingController();
-  String genderRadioValue = 'female';
+  Gender genderRadioValue = Gender.female;
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +66,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-
                       children: [
                         CustomTextField(
                           hintText: 'Johny Koudsi',
                           passwordBool: false,
+                          controller: fullNameController,
                           label: "Full Name".tr(),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -88,12 +91,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         PhoneNumberField(
                           phoneNumberController: phoneNumberController,
-                          phoneNumber: phoneNumber,
+                          onChange: (PhoneNumber value) {
+                            phoneNumber = value;
+                          },
                         ),
                         SizedBox(
                           height: heightBetweenFields,
                         ),
-                        CustomTextField(hintText: "johnykoudsi@gmail.com", passwordBool: false,label: "Email".tr(),textInputType: TextInputType.emailAddress,
+                        CustomTextField(
+                          hintText: "johnykoudsi@gmail.com",
+                          passwordBool: false,
+                          label: "Email".tr(),
+                          controller: emailController,
+                          textInputType: TextInputType.emailAddress,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return "Email is required".tr();
@@ -135,16 +145,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             if (value == null || value.isEmpty) {
                               return "Repeat Password is required".tr();
                             }
-                           if(value != passwordController.text){
-                             return "Password are not match".tr();
-                           }
+                            if (value != passwordController.text) {
+                              return "Password are not match".tr();
+                            }
                             return null;
                           },
                           hintText: '12345678a',
                           textInputType: TextInputType.visiblePassword,
                           passwordBool: true,
                         ),
-
                         SizedBox(
                           height: heightBetweenFields,
                         ),
@@ -156,17 +165,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Radio(
                                     activeColor: AppStyle.darkBlueColor,
                                     focusColor: AppStyle.darkBlueColor,
-                                    value: 'male',
+                                    value: Gender.male,
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {
                                       setState(() {
-                                        genderRadioValue = value ?? 'male';
+                                        genderRadioValue = value ??  Gender.male;
                                       });
                                     }),
                                 Text(
                                   "Male".tr(),
-                                  style:Theme.of(context).textTheme.bodyText2,
-
+                                  style: Theme.of(context).textTheme.bodyText2,
                                 ),
                               ],
                             ),
@@ -175,16 +183,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Radio(
                                     activeColor: AppStyle.darkBlueColor,
                                     focusColor: AppStyle.darkBlueColor,
-                                    value: 'female',
+                                    value:  Gender.female,
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {
                                       setState(() {
-                                        genderRadioValue = value ?? 'female';
+                                        genderRadioValue = value ?? Gender.female;
                                       });
                                     }),
                                 Text(
                                   "Female".tr(),
-                                  style:Theme.of(context).textTheme.bodyText2,
+                                  style: Theme.of(context).textTheme.bodyText2,
                                 ),
                               ],
                             ),
@@ -195,7 +203,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           title: 'Continue'.tr(),
                           onPressed: () {
                             if (_key.currentState!.validate()) {
-                              // todo : add sign up event
+                              context.read<UserBloc>().add(SendSMSEvent(
+                                  phoneNumber: phoneNumber.phoneNumber!));
+
+                              Navigator.of(context).pushNamed(
+                                  AppRoutes.verificationCode,
+                                  arguments: SignUpEvent(
+                                      password: passwordController.text,
+                                      phoneNumber: phoneNumber.phoneNumber!,
+                                      email: emailController.text,
+                                      fullName: fullNameController.text,
+                                      gender: genderRadioValue,
+                                      verificationCode: "0000",
+                                  ));
                             }
                           },
                         ),
@@ -207,8 +227,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("By signing up,you agree to our ".tr(),
-                                   style:Theme.of(context).textTheme.bodyText2,),
+                              Text(
+                                "By signing up,you agree to our ".tr(),
+                                style: Theme.of(context).textTheme.bodyText2,
+                              ),
                               Text(
                                 'Terms & Privacy Policy.'.tr(),
                                 style: Theme.of(context)
@@ -221,21 +243,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.of(context).pushReplacementNamed(AppRoutes.login);
+                            Navigator.of(context)
+                                .pushReplacementNamed(AppRoutes.login);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Already have an account ? ".tr(),
-                                  style:Theme.of(context).textTheme.bodyText2,),
+                                Text(
+                                  "Already have an account ? ".tr(),
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
                                 Text(
                                   'Login'.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2!
-                                        .copyWith(fontWeight: AppFontWeight.bold),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2!
+                                      .copyWith(fontWeight: AppFontWeight.bold),
                                 ),
                               ],
                             ),

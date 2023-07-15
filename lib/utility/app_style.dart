@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppStyle {
   static const Color blackColor = Color(0xFF333333);
-  static const Color darkBlueColor = Color(0xff20315a);
-  static const Color lightBlueColor = Color(0xFF2C52AB);
+  static const Color darkBlueColor = blackColor;
+  static const Color lightBlueColor = blackColor;
+  // static const Color darkBlueColor = Color(0xff20315a);
+  // static const Color lightBlueColor = Color(0xFF2C52AB);
   static const Color kBackGroundColor = Color(0xffF0F0F0);
   static const Color kGreyColor = Color(0xFFb5b5b5);
   static const Color redColor = Color(0xFFD81721);

@@ -5,12 +5,12 @@ import 'package:nostra_casa/utility/app_style.dart';
 class PhoneNumberField extends StatelessWidget {
   PhoneNumberField({
     required this.phoneNumberController,
-    required this.phoneNumber,
+    required this.onChange,
     Key? key,
   }) : super(key: key);
 
   TextEditingController phoneNumberController;
-  PhoneNumber phoneNumber;
+  Function(PhoneNumber value)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +21,14 @@ class PhoneNumberField extends StatelessWidget {
         color: Colors.white,
       ),
       child: InternationalPhoneNumberInput(
-        onInputChanged: (PhoneNumber value) {
-          phoneNumber = value;
-        },
+        onInputChanged: onChange,
         searchBoxDecoration: const InputDecoration(
           contentPadding: EdgeInsets.only(top: 30),
           // hintText: "Search by country name or dial code",
           labelText: "Search by country name or dial code",
         ),
         textStyle: Theme.of(context).textTheme.headline5!.copyWith(height: 2.5),
-        initialValue: phoneNumber,
+        initialValue: PhoneNumber(isoCode: "SY"),
         keyboardAction: TextInputAction.next,
         cursorColor: AppStyle.darkBlueColor,
         textFieldController: phoneNumberController,

@@ -4,16 +4,22 @@ import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dar
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
+import '../business_logic/user/user_bloc.dart';
 import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
 import '../presentation/login_screen/login_screen.dart';
 import '../presentation/policy.dart';
+import '../presentation/splash_screen/splash_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
-        case AppRoutes.welcome:
+
+        case AppRoutes.splashScreen:
+          return const SplashScreen();
+
+          case AppRoutes.welcome:
           return const WelcomeScreen();
 
         case AppRoutes.policy:
@@ -28,9 +34,12 @@ class AppRouter {
           return const LoginScreen();
 
         case AppRoutes.verificationCode:
-          return CodeVerificationScreenPage(phoneNumber: "+945057206");
+          SignUpEvent args = settings.arguments as SignUpEvent;
+          return CodeVerificationScreenPage(signUpEvent: args);
+
         case AppRoutes.myProfile:
           return const MyProfileScreen();
+
         case AppRoutes.addPropertyWelcome:
           return  AddPropertyHome();
 

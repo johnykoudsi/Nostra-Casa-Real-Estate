@@ -1,5 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
+
+import 'constant_logic_validations.dart';
 import 'endpoints.dart';
 import 'enums.dart';
 import 'package:http/http.dart' as http;
@@ -22,62 +26,120 @@ class HelperResponse {
 
 class NetworkHelpers {
 
-  static Future<HelperResponse> getDataHelper({
+  static Future<HelperResponse> postDataHelper({
     required String url,
-    body,
+    body = "",
     String? sessionToken,
   }) async {
     try {
       Map<String, String> headers;
       headers = {
-        'X-Parse-Application-Id': "estore",
-        'X-Parse-REST-API-Key': "GRU2FmjRzJJDhz7e",
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
       };
 
       if (sessionToken != null) {
-        headers['X-Parse-Session-Token'] = sessionToken;
+        headers['Authorization'] = "Bearer $sessionToken";
       }
 
-      var request = http.Request('GET', Uri.parse(EndPoints.kMainUrl + url));
+      var request;
+      http.StreamedResponse response;
+
+      request = http.Request('POST', Uri.parse(EndPoints.kMainUrl + url));
 
       request.headers.addAll(headers);
+      request.body = body;
 
-      if(body != null){
-        request.body = body;
+      response = await request.send();
+
+      String streamRes = await response.stream.bytesToString();
+
+      if (response.statusCode == 200) {
+        if (getStatuesFromResponse(streamRes)) {
+          return HelperResponse(
+            response: streamRes,
+            servicesResponse: ServicesResponseStatues.success,
+          );
+        }
       }
+
+      Map<String, dynamic> jsonError = json.decode(streamRes);
+
+      if (response.statusCode == 401) {
+        //todo : delete user
+        globalNavigatorKey.currentState?.pushNamedAndRemoveUntil(
+            AppRoutes.welcome, (Route<dynamic> route) => false);
+      }
+
+      String? error = jsonError["message"];
+      return HelperResponse(
+        response: error ?? response.reasonPhrase ?? "",
+        servicesResponse: ServicesResponseStatues.someThingWrong,
+      );
+    } on SocketException catch (e) {
+      return HelperResponse(
+          servicesResponse: ServicesResponseStatues.networkError,
+      );
+    }
+
+  }
+  static Future<HelperResponse> getDeleteDataHelper({
+    required String url,
+    body = "",
+    String? sessionToken,
+    String? serviceTypeHeader,
+    String crud = "GET",
+  }) async {
+    try {
+      Map<String, String> headers;
+      headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      };
+
+      if (sessionToken != null) {
+        headers['Authorization'] = "Bearer $sessionToken";
+      }
+      if (serviceTypeHeader != null) {
+        headers['ServiceType'] = serviceTypeHeader;
+      }
+
+      var request = http.Request(crud, Uri.parse(EndPoints.kMainUrl + url));
+
+      request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
 
       String streamRes = await response.stream.bytesToString();
 
-      if (response.statusCode == 200
-          || response.statusCode == 201) {
-        return HelperResponse(
+      if (response.statusCode == 200) {
+        if (getStatuesFromResponse(streamRes)) {
+          return HelperResponse(
             response: streamRes,
-            servicesResponse: ServicesResponseStatues.success
-        );
-      } else {
-        Map<String, dynamic> jsonError = json.decode(streamRes);
-
-        if (jsonError.containsKey("code")
-            && jsonError["code"] == 209 ) {
-          //todo: delete user from local storage
+            servicesResponse: ServicesResponseStatues.success,
+          );
         }
-        String? error =  jsonError["error"];
-
-        return HelperResponse(
-            response: error ?? response.reasonPhrase ?? "",
-            servicesResponse: ServicesResponseStatues.someThingWrong
-        );
       }
+
+      Map<String, dynamic> jsonError = json.decode(streamRes);
+
+      if (response.statusCode == 401) {
+        //todo : delete user
+
+        globalNavigatorKey.currentState
+            ?.pushNamedAndRemoveUntil(AppRoutes.welcome, (Route<dynamic> route) => false);
+      }
+
+      String? error = jsonError["message"];
+      return HelperResponse(
+        response: error ?? response.reasonPhrase ?? "",
+        servicesResponse: ServicesResponseStatues.someThingWrong,
+      );
     } on SocketException catch (e) {
       return HelperResponse(
-          servicesResponse: ServicesResponseStatues.networkError
-      );
+          servicesResponse: ServicesResponseStatues.networkError);
     }
   }
-
 
 
 }
