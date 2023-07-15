@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
-import '../widgets/grid_item.dart';
+import '../widgets/custom_grid.dart';
 
 class ChooseAmenities extends StatefulWidget {
   const ChooseAmenities({Key? key}) : super(key: key);
@@ -14,8 +14,8 @@ class ChooseAmenities extends StatefulWidget {
 class _ChooseAmenitiesState extends State<ChooseAmenities> {
   @override
   Widget build(BuildContext context) {
-    final List<String> _svgPaths=[AppAssets.tv,AppAssets.pool,AppAssets.wifi,AppAssets.airCondition];
-    final List<String> _title=["TV","Pool","Wifi","Air Conditioning"];
+    final List<String> svgPaths=[AppAssets.tv,AppAssets.pool,AppAssets.wifi,AppAssets.airCondition];
+    final List<String> title=["TV","Pool","Wifi","Air Conditioning"];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -36,17 +36,7 @@ class _ChooseAmenitiesState extends State<ChooseAmenities> {
               height: screenHeight * 0.03,
             ),
             Expanded(
-              child: GridView.builder(
-                  itemCount: _title.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1.6,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return GridItem(svgPaths: _svgPaths, title: _title,);
-                  }),
+              child: CustomGrid(svgPaths: svgPaths, title: title,),
             ),
           ],
         ),

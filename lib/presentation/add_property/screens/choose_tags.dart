@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/grid_item.dart';
+import 'package:nostra_casa/presentation/add_property/widgets/custom_grid.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 
 import '../../../utility/app_style.dart';
@@ -37,17 +37,7 @@ class _ChooseTagsState extends State<ChooseTags> {
               height: screenHeight * 0.03,
             ),
             Expanded(
-              child: GridView.builder(
-                  itemCount: title.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 1.6,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15,
-                    mainAxisSpacing: 15,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return GridItem(svgPaths: svgPaths, title: title,);
-                  }),
+              child: CustomGrid(svgPaths: svgPaths, title: title,),
             ),
           ],
         ),
