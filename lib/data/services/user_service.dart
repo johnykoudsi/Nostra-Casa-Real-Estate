@@ -7,20 +7,10 @@ import '../../utility/network_helper.dart';
 import '../models/user_model.dart';
 
 class UserServices {
-
   static Future signInUserService(SignUpEvent event) async {
-
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
-        url: EndPoints.verifyAndSignUp,
-        body: json.encode({
-          "verification_code": event.verificationCode,
-          "name": event.fullName,
-          "email": event.email,
-          "mobile": event.phoneNumber,
-          "gender": event.gender.name,
-          "password": event.password,
-          "password_confirmation": event.password
-        })
+      url: EndPoints.verifyAndSignUp,
+      body: json.encode(event.toJson()),
     );
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
@@ -35,13 +25,14 @@ class UserServices {
 
     return helperResponse;
   }
+
   static Future sendSMSVerificationCode(SendSMSEvent event) async {
-   final response = await NetworkHelpers.postDataHelper(
+    final response = await NetworkHelpers.postDataHelper(
         url: EndPoints.sendSMS,
         body: json.encode({
           "mobile": event.phoneNumber,
         }));
-   print(response.response);
+    print(response.response);
   }
 
 // static Future loginUserService(LoginUserEvent event) async {
