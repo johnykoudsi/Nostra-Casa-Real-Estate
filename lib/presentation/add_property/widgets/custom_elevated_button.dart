@@ -35,7 +35,7 @@ class CustomElevatedButton extends StatelessWidget {
           children: [
             Icon(iconData,size: 30,color: AppStyle.blackColor,),
             SizedBox(width: screenWidth*0.03,),
-            Text("Add photos",style: Theme.of(context).textTheme.headline5,),
+            Text(title,style: Theme.of(context).textTheme.headline5,),
           ],
         ),
       ),

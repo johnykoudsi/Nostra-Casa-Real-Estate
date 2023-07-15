@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/custom_elevated_btton.dart';
+import 'package:nostra_casa/presentation/add_property/widgets/custom_elevated_button.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/images_list.dart';
 
 import '../../../utility/app_style.dart';
@@ -24,6 +24,7 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
       _images = pickedFiles?.map((pickedFile) => File(pickedFile.path)).toList();
+      print(_images?.length);
 
     });
   }
@@ -75,13 +76,15 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
                   SizedBox(height: screenHeight*0.02,),
                   CustomElevatedButton(onPress: _takeImage, title: "Take new photos", iconData: Icons.camera_alt_outlined),
                   SizedBox(height: screenHeight*0.02,),
-                  Expanded(child: ImagesList(
-                    images: _images,
-                  )),
+                  Expanded(
+                    child: ImagesList(
+                      images: _images,
+                    ),
+                  ),
                 ],
               ),
             ),
-
+        
           ],
         ),
       ),

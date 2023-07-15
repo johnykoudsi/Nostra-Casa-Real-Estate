@@ -9,30 +9,19 @@ class ImagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return ListView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: images == null ? 0 : images!.length,
         itemBuilder: (BuildContext context, int index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: AppStyle.blackColor,
-                    width: 3,
+            child: ClipRRect(
+                    borderRadius: BorderRadius.circular(17),
+                    child: Image.file(
+                      images![index],
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
-                child: images == null
-                    ? const Text('No image taken.')
-                    : ClipRRect(
-                        borderRadius: BorderRadius.circular(17),
-                        child: Image.file(
-                          images![index],
-                          fit: BoxFit.contain,
-                        ),
-                      )),
           );
         });
   }
