@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_location.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_service.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_tags.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';
@@ -24,6 +25,7 @@ class _AddPropertyHomeState extends State<AddPropertyHome> {
     const ChooseTags(),
     const ChooseType(),
     const ChooseService(),
+    const ChoosePropertyTypeAttributes(),
     const ChooseLocation(),
   ];
 
