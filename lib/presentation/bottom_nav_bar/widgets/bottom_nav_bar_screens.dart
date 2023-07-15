@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../../map_screen/map_screen.dart';
+import '../../my_profile_screen/my_profile_screen.dart';
 import '../../policy.dart';
 
 
@@ -22,6 +23,9 @@ class GetSelectedScreenByIndex extends StatelessWidget {
           }
           if(screenIndex == 2){
             return const AddPropertyHome();
+          }
+          if(screenIndex == 4){
+            return const MyProfileScreen();
           }
           return const Scaffold(
             body: Center(
