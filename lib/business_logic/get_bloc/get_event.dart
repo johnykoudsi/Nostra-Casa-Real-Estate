@@ -7,7 +7,8 @@ class GetRequestApiEvent extends GetEvent {
 
   GetRequestApiEvent({required this.getRequestType});
   GetRequestType getRequestType;
+  UserState? userState;
 
   @override
-  List<Object?> get props => [getRequestType];
+  List<Object?> get props => [getRequestType,userState];
 }

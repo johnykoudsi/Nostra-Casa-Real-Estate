@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
@@ -74,7 +75,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         onPressed: () {
                           //todo navigate to my favorite
                         },
-                        color: AppStyle.kGreyColor),
+                        color: Colors.white),
                     MyProfileItem(
                         svgPath: AppAssets.bell,
                         name: "Notifications",
@@ -88,12 +89,12 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         onPressed: () {
                           //todo navigate to about us
                         },
-                        color: AppStyle.kGreyColor),
+                        color: Colors.white),
                     MyProfileItem(
                         svgPath: AppAssets.language,
                         name: "Language",
                         onPressed: () {
-                          //todo add language changer
+                          DialogsWidgetsYesNo.showLanguageBottomSheet(context);
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(
@@ -102,7 +103,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         onPressed: () {
                           //todo navigate to edit profile
                         },
-                        color: AppStyle.kGreyColor),
+                        color: Colors.white),
                     MyProfileItem(
                         svgPath: AppAssets.share,
                         name: "Sign Out",
@@ -116,7 +117,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       onPressed: () {
                         //todo delete account
                       },
-                      color: AppStyle.kGreyColor,
+                      color: Colors.white,
                       isDelete: true,
                     ),
                   ],

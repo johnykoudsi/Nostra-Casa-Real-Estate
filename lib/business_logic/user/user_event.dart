@@ -26,7 +26,6 @@ class SendSMSEvent extends UserEvent {
   List<Object?> get props => [phoneNumber];
 }
 
-
 class SignUpEvent extends UserEvent {
   SignUpEvent(
       {required this.password,
@@ -34,8 +33,7 @@ class SignUpEvent extends UserEvent {
       required this.email,
       required this.fullName,
       required this.gender,
-        required this.verificationCode
-      });
+      required this.verificationCode});
   String phoneNumber;
   String password;
   String email;
@@ -43,6 +41,17 @@ class SignUpEvent extends UserEvent {
   Gender gender;
   String verificationCode;
 
+  Map<String, dynamic> toJson() => {
+        "verification_code": verificationCode,
+        "name": fullName,
+        "email": email,
+        "mobile": phoneNumber,
+        "gender": gender.name,
+        "password": password,
+        "password_confirmation": password,
+      };
+
   @override
-  List<Object?> get props => [phoneNumber, password, email, fullName, gender,verificationCode];
+  List<Object?> get props =>
+      [phoneNumber, password, email, fullName, gender, verificationCode];
 }

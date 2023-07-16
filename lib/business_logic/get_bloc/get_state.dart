@@ -17,6 +17,7 @@ class GetDone extends GetState {
   GetDone({required this.getRequestModel});
 
   GetRequestModel getRequestModel;
+
   @override
   List<Object> get props => [getRequestModel];
 }
