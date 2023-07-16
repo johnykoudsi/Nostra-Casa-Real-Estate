@@ -12,9 +12,10 @@ class AddPropertyHome extends StatefulWidget {
 }
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
+  int screensNumber=8;
   void _goToNextStep() {
     setState(() {
-      if (stepNumber < 7) {
+      if (stepNumber < screensNumber) {
         stepNumber++;
       }
     });
@@ -35,7 +36,7 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
 
   @override
   Widget build(BuildContext context) {
-    final progress = (stepNumber * 100) / 7;
+    final progress = (stepNumber * 100) / screensNumber;
     return Scaffold(
       appBar: AppBar(
           ),

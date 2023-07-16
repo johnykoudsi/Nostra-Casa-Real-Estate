@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_images.dart';
+import 'package:nostra_casa/presentation/add_property/screens/add_property_title.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_amenities.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_location.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
@@ -11,7 +12,6 @@ import 'package:nostra_casa/presentation/add_property/screens/welcome_step.dart'
 class GetSelectedScreenByStepNumber extends StatelessWidget {
   const GetSelectedScreenByStepNumber({required this.stepNumber,Key? key}) : super(key: key);
   final int stepNumber ;
-
   @override
   Widget build(BuildContext context) {
     return Builder(
@@ -39,6 +39,9 @@ class GetSelectedScreenByStepNumber extends StatelessWidget {
           }
           if(stepNumber == 7){
             return const ChooseLocation();
+          }
+          if(stepNumber == 8){
+            return const AddPropertyTitle();
           }
           return const Scaffold(
             body: Center(
