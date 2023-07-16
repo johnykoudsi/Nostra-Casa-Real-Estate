@@ -17,7 +17,7 @@ class AddPropertyImages extends StatefulWidget {
 }
 
 class _AddPropertyImagesState extends State<AddPropertyImages> {
-  List<File>? _images;
+  List<File>? images;
   File? _cameraImage;
 
   final ImagePicker _picker = ImagePicker();
@@ -25,9 +25,9 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
   Future<void> _chooseImages() async {
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
-      _images?.addAll(pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
-      if(_images != null){
-        ImagesCount.counter=_images!.length;
+      images?.addAll(pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
+      if(images != null){
+        ImagesCount.counter=images!.length;
       }
 
     });
@@ -39,21 +39,21 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
       _cameraImage = pickedFile != null ? File(pickedFile.path) : null;
       if (pickedFile != null) {
         final cameraImage = File(pickedFile.path);
-        if (_images == null) {
-          _images = [cameraImage];
+        if (images == null) {
+          images = [cameraImage];
         } else {
-          _images!.add(cameraImage);
+          images!.add(cameraImage);
         }
-        if(_images != null){
-          ImagesCount.counter=_images!.length;
+        if(images != null){
+          ImagesCount.counter=images!.length;
         }
       }
     });
   }
   void _removeImage(File image) {
-      _images!.remove(image);
-      if(_images != null){
-        ImagesCount.counter=_images!.length;
+      images!.remove(image);
+      if(images != null){
+        ImagesCount.counter=images!.length;
       }
   }
   @override
@@ -103,7 +103,7 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
                   ),
                   Expanded(
                     child: ImagesList(
-                      images: _images,
+                      images: images,
                         onImageRemoved: _removeImage,
                     ),
                   ),

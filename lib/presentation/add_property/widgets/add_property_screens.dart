@@ -17,28 +17,28 @@ class GetSelectedScreenByStepNumber extends StatelessWidget {
     return Builder(
         builder: (context) {
           if(stepNumber == 0){
-            return WelcomeStep();
+            return const WelcomeStep();
           }
           if(stepNumber == 1){
-            return ChooseTags();
+            return const ChooseTags();
           }
           if(stepNumber == 2){
-            return ChooseType();
+            return const ChooseType();
           }
           if(stepNumber == 3){
-            return ChooseService();
+            return const ChooseService();
           }
           if(stepNumber == 4){
-            return ChoosePropertyTypeAttributes();
+            return const ChoosePropertyTypeAttributes();
           }
           if(stepNumber == 5){
-            return ChooseAmenities();
+            return const ChooseAmenities();
           }
           if(stepNumber == 6){
-            return AddPropertyImages();
+            return const AddPropertyImages();
           }
           if(stepNumber == 7){
-            return ChooseLocation();
+            return const ChooseLocation();
           }
           return const Scaffold(
             body: Center(
