@@ -12,7 +12,7 @@ class AddPropertyHome extends StatefulWidget {
 }
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
-  int screensNumber = 8;
+  int screensNumber = 9;
   void _goToNextStep() {
     setState(() {
       if (stepNumber < screensNumber) {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/presentation/add_property/screens/add_property_description.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_images.dart';
+import 'package:nostra_casa/presentation/add_property/screens/add_property_price.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_title.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_amenities.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_location.dart';
@@ -40,6 +42,12 @@ class GetSelectedScreenByStepNumber extends StatelessWidget {
       }
       if (stepNumber == 7) {
         return const AddPropertyTitle();
+      }
+      if (stepNumber == 8) {
+        return const AddPropertyDescription();
+      }
+      if (stepNumber == 9) {
+        return const AddPropertyPrice();
       }
       return const Scaffold(
         body: Center(

@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/add_title_text_field.dart';
-import 'package:pinput/pinput.dart';
 
 import '../../../utility/app_style.dart';
+import '../widgets/add_title_text_field.dart';
 
-class AddPropertyTitle extends StatefulWidget {
-  const AddPropertyTitle({Key? key}) : super(key: key);
+class AddPropertyDescription extends StatefulWidget {
+  const AddPropertyDescription({Key? key}) : super(key: key);
 
   @override
-  State<AddPropertyTitle> createState() => _AddPropertyTitleState();
+  State<AddPropertyDescription> createState() => _AddPropertyDescriptionState();
 }
 
-class _AddPropertyTitleState extends State<AddPropertyTitle> {
-  late TextEditingController titleController;
+class _AddPropertyDescriptionState extends State<AddPropertyDescription> {
+  late TextEditingController descriptionController;
 
   @override
   void initState() {
-    titleController = TextEditingController()
+    descriptionController = TextEditingController()
       ..addListener(() {
         setState(() {});
       });
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
       body: Padding(
@@ -39,20 +36,13 @@ class _AddPropertyTitleState extends State<AddPropertyTitle> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Now let\'s give your house a title',
+              'Describe your property with a few words',
               style: Theme.of(context).textTheme.headline2,
-            ),
-            Text(
-              'short titles work best. Have fun with it you, can always change it later',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6!
-                  .copyWith(color: AppStyle.kGreyColor),
             ),
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            AddTitleTextField(titleController: titleController),
+            AddTitleTextField(titleController: descriptionController),
           ],
         ),
       ),
