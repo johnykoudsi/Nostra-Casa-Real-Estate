@@ -32,9 +32,9 @@ class AddPropertyBottomNavigator extends StatelessWidget {
             children: [
               Builder(
                 builder: (context) {
-                  if(stepNumber == 0){
-                    return const SizedBox();
-                  }
+                  // if(stepNumber == 0){
+                  //   return const SizedBox();
+                  // }
                   return Expanded(
                     child: Padding(
                       padding:

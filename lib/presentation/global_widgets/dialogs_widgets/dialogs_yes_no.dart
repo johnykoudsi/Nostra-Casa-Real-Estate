@@ -156,7 +156,7 @@ class DialogsWidgetsYesNo {
                           contentPadding:
                           const EdgeInsets.all(0),
                           activeColor:
-                          AppStyle.darkBlueColor,
+                          AppStyle.mainColor,
                           title: const Text(
                             "English",
                           ),
@@ -171,7 +171,7 @@ class DialogsWidgetsYesNo {
                           contentPadding:
                           const EdgeInsets.all(0),
                           activeColor:
-                          AppStyle.darkBlueColor,
+                          AppStyle.mainColor,
                           title: const Text(
                             "العربية",
                           ),

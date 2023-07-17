@@ -23,7 +23,7 @@ class CustomCheckbox extends StatelessWidget {
         borderRadius: BorderRadius.circular(3.5),
       ),
 
-      activeColor: AppStyle.darkBlueColor,
+      activeColor: AppStyle.mainColor,
     );
   }
 }

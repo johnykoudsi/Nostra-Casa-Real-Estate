@@ -30,7 +30,7 @@ class PhoneNumberField extends StatelessWidget {
         textStyle: Theme.of(context).textTheme.headline5!.copyWith(height: 2.5),
         initialValue: PhoneNumber(isoCode: "SY"),
         keyboardAction: TextInputAction.next,
-        cursorColor: AppStyle.darkBlueColor,
+        cursorColor: AppStyle.mainColor,
         textFieldController: phoneNumberController,
         selectorConfig: const SelectorConfig(
             selectorType: PhoneInputSelectorType.BOTTOM_SHEET),
