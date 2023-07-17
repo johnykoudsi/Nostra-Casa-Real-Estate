@@ -23,8 +23,8 @@ class _ChooseTagsState extends State<ChooseTags> {
       backgroundColor: AppStyle.kBackGroundColor,
       body: Padding(
         padding: EdgeInsets.only(
-            left: screenWidth * 0.07,
-            right: screenWidth * 0.07,
+            left: screenWidth * 0.038,
+            right: screenWidth * 0.038,
             top: screenHeight * 0.03),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

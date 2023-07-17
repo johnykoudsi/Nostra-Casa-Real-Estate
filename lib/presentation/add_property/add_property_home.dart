@@ -12,7 +12,7 @@ class AddPropertyHome extends StatefulWidget {
 }
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
-  int screensNumber=8;
+  int screensNumber = 8;
   void _goToNextStep() {
     setState(() {
       if (stepNumber < screensNumber) {
@@ -61,6 +61,7 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
         onPressedBack: _goToPrevStep,
         onPressedNext: _goToNextStep,
         progress: progress,
+        stepNumber: stepNumber,
       ),
     );
   }
