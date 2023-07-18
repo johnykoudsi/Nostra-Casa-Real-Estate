@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppStyle {
   static const Color blackColor = Color(0xFF333333);
-  static const Color darkBlueColor = blackColor;
-  static const Color lightBlueColor = blackColor;
+  static const Color mainColor = blackColor;
+  static const Color seconderyColor = blackColor;
   // static const Color darkBlueColor = Color(0xff20315a);
   // static const Color lightBlueColor = Color(0xFF2C52AB);
   static const Color kBackGroundColor = Color(0xffF0F0F0);
@@ -15,7 +15,7 @@ class AppStyle {
 
   static ThemeData theme = ThemeData(
     bottomSheetTheme: const BottomSheetThemeData(backgroundColor: kBackGroundColor),
-    primaryColor: darkBlueColor,
+    primaryColor: mainColor,
     useMaterial3: true,
     scaffoldBackgroundColor: kBackGroundColor,
     colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -32,7 +32,7 @@ class AppStyle {
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
       backgroundColor: kBackGroundColor,
-      surfaceTintColor: darkBlueColor,
+      surfaceTintColor: mainColor,
       centerTitle: true,
       titleTextStyle: TextStyle(
         fontSize: 24,

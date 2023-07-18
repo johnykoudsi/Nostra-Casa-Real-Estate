@@ -163,8 +163,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: [
                                 Radio(
-                                    activeColor: AppStyle.darkBlueColor,
-                                    focusColor: AppStyle.darkBlueColor,
+                                    activeColor: AppStyle.mainColor,
+                                    focusColor: AppStyle.mainColor,
                                     value: Gender.male,
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {
@@ -181,8 +181,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             Row(
                               children: [
                                 Radio(
-                                    activeColor: AppStyle.darkBlueColor,
-                                    focusColor: AppStyle.darkBlueColor,
+                                    activeColor: AppStyle.mainColor,
+                                    focusColor: AppStyle.mainColor,
                                     value:  Gender.female,
                                     groupValue: genderRadioValue,
                                     onChanged: (value) {

@@ -26,7 +26,7 @@ class CustomNavigatorWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: AppStyle.k4RadiusLowerPadding,
           color: selectedIndex == widgetIndex
-              ? AppStyle.darkBlueColor
+              ? AppStyle.mainColor
               : Colors.transparent,
         ),
         child: Padding(
@@ -35,7 +35,7 @@ class CustomNavigatorWidget extends StatelessWidget {
             svgPath,
             color: selectedIndex == widgetIndex
                 ? Colors.white
-                : AppStyle.darkBlueColor,
+                : AppStyle.mainColor,
           ),
         ));
   }

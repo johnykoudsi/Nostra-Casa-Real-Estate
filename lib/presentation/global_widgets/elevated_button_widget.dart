@@ -3,8 +3,8 @@ import 'package:nostra_casa/utility/app_style.dart';
 
 class ElevatedButtonWidget extends StatelessWidget {
   ElevatedButtonWidget({
-    this.mainColor = AppStyle.darkBlueColor,
-    this.gradientColor = AppStyle.lightBlueColor,
+    this.mainColor = AppStyle.mainColor,
+    this.gradientColor = AppStyle.seconderyColor,
     this.fontSize = 18,
     this.title = '',
     this.onPressed,

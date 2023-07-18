@@ -74,7 +74,7 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           obscureText: passwordBool,
           keyboardType: textInputType,
-          cursorColor: AppStyle.darkBlueColor,
+          cursorColor: AppStyle.mainColor,
           decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.only(left: 15, bottom: 0, top: 0, right: 15),
@@ -98,12 +98,12 @@ class CustomTextField extends StatelessWidget {
                 borderRadius: AppStyle.k4RadiusLowerPadding,
                 borderSide: BorderSide(
                   width: 2,
-                  color: AppStyle.darkBlueColor,
+                  color: AppStyle.mainColor,
                 )),
             border: const OutlineInputBorder(
                 borderRadius: AppStyle.k4RadiusLowerPadding,
                 borderSide: BorderSide(
-                  color: AppStyle.darkBlueColor,
+                  color: AppStyle.mainColor,
                 )),
           ),
           textInputAction: action,
