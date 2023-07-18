@@ -7,9 +7,7 @@ import 'package:nostra_casa/presentation/add_property/widgets/images_list.dart';
 
 import '../../../utility/app_style.dart';
 
-class ImagesCount {
-  static int counter = 0;
-}
+
 
 class AddPropertyImages extends StatefulWidget {
   const AddPropertyImages({Key? key}) : super(key: key);
@@ -27,11 +25,15 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
   Future<void> _chooseImages() async {
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
-      images?.addAll(
-          pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
-      if (images != null) {
-        ImagesCount.counter = images!.length;
+      if(images != null){
+        images?.addAll(
+            pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
+      }else{
+        images=
+            pickedFiles.map((pickedFile) => File(pickedFile.path)).toList();
       }
+
+
     });
   }
 
@@ -46,18 +48,13 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
         } else {
           images!.add(cameraImage);
         }
-        if (images != null) {
-          ImagesCount.counter = images!.length;
-        }
+
       }
     });
   }
 
   void _removeImage(File image) {
     images!.remove(image);
-    if (images != null) {
-      ImagesCount.counter = images!.length;
-    }
   }
 
   @override
