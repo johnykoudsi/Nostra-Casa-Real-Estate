@@ -14,6 +14,7 @@ class AddPropertyPrice extends StatefulWidget {
 
 class _AddPropertyPriceState extends State<AddPropertyPrice> {
   TextEditingController priceController = TextEditingController();
+
   double price = 225;
   String timePeriod="month";
   double lowEstimation =200;
@@ -24,17 +25,18 @@ class _AddPropertyPriceState extends State<AddPropertyPrice> {
 
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    priceController.text = "${price} M SP";
+    priceController.text = "${price}";
     void increasePrice(){
       setState(() {
+        price = double.parse(priceController.text);
         price++;
-        priceController.text = "${price} M SP";
       });
     }
     void decreasePrice(){
       setState(() {
+        price = double.parse(priceController.text);
         price--;
-        priceController.text = "${price} M SP";
+
       });
     }
     return Scaffold(
@@ -92,9 +94,7 @@ class _AddPropertyPriceState extends State<AddPropertyPrice> {
                             ),
                           ),
                           child: TextField(
-                            onChanged: (text){
-                              priceController.text = text;
-                            },
+                            keyboardType: TextInputType.number,
                             controller: priceController,
                             cursorColor: AppStyle.blackColor,
                             style: const TextStyle(
@@ -110,9 +110,9 @@ class _AddPropertyPriceState extends State<AddPropertyPrice> {
                       ),
                     ],
                   ),
-                  Text("per $timePeriod"),
+                  Text("sp per $timePeriod"),
                   SizedBox(height: screenHeight*0.02,),
-                  Text("Places like yours in your area usually range from\n ${lowEstimation} to ${highEstimation} M SP",
+                  Text("Places like yours in your area usually range from\n ${lowEstimation} to ${highEstimation}",
                   style: Theme.of(context).textTheme.headline5,
                   textAlign: TextAlign.center,
                     maxLines: 3,
