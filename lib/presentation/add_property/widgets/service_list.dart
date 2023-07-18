@@ -5,24 +5,24 @@ import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
-class TypesList extends StatefulWidget {
-  const TypesList({Key? key}) : super(key: key);
+class ServicesList extends StatefulWidget {
+  const ServicesList({Key? key}) : super(key: key);
 
   @override
-  State<TypesList> createState() => _TypesListState();
+  State<ServicesList> createState() => _ServicesListState();
 }
 
-class _TypesListState extends State<TypesList> {
+class _ServicesListState extends State<ServicesList> {
   final List<String> svgPaths = [
-    AppAssets.house,
-    AppAssets.agricultural,
-    AppAssets.commercial
+    AppAssets.sale,
+    AppAssets.rent,
+    AppAssets.holiday
   ];
-  final List<String> title = ["Residential", "Agricultural", "Commercial"];
+  final List<String> title = ["Sale", "Rent", "Holiday"];
   final List<String> description = [
-    "Refers to properties that are designed and used primarily for living purposes.",
-    "Refers to land that is used or suitable for farming or other agricultural purposes.",
-    "Refers to properties that are intended for business or profit-making activities."
+    "Refers to the transfer of property ownership from one party to another.",
+    "Refers to the payment made by a tenant to a landlord in exchange for the use of a property.",
+    "Refers to properties that are intended for short-term vacation or leisure use."
   ];
   @override
   Widget build(BuildContext context) {
@@ -40,18 +40,20 @@ class _TypesListState extends State<TypesList> {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              context.read<AddPropertyBloc>().add(SelectPropertyTypeEvent(
-                  propertyType: PropertyType.values[index]));
+              context.read<AddPropertyBloc>().add(SelectServiceTypeEvent(
+                  propertyService: PropertyService.values[index]));
             },
             child: BlocBuilder<AddPropertyBloc, AddPropertyState>(
               builder: (context, state) {
                 return Container(
                     decoration: BoxDecoration(
-                      color: state.selectedPropertyType == PropertyType.values[index]
+                      color: state.propertyService ==
+                              PropertyService.values[index]
                           ? AppStyle.kGreyColor
                           : AppStyle.kBackGroundColor,
                       border: Border.all(
-                        color:  state.selectedPropertyType == PropertyType.values[index]
+                        color: state.propertyService ==
+                                PropertyService.values[index]
                             ? AppStyle.blackColor
                             : AppStyle.kGreyColor,
                       ),

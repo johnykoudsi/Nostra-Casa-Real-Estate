@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../../../business_logic/google_maps/google_maps_bloc.dart';
 import '../../../global_widgets/elevated_button_widget.dart';
 
 class GoogleMapsScreen extends StatefulWidget {
@@ -29,15 +29,15 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
   void initState() {
     askPermission();
 
-    final blocLocation = context.read<GoogleMapsBloc>().state;
+    final addPropertyBloc = context.read<AddPropertyBloc>().state;
 
-    if (blocLocation is GoogleMapsPinSelected) {
-      _defaultLocation = CameraPosition(target: blocLocation.latLng, zoom: 15);
-      _selectedLocation = blocLocation.latLng;
+    if (addPropertyBloc.selectedLocation != null) {
+      _defaultLocation = CameraPosition(target: addPropertyBloc.selectedLocation!, zoom: 15);
+      _selectedLocation = addPropertyBloc.selectedLocation;
       _markers.add(
         Marker(
           markerId: const MarkerId("0"),
-          position: blocLocation.latLng,
+          position: addPropertyBloc.selectedLocation!,
           infoWindow: const InfoWindow(
             title: "Location",
           ),
@@ -81,8 +81,8 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
         _selectedLocation = location;
       });
     }
-    final state = context.read<GoogleMapsBloc>();
-    state.add(GoogleAddPinEvent(latLng: _selectedLocation!));
+    final state = context.read<AddPropertyBloc>();
+    state.add(SelectLocationEvent(latLng: _selectedLocation!));
   }
 
   Future<Position> getUserCurrentLocation() async {

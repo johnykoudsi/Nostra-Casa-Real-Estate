@@ -14,9 +14,6 @@ class ChooseType extends StatefulWidget {
 class _ChooseTypeState extends State<ChooseType> {
   @override
   Widget build(BuildContext context) {
-    final List<String> svgPaths =[AppAssets.house,AppAssets.agricultural,AppAssets.commercial];
-    final List<String> title =["Residential","Agricultural","Commercial"];
-    final List<String> description =["Refers to properties that are designed and used primarily for living purposes.","Refers to land that is used or suitable for farming or other agricultural purposes.","Refers to properties that are intended for business or profit-making activities."];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -37,8 +34,8 @@ class _ChooseTypeState extends State<ChooseType> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            Expanded(
-              child: TypesList(description: description,svgPaths: svgPaths,title: title,),
+            const Expanded(
+              child: TypesList(),
             ),
           ],
         ),

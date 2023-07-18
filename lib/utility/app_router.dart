@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
@@ -16,11 +18,10 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
-
         case AppRoutes.splashScreen:
           return const SplashScreen();
 
-          case AppRoutes.welcome:
+        case AppRoutes.welcome:
           return const WelcomeScreen();
 
         case AppRoutes.policy:
@@ -44,8 +45,15 @@ class AppRouter {
         case AppRoutes.addPropertyWelcome:
           return const WelcomeStep();
 
-          case AppRoutes.addProperty:
-          return const AddPropertyHome();
+        case AppRoutes.addProperty:
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => AddPropertyBloc(),
+              ),
+            ],
+            child: const AddPropertyHome(),
+          );
 
         default:
           return const Scaffold(
