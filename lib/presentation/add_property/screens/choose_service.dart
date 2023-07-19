@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utility/app_assets.dart';
@@ -30,7 +31,7 @@ class _ChooseServiceState extends State<ChooseService> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'What service are you offering your property to?',
+              'What service are you offering your property to?'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             SizedBox(

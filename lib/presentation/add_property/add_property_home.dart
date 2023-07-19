@@ -31,16 +31,16 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     if (screensNumber == stepNumber) {
       return true;
     }
-    if(addPropertyBloc.state.selectedPropertyType == null && stepNumber == 1){
+    if (addPropertyBloc.state.selectedPropertyType == null && stepNumber == 1) {
       return true;
     }
-    if(addPropertyBloc.state.propertyService == null && stepNumber == 2){
+    if (addPropertyBloc.state.propertyService == null && stepNumber == 2) {
       return true;
     }
-    if(addPropertyBloc.state.images.length < 3 && stepNumber == 5){
+    if (addPropertyBloc.state.images.length < 3 && stepNumber == 5) {
       return true;
     }
-    if(addPropertyBloc.state.selectedLocation == null && stepNumber == 6){
+    if (addPropertyBloc.state.selectedLocation == null && stepNumber == 6) {
       return true;
     }
 
@@ -59,7 +59,8 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     super.dispose();
   }
 
-  final SharedAxisTransitionType _transitionType = SharedAxisTransitionType.horizontal;
+  final SharedAxisTransitionType _transitionType =
+      SharedAxisTransitionType.horizontal;
   int stepNumber = 0;
   bool isReverse = false;
 
@@ -67,78 +68,79 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
   Widget build(BuildContext context) {
     final progress = (stepNumber * 100) / screensNumber;
     return Scaffold(
-      appBar: AppBar(),
-      body: PageTransitionSwitcher(
-        duration: const Duration(milliseconds: 600),
-        reverse: context.locale.languageCode == 'ar' ? !isReverse : isReverse,
-        transitionBuilder: (Widget child, Animation<double> animation,
-            Animation<double> secondaryAnimation) {
-          return SharedAxisTransition(
-            animation: animation,
-            secondaryAnimation: secondaryAnimation,
-            transitionType: _transitionType,
-            child: child,
-          );
-        },
-        child: Builder(
-            key: Key(stepNumber.toString()),
-            builder: (context) {
-              if (stepNumber == 0) {
-                return const ChooseTags();
-              }
-              if (stepNumber == 1) {
-                return const ChooseType();
-              }
-              if (stepNumber == 2) {
-                return const ChooseService();
-              }
-              if (stepNumber == 3) {
-                return const ChoosePropertyTypeAttributes();
-              }
-              if (stepNumber == 4) {
-                return const ChooseAmenities();
-              }
-              if (stepNumber == 5) {
-                return const AddPropertyImages();
-              }
-              if (stepNumber == 6) {
-                return const GoogleMapsScreen();
-              }
-              if (stepNumber == 7) {
-                return const AddPropertyTitle();
-              }
-              if (stepNumber == 8) {
-                return const AddPropertyDescription();
-              }
-              if (stepNumber == 9) {
-                return const AddPropertyPrice();
-              }
-              return const Scaffold(
-                body: Center(
-                  child: Text(
-                    'Check Named Route',
-                    style: TextStyle(fontSize: 30, color: Colors.black),
+        appBar: AppBar(),
+        body: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 600),
+          reverse: context.locale.languageCode == 'ar' ? !isReverse : isReverse,
+          transitionBuilder: (Widget child, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return SharedAxisTransition(
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: _transitionType,
+              child: child,
+            );
+          },
+          child: Builder(
+              key: Key(stepNumber.toString()),
+              builder: (context) {
+                if (stepNumber == 0) {
+                  return const ChooseTags();
+                }
+                if (stepNumber == 1) {
+                  return const ChooseType();
+                }
+                if (stepNumber == 2) {
+                  return const ChooseService();
+                }
+                if (stepNumber == 3) {
+                  return const ChoosePropertyTypeAttributes();
+                }
+                if (stepNumber == 4) {
+                  return const ChooseAmenities();
+                }
+                if (stepNumber == 5) {
+                  return const AddPropertyImages();
+                }
+                if (stepNumber == 6) {
+                  return const GoogleMapsScreen();
+                }
+                if (stepNumber == 7) {
+                  return const AddPropertyTitle();
+                }
+                if (stepNumber == 8) {
+                  return const AddPropertyDescription();
+                }
+                if (stepNumber == 9) {
+                  return const AddPropertyPrice();
+                }
+                return const Scaffold(
+                  body: Center(
+                    child: Text(
+                      'Check Named Route',
+                      style: TextStyle(fontSize: 30, color: Colors.black),
+                    ),
                   ),
-                ),
-              );
-            }),
-      ),
-      bottomNavigationBar:  AddPropertyBottomNavigator(
-        onPressedBack: isDisabledBack()
-            ? null : () {
-          setState(() {
-            stepNumber--;
-          });
-        },
-        onPressedNext: isDisabledNext()
-            ? null : () {
-          setState(() {
-            stepNumber++;
-          });
-        },
-        progress: progress,
-        stepNumber: stepNumber,
-      )
-    );
+                );
+              }),
+        ),
+        bottomNavigationBar: AddPropertyBottomNavigator(
+          onPressedBack: isDisabledBack()
+              ? null
+              : () {
+                  setState(() {
+                    stepNumber--;
+                  });
+                },
+          onPressedNext: isDisabledNext()
+              ? null
+              : () {
+                  setState(() {
+                    stepNumber++;
+                  });
+                },
+          progress: progress,
+          stepNumber: stepNumber,
+        ));
   }
 }

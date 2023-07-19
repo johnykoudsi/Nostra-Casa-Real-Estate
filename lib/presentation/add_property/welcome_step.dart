@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
@@ -37,7 +38,7 @@ class _WelcomeStepState extends State<WelcomeStep> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Tell us about your place',
+                      'Tell us about your place'.tr(),
                       style: Theme.of(context).textTheme.headline2,
                     ),
                     const SizedBox(
@@ -45,15 +46,16 @@ class _WelcomeStepState extends State<WelcomeStep> {
                     ),
                     Text(
                       "Welcome to our platform! Add your property effortlessly and connect with potential "
-                      "renters or buyers. Start maximizing your property's potential today!",
+                              "renters or buyers. Start maximizing your property's potential today!"
+                          .tr(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     const SizedBox(
                       height: 100,
                     ),
                     ElevatedButtonWidget(
-                      title: "Add Now",
-                      onPressed: (){
+                      title: "Add Now".tr(),
+                      onPressed: () {
                         Navigator.of(context).pushNamed(AppRoutes.addProperty);
                       },
                     )
@@ -71,13 +73,7 @@ class _WelcomeStepState extends State<WelcomeStep> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // Text(
-            //   'Step 1',
-            //   style:
-            //       Theme.of(context).textTheme.headline4!.copyWith(fontSize: 16),
-            // ),
-          ],
+          children: [],
         ),
       ),
     );

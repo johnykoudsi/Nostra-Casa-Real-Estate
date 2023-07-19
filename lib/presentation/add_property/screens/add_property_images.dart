@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,8 +10,6 @@ import 'package:nostra_casa/presentation/add_property/widgets/images_list.dart';
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
 
-
-
 class AddPropertyImages extends StatefulWidget {
   const AddPropertyImages({Key? key}) : super(key: key);
 
@@ -19,27 +18,24 @@ class AddPropertyImages extends StatefulWidget {
 }
 
 class _AddPropertyImagesState extends State<AddPropertyImages> {
+  List<File>? images;
 
-  List<File>? images ;
   File? _cameraImage;
 
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _chooseImages() async {
-
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
-      if(images != null){
+      if (images != null) {
         images?.addAll(
             pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
-      }else{
-        images=
+      } else {
+        images =
             pickedFiles.map((pickedFile) => File(pickedFile.path)).toList();
       }
 
-      context.read<AddPropertyBloc>().add(SelectedImagesEvent(
-          images: images));
-
+      context.read<AddPropertyBloc>().add(SelectedImagesEvent(images: images));
     });
   }
 
@@ -54,22 +50,18 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
         } else {
           images!.add(cameraImage);
         }
-        context.read<AddPropertyBloc>().add(SelectedImagesEvent(
-            images: images));
+        context
+            .read<AddPropertyBloc>()
+            .add(SelectedImagesEvent(images: images));
       }
     });
   }
-
   void _removeImage(File image) {
     setState(() {
       images!.remove(image);
-      context.read<AddPropertyBloc>().add(SelectedImagesEvent(
-          images: images));
-
+      context.read<AddPropertyBloc>().add(SelectedImagesEvent(images: images));
     });
-
   }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -85,11 +77,12 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Add some photos of your house',
+              'Add some photos of your house'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             Text(
-              'You\'ll need 3 photos to get started. you can add more or make changed later.',
+              'You\'ll need 3 photos to get started. you can add more or make changed later.'
+                  .tr(),
               style: Theme.of(context)
                   .textTheme
                   .headline6!
@@ -103,14 +96,14 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
                 children: [
                   CustomElevatedButton(
                       onPress: _chooseImages,
-                      title: "Add photos",
+                      title: "Add photos".tr(),
                       iconData: Icons.add),
                   SizedBox(
                     height: screenHeight * 0.02,
                   ),
                   CustomElevatedButton(
                       onPress: _takeImage,
-                      title: "Take new photos",
+                      title: "Take new photos".tr(),
                       iconData: Icons.camera_alt_outlined),
                   SizedBox(
                     height: screenHeight * 0.02,

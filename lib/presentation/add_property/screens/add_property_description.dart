@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utility/app_style.dart';
@@ -21,6 +22,7 @@ class _AddPropertyDescriptionState extends State<AddPropertyDescription> {
       });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -36,7 +38,7 @@ class _AddPropertyDescriptionState extends State<AddPropertyDescription> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Describe your property with a few words',
+              'Describe your property with a few words'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             SizedBox(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/attributes_list.dart';
@@ -25,22 +26,22 @@ class _ChoosePropertyTypeAttributesState
     if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.residential) {
       propertyTypeAttributes = {
-        "Bathrooms": 2,
-        "Bedrooms": 6,
-        "Balconies": 2,
-        "Living rooms": 3,
+        "Bathrooms".tr(): 2,
+        "Bedrooms".tr(): 6,
+        "Balconies".tr(): 2,
+        "Living rooms".tr(): 3,
         "Floor": 2
       };
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.agricultural) {
       propertyTypeAttributes = {
-        "Livestock inventory": 25,
-        "Water usage (by liter)": 100,
-        "Fertilizer usage (by pound)": 15
+        "Livestock inventory".tr(): 25,
+        "Water usage (by liter)".tr(): 100,
+        "Fertilizer usage (by pound)".tr(): 15
       };
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.commercial) {
-      propertyTypeAttributes = {"Bathrooms": 2, "Balconies": 2, "Floor": 1};
+      propertyTypeAttributes = {"Bathrooms".tr(): 2, "Balconies".tr(): 2, "Floor".tr(): 1};
     }
     propertyTypeAttributes=addPropertyBloc.state.propertyTypeAttributes;
     double screenWidth = MediaQuery.of(context).size.width;
@@ -57,7 +58,7 @@ class _ChoosePropertyTypeAttributesState
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Share some basics about your place',
+              'Share some basics about your place'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             SizedBox(
@@ -66,7 +67,7 @@ class _ChoosePropertyTypeAttributesState
             SizedBox(
               width: screenWidth,
               child: Text(
-                'You\'ll add more details later',
+                'You\'ll add more details later'.tr(),
                 style: Theme.of(context)
                     .textTheme
                     .headline6!

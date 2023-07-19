@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,11 +35,11 @@ print(addPropertyBloc.state.propertyTypeAttributes);
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Tell us what you\'r place has to offer',
+              'Tell us what you\'r place has to offer'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             Text(
-              'You can add more amenities after you publish your property.',
+              'You can add more amenities after you publish your property.'.tr(),
               style: Theme.of(context).textTheme.headline6!.copyWith(color: AppStyle.kGreyColor),
             ),
             SizedBox(

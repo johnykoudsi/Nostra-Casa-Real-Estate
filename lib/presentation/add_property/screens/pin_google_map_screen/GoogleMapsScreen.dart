@@ -13,6 +13,7 @@ import '../../../global_widgets/elevated_button_widget.dart';
 
 class GoogleMapsScreen extends StatefulWidget {
   const GoogleMapsScreen({Key? key}) : super(key: key);
+
   @override
   State<GoogleMapsScreen> createState() => _GoogleMapsScreenState();
 }
@@ -32,14 +33,15 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
     final addPropertyBloc = context.read<AddPropertyBloc>().state;
 
     if (addPropertyBloc.selectedLocation != null) {
-      _defaultLocation = CameraPosition(target: addPropertyBloc.selectedLocation!, zoom: 15);
+      _defaultLocation =
+          CameraPosition(target: addPropertyBloc.selectedLocation!, zoom: 15);
       _selectedLocation = addPropertyBloc.selectedLocation;
       _markers.add(
         Marker(
           markerId: const MarkerId("0"),
           position: addPropertyBloc.selectedLocation!,
-          infoWindow: const InfoWindow(
-            title: "Location",
+          infoWindow: InfoWindow(
+            title: "Location".tr(),
           ),
           icon: BitmapDescriptor.defaultMarker,
           onDrag: (location) => addMarker(location: location, isInit: true),
@@ -71,8 +73,8 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
           Marker(
             markerId: const MarkerId("0"),
             position: location,
-            infoWindow: const InfoWindow(
-              title: "Your Location",
+            infoWindow: InfoWindow(
+              title: "Your Location".tr(),
             ),
             icon: BitmapDescriptor.defaultMarker,
             onDrag: (location) => addMarker(location: location),
@@ -115,11 +117,12 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Where\'s your place locates?',
+                  'Where\'s your place locates?'.tr(),
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 Text(
-                  'Your address is only shared with clients after they\'ve made an account',
+                  'Your address is only shared with clients after they\'ve made an account'
+                      .tr(),
                   style: Theme.of(context)
                       .textTheme
                       .headline6!

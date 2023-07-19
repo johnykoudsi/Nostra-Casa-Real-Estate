@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/types_list.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
@@ -28,7 +29,7 @@ class _ChooseTypeState extends State<ChooseType> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Define your place',
+              'Define your place'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             SizedBox(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/add_title_text_field.dart';
 import 'package:pinput/pinput.dart';
@@ -39,11 +40,12 @@ class _AddPropertyTitleState extends State<AddPropertyTitle> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Now let\'s give your house a title',
+              'Now let\'s give your house a title'.tr(),
               style: Theme.of(context).textTheme.headline2,
             ),
             Text(
-              'short titles work best. Have fun with it you, can always change it later',
+              'short titles work best. Have fun with it you, can always change it later'
+                  .tr(),
               style: Theme.of(context)
                   .textTheme
                   .headline6!
