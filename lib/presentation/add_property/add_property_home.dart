@@ -28,7 +28,7 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
 
   bool isDisabledNext() {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
-
+print(addPropertyBloc.state.images!.length );
     if (screensNumber == stepNumber) {
       return true;
     }
@@ -38,9 +38,13 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     if(addPropertyBloc.state.propertyService == null && stepNumber == 2){
       return true;
     }
+    if(addPropertyBloc.state.images!.length < 3 && stepNumber == 5){
+      return true;
+    }
     if(addPropertyBloc.state.selectedLocation == null && stepNumber == 6){
       return true;
     }
+
     return false;
   }
 

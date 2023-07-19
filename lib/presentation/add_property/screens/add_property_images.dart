@@ -1,10 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/custom_elevated_button.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/images_list.dart';
 
+import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
 
 
@@ -17,12 +19,14 @@ class AddPropertyImages extends StatefulWidget {
 }
 
 class _AddPropertyImagesState extends State<AddPropertyImages> {
-  List<File>? images;
+
+  List<File>? images ;
   File? _cameraImage;
 
   final ImagePicker _picker = ImagePicker();
 
   Future<void> _chooseImages() async {
+
     final pickedFiles = await _picker.pickMultiImage();
     setState(() {
       if(images != null){
@@ -33,6 +37,8 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
             pickedFiles.map((pickedFile) => File(pickedFile.path)).toList();
       }
 
+      context.read<AddPropertyBloc>().add(SelectedImagesEvent(
+          images: images));
 
     });
   }
@@ -48,13 +54,20 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
         } else {
           images!.add(cameraImage);
         }
-
+        context.read<AddPropertyBloc>().add(SelectedImagesEvent(
+            images: images));
       }
     });
   }
 
   void _removeImage(File image) {
-    images!.remove(image);
+    setState(() {
+      images!.remove(image);
+      context.read<AddPropertyBloc>().add(SelectedImagesEvent(
+          images: images));
+
+    });
+
   }
 
   @override

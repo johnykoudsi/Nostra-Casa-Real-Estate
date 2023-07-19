@@ -24,3 +24,10 @@ class SelectLocationEvent extends AddPropertyEvent{
   @override
   List<Object?> get props => [latLng];
 }
+class SelectedImagesEvent extends AddPropertyEvent{
+  SelectedImagesEvent({required this.images});
+  List<File>? images;
+  @override
+  List<Object?> get props => [images];
+}
+

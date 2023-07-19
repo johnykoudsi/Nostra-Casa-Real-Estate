@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -21,6 +22,8 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
     on<SelectLocationEvent>((event, emit) {
       emit(state.copyWith(selectedLocation: event.latLng));
     });
-
+    on<SelectedImagesEvent>((event, emit) {
+      emit(state.copyWith(images: event.images));
+    });
   }
 }
