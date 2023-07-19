@@ -40,7 +40,7 @@ class _ImagesListState extends State<ImagesList> {
               children: [
                 Container(
                   width: screenWidth*0.7,
-                  height: screenHeight*0.2,
+                  height: screenHeight*0.15,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
@@ -51,7 +51,6 @@ class _ImagesListState extends State<ImagesList> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(17),
                     child: Image.file(
-                     // widget.images![index],
                       state.images![index],
                       fit: BoxFit.fill,
                     ),

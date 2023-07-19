@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 import '../widgets/custom_grid.dart';
@@ -14,6 +16,8 @@ class ChooseAmenities extends StatefulWidget {
 class _ChooseAmenitiesState extends State<ChooseAmenities> {
   @override
   Widget build(BuildContext context) {
+    final addPropertyBloc = context.watch<AddPropertyBloc>();
+print(addPropertyBloc.state.propertyTypeAttributes);
     final List<String> svgPaths=[AppAssets.tv,AppAssets.pool,AppAssets.wifi,AppAssets.airCondition];
     final List<String> title=["TV","Pool","Wifi","Air Conditioning"];
     double screenWidth = MediaQuery.of(context).size.width;

@@ -25,5 +25,8 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
     on<SelectedImagesEvent>((event, emit) {
       emit(state.copyWith(images: List.of(event.images!.toList())));
     });
+    on<SelectedTypeAttributesEvent>((event, emit) {
+      emit(state.copyWith(propertyTypeAttributes: event.propertyTypeAttributes));
+    });
   }
 }

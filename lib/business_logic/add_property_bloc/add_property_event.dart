@@ -30,4 +30,9 @@ class SelectedImagesEvent extends AddPropertyEvent{
   @override
   List<Object?> get props => [images];
 }
-
+class SelectedTypeAttributesEvent extends AddPropertyEvent{
+  SelectedTypeAttributesEvent({required this.propertyTypeAttributes});
+  Map<String,int>? propertyTypeAttributes;
+  @override
+  List<Object?> get props => [propertyTypeAttributes];
+}
