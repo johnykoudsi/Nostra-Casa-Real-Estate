@@ -9,11 +9,11 @@ class AddPropertyState extends Equatable {
       this.images=const [],
       });
   List<String> tags;
-  List<File>? images;
+  List<File> images;
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
   LatLng? selectedLocation;
-
+  
   AddPropertyState copyWith({
     List<File>? images,
     List<String>? tags,
@@ -31,7 +31,7 @@ class AddPropertyState extends Equatable {
 
   @override
   List<Object?> get props =>
-      [tags, selectedPropertyType, propertyService, selectedLocation,images];
+      [tags, selectedPropertyType, propertyService, selectedLocation,images,images.length];
 }
 
 enum PropertyType {

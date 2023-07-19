@@ -23,7 +23,7 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
       emit(state.copyWith(selectedLocation: event.latLng));
     });
     on<SelectedImagesEvent>((event, emit) {
-      emit(state.copyWith(images: event.images));
+      emit(state.copyWith(images: List.of(event.images!.toList())));
     });
   }
 }
