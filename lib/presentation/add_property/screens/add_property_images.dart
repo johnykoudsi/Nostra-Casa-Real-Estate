@@ -81,7 +81,7 @@ class _AddPropertyImagesState extends State<AddPropertyImages> {
               style: Theme.of(context).textTheme.headline2,
             ),
             Text(
-              'You\'ll need 3 photos to get started. you can add more or make changed later.'
+              'You\'ll need 3 photos to get started. you can add more or make changes later.'
                   .tr(),
               style: Theme.of(context)
                   .textTheme

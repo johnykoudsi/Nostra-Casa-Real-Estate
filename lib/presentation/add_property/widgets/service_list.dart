@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,11 +19,11 @@ class _ServicesListState extends State<ServicesList> {
     AppAssets.rent,
     AppAssets.holiday
   ];
-  final List<String> title = ["Sale", "Rent", "Holiday"];
+  final List<String> title = ["Sale".tr(), "Rent".tr(), "Holiday".tr()];
   final List<String> description = [
-    "Refers to the transfer of property ownership from one party to another.",
-    "Refers to the payment made by a tenant to a landlord in exchange for the use of a property.",
-    "Refers to properties that are intended for short-term vacation or leisure use."
+    "Refers to the transfer of property ownership from one party to another.".tr(),
+    "Refers to the payment made by a tenant to a landlord in exchange for the use of a property.".tr(),
+    "Refers to properties that are intended for short-term vacation or leisure use.".tr()
   ];
   @override
   Widget build(BuildContext context) {

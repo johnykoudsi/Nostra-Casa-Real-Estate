@@ -45,7 +45,7 @@ class _CustomGridState extends State<CustomGrid> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.only(left: screenWidth * 0.03),
+                  padding: EdgeInsets.only(left: screenWidth * 0.03,right: screenWidth * 0.03),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,

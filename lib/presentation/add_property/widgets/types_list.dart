@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,11 +19,11 @@ class _TypesListState extends State<TypesList> {
     AppAssets.agricultural,
     AppAssets.commercial
   ];
-  final List<String> title = ["Residential", "Agricultural", "Commercial"];
+  final List<String> title = ["Residential".tr(), "Agricultural".tr(), "Commercial".tr()];
   final List<String> description = [
-    "Refers to properties that are designed and used primarily for living purposes.",
-    "Refers to land that is used or suitable for farming or other agricultural purposes.",
-    "Refers to properties that are intended for business or profit-making activities."
+    "Refers to properties that are designed and used primarily for living purposes.".tr(),
+    "Refers to land that is used or suitable for farming or other agricultural purposes.".tr(),
+    "Refers to properties that are intended for business or profit-making activities.".tr()
   ];
   @override
   Widget build(BuildContext context) {

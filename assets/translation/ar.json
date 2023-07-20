@@ -1,6 +1,6 @@
 {
   "Hello !": "مرحبا !",
-  "Welcome to NostraCasa":"أهلا بك في NotraCasa",
+  "Welcome to NostraCasa": "أهلا بك في NotraCasa",
   "Login": "تسجيل الدخول",
   "Signup": "انشاء حساب",
   "Continue as a ": "المتابعة ك ",
@@ -23,48 +23,75 @@
   "Continue": "متابعة",
   "By signing up,you agree to our ": "بانشاء حساب أنت توافق على ",
   "Terms & Privacy Policy.": "شروط وسياسة الخصوصية.",
-  "Already have an account ? ":"هل لديك حساب سابق ؟",
+  "Already have an account ? ": "هل لديك حساب سابق ؟",
   "Welcome Back": "أهلا بك مجدداً",
   "Login to Continue": "تسجيل الدخول للمتابعة",
   "Please enter phone number first !": "الرجاء ادخال رقم الهاتف أولا !",
   "Verification code will be send to this number :": "سيتم ارسال رمز التأكيد الى هذا الرقم :",
   "Cancel": "الغاء",
   "Send": "ارسال",
-  "Forgot Password ":"نسيت كلمة المرور ",
+  "Forgot Password ": "نسيت كلمة المرور ",
   "Send a code": "ارسال رمز",
   "Don't have an account ? ": "لست تملك حساب ؟",
-  "Tell us about your place": "أخبرنا عن منزلك"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "Tell us about your place": "أخبرنا عن منزلك",
+  "Welcome to our platform! Add your property effortlessly and connect with potential renters or buyers. Start maximizing your property's potential today!": "أهلاً بك في منصتنا أضف عقارك مجانا وتواصل مع الشارين أو المستأجِرين. ابدأ بعرض عقارك اليوم!",
+  "Add Now": "أضف الآن",
+  "Which of these best describes your place?": "ما الذي يوصف عقارك بأفضل طريقة من التالي؟",
+  "Define your place": "قم بتعريف عقارك",
+  "What service are you offering your property to?": "ما هي الخدمة التي تعرض عقارك لها",
+  "Bathrooms": "الحمامات",
+  "Bedrooms": "غرف النوم",
+  "Balconies": "الشرفات",
+  "Living rooms": "غرف المعيشة",
+  "Share some basics about your place": "شارك بعض الأساسيات عن منزلك",
+  "You'll add more details later": "سوف تضيف المزيد من التفاصيل لاحقا",
+  "Tell us what you'r place has to offer": "أخبرنا ما الذي سيقدمه عقارك",
+  "You can add more amenities after you publish your property.": "يمكنك اضافة المزيد من وسائل الراحة بعد نشر عقارك",
+  "Add some photos of your house": "أضف بعد الصور لمنزلك",
+  "You'll need 3 photos to get started. you can add more or make changes later.": "ستحتاج 3 صور على الأقل لعقارك لكي تبدأ. يمكنك اضافة المزيد او القيام بتغييرات لاحقا",
+  "Add photos": "أضف صور",
+  "Take new photos": "التقط صور جديدة",
+  "Location": "الموقع",
+  "Your Location": "موقعك",
+  "Where's your place locates?": "أين هو موقع عقارك؟",
+  "Your address is only shared with clients after they've made an account": "سيتم مشاركة عنوانك مع العملاء بعد انشاء حساباتهم",
+  "Now let's give your house a title": " لنعطِ الآن منزلك عنوان",
+  "short titles work best. Have fun with it you, can always change it later": "العناوين القصيرة تعمل بطريقة أفضل. استمتع بها, يمكنك دائماً تغييرها لاحقاً",
+  "Describe your property with a few words": "اوصف عقارك ببضع كلمات",
+  "month": "شهر",
+  "Now set your property price and space": " أضف الآن سعر ومساحة عقارك",
+  "you can change it any time": "يمكنك تغييره في أيّ وقت",
+  "sp per ": "ل.س في ",
+  "Places like yours in your area usually range from\n": "أماكن مثل منزلك في موقعك غالبا تأخد مجالا من",
+  "to": "الى",
+  "Next": "اللّاحق",
+  "Back": "السابق",
+  "House": "منزل",
+  "Refers to properties that are designed and used primarily for living purposes.": "يشير إلى العقارات التي صممت و تستعمل لأغراض سكنية.",
+  "Refers to land that is used or suitable for farming or other agricultural purposes.": "تشير إلى الأرض التي تستعمل للفلاحة او لأغراض زراعية أخرى.",
+  "Refers to properties that are intended for business or profit-making activities.": "تشير للعقارات التي تحوي الأعمال والنشاطات التي تدر الربح.",
+  "Residential": "سكني",
+  "Agricultural": "زراعي",
+  "Commercial": "تجاري",
+  "Refers to the transfer of property ownership from one party to another.": "تشير إلى نقل ملكية العقار من طرف لآخر.",
+  "Refers to the payment made by a tenant to a landlord in exchange for the use of a property.": "تشير إلى تقديم دفعات دورية للمالك مقابل استعمال العقار.",
+  "Refers to properties that are intended for short-term vacation or leisure use.": "تشير إلى العقارات الموجهة لغراض الإجازات القصيرة.",
+  "Sale": "بيع",
+  "Rent": "استئجار",
+  "Holiday": "إجازة",
+  "sp per month": "ل.س في الشهر",
+  "sp per day": "ل.س في اليوم",
+  "square meters": "متر مربع",
+  "user account": "حساب مستخدم",
+  "My Estates": "عقاراتي",
+  "My Favorites": "المفضلة",
+  "Notifications": "الاشعارات",
+  "About Us": "المزيد عنّا",
+  "Language": "اللّغة",
+  "Edit Profile": "تعديل الملف الشخصي",
+  "Sign Out": "تسجيل الخروج",
+  "Delete Account": "حذف الحساب",
+  "Cancel": "إلغاء",
+  "Exit": "خروج",
+  "Are you sure you want to exit !": "هل أنت متأكد أنك تريد الخروج!"
 }

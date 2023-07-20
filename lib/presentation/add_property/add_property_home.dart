@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_description.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_images.dart';
-import 'package:nostra_casa/presentation/add_property/screens/add_property_price.dart';
+import 'package:nostra_casa/presentation/add_property/screens/add_property_price_and_space.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_title.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_amenities.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
@@ -15,6 +15,7 @@ import 'package:nostra_casa/presentation/add_property/screens/pin_google_map_scr
 import 'package:nostra_casa/presentation/add_property/widgets/add_property_bottom_navigator.dart';
 
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';
+import '../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 
 class AddPropertyHome extends StatefulWidget {
   const AddPropertyHome({super.key});
@@ -63,84 +64,89 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
       SharedAxisTransitionType.horizontal;
   int stepNumber = 0;
   bool isReverse = false;
-
+  Future<bool> onWillPopMethod() async {
+    return DialogsWidgetsYesNo.onWillPopMethod(context);
+  }
   @override
   Widget build(BuildContext context) {
     final progress = (stepNumber * 100) / screensNumber;
-    return Scaffold(
-        appBar: AppBar(),
-        body: PageTransitionSwitcher(
-          duration: const Duration(milliseconds: 600),
-          reverse: context.locale.languageCode == 'ar' ? !isReverse : isReverse,
-          transitionBuilder: (Widget child, Animation<double> animation,
-              Animation<double> secondaryAnimation) {
-            return SharedAxisTransition(
-              animation: animation,
-              secondaryAnimation: secondaryAnimation,
-              transitionType: _transitionType,
-              child: child,
-            );
-          },
-          child: Builder(
-              key: Key(stepNumber.toString()),
-              builder: (context) {
-                if (stepNumber == 0) {
-                  return const ChooseTags();
-                }
-                if (stepNumber == 1) {
-                  return const ChooseType();
-                }
-                if (stepNumber == 2) {
-                  return const ChooseService();
-                }
-                if (stepNumber == 3) {
-                  return const ChoosePropertyTypeAttributes();
-                }
-                if (stepNumber == 4) {
-                  return const ChooseAmenities();
-                }
-                if (stepNumber == 5) {
-                  return const AddPropertyImages();
-                }
-                if (stepNumber == 6) {
-                  return const GoogleMapsScreen();
-                }
-                if (stepNumber == 7) {
-                  return const AddPropertyTitle();
-                }
-                if (stepNumber == 8) {
-                  return const AddPropertyDescription();
-                }
-                if (stepNumber == 9) {
-                  return const AddPropertyPrice();
-                }
-                return const Scaffold(
-                  body: Center(
-                    child: Text(
-                      'Check Named Route',
-                      style: TextStyle(fontSize: 30, color: Colors.black),
+    return WillPopScope(
+      onWillPop: onWillPopMethod,
+      child: Scaffold(
+          appBar: AppBar(),
+          body: PageTransitionSwitcher(
+            duration: const Duration(milliseconds: 600),
+            reverse: context.locale.languageCode == 'ar' ? !isReverse : isReverse,
+            transitionBuilder: (Widget child, Animation<double> animation,
+                Animation<double> secondaryAnimation) {
+              return SharedAxisTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                transitionType: _transitionType,
+                child: child,
+              );
+            },
+            child: Builder(
+                key: Key(stepNumber.toString()),
+                builder: (context) {
+                  if (stepNumber == 0) {
+                    return const ChooseTags();
+                  }
+                  if (stepNumber == 1) {
+                    return const ChooseType();
+                  }
+                  if (stepNumber == 2) {
+                    return const ChooseService();
+                  }
+                  if (stepNumber == 3) {
+                    return const ChoosePropertyTypeAttributes();
+                  }
+                  if (stepNumber == 4) {
+                    return const ChooseAmenities();
+                  }
+                  if (stepNumber == 5) {
+                    return const AddPropertyImages();
+                  }
+                  if (stepNumber == 6) {
+                    return const GoogleMapsScreen();
+                  }
+                  if (stepNumber == 7) {
+                    return const AddPropertyTitle();
+                  }
+                  if (stepNumber == 8) {
+                    return const AddPropertyDescription();
+                  }
+                  if (stepNumber == 9) {
+                    return const AddPropertyPriceAndSpace();
+                  }
+                  return const Scaffold(
+                    body: Center(
+                      child: Text(
+                        'Check Named Route',
+                        style: TextStyle(fontSize: 30, color: Colors.black),
+                      ),
                     ),
-                  ),
-                );
-              }),
-        ),
-        bottomNavigationBar: AddPropertyBottomNavigator(
-          onPressedBack: isDisabledBack()
-              ? null
-              : () {
-                  setState(() {
-                    stepNumber--;
-                  });
-                },
-          onPressedNext: isDisabledNext()
-              ? null
-              : () {
-                  setState(() {
-                    stepNumber++;
-                  });
-                },
-          progress: progress,
-          stepNumber: stepNumber,
-        ));
+                  );
+                }),
+          ),
+          bottomNavigationBar: AddPropertyBottomNavigator(
+            onPressedBack: isDisabledBack()
+                ? null
+                : () {
+                    setState(() {
+                      stepNumber--;
+                    });
+                  },
+            onPressedNext: isDisabledNext()
+                ? null
+                : () {
+                    setState(() {
+                      stepNumber++;
+                    });
+                  },
+            progress: progress,
+            stepNumber: stepNumber,
+          )),
+    );
   }
 }

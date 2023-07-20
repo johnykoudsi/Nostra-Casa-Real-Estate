@@ -93,7 +93,7 @@ class DialogsWidgetsYesNo {
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Center(
-                  child: Text("Are you sure you want to exit !",
+                  child: Text("Are you sure you want to exit !".tr(),
                       style: Theme.of(context).textTheme.headline3,
                       textAlign: TextAlign.center),
                 ),
@@ -104,7 +104,7 @@ class DialogsWidgetsYesNo {
                     Expanded(
                       flex: 6,
                       child: ElevatedButtonWidget(
-                        title: "Cancel",
+                        title: "Cancel".tr(),
                         mainColor: AppStyle.kGreyColor,
                         gradientColor: AppStyle.kGreyColor,
                         onPressed: () => Navigator.of(context).pop(false),
@@ -116,7 +116,7 @@ class DialogsWidgetsYesNo {
                     Expanded(
                       flex: 6,
                       child: ElevatedButtonWidget(
-                        title: "Exit",
+                        title: "Exit".tr(),
                         onPressed: () => Navigator.of(context).pop(true),
                       ),
                     ),

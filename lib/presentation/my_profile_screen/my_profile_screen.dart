@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem.dart';
@@ -34,7 +35,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "user account",
+                    "user account".tr(),
                     style: Theme.of(context)
                         .textTheme
                         .headline3
@@ -62,7 +63,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   children: [
                     MyProfileItem(
                       svgPath: AppAssets.house,
-                      name: "My Estates",
+                      name: "My Estates".tr(),
                       onPressed: () {
                         //todo navigate to my estates
                       },
@@ -71,49 +72,49 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                     ),
                     MyProfileItem(
                         svgPath: AppAssets.favorites,
-                        name: "My Favorites",
+                        name: "My Favorites".tr(),
                         onPressed: () {
                           //todo navigate to my favorite
                         },
                         color: Colors.white),
                     MyProfileItem(
                         svgPath: AppAssets.bell,
-                        name: "Notifications",
+                        name: "Notifications".tr(),
                         onPressed: () {
                           //todo navigate to notifications
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(
                         svgPath: AppAssets.about,
-                        name: "About Us",
+                        name: "About Us".tr(),
                         onPressed: () {
                           //todo navigate to about us
                         },
                         color: Colors.white),
                     MyProfileItem(
                         svgPath: AppAssets.language,
-                        name: "Language",
+                        name: "Language".tr(),
                         onPressed: () {
                           DialogsWidgetsYesNo.showLanguageBottomSheet(context);
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(
                         svgPath: AppAssets.edit,
-                        name: "Edit Profile",
+                        name: "Edit Profile".tr(),
                         onPressed: () {
                           //todo navigate to edit profile
                         },
                         color: Colors.white),
                     MyProfileItem(
                         svgPath: AppAssets.share,
-                        name: "Sign Out",
+                        name: "Sign Out".tr(),
                         onPressed: () {
                           //todo sign out
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(
                       svgPath: AppAssets.delete,
-                      name: "Delete Account",
+                      name: "Delete Account".tr(),
                       onPressed: () {
                         //todo delete account
                       },

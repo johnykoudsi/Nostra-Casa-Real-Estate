@@ -17,7 +17,7 @@ class _ChooseTagsState extends State<ChooseTags> {
   @override
   Widget build(BuildContext context) {
     final List<String> svgPaths=[AppAssets.house,AppAssets.house,AppAssets.house];
-    final List<String> title=["House","House","House"];
+    final List<String> title=["House".tr(),"House".tr(),"House".tr()];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(

@@ -45,8 +45,7 @@ class _WelcomeStepState extends State<WelcomeStep> {
                       height: 18,
                     ),
                     Text(
-                      "Welcome to our platform! Add your property effortlessly and connect with potential "
-                              "renters or buyers. Start maximizing your property's potential today!"
+                      "Welcome to our platform! Add your property effortlessly and connect with potential renters or buyers. Start maximizing your property's potential today!"
                           .tr(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
