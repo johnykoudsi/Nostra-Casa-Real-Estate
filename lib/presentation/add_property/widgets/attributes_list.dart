@@ -5,7 +5,7 @@ import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
 
 class AttributesList extends StatefulWidget {
-  const AttributesList({
+   const AttributesList({
     Key? key,
     required this.propertyTypeAttributes,
   }) : super(key: key);
@@ -38,10 +38,9 @@ addPropertyBloc.state.propertyTypeAttributes=widget.propertyTypeAttributes;
       });
     }
     double screenWidth = MediaQuery.of(context).size.width;
-    return BlocBuilder<AddPropertyBloc, AddPropertyState>(
-  builder: (context, state) {
+
     return ListView.builder(
-        itemCount: widget.propertyTypeAttributes!.entries.toList().length,
+        itemCount: widget.propertyTypeAttributes?.entries.toList().length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
               decoration: const BoxDecoration(
@@ -53,7 +52,7 @@ addPropertyBloc.state.propertyTypeAttributes=widget.propertyTypeAttributes;
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        state.propertyTypeAttributes!.entries.toList()[index].key,
+                        widget.propertyTypeAttributes!.entries.toList()[index].key,
                         style: Theme.of(context).textTheme.headline5,
                       ),
                       Row(
@@ -68,7 +67,7 @@ addPropertyBloc.state.propertyTypeAttributes=widget.propertyTypeAttributes;
                           SizedBox(
                             width: screenWidth * 0.09,
                             child: Text(
-                             state.propertyTypeAttributes!.entries.toList()[index].value.toString(),
+                             widget.propertyTypeAttributes!.entries.toList()[index].value.toString(),
                               style: Theme.of(context).textTheme.headline5,
                               textAlign: TextAlign.center,
                             ),
@@ -89,7 +88,5 @@ addPropertyBloc.state.propertyTypeAttributes=widget.propertyTypeAttributes;
                 ],
               ));
         });
-  },
-);
   }
 }

@@ -41,9 +41,15 @@ class _ChoosePropertyTypeAttributesState
       };
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.commercial) {
-      propertyTypeAttributes = {"Bathrooms".tr(): 2, "Balconies".tr(): 2, "Floor".tr(): 1};
+      propertyTypeAttributes = {
+        "Bathrooms".tr(): 2,
+        "Balconies".tr(): 2,
+        "Floor".tr(): 1
+      };
     }
-    propertyTypeAttributes=addPropertyBloc.state.propertyTypeAttributes;
+    if (addPropertyBloc.state.propertyTypeAttributes != null) {
+      propertyTypeAttributes = addPropertyBloc.state.propertyTypeAttributes;
+    }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
