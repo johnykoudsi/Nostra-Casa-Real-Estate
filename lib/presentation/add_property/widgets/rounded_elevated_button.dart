@@ -3,9 +3,11 @@ import '../../../utility/app_style.dart';
 
 // ignore: must_be_immutable
 class RoundedElevatedButton extends StatelessWidget {
-   RoundedElevatedButton({Key? key, required this.iconData,this.onTap,this.iconColor,this.backgroundColor})
+   RoundedElevatedButton({Key? key, required this.iconData,this.onTap,this.iconColor,this.backgroundColor,  this.size,this.iconSize})
       : super(key: key);
   final IconData iconData;
+   double? size;
+   double? iconSize;
   Color? iconColor;
   Color? backgroundColor;
   Function()? onTap;
@@ -15,7 +17,7 @@ class RoundedElevatedButton extends StatelessWidget {
       onPressed: onTap,
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor == null ? AppStyle.kBackGroundColor: backgroundColor as Color,
-        minimumSize: const Size(30, 30), // change the size here
+        minimumSize: size == null ? const Size(30, 30) : Size(size!,size!), // change the size here
         elevation: 0,
         shape:  const CircleBorder(
           side: BorderSide(
@@ -27,6 +29,7 @@ class RoundedElevatedButton extends StatelessWidget {
         child: Icon(
           iconData,
           color: iconColor == null ? AppStyle.blackColor : iconColor as Color,
+          size: iconSize==null ? 22 : iconSize,
         ),
       ),
     );
