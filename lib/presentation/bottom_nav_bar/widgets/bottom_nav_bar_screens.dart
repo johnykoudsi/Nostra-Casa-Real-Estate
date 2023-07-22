@@ -5,7 +5,7 @@ import 'package:nostra_casa/utility/app_style.dart';
 import '../../add_property/welcome_step.dart';
 import '../../map_screen/map_screen.dart';
 import '../../my_profile_screen/my_profile_screen.dart';
-import '../../policy.dart';
+import '../../policy/policy.dart';
 
 
 class GetSelectedScreenByIndex extends StatelessWidget {

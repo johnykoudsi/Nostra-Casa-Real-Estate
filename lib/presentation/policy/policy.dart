@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/custom_check_box.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:nostra_casa/utility/enums.dart';
-import '../../business_logic/get_bloc/get_bloc.dart';
-import 'global_widgets/elevated_button_widget.dart';
+import '../../../business_logic/get_bloc/get_bloc.dart';
+import '../global_widgets/elevated_button_widget.dart';
 
 class Policy extends StatefulWidget {
   Policy({super.key, required this.title});

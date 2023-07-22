@@ -5,6 +5,8 @@ import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
+import '../../utility/app_routes.dart';
+
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({Key? key}) : super(key: key);
 
@@ -88,7 +90,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         svgPath: AppAssets.about,
                         name: "About Us".tr(),
                         onPressed: () {
-                          //todo navigate to about us
+                          Navigator.pushNamed(context, AppRoutes.aboutUs);
                         },
                         color: Colors.white),
                     MyProfileItem(

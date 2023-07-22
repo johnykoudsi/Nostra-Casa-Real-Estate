@@ -29,6 +29,7 @@ class AppStyle {
         fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
     checkboxTheme: const CheckboxThemeData().copyWith(
         fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
+
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
       backgroundColor: kBackGroundColor,
@@ -41,6 +42,7 @@ class AppStyle {
         fontWeight: AppFontWeight.bold,
       ),
     ),
+
     dividerColor: const Color(0xFFD9D9D9),
     fontFamily: fontName,
     textTheme: const TextTheme(

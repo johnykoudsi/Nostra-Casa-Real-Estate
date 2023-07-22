@@ -8,7 +8,7 @@ import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../global_widgets/elevated_button_widget.dart';
-import '../policy.dart';
+import '../policy/policy.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
