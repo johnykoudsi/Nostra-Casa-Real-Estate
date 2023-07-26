@@ -5,6 +5,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../data/models/GetRequestModel.dart';
+
 part 'add_property_event.dart';
 part 'add_property_state.dart';
 
@@ -27,6 +29,9 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
     });
     on<SelectedTypeAttributesEvent>((event, emit) {
       emit(state.copyWith(propertyTypeAttributes: event.propertyTypeAttributes));
+    });
+    on<SelectRegionEvent>((event, emit) {
+      emit(state.copyWith(region: event.region));
     });
   }
 }

@@ -32,6 +32,7 @@ class _GoogleMapsScreenState extends State<GoogleMapsScreen> {
 
     final addPropertyBloc = context.read<AddPropertyBloc>().state;
 
+
     if (addPropertyBloc.selectedLocation != null) {
       _defaultLocation =
           CameraPosition(target: addPropertyBloc.selectedLocation!, zoom: 15);

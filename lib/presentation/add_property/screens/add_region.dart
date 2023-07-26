@@ -1,28 +1,30 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/presentation/add_property/widgets/custom_insert_text.dart';
 
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
-import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
-import '../widgets/custom_grid.dart';
+import '../widgets/custstom_insert_number_field.dart';
 
-class ChooseAmenities extends StatefulWidget {
-  const ChooseAmenities({Key? key}) : super(key: key);
+class AddRegion extends StatefulWidget {
+  const AddRegion({Key? key}) : super(key: key);
 
   @override
-  State<ChooseAmenities> createState() => _ChooseAmenitiesState();
+  State<AddRegion> createState() => _AddRegionState();
 }
 
-class _ChooseAmenitiesState extends State<ChooseAmenities> {
+class _AddRegionState extends State<AddRegion> {
   @override
   Widget build(BuildContext context) {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
-    final List<String> svgPaths=[AppAssets.tv,AppAssets.pool,AppAssets.wifi,AppAssets.airCondition];
-    final List<String> title=["TV","Pool","Wifi","Air Conditioning"];
+    TextEditingController regionController = TextEditingController();
+    if(addPropertyBloc.state.region != null){
+      regionController.text=addPropertyBloc.state.region!;
+    }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
+     return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
       body: Padding(
         padding: EdgeInsets.only(
@@ -34,18 +36,26 @@ class _ChooseAmenitiesState extends State<ChooseAmenities> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Tell us what you\'r place has to offer'.tr(),
+              'Please add your property region',
               style: Theme.of(context).textTheme.headline2,
             ),
             Text(
-              'You can add more amenities after you publish your property.'.tr(),
-              style: Theme.of(context).textTheme.headline6!.copyWith(color: AppStyle.kGreyColor),
+              'next you will set your property location on the map',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(color: AppStyle.kGreyColor),
             ),
             SizedBox(
               height: screenHeight * 0.03,
             ),
             Expanded(
-              child: CustomGrid(svgPaths: svgPaths, title: title,),
+              child: ListView(
+                children: [
+                 CustomInsertText(
+                   controller: regionController,hintText: "Damascus",),
+                ],
+              ),
             ),
           ],
         ),

@@ -6,6 +6,7 @@ import 'package:nostra_casa/presentation/add_property/screens/add_property_descr
 import 'package:nostra_casa/presentation/add_property/screens/add_property_images.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_price_and_space.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_title.dart';
+import 'package:nostra_casa/presentation/add_property/screens/add_region.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_amenities.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_service.dart';
@@ -25,7 +26,7 @@ class AddPropertyHome extends StatefulWidget {
 }
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
-  int screensNumber = 9;
+  int screensNumber = 10;
 
   bool isDisabledNext() {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
@@ -41,7 +42,7 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     if (addPropertyBloc.state.images.length < 3 && stepNumber == 5) {
       return true;
     }
-    if (addPropertyBloc.state.selectedLocation == null && stepNumber == 6) {
+    if (addPropertyBloc.state.selectedLocation == null && stepNumber == 7) {
       return true;
     }
 
@@ -108,15 +109,18 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
                     return const AddPropertyImages();
                   }
                   if (stepNumber == 6) {
-                    return const GoogleMapsScreen();
+                    return const AddRegion();
                   }
                   if (stepNumber == 7) {
-                    return const AddPropertyTitle();
+                    return const GoogleMapsScreen();
                   }
                   if (stepNumber == 8) {
-                    return const AddPropertyDescription();
+                    return const AddPropertyTitle();
                   }
                   if (stepNumber == 9) {
+                    return const AddPropertyDescription();
+                  }
+                  if (stepNumber == 10) {
                     return const AddPropertyPriceAndSpace();
                   }
                   return const Scaffold(

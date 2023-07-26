@@ -2,6 +2,9 @@ part of 'add_property_bloc.dart';
 
 abstract class AddPropertyEvent extends Equatable {
   const AddPropertyEvent();
+  Map<String, dynamic> toJson() => {
+
+  };
 }
 class SelectPropertyTypeEvent extends AddPropertyEvent{
 
@@ -16,6 +19,13 @@ class SelectServiceTypeEvent extends AddPropertyEvent{
   PropertyService propertyService;
   @override
   List<Object?> get props => [propertyService];
+}
+class SelectRegionEvent extends AddPropertyEvent{
+
+  SelectRegionEvent({required this.region});
+  String region;
+  @override
+  List<Object?> get props => [region];
 }
 class SelectLocationEvent extends AddPropertyEvent{
 
