@@ -54,7 +54,8 @@ class _CodeVerificationScreenPagePageState
           if(state is UserErrorState){
             DialogsWidgetsSnackBar.showSnackBarFromStatus(
                 context: context,
-                servicesResponseStatues: state.helperResponse.servicesResponse
+              helperResponse: state.helperResponse,
+              showServerError: true
             );
           }
         },

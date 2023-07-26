@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 import '../../../utility/enums.dart';
+import '../../../utility/network_helper.dart';
 import '../elevated_button_widget.dart';
 
 class DialogsWidgetsSnackBar {
@@ -34,24 +35,32 @@ class DialogsWidgetsSnackBar {
 
   static void showSnackBarFromStatus({
     required BuildContext context,
-    required ServicesResponseStatues servicesResponseStatues,
+    required HelperResponse helperResponse,
+    bool showServerError = false,
   }) {
-    if (servicesResponseStatues == ServicesResponseStatues.success) {
+    if(showServerError){
       return DialogsWidgetsSnackBar.showScaffoldSnackBar(
-          title: "${serviceValues.reverse[servicesResponseStatues]}" ,
+          title: helperResponse.response ,
+          color: AppStyle.redColor,
+          context: context
+      );
+    }
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
+          title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
           color: AppStyle.kGreenColor,
           context: context
       );
     }
-    if (servicesResponseStatues == ServicesResponseStatues.networkError){
+    if (helperResponse.servicesResponse == ServicesResponseStatues.networkError){
       return DialogsWidgetsSnackBar.showScaffoldSnackBar(
-        title: "${serviceValues.reverse[servicesResponseStatues]}" ,
+        title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
         context: context,
       );
     }
     else {
       return DialogsWidgetsSnackBar.showScaffoldSnackBar(
-        title: "${serviceValues.reverse[servicesResponseStatues]}" ,
+        title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
         context: context,
       );
     }
