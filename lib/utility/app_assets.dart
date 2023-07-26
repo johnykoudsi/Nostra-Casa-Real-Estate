@@ -2,6 +2,7 @@
 
 class AppAssets{
 
+  static const appLogo = "assets/images/logo_5.png";
   static const mkbr = "assets/images/mkbr.svg";
   static const mapLocation = "assets/images/map-location.svg";
   static const houseAdd = "assets/images/house-add.svg";
