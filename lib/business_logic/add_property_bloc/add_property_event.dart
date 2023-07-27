@@ -40,11 +40,17 @@ class SelectedImagesEvent extends AddPropertyEvent{
   @override
   List<Object?> get props => [images];
 }
-class SelectedTypeAttributesEvent extends AddPropertyEvent{
-  SelectedTypeAttributesEvent({required this.propertyTypeAttributes});
-  Map<String,int>? propertyTypeAttributes;
+class SelectedTypeConstAttributesEvent extends AddPropertyEvent{
+  SelectedTypeConstAttributesEvent({required this.propertyTypeConstAttributes});
+  Map<String,int>? propertyTypeConstAttributes;
   @override
-  List<Object?> get props => [propertyTypeAttributes];
+  List<Object?> get props => [propertyTypeConstAttributes];
+}
+class SelectedTypeSpecialAttributesEvent extends AddPropertyEvent{
+  SelectedTypeSpecialAttributesEvent({required this.propertyTypeSpecialAttributes});
+  Map<String,int>? propertyTypeSpecialAttributes;
+  @override
+  List<Object?> get props => [propertyTypeSpecialAttributes];
 }
 class OnAmenityItemPressEvent extends AddPropertyEvent {
   OnAmenityItemPressEvent({required this.amenity});

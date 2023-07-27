@@ -109,30 +109,39 @@ class DialogsWidgetsYesNo {
                   padding: EdgeInsets.symmetric(
                     horizontal: getWidth * 0.01,
                   ),
-                  child: Column(
-                    children: [
-                      Center(
-                        child: Text(
-                            operationName == "Add"
-                                ? "Please add name and number for your special attribute"
-                                : "Please edit the number of the attribute",
-                            style: Theme.of(context).textTheme.headline3,
-                            textAlign: TextAlign.center),
-                      ),
-                      CustomTextField(
-                        enabled: enable,
-                        hintText: "Special Name",
-                        passwordBool: false,
-                        controller: attributeNameController,
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: getWidth * 0.0),
-                        child: Form(
-                          key: key,
+                  child: Form(
+                    key: key,
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Text(
+                              operationName == "Add"
+                                  ? "Please add name and number for your special attribute"
+                                  : "Please edit the number of the attribute",
+                              style: Theme.of(context).textTheme.headline3,
+                              textAlign: TextAlign.center),
+                        ),
+                        Visibility(
+                          visible: enable,
                           child: CustomTextField(
                             validator: (value) {
-                              if (int.parse(value.toString()) < 0 ||
+                              if (value == null || value.isEmpty) {
+                                return "Name is required";
+                              }
+                            },
+                            hintText: "Special Name",
+                            passwordBool: false,
+                            controller: attributeNameController,
+                          ),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: getWidth * 0.0),
+                          child: CustomTextField(
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Number is required";
+                              } else if (int.parse(value.toString()) < 0 ||
                                   int.parse(value.toString()) > 999) {
                                 return "Attribute value should be between 0 and 1000";
                               }
@@ -143,39 +152,42 @@ class DialogsWidgetsYesNo {
                             controller: attributeNumberController,
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: getHeight * 0.02,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Expanded(
-                            flex: 6,
-                            child: ElevatedButtonWidget(
-                              title: "Cancel".tr(),
-                              onPressed: () => Navigator.of(context).pop(false),
+                        SizedBox(
+                          height: getHeight * 0.02,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: ElevatedButtonWidget(
+                                title: "Cancel".tr(),
+                                onPressed: () => Navigator.of(context).pop(false),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: getWidth * 0.038,
-                          ),
-                          Expanded(
-                            flex: 6,
-                            child: ElevatedButtonWidget(
-                                title: operationName,
-                                onPressed:
-                                    changePropertyAttribute,
+                            SizedBox(
+                              width: getWidth * 0.038,
+                            ),
+                            Expanded(
+                              flex: 6,
+                              child: ElevatedButtonWidget(
+                                  title: operationName,
+                                  onPressed:
 
-                                ),
-                          ),
-                        ],
-                      ),
-                      // ElevatedButtonWidget(
-                      //   title: "Add".tr(),
-                      //   onPressed: addPropertyAttribute,
-                      // ),
-                    ],
+                                      changePropertyAttribute,
+
+
+
+                                  ),
+                            ),
+                          ],
+                        ),
+                        // ElevatedButtonWidget(
+                        //   title: "Add".tr(),
+                        //   onPressed: addPropertyAttribute,
+                        // ),
+                      ],
+                    ),
                   ),
                 ),
               ],

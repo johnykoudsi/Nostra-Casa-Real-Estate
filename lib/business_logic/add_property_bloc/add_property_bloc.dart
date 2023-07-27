@@ -12,6 +12,7 @@ part 'add_property_state.dart';
 
 class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
   AddPropertyBloc() : super(AddPropertyState()) {
+
     on<SelectPropertyTypeEvent>((event, emit) {
       emit(state.copyWith(selectedPropertyType: event.propertyType));
     });
@@ -26,9 +27,11 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
     on<SelectedImagesEvent>((event, emit) {
       emit(state.copyWith(images: List.of(event.images!.toList())));
     });
-    on<SelectedTypeAttributesEvent>((event, emit) {
-      emit(
-          state.copyWith(propertyTypeAttributes: event.propertyTypeAttributes));
+    on<SelectedTypeConstAttributesEvent>((event, emit) {
+      emit(state.copyWith(propertyTypeConstAttributes: event.propertyTypeConstAttributes));
+    });
+    on<SelectedTypeSpecialAttributesEvent>((event, emit) {
+      emit(state.copyWith(propertyTypeSpecialAttributes: event.propertyTypeSpecialAttributes));
     });
     on<SelectRegionEvent>((event, emit) {
       emit(state.copyWith(region: event.region));

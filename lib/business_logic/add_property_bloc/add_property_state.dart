@@ -7,7 +7,8 @@ class AddPropertyState extends Equatable {
     this.propertyService,
     this.selectedLocation,
     this.images = const [],
-    this.propertyTypeAttributes,
+    this.propertyTypeConstAttributes,
+    this.propertyTypeSpecialAttributes,
     this.region,
     this.selectedAmenity = const [],
 
@@ -18,7 +19,8 @@ class AddPropertyState extends Equatable {
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
   LatLng? selectedLocation;
-  Map<String,int>? propertyTypeAttributes;
+  Map<String,int>? propertyTypeConstAttributes;
+  Map<String,int>? propertyTypeSpecialAttributes;
   String? region;
   List<Amenity> selectedAmenity;
 
@@ -26,7 +28,8 @@ class AddPropertyState extends Equatable {
   AddPropertyState copyWith({
     List<File>? images,
     List<String>? tags,
-    Map<String,int>? propertyTypeAttributes,
+    Map<String,int>? propertyTypeConstAttributes,
+    Map<String,int>? propertyTypeSpecialAttributes,
     PropertyType? selectedPropertyType,
     PropertyService? propertyService,
     LatLng? selectedLocation,
@@ -35,7 +38,8 @@ class AddPropertyState extends Equatable {
 
   }) =>
       AddPropertyState(
-        propertyTypeAttributes: propertyTypeAttributes ?? this.propertyTypeAttributes,
+        propertyTypeConstAttributes: propertyTypeConstAttributes ?? this.propertyTypeConstAttributes,
+        propertyTypeSpecialAttributes: propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
         images: images ?? this.images,
         tags: tags ?? this.tags,
         selectedPropertyType: selectedPropertyType ?? this.selectedPropertyType,
@@ -54,7 +58,8 @@ class AddPropertyState extends Equatable {
         selectedLocation,
         images,
         images.length,
-        propertyTypeAttributes,
+        propertyTypeConstAttributes,
+        propertyTypeSpecialAttributes,
     region,
     selectedAmenity,
       ];

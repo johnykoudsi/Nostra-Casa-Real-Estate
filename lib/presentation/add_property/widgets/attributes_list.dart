@@ -9,12 +9,13 @@ class AttributesList extends StatefulWidget {
   AttributesList({
     Key? key,
     required this.propertyTypeAttributes,
+    required this.enableDelete,
   }) : super(key: key);
   final Map<String, int>? propertyTypeAttributes;
+  bool enableDelete;
 
   @override
   State<AttributesList> createState() => _AttributesListState();
-
 }
 
 class _AttributesListState extends State<AttributesList> {
@@ -25,8 +26,14 @@ class _AttributesListState extends State<AttributesList> {
     TextEditingController editAttributeName = TextEditingController();
     TextEditingController editAttributeNumber = TextEditingController();
     final addPropertyBloc = context.watch<AddPropertyBloc>();
-    addPropertyBloc.state.propertyTypeAttributes =
-        widget.propertyTypeAttributes;
+    if (widget.enableDelete) {
+      addPropertyBloc.state.propertyTypeSpecialAttributes =
+          widget.propertyTypeAttributes;
+    } else {
+      addPropertyBloc.state.propertyTypeConstAttributes =
+          widget.propertyTypeAttributes;
+    }
+
     void plus(int index) {
       setState(() {
         if (widget.propertyTypeAttributes!.entries.toList()[index].value <
@@ -34,8 +41,13 @@ class _AttributesListState extends State<AttributesList> {
           widget.propertyTypeAttributes!.update(
               widget.propertyTypeAttributes!.entries.toList()[index].key,
               (value) => value + 1);
-          addPropertyBloc.state.propertyTypeAttributes =
-              widget.propertyTypeAttributes;
+          if (widget.enableDelete) {
+            addPropertyBloc.state.propertyTypeSpecialAttributes =
+                widget.propertyTypeAttributes;
+          } else {
+            addPropertyBloc.state.propertyTypeConstAttributes =
+                widget.propertyTypeAttributes;
+          }
         }
       });
     }
@@ -46,19 +58,46 @@ class _AttributesListState extends State<AttributesList> {
           widget.propertyTypeAttributes!.update(
               widget.propertyTypeAttributes!.entries.toList()[index].key,
               (value) => value - 1);
-          addPropertyBloc.state.propertyTypeAttributes =
-              widget.propertyTypeAttributes;
+          if (widget.enableDelete) {
+            addPropertyBloc.state.propertyTypeSpecialAttributes =
+                widget.propertyTypeAttributes;
+          } else {
+            addPropertyBloc.state.propertyTypeConstAttributes =
+                widget.propertyTypeAttributes;
+          }
         }
       });
     }
+
     editPropertyTypeAttribute() {
       setState(() {
-if(validationKey.currentState!.validate()){
-  widget.propertyTypeAttributes!.update(editAttributeName.text,
-          (value) => int.parse(editAttributeNumber.text));
-  Navigator.of(context).pop(false);
-}
+        if (validationKey.currentState!.validate()) {
+          widget.propertyTypeAttributes!.update(editAttributeName.text,
+              (value) => int.parse(editAttributeNumber.text));
+          if (widget.enableDelete) {
+            addPropertyBloc.state.propertyTypeSpecialAttributes =
+                widget.propertyTypeAttributes;
+          } else {
+            addPropertyBloc.state.propertyTypeConstAttributes =
+                widget.propertyTypeAttributes;
+          }
+          Navigator.of(context).pop(false);
+        }
+      });
+    }
 
+    void deleteAttribute(int index) {
+      setState(() {
+        widget.propertyTypeAttributes!.remove(
+          widget.propertyTypeAttributes!.entries.toList()[index].key,
+        );
+        if (widget.enableDelete) {
+          addPropertyBloc.state.propertyTypeSpecialAttributes =
+              widget.propertyTypeAttributes;
+        } else {
+          addPropertyBloc.state.propertyTypeConstAttributes =
+              widget.propertyTypeAttributes;
+        }
       });
     }
 
@@ -81,68 +120,101 @@ if(validationKey.currentState!.validate()){
 
     double screenWidth = MediaQuery.of(context).size.width;
 
-    return ListView.builder(
-        itemCount: widget.propertyTypeAttributes?.entries.toList().length,
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onLongPress: () {
-              showEditPropertyTypeAttributeDialog(index);
-            },
-            child: Container(
-                decoration: const BoxDecoration(
-                  color: AppStyle.kBackGroundColor,
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-
-                            widget.propertyTypeAttributes!.entries
-                                .toList()[index]
-                                .key,
-                            style: Theme.of(context).textTheme.headline5,
-                            
-                          ),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            RoundedElevatedButton(
-                              iconData: Icons.remove,
-                              onTap: () {
-                                minus(index);
-                              },
-                            ),
-                            SizedBox(
-                              width: screenWidth * 0.09,
-                              child: Text(
-                                widget.propertyTypeAttributes!.entries
-                                    .toList()[index]
-                                    .value
-                                    .toString(),
-                                style: Theme.of(context).textTheme.headline5,
-                                textAlign: TextAlign.center,
+    return Column(
+      children: [
+        Visibility(
+          visible: widget.enableDelete&&widget.propertyTypeAttributes!.isNotEmpty,
+          child: Center(
+              child: Text(
+            "Your special attributes",
+            style: Theme.of(context).textTheme.headline5,
+          )),
+        ),
+        Visibility(
+          visible: widget.enableDelete&&widget.propertyTypeAttributes!.isNotEmpty,
+          child: Padding(
+              padding: EdgeInsets.only(
+                  left: screenWidth * 0.2, right: screenWidth * 0.2),
+              child: const Divider(
+                color: AppStyle.kGreyColor,
+              )),
+        ),
+        Expanded(
+          child: ListView.builder(
+              itemCount: widget.propertyTypeAttributes?.entries.toList().length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onLongPress: () {
+                    showEditPropertyTypeAttributeDialog(index);
+                  },
+                  child: Container(
+                      decoration: const BoxDecoration(
+                        color: AppStyle.kBackGroundColor,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Visibility(
+                                  visible: widget.enableDelete,
+                                  child: RoundedElevatedButton(
+                                    onTap: () {
+                                      setState(() {
+                                        deleteAttribute(index);
+                                      });
+                                    },
+                                    iconData: Icons.delete_forever,
+                                    iconColor: Colors.red,
+                                  )),
+                              Expanded(
+                                child: Text(
+                                  widget.propertyTypeAttributes!.entries
+                                      .toList()[index]
+                                      .key,
+                                  style: Theme.of(context).textTheme.headline5,
+                                ),
                               ),
-                            ),
-                            RoundedElevatedButton(
-                              iconData: Icons.add,
-                              onTap: () {
-                                plus(index);
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    const Divider(
-                      color: AppStyle.kGreyColor,
-                    ),
-                  ],
-                )),
-          );
-        });
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  RoundedElevatedButton(
+                                    iconData: Icons.remove,
+                                    onTap: () {
+                                      minus(index);
+                                    },
+                                  ),
+                                  SizedBox(
+                                    width: screenWidth * 0.09,
+                                    child: Text(
+                                      widget.propertyTypeAttributes!.entries
+                                          .toList()[index]
+                                          .value
+                                          .toString(),
+                                      style:
+                                          Theme.of(context).textTheme.headline5,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                  RoundedElevatedButton(
+                                    iconData: Icons.add,
+                                    onTap: () {
+                                      plus(index);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          const Divider(
+                            color: AppStyle.kGreyColor,
+                          ),
+                        ],
+                      )),
+                );
+              }),
+        ),
+      ],
+    );
   }
 }

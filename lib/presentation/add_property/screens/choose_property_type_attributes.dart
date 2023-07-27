@@ -22,14 +22,15 @@ class _ChoosePropertyTypeAttributesState
 
   @override
   Widget build(BuildContext context) {
-    Map<String, int>? propertyTypeAttributes = {
+    Map<String, int>? propertyTypeConstAttributes = {
       'none': 0,
     };
 
     final addPropertyBloc = context.watch<AddPropertyBloc>();
+
     if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.residential) {
-      propertyTypeAttributes = {
+      propertyTypeConstAttributes = {
         "Bathrooms".tr(): 2,
         "Bedrooms".tr(): 6,
         "Balconies".tr(): 2,
@@ -38,49 +39,60 @@ class _ChoosePropertyTypeAttributesState
       };
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.agricultural) {
-      propertyTypeAttributes = {
+      propertyTypeConstAttributes = {
         "Livestock inventory".tr(): 25,
         "Water usage (by liter)".tr(): 100,
         "Fertilizer usage (by pound)".tr(): 15,
       };
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.commercial) {
-      propertyTypeAttributes = {
+      propertyTypeConstAttributes = {
         "Bathrooms".tr(): 2,
         "Balconies".tr(): 2,
         "Floor".tr(): 1
       };
     }
-    if (addPropertyBloc.state.propertyTypeAttributes != null) {
-      propertyTypeAttributes = addPropertyBloc.state.propertyTypeAttributes;
+    if (addPropertyBloc.state.propertyTypeConstAttributes != null) {
+      propertyTypeConstAttributes =
+          addPropertyBloc.state.propertyTypeConstAttributes;
     }
-    TextEditingController newAttributeName = TextEditingController();
-    TextEditingController newAttributeNumber = TextEditingController();
-    addPropertyTypeAttribute() {
-      setState(() {
-        if (addPropertyBloc.state.propertyTypeAttributes!
-            .containsKey(newAttributeName.text)) {
-          DialogsWidgetsYesNo.alreadyExistDialog(
-              context, newAttributeName.text);
-        } else {
-          if(validationKey.currentState!.validate()){
-            addPropertyBloc.state.propertyTypeAttributes![newAttributeName.text] =
-                int.parse(newAttributeNumber.text);
-            Navigator.of(context).pop(false);
+    TextEditingController newSpecialAttributeName = TextEditingController();
+    TextEditingController newSpecialAttributeNumber = TextEditingController();
+    addPropertySpecialTypeAttribute() {
+      if (validationKey.currentState!.validate()) {
+        setState(() {
+          if (propertyTypeConstAttributes!
+              .containsKey(newSpecialAttributeName.text)) {
+            DialogsWidgetsYesNo.alreadyExistDialog(
+                context, newSpecialAttributeName.text);
+          } else if (addPropertyBloc.state.propertyTypeSpecialAttributes ==
+              null) {
+            addPropertyBloc.state.propertyTypeSpecialAttributes = {
+              newSpecialAttributeName.text:
+                  int.parse(newSpecialAttributeNumber.text)
+            };
+          } else if (addPropertyBloc.state.propertyTypeSpecialAttributes!
+              .containsKey(newSpecialAttributeName.text)) {
+            DialogsWidgetsYesNo.alreadyExistDialog(
+                context, newSpecialAttributeName.text);
+          } else {
+            addPropertyBloc.state.propertyTypeSpecialAttributes![
+                    newSpecialAttributeName.text] =
+                int.parse(newSpecialAttributeNumber.text);
+            Navigator.of(context).pop();
           }
-
-        }
-      });
+        });
+      }
     }
 
     Future<bool> showAddPropertyTypeAttributeDialog() async {
       return DialogsWidgetsYesNo.textFieldDialog(
-        key: validationKey,
+          key: validationKey,
           operationName: "Add",
           context: context,
-          attributeNameController: newAttributeName,
-          attributeNumberController: newAttributeNumber,
-          changePropertyAttribute: addPropertyTypeAttribute,
+          attributeNameController: newSpecialAttributeName,
+          attributeNumberController: newSpecialAttributeNumber,
+          changePropertyAttribute: addPropertySpecialTypeAttribute,
           enable: true);
     }
 
@@ -119,7 +131,22 @@ class _ChoosePropertyTypeAttributesState
             ),
             Expanded(
               child: AttributesList(
-                propertyTypeAttributes: propertyTypeAttributes,
+                propertyTypeAttributes: propertyTypeConstAttributes,
+                enableDelete: false,
+              ),
+            ),
+            SizedBox(
+              height: screenHeight * 0.05,
+            ),
+            Visibility(
+              visible:
+                  addPropertyBloc.state.propertyTypeSpecialAttributes != null,
+              child: Expanded(
+                child: AttributesList(
+                  propertyTypeAttributes:
+                      addPropertyBloc.state.propertyTypeSpecialAttributes,
+                  enableDelete: true,
+                ),
               ),
             ),
             RoundedElevatedButton(
