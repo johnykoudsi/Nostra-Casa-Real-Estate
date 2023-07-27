@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
+import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
@@ -51,6 +52,9 @@ class AppRouter {
             providers: [
               BlocProvider(
                 create: (context) => AddPropertyBloc(),
+              ),
+              BlocProvider(
+                create: (context) => AmenityBloc()..add(ChangeToLoadingApiEvent()),
               ),
             ],
             child: const AddPropertyHome(),

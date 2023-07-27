@@ -1,71 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
+import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 
+import '../../../data/models/amenities_model.dart';
+import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
-class CustomGrid extends StatefulWidget {
-  const CustomGrid({Key? key, required this.svgPaths, required this.title}) : super(key: key);
+class CustomAmenityGrid extends StatefulWidget {
+  const CustomAmenityGrid(
+      {Key? key, required this.svgPaths, required this.title})
+      : super(key: key);
   final List<String> svgPaths;
   final List<String> title;
   @override
-  State<CustomGrid> createState() => _CustomGridState();
+  State<CustomAmenityGrid> createState() => _CustomAmenityGridState();
 }
 
-class _CustomGridState extends State<CustomGrid> {
-  List<bool> clicked =[];
-
+class _CustomAmenityGridState extends State<CustomAmenityGrid> {
   @override
   Widget build(BuildContext context) {
-    for(int i=0;i<widget.title.length;i++){
-      clicked.add(false);
-    }
+    return BlocBuilder<AmenityBloc, AmenityState>(
+      builder: (context, state) {
+        if (state is AmenityLoadedState) {
+          return GridView.builder(
+              itemCount: state.amenities.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.6,
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return AmenityItemWidget(
+                  amenity: state.amenities[index],
+                );
+              });
+        }
+        return const Center(child: CircularProgressIndicator());
+      },
+    );
+  }
+}
+
+class AmenityItemWidget extends StatelessWidget {
+  AmenityItemWidget({required this.amenity, Key? key}) : super(key: key);
+  Amenity amenity;
+  @override
+  Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    return GridView.builder(
-        itemCount: widget.title.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 1.6,
-          crossAxisCount: 2,
-          crossAxisSpacing: 15,
-          mainAxisSpacing: 15,
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
-              setState(() {
-                clicked[index] = !clicked[index];
-              });
-            },
-            child: Container(
-                decoration: BoxDecoration(
-                  color: clicked[index] ? AppStyle.kGreyColor : AppStyle.kBackGroundColor,
-                  border: Border.all(
-                    color: clicked[index] ? AppStyle.blackColor : AppStyle.kGreyColor,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
+
+    return GestureDetector(
+      onTap: () {
+        context
+            .read<AddPropertyBloc>()
+            .add(OnAmenityItemPressEvent(amenity: amenity));
+      },
+      child: BlocBuilder<AddPropertyBloc, AddPropertyState>(
+        builder: (context, state) {
+          return Container(
+              decoration: BoxDecoration(
+                color: state.selectedAmenity.contains(amenity)
+                    ? AppStyle.kGreyColor
+                    : AppStyle.kBackGroundColor,
+                border: Border.all(
+                  color: state.selectedAmenity.contains(amenity)
+                      ? AppStyle.blackColor
+                      : AppStyle.kGreyColor,
                 ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: screenWidth * 0.03,right: screenWidth * 0.03),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SvgPicture.asset(
-                        widget.svgPaths[index],
-                        width: screenWidth * 0.1,
-                        height: screenHeight * 0.05,
-                      ),
-                      SizedBox(
-                        height: screenHeight * 0.02,
-                      ),
-                      Text(
-                        widget.title[index],
-                        style: Theme.of(context).textTheme.headline5,
-                      )
-                    ],
-                  ),
-                )),
-          );
-        });
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: screenWidth * 0.03, right: screenWidth * 0.03),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SvgPicture.asset(
+                      AppAssets.tv,
+                      width: screenWidth * 0.1,
+                      height: screenHeight * 0.05,
+                    ),
+                    SizedBox(
+                      height: screenHeight * 0.02,
+                    ),
+                    Text(
+                      amenity.name,
+                      style: Theme.of(context).textTheme.headline5,
+                    )
+                  ],
+                ),
+              ));
+        },
+      ),
+    );
   }
 }

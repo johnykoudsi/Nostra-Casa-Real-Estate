@@ -11,7 +11,7 @@ class AmenityService {
     String? sessionToken,
     required GetAmenityApiEvent event,
   }) async {
-    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+    HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: EndPoints.getAmenities(
           page: event.searchFilterProperties.page,
           limit: kProductsGetLimit,

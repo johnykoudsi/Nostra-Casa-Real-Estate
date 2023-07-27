@@ -46,7 +46,7 @@ print(addPropertyBloc.state.propertyTypeAttributes);
               height: screenHeight * 0.03,
             ),
             Expanded(
-              child: CustomGrid(svgPaths: svgPaths, title: title,),
+              child: CustomAmenityGrid(svgPaths: svgPaths, title: title,),
             ),
           ],
         ),

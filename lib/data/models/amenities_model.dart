@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
+
 WelcomeAmenities welcomeAmenitiesFromJson(String str) =>
     WelcomeAmenities.fromJson(json.decode(str));
 
@@ -17,7 +19,7 @@ class WelcomeAmenities {
       );
 }
 
-class Amenity {
+class Amenity extends Equatable{
   int id;
   String name;
   String description;
@@ -39,6 +41,9 @@ class Amenity {
         active: json["active"] ?? 0,
         amenityTypeId: json["amenity_type_id"],
       );
+
+  @override
+  List<Object?> get props => [id,name,description,active,amenityTypeId];
 }
 
 class AmenitiesSearchFilter {

@@ -63,6 +63,8 @@ class AmenityBloc extends Bloc<AmenityEvent, AmenityState> {
           }
         }
       } else {
+        print("Server ${(getAmenity as HelperResponse).response}");
+
         emit(AmenityErrorState(helperResponse: getAmenity));
       }
     });
