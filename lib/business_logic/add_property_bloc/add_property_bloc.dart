@@ -5,6 +5,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../data/models/amenities_model.dart';
+
 part 'add_property_event.dart';
 part 'add_property_state.dart';
 

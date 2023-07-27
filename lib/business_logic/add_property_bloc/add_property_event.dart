@@ -46,3 +46,10 @@ class SelectedTypeAttributesEvent extends AddPropertyEvent{
   @override
   List<Object?> get props => [propertyTypeAttributes];
 }
+class OnAmenityItemPressEvent extends AddPropertyEvent {
+  OnAmenityItemPressEvent({required this.amenity});
+  Amenity amenity;
+  @override
+  List<Object?> get props => [amenity];
+}
+
