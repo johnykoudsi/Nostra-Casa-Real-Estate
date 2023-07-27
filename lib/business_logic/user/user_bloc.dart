@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nostra_casa/utility/enums.dart';
 import '../../data/models/user_model.dart';
 import '../../data/models/user_model_local_storage.dart';
@@ -21,6 +22,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       } else {
         emit(UserNotLoggedState());
       }
+
+      add(AddFcmToken());
     });
 
     on<SignUpEvent>((event, emit) async {
@@ -40,35 +43,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       UserServices.sendSMSVerificationCode(event);
     });
 
-    // on<LoginUserEvent>((event, emit) async {
-    //   emit(UserLoading());
-    //
-    //   final response = await UserService.loginUserService(event);
-    //
-    //   if (response is UserInfo) {
-    //     add(SaveUserToLocal(user: response));
-    //     emit(UserLoggedState(user: response));
-    //   } else {
-    //     emit(UserErrorState(helperResponse: response));
-    //   }
-    // });
+    on<AddFcmToken>((event, emit) {
+      // final userState = state;
+      // if(userState is! UserLoggedState){
+      //   return;
+      // }
+      FirebaseMessaging.instance.getToken().then((fcm) async {
+        print('FCM Token :$fcm');
+        FirebaseMessaging.instance.subscribeToTopic("Public");
+        //add fcm to user
+        // todo : send fcm service
+      });
 
-    // on<LogOutEvent>((event, emit) {
-    //   print("log out");
-    //   final userState = event.userState;
-    //   if (userState is UserLoggedState) {
-    //     NetworkHelpers.postDataHelper(
-    //       url: EndPoints.logout,
-    //       sessionToken: userState.user.sessionToken,
-    //     );
-    //   }
-    //
-    //   emit(UserNotLoggedState());
-    // });
-    //
-    // on<SaveUserToLocal>((event, emit) async {
-    //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-    //   await prefs.setString('user', welcomeUserToJson(event.user));
-    // });
+    });
   }
 }

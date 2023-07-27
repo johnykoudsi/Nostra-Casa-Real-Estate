@@ -55,3 +55,10 @@ class SignUpEvent extends UserEvent {
   List<Object?> get props =>
       [phoneNumber, password, email, fullName, gender, verificationCode];
 }
+
+class AddFcmToken extends UserEvent{
+
+  @override
+  List<Object?> get props => [];
+
+}
