@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
                 image: const AssetImage(AppAssets.welcome),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
-                    AppStyle.mainColor.withOpacity(0.6), BlendMode.darken),
+                    AppStyle.mainColor.withOpacity(0.7), BlendMode.darken),
               ),
             ),
           ),

@@ -25,10 +25,15 @@ class _WelcomeStepState extends State<WelcomeStep> {
           Column(
             children: [
               SizedBox(
-                height: screenHeight * 0.15,
+                height: screenHeight * 0.1,
               ),
-              const Image(
-                image: AssetImage(AppAssets.internalHouse),
+              Padding(
+                padding:EdgeInsets.symmetric(
+                    horizontal: screenWidth * 0.038,
+                    vertical: screenWidth * 0.038),
+                child: const Image(
+                  image: AssetImage(AppAssets.internalHouse),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
@@ -49,15 +54,7 @@ class _WelcomeStepState extends State<WelcomeStep> {
                           .tr(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    ElevatedButtonWidget(
-                      title: "Add Now".tr(),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(AppRoutes.addProperty);
-                      },
-                    )
+
                   ],
                 ),
               ),
@@ -67,12 +64,19 @@ class _WelcomeStepState extends State<WelcomeStep> {
       ),
       bottomSheet: Padding(
         padding: EdgeInsets.only(
-            left: screenWidth * 0.15, right: screenWidth * 0.15),
+            left: screenWidth * 0.038, right: screenWidth * 0.038),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
+          children: [
+            ElevatedButtonWidget(
+              title: "Add Now".tr(),
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.addProperty);
+              },
+            )
+          ],
         ),
       ),
     );
