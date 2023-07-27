@@ -79,17 +79,21 @@ class AmenityItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SvgPicture.asset(
-                      AppAssets.tv,
-                      width: screenWidth * 0.1,
-                      height: screenHeight * 0.05,
+                    Expanded(
+                      child: SvgPicture.asset(
+                        AppAssets.tv,
+                        width: screenWidth * 0.1,
+                        height: screenHeight * 0.05,
+                      ),
                     ),
                     SizedBox(
                       height: screenHeight * 0.02,
                     ),
-                    Text(
-                      amenity.name,
-                      style: Theme.of(context).textTheme.headline5,
+                    Expanded(
+                      child: Text(
+                        amenity.name,
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
                     )
                   ],
                 ),
