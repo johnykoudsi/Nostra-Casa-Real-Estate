@@ -12,12 +12,14 @@ class AddPropertyBottomNavigator extends StatelessWidget {
       required this.stepNumber,
       required this.progress,
       this.onPressedNext,
-      this.onPressedBack})
+      this.onPressedBack,
+      this.onSubmit})
       : super(key: key);
   double progress;
   int stepNumber;
   Function()? onPressedNext;
   Function()? onPressedBack;
+  Function()? onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +31,11 @@ class AddPropertyBottomNavigator extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(
-              top: screenHeight * 0.01,
-              bottom: screenHeight * 0.04,
-            ),
-
-                child: MyProgressBar(progressValue: progress)
-          ),
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.01,
+                bottom: screenHeight * 0.04,
+              ),
+              child: MyProgressBar(progressValue: progress)),
           Row(
             children: [
               Builder(builder: (context) {
@@ -58,8 +58,8 @@ class AddPropertyBottomNavigator extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
                   child: ElevatedButtonWidget(
-                    title: 'Next'.tr(),
-                    onPressed: onPressedNext,
+                    title: stepNumber < 11 ? 'Next'.tr() : 'Submit',
+                    onPressed: stepNumber < 11 ? onPressedNext : onSubmit,
                   ),
                 ),
               ),

@@ -13,6 +13,7 @@ import 'package:nostra_casa/presentation/add_property/screens/choose_service.dar
 import 'package:nostra_casa/presentation/add_property/screens/choose_tags.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';
 import 'package:nostra_casa/presentation/add_property/screens/pin_google_map_screen/GoogleMapsScreen.dart';
+import 'package:nostra_casa/presentation/add_property/screens/submit_property.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/add_property_bottom_navigator.dart';
 
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';
@@ -26,7 +27,7 @@ class AddPropertyHome extends StatefulWidget {
 }
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
-  int screensNumber = 10;
+  int screensNumber = 11;
 
   bool isDisabledNext() {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
@@ -48,13 +49,23 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
 
     return false;
   }
+void onSubmit(){
+  final addPropertyBloc = context.watch<AddPropertyBloc>();
 
+  print(
+      "tags: " + addPropertyBloc.state.tags.toString()+
+          "\ntype: "+ addPropertyBloc.state.selectedPropertyType.toString()+
+          "\nservice "+addPropertyBloc.state.propertyService.toString()
+  );
+}
   bool isDisabledBack() {
     if (stepNumber == 0) {
       return true;
     }
     return false;
   }
+
+
 
   @override
   void dispose() {
@@ -65,9 +76,11 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
       SharedAxisTransitionType.horizontal;
   int stepNumber = 0;
   bool isReverse = false;
+
   Future<bool> onWillPopMethod() async {
     return DialogsWidgetsYesNo.onWillPopMethod(context);
   }
+
   @override
   Widget build(BuildContext context) {
     final progress = (stepNumber * 100) / screensNumber;
@@ -77,7 +90,9 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
           appBar: AppBar(),
           body: PageTransitionSwitcher(
             duration: const Duration(milliseconds: 600),
-            reverse: context.locale.languageCode == 'ar' ? !isReverse : isReverse,
+            reverse: context.locale.languageCode == 'ar'
+                ? !isReverse
+                : isReverse,
             transitionBuilder: (Widget child, Animation<double> animation,
                 Animation<double> secondaryAnimation) {
               return SharedAxisTransition(
@@ -123,6 +138,9 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
                   if (stepNumber == 10) {
                     return const AddPropertyPriceAndSpace();
                   }
+                  if (stepNumber == 11) {
+                    return const SubmitProperty();
+                  }
                   return const Scaffold(
                     body: Center(
                       child: Text(
@@ -137,19 +155,20 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
             onPressedBack: isDisabledBack()
                 ? null
                 : () {
-                    setState(() {
-                      stepNumber--;
-                    });
-                  },
+              setState(() {
+                stepNumber--;
+              });
+            },
             onPressedNext: isDisabledNext()
                 ? null
                 : () {
-                    setState(() {
-                      stepNumber++;
-                    });
-                  },
+              setState(() {
+                stepNumber++;
+              });
+            },
             progress: progress,
             stepNumber: stepNumber,
+            onSubmit: onSubmit,
           )),
     );
   }
