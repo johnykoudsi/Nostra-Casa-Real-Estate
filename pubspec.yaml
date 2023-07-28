@@ -33,6 +33,7 @@ dependencies:
   firebase_core: ^2.15.0
   firebase_messaging: ^14.6.5
   flutter_local_notifications: ^15.1.0+1
+  csc_picker: ^0.2.7
 
 
 dev_dependencies:

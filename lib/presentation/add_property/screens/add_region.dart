@@ -1,11 +1,11 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/presentation/add_property/widgets/country_and_city_picker.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/custom_insert_text.dart';
 
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
-import '../widgets/custstom_insert_number_field.dart';
 
 class AddRegion extends StatefulWidget {
   const AddRegion({Key? key}) : super(key: key);
@@ -17,6 +17,10 @@ class AddRegion extends StatefulWidget {
 class _AddRegionState extends State<AddRegion> {
   @override
   Widget build(BuildContext context) {
+    String countryValue = "";
+    String? stateValue = "";
+    String? cityValue = "";
+    String address = "";
     final addPropertyBloc = context.watch<AddPropertyBloc>();
     TextEditingController regionController = TextEditingController();
     if(addPropertyBloc.state.region != null){
@@ -36,11 +40,11 @@ class _AddRegionState extends State<AddRegion> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Please add your property region',
+              'Please add your property country, state and city',
               style: Theme.of(context).textTheme.headline2,
             ),
             Text(
-              'next you will set your property location on the map',
+              'if your city is not listed feel free to add it manually.',
               style: Theme.of(context)
                   .textTheme
                   .headline6!
@@ -52,8 +56,26 @@ class _AddRegionState extends State<AddRegion> {
             Expanded(
               child: ListView(
                 children: [
+                  CSCPicker(
+                    onCountryChanged: (value) {
+                      setState(() {
+                        countryValue = value;
+                      });
+                    },
+                    onStateChanged:(value) {
+                      setState(() {
+                        stateValue = value;
+                      });
+                    },
+                    onCityChanged:(value) {
+                      setState(() {
+                        cityValue = value;
+                      });
+                    },
+                  ),
+                  SizedBox(height: screenHeight*0.05,),
                  CustomInsertText(
-                   controller: regionController,hintText: "Damascus",),
+                   controller: regionController,hintText: "Damascus",additionalText: "here you can add more additional details about you property region",),
                 ],
               ),
             ),

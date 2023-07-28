@@ -7,7 +7,9 @@ import '../../../utility/app_style.dart';
 import '../../global_widgets/phone_number_field.dart';
 
 class CustomInsertText extends StatelessWidget {
-  CustomInsertText({Key? key,required this.controller,this.additionalText,this.hintText}) : super(key: key);
+  CustomInsertText(
+      {Key? key, required this.controller, this.additionalText, this.hintText})
+      : super(key: key);
   TextEditingController controller = TextEditingController();
   String? additionalText;
   String? hintText;
@@ -18,50 +20,43 @@ class CustomInsertText extends StatelessWidget {
 
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
-    return  Container(
-      height: screenHeight * 0.25,
-      decoration: BoxDecoration(
-        color: AppStyle.kLightGrey,
-        borderRadius: AppStyle.k15BorderRadius,
-        border: Border.all(
-          color: AppStyle.kGreyColor,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding:  EdgeInsets.only(left: screenWidth*0.06,right: screenWidth*0.06),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: AppStyle.k15BorderRadius,
-                      color: AppStyle.kBackGroundColor,
-                      border: Border.all(
-                        color: AppStyle.kGreyColor,
-                      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: EdgeInsets.only(
+              left: screenWidth * 0.06, right: screenWidth * 0.06),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: AppStyle.k15BorderRadius,
+                    color: AppStyle.kBackGroundColor,
+                    border: Border.all(
+                      color: AppStyle.kGreyColor,
                     ),
-                    child: TextField(
-                      onChanged: (value){addPropertyBloc.state.region=controller.text;},
-                      decoration: InputDecoration(
-                        hintText : hintText,
-                      ),
-                      controller: controller,
-                      cursorColor: AppStyle.blackColor,
-                      style: const TextStyle(
-                        fontSize: 22,
-                      ),
+                  ),
+                  child: TextField(
+                    onChanged: (value) {
+                      addPropertyBloc.state.region = controller.text;
+                    },
+                    decoration: InputDecoration(
+                      hintText: hintText,
+                    ),
+                    controller: controller,
+                    cursorColor: AppStyle.blackColor,
+                    style: const TextStyle(
+                      fontSize: 22,
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
