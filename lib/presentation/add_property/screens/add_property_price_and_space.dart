@@ -10,15 +10,16 @@ import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
 
 class AddPropertyPriceAndSpace extends StatefulWidget {
-  const AddPropertyPriceAndSpace({Key? key}) : super(key: key);
+   AddPropertyPriceAndSpace({Key? key,this.priceController,this.areaController}) : super(key: key);
+TextEditingController? priceController;
+TextEditingController? areaController;
 
   @override
   State<AddPropertyPriceAndSpace> createState() => _AddPropertyPriceAndSpaceState();
 }
 
 class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
-  TextEditingController priceController = TextEditingController();
-  TextEditingController spaceController = TextEditingController();
+
 
   double price = 225;
   double space = 100;
@@ -39,12 +40,12 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
     }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    priceController.text = price.toString();
-    spaceController.text = space.toString();
+    widget.priceController!.text = price.toString();
+    widget.areaController!.text = space.toString();
     void increasePrice() {
       setState(() {
-        if (priceController.text != "") {
-          price = double.parse(priceController.text);
+        if (widget.priceController!.text != "") {
+          price = double.parse(widget.priceController!.text);
           price++;
         }
       });
@@ -52,8 +53,8 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
 
     void decreasePrice() {
       setState(() {
-        if (priceController.text != "") {
-          price = double.parse(priceController.text);
+        if (widget.priceController!.text != "") {
+          price = double.parse(widget.priceController!.text);
           price--;
         }
       });
@@ -61,8 +62,8 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
 
     void increaseSpace() {
       setState(() {
-        if (spaceController.text != "") {
-          space = double.parse(spaceController.text);
+        if (widget.areaController!.text != "") {
+          space = double.parse(widget.areaController!.text);
           space++;
         }
       });
@@ -70,8 +71,8 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
 
     void decreaseSpace() {
       setState(() {
-        if (spaceController.text != "") {
-          space = double.parse(spaceController.text);
+        if (widget.areaController!.text != "") {
+          space = double.parse(widget.areaController!.text);
           space--;
         }
       });
@@ -109,7 +110,7 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
                   CustomInsertNumberField(
                     decrease: decreasePrice,
                     increase: increasePrice,
-                    controller: priceController,
+                    controller: widget.priceController!,
                     unit: timePeriod,
                     additionalText:
                         "Places like yours in your area usually range from\n"
@@ -124,7 +125,7 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
                   CustomInsertNumberField(
                     decrease: decreaseSpace,
                     increase: increaseSpace,
-                    controller: spaceController,
+                    controller: widget.areaController!,
                     unit: "square meters".tr(),
                   ),
                 ],

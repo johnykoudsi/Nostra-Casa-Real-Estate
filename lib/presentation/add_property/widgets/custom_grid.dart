@@ -74,7 +74,7 @@ class AmenityItemWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: screenWidth * 0.03, right: screenWidth * 0.03),
+                    left: screenWidth * 0.03, right: screenWidth * 0.03,top: screenWidth*0.01),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,17 +82,16 @@ class AmenityItemWidget extends StatelessWidget {
                     Expanded(
                       child: SvgPicture.asset(
                         AppAssets.tv,
-                        width: screenWidth * 0.1,
-                        height: screenHeight * 0.05,
+                        width: screenWidth * 0.07,
+                        height: screenHeight * 0.045,
                       ),
                     ),
-                    SizedBox(
-                      height: screenHeight * 0.02,
-                    ),
+
                     Expanded(
                       child: Text(
                         amenity.name,
                         style: Theme.of(context).textTheme.headline5,
+                        textAlign: TextAlign.center,
                       ),
                     )
                   ],

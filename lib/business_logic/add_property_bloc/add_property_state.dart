@@ -1,45 +1,54 @@
 part of 'add_property_bloc.dart';
 
 class AddPropertyState extends Equatable {
-  AddPropertyState({
-    this.tags = const [],
-    this.selectedPropertyType,
-    this.propertyService,
-    this.selectedLocation,
-    this.images = const [],
-    this.propertyTypeConstAttributes,
-    this.propertyTypeSpecialAttributes,
-    this.region,
-    this.selectedAmenity = const [],
-
-  });
+  AddPropertyState(
+      {this.tags = const [],
+      this.selectedPropertyType,
+      this.propertyService,
+      this.selectedLocation,
+      this.images = const [],
+      this.propertyTypeConstAttributes,
+      this.propertyTypeSpecialAttributes,
+      this.region,
+      this.selectedAmenity = const [],
+      this.title,
+      this.description,
+      this.price,
+      this.area});
 
   List<String> tags;
   List<File> images;
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
   LatLng? selectedLocation;
-  Map<String,int>? propertyTypeConstAttributes;
-  Map<String,int>? propertyTypeSpecialAttributes;
+  Map<String, int>? propertyTypeConstAttributes;
+  Map<String, int>? propertyTypeSpecialAttributes;
   String? region;
   List<Amenity> selectedAmenity;
+  String? title;
+  String? description;
+  String? price;
+  String? area;
 
-
-  AddPropertyState copyWith({
-    List<File>? images,
-    List<String>? tags,
-    Map<String,int>? propertyTypeConstAttributes,
-    Map<String,int>? propertyTypeSpecialAttributes,
-    PropertyType? selectedPropertyType,
-    PropertyService? propertyService,
-    LatLng? selectedLocation,
-    List<Amenity>? selectedAmenity,
-    String? region,
-
-  }) =>
+  AddPropertyState copyWith(
+          {List<File>? images,
+          List<String>? tags,
+          Map<String, int>? propertyTypeConstAttributes,
+          Map<String, int>? propertyTypeSpecialAttributes,
+          PropertyType? selectedPropertyType,
+          PropertyService? propertyService,
+          LatLng? selectedLocation,
+          List<Amenity>? selectedAmenity,
+          String? region,
+          String? title,
+          String? description,
+          String? price,
+          String? area}) =>
       AddPropertyState(
-        propertyTypeConstAttributes: propertyTypeConstAttributes ?? this.propertyTypeConstAttributes,
-        propertyTypeSpecialAttributes: propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
+        propertyTypeConstAttributes:
+            propertyTypeConstAttributes ?? this.propertyTypeConstAttributes,
+        propertyTypeSpecialAttributes:
+            propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
         images: images ?? this.images,
         tags: tags ?? this.tags,
         selectedPropertyType: selectedPropertyType ?? this.selectedPropertyType,
@@ -47,7 +56,10 @@ class AddPropertyState extends Equatable {
         selectedLocation: selectedLocation ?? this.selectedLocation,
         selectedAmenity: selectedAmenity ?? this.selectedAmenity,
         region: region ?? this.region,
-
+        title: title ?? this.title,
+        description: description ?? this.description,
+        price: price ?? this.price,
+        area: area ?? this.area,
       );
 
   @override
@@ -60,8 +72,12 @@ class AddPropertyState extends Equatable {
         images.length,
         propertyTypeConstAttributes,
         propertyTypeSpecialAttributes,
-    region,
-    selectedAmenity,
+        region,
+        selectedAmenity,
+        title,
+        description,
+        price,
+        area
       ];
 }
 

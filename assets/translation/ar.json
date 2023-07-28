@@ -93,5 +93,14 @@
   "Delete Account": "حذف الحساب",
   "Cancel": "إلغاء",
   "Exit": "خروج",
-  "Are you sure you want to exit !": "هل أنت متأكد أنك تريد الخروج!"
+  "Are you sure you want to exit !": "هل أنت متأكد أنك تريد الخروج!",
+  " is already exist": " موجود مسبقا",
+  "Please add name and number for your special attribute": "الرجاء اضافة اسم وعدد للصفات المميزة الخاصة بعقارك",
+  "Please edit the number of the attribute": "الرجاء تعديل عدد الصفات",
+  "Special Name": "اسم مميز",
+  "Number is required": "الرقم مطلوب",
+  "Attribute value should be between 0 and 1000": "القيمة يجب أن تكون بين 0 و 1000",
+  "Add": "إضافة",
+  "Your special attributes": "الصفة المميزة الخاصة بعقارك",
+  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way.": "أهلاً بك في منصة Nostra Casa.\nهنا يمكنك أن تجد أنواع مختلفة من العقارات لشرائها,استئجارها,أو قضاء الإجازة فيها!\nيمكنك حتى أن تعرض عقارك الخاص أو إنشاء وكالة لعرض العقارات المختلفة التي تعتقد أنها ستنال الإعجاب.\nNostra Casa سيساعدك في وصف عقارك بأفضل طريقة."
 }

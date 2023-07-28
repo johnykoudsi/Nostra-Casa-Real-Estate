@@ -88,7 +88,7 @@ class _ChoosePropertyTypeAttributesState
     Future<bool> showAddPropertyTypeAttributeDialog() async {
       return DialogsWidgetsYesNo.textFieldDialog(
           key: validationKey,
-          operationName: "Add",
+          operationName: "Add".tr(),
           context: context,
           attributeNameController: newSpecialAttributeName,
           attributeNumberController: newSpecialAttributeNumber,

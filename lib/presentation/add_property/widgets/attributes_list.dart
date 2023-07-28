@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_button.dart';
@@ -126,7 +127,7 @@ class _AttributesListState extends State<AttributesList> {
           visible: widget.enableDelete&&widget.propertyTypeAttributes!.isNotEmpty,
           child: Center(
               child: Text(
-            "Your special attributes",
+            "Your special attributes".tr(),
             style: Theme.of(context).textTheme.headline5,
           )),
         ),

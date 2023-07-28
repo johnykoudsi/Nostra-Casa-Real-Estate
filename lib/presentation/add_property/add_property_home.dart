@@ -28,6 +28,10 @@ class AddPropertyHome extends StatefulWidget {
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
   int screensNumber = 11;
+  TextEditingController titleController =TextEditingController();
+  TextEditingController descriptionController =TextEditingController();
+  TextEditingController priceController=TextEditingController();
+  TextEditingController areaController=TextEditingController();
 
   bool isDisabledNext() {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
@@ -50,12 +54,23 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     return false;
   }
 void onSubmit(){
-  final addPropertyBloc = context.watch<AddPropertyBloc>();
+  final addPropertyBloc = context.read<AddPropertyBloc>();
 
   print(
       "tags: " + addPropertyBloc.state.tags.toString()+
           "\ntype: "+ addPropertyBloc.state.selectedPropertyType.toString()+
-          "\nservice "+addPropertyBloc.state.propertyService.toString()
+          "\nservice "+addPropertyBloc.state.propertyService.toString()+
+          "\ntype const attributes "+addPropertyBloc.state.propertyTypeConstAttributes.toString()+
+      "\ntype special attributes "+addPropertyBloc.state.propertyTypeSpecialAttributes.toString()+
+      "\namenities "+addPropertyBloc.state.selectedAmenity.toString()+
+      "\nimages "+addPropertyBloc.state.images.length.toString()+
+      "\ncountry + city "+"not yet"+
+      "\nlat "+addPropertyBloc.state.selectedLocation!.latitude.toString()+
+      "\nlon "+addPropertyBloc.state.selectedLocation!.longitude.toString()+
+      "\ntitle "+addPropertyBloc.state.title.toString()+
+      "\ndescriptions "+addPropertyBloc.state.description.toString()+
+      "\nprice "+addPropertyBloc.state.price.toString()+
+      "\narea "+addPropertyBloc.state.area.toString()
   );
 }
   bool isDisabledBack() {
@@ -130,13 +145,13 @@ void onSubmit(){
                     return const GoogleMapsScreen();
                   }
                   if (stepNumber == 8) {
-                    return const AddPropertyTitle();
+                    return  AddPropertyTitle(titleController: titleController,);
                   }
                   if (stepNumber == 9) {
-                    return const AddPropertyDescription();
+                    return  AddPropertyDescription(descriptionController: descriptionController,);
                   }
                   if (stepNumber == 10) {
-                    return const AddPropertyPriceAndSpace();
+                    return  AddPropertyPriceAndSpace(priceController: priceController,areaController: areaController,);
                   }
                   if (stepNumber == 11) {
                     return const SubmitProperty();
@@ -163,7 +178,19 @@ void onSubmit(){
                 ? null
                 : () {
               setState(() {
+                if(stepNumber==8){
+                  context.read<AddPropertyBloc>().state.title=titleController.text;
+                }
+                if(stepNumber==9){
+                  context.read<AddPropertyBloc>().state.description=descriptionController.text;
+                }
+                if(stepNumber==10){
+                  context.read<AddPropertyBloc>().state.price=priceController.text;
+                  context.read<AddPropertyBloc>().state.area=areaController.text;
+                }
+
                 stepNumber++;
+
               });
             },
             progress: progress,

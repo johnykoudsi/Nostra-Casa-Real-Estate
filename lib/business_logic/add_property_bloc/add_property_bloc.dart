@@ -8,11 +8,11 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../data/models/amenities_model.dart';
 
 part 'add_property_event.dart';
+
 part 'add_property_state.dart';
 
 class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
   AddPropertyBloc() : super(AddPropertyState()) {
-
     on<SelectPropertyTypeEvent>((event, emit) {
       emit(state.copyWith(selectedPropertyType: event.propertyType));
     });
@@ -28,13 +28,27 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
       emit(state.copyWith(images: List.of(event.images!.toList())));
     });
     on<SelectedTypeConstAttributesEvent>((event, emit) {
-      emit(state.copyWith(propertyTypeConstAttributes: event.propertyTypeConstAttributes));
+      emit(state.copyWith(
+          propertyTypeConstAttributes: event.propertyTypeConstAttributes));
     });
     on<SelectedTypeSpecialAttributesEvent>((event, emit) {
-      emit(state.copyWith(propertyTypeSpecialAttributes: event.propertyTypeSpecialAttributes));
+      emit(state.copyWith(
+          propertyTypeSpecialAttributes: event.propertyTypeSpecialAttributes));
     });
     on<SelectRegionEvent>((event, emit) {
       emit(state.copyWith(region: event.region));
+    });
+    on<PropertyTitle>((event, emit) {
+      emit(state.copyWith(region: event.title));
+    });
+    on<PropertyDescription>((event, emit) {
+      emit(state.copyWith(region: event.description));
+    });
+    on<PropertyPrice>((event, emit) {
+      emit(state.copyWith(price: event.price));
+    });
+    on<PropertyArea>((event, emit) {
+      emit(state.copyWith(area: event.area));
     });
     on<OnAmenityItemPressEvent>((event, emit) {
       List<Amenity> selectedAmenity = [];

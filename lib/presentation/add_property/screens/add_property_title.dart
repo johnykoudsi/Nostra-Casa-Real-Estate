@@ -1,34 +1,25 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/add_title_text_field.dart';
-import 'package:pinput/pinput.dart';
-
 import '../../../utility/app_style.dart';
 
 class AddPropertyTitle extends StatefulWidget {
-  const AddPropertyTitle({Key? key}) : super(key: key);
-
+   AddPropertyTitle({Key? key, this.titleController}) : super(key: key);
+  final TextEditingController? titleController;
   @override
   State<AddPropertyTitle> createState() => _AddPropertyTitleState();
 }
 
 class _AddPropertyTitleState extends State<AddPropertyTitle> {
-  late TextEditingController titleController;
 
-  @override
-  void initState() {
-    titleController = TextEditingController()
-      ..addListener(() {
-        setState(() {});
-      });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
       body: Padding(
@@ -54,7 +45,7 @@ class _AddPropertyTitleState extends State<AddPropertyTitle> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            AddTitleTextField(titleController: titleController),
+            AddTitleTextField(controller: widget.titleController!,),
           ],
         ),
       ),

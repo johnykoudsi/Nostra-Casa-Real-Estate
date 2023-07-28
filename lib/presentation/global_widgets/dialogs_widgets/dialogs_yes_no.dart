@@ -117,7 +117,9 @@ class DialogsWidgetsYesNo {
                           child: Text(
                               operationName == "Add"
                                   ? "Please add name and number for your special attribute"
-                                  : "Please edit the number of the attribute",
+                                      .tr()
+                                  : "Please edit the number of the attribute"
+                                      .tr(),
                               style: Theme.of(context).textTheme.headline3,
                               textAlign: TextAlign.center),
                         ),
@@ -126,10 +128,10 @@ class DialogsWidgetsYesNo {
                           child: CustomTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Name is required";
+                                return "Name is required".tr();
                               }
                             },
-                            hintText: "Special Name",
+                            hintText: "Special Name".tr(),
                             passwordBool: false,
                             controller: attributeNameController,
                           ),
@@ -140,10 +142,11 @@ class DialogsWidgetsYesNo {
                           child: CustomTextField(
                             validator: (value) {
                               if (value == null || value.isEmpty) {
-                                return "Number is required";
+                                return "Number is required".tr();
                               } else if (int.parse(value.toString()) < 0 ||
                                   int.parse(value.toString()) > 999) {
-                                return "Attribute value should be between 0 and 1000";
+                                return "Attribute value should be between 0 and 1000"
+                                    .tr();
                               }
                             },
                             hintText: "25",
@@ -162,7 +165,8 @@ class DialogsWidgetsYesNo {
                               flex: 6,
                               child: ElevatedButtonWidget(
                                 title: "Cancel".tr(),
-                                onPressed: () => Navigator.of(context).pop(false),
+                                onPressed: () =>
+                                    Navigator.of(context).pop(false),
                               ),
                             ),
                             SizedBox(
@@ -171,21 +175,12 @@ class DialogsWidgetsYesNo {
                             Expanded(
                               flex: 6,
                               child: ElevatedButtonWidget(
-                                  title: operationName,
-                                  onPressed:
-
-                                      changePropertyAttribute,
-
-
-
-                                  ),
+                                title: operationName,
+                                onPressed: changePropertyAttribute,
+                              ),
                             ),
                           ],
                         ),
-                        // ElevatedButtonWidget(
-                        //   title: "Add".tr(),
-                        //   onPressed: addPropertyAttribute,
-                        // ),
                       ],
                     ),
                   ),
@@ -230,7 +225,7 @@ class DialogsWidgetsYesNo {
                   child: Column(
                     children: [
                       Center(
-                        child: Text(name + " is already exist",
+                        child: Text(name + " is already exist".tr(),
                             style: Theme.of(context).textTheme.headline3,
                             textAlign: TextAlign.center),
                       ),
@@ -241,11 +236,6 @@ class DialogsWidgetsYesNo {
                         title: "Cancel".tr(),
                         onPressed: () => Navigator.of(context).pop(false),
                       ),
-
-                      // ElevatedButtonWidget(
-                      //   title: "Add".tr(),
-                      //   onPressed: addPropertyAttribute,
-                      // ),
                     ],
                   ),
                 ),

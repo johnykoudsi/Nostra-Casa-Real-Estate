@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
@@ -56,7 +57,7 @@ class _AboutUsState extends State<AboutUs> {
               Padding(
                 padding: EdgeInsets.only(top: screenHeight * 0.05),
                 child: Text(
-                  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way.",
+                  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way.".tr(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
