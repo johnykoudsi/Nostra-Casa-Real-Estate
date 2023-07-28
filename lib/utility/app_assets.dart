@@ -28,6 +28,7 @@ class AppAssets{
   static const pool="assets/images/pool.svg";
   static const wifi="assets/images/wifi.svg";
   static const tv="assets/images/tv.svg";
+  static const logo="assets/images/logo_5.png";
 
 
 }

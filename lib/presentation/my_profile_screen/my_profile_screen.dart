@@ -83,7 +83,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         svgPath: AppAssets.bell,
                         name: "Notifications".tr(),
                         onPressed: () {
-                          //todo navigate to notifications
+                          Navigator.pushNamed(context,AppRoutes.notifications);
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(

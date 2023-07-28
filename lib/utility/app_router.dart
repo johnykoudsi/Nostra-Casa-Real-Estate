@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
@@ -12,6 +13,7 @@ import '../presentation/about_us/about_us.dart';
 import '../presentation/add_property/welcome_step.dart';
 import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
 import '../presentation/login_screen/login_screen.dart';
+import '../presentation/notifications/notifications.dart';
 import '../presentation/policy/policy.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import 'app_routes.dart';
@@ -47,6 +49,9 @@ class AppRouter {
         case AppRoutes.addPropertyWelcome:
           return const WelcomeStep();
 
+        case AppRoutes.notifications:
+          return const Notifications();
+
         case AppRoutes.addProperty:
           return MultiBlocProvider(
             providers: [
@@ -54,7 +59,8 @@ class AppRouter {
                 create: (context) => AddPropertyBloc(),
               ),
               BlocProvider(
-                create: (context) => AmenityBloc()..add(ChangeToLoadingApiEvent()),
+                create: (context) =>
+                    AmenityBloc()..add(ChangeToLoadingApiEvent()),
               ),
             ],
             child: const AddPropertyHome(),

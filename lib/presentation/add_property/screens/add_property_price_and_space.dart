@@ -105,6 +105,7 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
             Expanded(
               child: ListView(
                 children: [
+
                   CustomInsertNumberField(
                     decrease: decreasePrice,
                     increase: increasePrice,
