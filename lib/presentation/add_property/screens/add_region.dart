@@ -1,7 +1,6 @@
 import 'package:csc_picker/csc_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/country_and_city_picker.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/custom_insert_text.dart';
 
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
