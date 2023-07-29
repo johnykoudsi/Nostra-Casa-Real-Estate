@@ -105,7 +105,14 @@ class PropertyArea extends AddPropertyEvent {
   @override
   List<Object?> get props => [area];
 }
+class OnTagItemPressEvent extends AddPropertyEvent {
+  OnTagItemPressEvent({required this.tag});
 
+  Tag tag;
+
+  @override
+  List<Object?> get props => [tag];
+}
 class OnAmenityItemPressEvent extends AddPropertyEvent {
   OnAmenityItemPressEvent({required this.amenity});
 

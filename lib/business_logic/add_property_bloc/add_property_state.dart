@@ -11,6 +11,7 @@ class AddPropertyState extends Equatable {
       this.propertyTypeSpecialAttributes,
       this.region,
       this.selectedAmenity = const [],
+      this.selectedTag = const [],
       this.title,
       this.description,
       this.price,
@@ -25,6 +26,7 @@ class AddPropertyState extends Equatable {
   Map<String, int>? propertyTypeSpecialAttributes;
   String? region;
   List<Amenity> selectedAmenity;
+  List<Tag> selectedTag;
   String? title;
   String? description;
   String? price;
@@ -39,6 +41,7 @@ class AddPropertyState extends Equatable {
           PropertyService? propertyService,
           LatLng? selectedLocation,
           List<Amenity>? selectedAmenity,
+          List<Tag>? selectedTag,
           String? region,
           String? title,
           String? description,
@@ -55,6 +58,7 @@ class AddPropertyState extends Equatable {
         propertyService: propertyService ?? this.propertyService,
         selectedLocation: selectedLocation ?? this.selectedLocation,
         selectedAmenity: selectedAmenity ?? this.selectedAmenity,
+        selectedTag: selectedTag ?? this.selectedTag,
         region: region ?? this.region,
         title: title ?? this.title,
         description: description ?? this.description,
@@ -74,6 +78,7 @@ class AddPropertyState extends Equatable {
         propertyTypeSpecialAttributes,
         region,
         selectedAmenity,
+        selectedTag,
         title,
         description,
         price,

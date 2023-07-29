@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/utility/app_assets.dart';
-import '../../../utility/app_style.dart';
-import 'amenity/widget/custom_amenity_grid.dart';
+import 'package:nostra_casa/presentation/add_property/screens/tag/widgets/custom_tag_grid.dart';
+import '../../../../utility/app_style.dart';
 
 class ChooseTags extends StatefulWidget {
   const ChooseTags({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class _ChooseTagsState extends State<ChooseTags> {
               height: screenHeight * 0.03,
             ),
             const Expanded(
-              child: CustomAmenityGrid(),
+              child: CustomTagGrid(),
             ),
           ],
         ),

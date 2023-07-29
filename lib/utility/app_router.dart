@@ -8,6 +8,7 @@ import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dar
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
+import '../business_logic/tag_bloc/tag_bloc.dart';
 import '../business_logic/user/user_bloc.dart';
 import '../presentation/about_us/about_us.dart';
 import '../presentation/add_property/welcome_step.dart';
@@ -61,6 +62,10 @@ class AppRouter {
               BlocProvider(
                 create: (context) =>
                     AmenityBloc()..add(ChangeToLoadingApiEvent()),
+              ),
+              BlocProvider(
+                create: (context) =>
+                TagBloc()..add(ChangeToLoadingTagApiEvent()),
               ),
             ],
             child: const AddPropertyHome(),
