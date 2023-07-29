@@ -54,7 +54,23 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         //add fcm to user
         // todo : send fcm service
       });
+    });
 
+    on<LoginUserEvent>((event, emit) async {
+      emit(UserLoading());
+
+      final response = await UserServices.loginUserService(event);
+
+      if (response is UserModel) {
+        saveUserToLocalStorage(response);
+        emit(UserLoggedState(user: response));
+      } else {
+        emit(UserErrorState(helperResponse: response));
+      }
+    });
+
+    on<LogoutEvent>((event, emit) {
+      deleteUserFromLocal();
     });
   }
 }

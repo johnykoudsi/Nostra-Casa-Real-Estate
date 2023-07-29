@@ -62,3 +62,9 @@ class AddFcmToken extends UserEvent{
   List<Object?> get props => [];
 
 }
+class LogoutEvent extends UserEvent{
+
+  @override
+  List<Object?> get props => [];
+
+}

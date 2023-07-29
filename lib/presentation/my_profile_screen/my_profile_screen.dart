@@ -1,10 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
+import '../../business_logic/user/user_bloc.dart';
 import '../../utility/app_routes.dart';
 
 class MyProfileScreen extends StatefulWidget {
@@ -83,7 +85,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         svgPath: AppAssets.bell,
                         name: "Notifications".tr(),
                         onPressed: () {
-                          Navigator.pushNamed(context,AppRoutes.notifications);
+                          Navigator.pushNamed(context, AppRoutes.notifications);
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(
@@ -111,7 +113,20 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         svgPath: AppAssets.share,
                         name: "Sign Out".tr(),
                         onPressed: () {
-                          //todo sign out
+                          DialogsWidgetsYesNo.showYesNoDialog(
+                              title: "Are you sure you want to logout",
+                              noTitle: "Cancel",
+                              yesTitle: "Logout",
+                              onYesTap: () {
+                                context.read<UserBloc>().add(LogoutEvent());
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    AppRoutes.welcome,
+                                    (Route<dynamic> route) => false);
+                              },
+                              onNoTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              context: context);
                         },
                         color: AppStyle.kBackGroundColor),
                     MyProfileItem(

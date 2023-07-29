@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
-
 import '../../../../../data/models/amenities_model.dart';
 import '../../../../../utility/app_assets.dart';
 import '../../../../../utility/app_style.dart';
@@ -44,7 +43,7 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
       builder: (context, state) {
         if (state is AmenityLoadedState) {
           return GridView.builder(
-            controller: scrollController,
+              controller: scrollController,
               itemCount: state.hasReachedMax
                   ? state.amenities.length
                   : state.amenities.length + 2,
@@ -79,13 +78,13 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
         return SomethingWrongWidget(
           elevatedButtonWidget: ElevatedButtonWidget(
             title: "Refresh".tr(),
-            onPressed: (){
+            onPressed: () {
               context.read<AmenityBloc>().add(ChangeToLoadingApiEvent());
               //search(userS);
             },
           ),
         );
-        },
+      },
     );
   }
 }

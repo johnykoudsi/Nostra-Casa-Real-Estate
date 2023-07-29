@@ -35,20 +35,23 @@ class UserServices {
     print(response.response);
   }
 
-// static Future loginUserService(LoginUserEvent event) async {
-//   HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
-//     url: EndPoints.login(user: event.phoneNumber, password: event.password),
-//   );
-//
-//   if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-//     try {
-//       return welcomeUserFromJson(helperResponse.response);
-//     } catch (e) {
-//       return helperResponse.copyWith(
-//           servicesResponse: ServicesResponseStatues.modelError);
-//     }
-//   }
-//
-//   return helperResponse;
-// }
+  static Future loginUserService(LoginUserEvent event) async {
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      url: EndPoints.login,
+      body: json.encode({
+        "mobile": event.phoneNumber,
+        "password": event.password,
+      }),
+    );
+
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        return welcomeUserFromJson(helperResponse.response).data;
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
+    }
+    return helperResponse;
+  }
 }
