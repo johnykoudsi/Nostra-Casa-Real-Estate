@@ -49,46 +49,39 @@ class AppStyle {
         fontSize: 35,
         fontWeight: AppFontWeight.bold,
         fontFamily: fontName,
-        overflow: TextOverflow.ellipsis,
         color: blackColor,
       ),
       headline2: TextStyle(
         fontSize: 28,
         fontWeight: AppFontWeight.bold,
-        overflow: TextOverflow.ellipsis,
         color: blackColor,
       ),
       headline3: TextStyle(
         fontSize: 24,
         fontWeight: AppFontWeight.bold,
-        overflow: TextOverflow.ellipsis,
         color: blackColor,
       ),
       headline4: TextStyle(
         fontSize: 20,
         color: blackColor,
         fontWeight: AppFontWeight.bold,
-        overflow: TextOverflow.ellipsis,
       ),
       headline5: TextStyle(fontSize: 18, color: blackColor),
       headline6: TextStyle(
         fontSize: 16,
         color: blackColor,
         fontWeight: AppFontWeight.medium,
-        overflow: TextOverflow.ellipsis,
       ),
 
       bodyText1: TextStyle(
         fontSize: 18,
         color: blackColor,
         fontWeight: AppFontWeight.light,
-        overflow: TextOverflow.ellipsis,
       ),
       bodyText2: TextStyle(
         fontSize: 14,
         color: blackColor,
         fontWeight: AppFontWeight.light,
-        overflow: TextOverflow.ellipsis,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

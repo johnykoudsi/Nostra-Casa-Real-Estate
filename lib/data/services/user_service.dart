@@ -54,4 +54,11 @@ class UserServices {
     }
     return helperResponse;
   }
+
+  static Future logoutUserService() async {
+    NetworkHelpers.getDeleteDataHelper(
+      url: EndPoints.logout,
+      useUserToken: true
+    );
+  }
 }

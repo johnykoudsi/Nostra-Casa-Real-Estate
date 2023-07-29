@@ -70,6 +70,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     });
 
     on<LogoutEvent>((event, emit) {
+      UserServices.logoutUserService();
       deleteUserFromLocal();
     });
   }
