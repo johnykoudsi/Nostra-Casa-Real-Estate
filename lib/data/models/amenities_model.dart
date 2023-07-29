@@ -47,7 +47,7 @@ class Amenity extends Equatable{
 }
 
 class AmenitiesSearchFilter {
-  AmenitiesSearchFilter({required this.page});
+  AmenitiesSearchFilter({this.page = 1});
   int page;
 
   AmenitiesSearchFilter copyWith({

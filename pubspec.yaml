@@ -34,6 +34,8 @@ dependencies:
   firebase_messaging: ^14.6.5
   flutter_local_notifications: ^15.1.0+1
   csc_picker: ^0.2.7
+  shimmer: ^2.0.0
+
 
 
 dev_dependencies:

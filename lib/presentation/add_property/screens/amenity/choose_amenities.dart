@@ -1,25 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/presentation/add_property/screens/amenity/widget/custom_amenity_grid.dart';
+import '../../../../utility/app_style.dart';
 
-import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
-import '../../../utility/app_assets.dart';
-import '../../../utility/app_style.dart';
-import '../widgets/custom_grid.dart';
-
-class ChooseAmenities extends StatefulWidget {
+class ChooseAmenities extends StatelessWidget {
   const ChooseAmenities({Key? key}) : super(key: key);
 
   @override
-  State<ChooseAmenities> createState() => _ChooseAmenitiesState();
-}
-
-class _ChooseAmenitiesState extends State<ChooseAmenities> {
-  @override
   Widget build(BuildContext context) {
-    final addPropertyBloc = context.watch<AddPropertyBloc>();
-    final List<String> svgPaths=[AppAssets.tv,AppAssets.pool,AppAssets.wifi,AppAssets.airCondition];
-    final List<String> title=["TV","Pool","Wifi","Air Conditioning"];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -44,8 +32,8 @@ class _ChooseAmenitiesState extends State<ChooseAmenities> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            Expanded(
-              child: CustomAmenityGrid(svgPaths: svgPaths, title: title,),
+            const Expanded(
+              child: CustomAmenityGrid(),
             ),
           ],
         ),

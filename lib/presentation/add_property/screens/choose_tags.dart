@@ -1,9 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/custom_grid.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
-
 import '../../../utility/app_style.dart';
+import 'amenity/widget/custom_amenity_grid.dart';
 
 class ChooseTags extends StatefulWidget {
   const ChooseTags({Key? key}) : super(key: key);
@@ -16,8 +15,6 @@ class ChooseTags extends StatefulWidget {
 class _ChooseTagsState extends State<ChooseTags> {
   @override
   Widget build(BuildContext context) {
-    final List<String> svgPaths=[AppAssets.house,AppAssets.house,AppAssets.house];
-    final List<String> title=["House".tr(),"House".tr(),"House".tr()];
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -37,8 +34,8 @@ class _ChooseTagsState extends State<ChooseTags> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            Expanded(
-              child: CustomAmenityGrid(svgPaths: svgPaths, title: title,),
+            const Expanded(
+              child: CustomAmenityGrid(),
             ),
           ],
         ),

@@ -7,7 +7,7 @@ import 'package:nostra_casa/presentation/add_property/screens/add_property_image
 import 'package:nostra_casa/presentation/add_property/screens/add_property_price_and_space.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_title.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_region.dart';
-import 'package:nostra_casa/presentation/add_property/screens/choose_amenities.dart';
+import 'package:nostra_casa/presentation/add_property/screens/amenity/choose_amenities.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_service.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_tags.dart';
@@ -15,7 +15,6 @@ import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';
 import 'package:nostra_casa/presentation/add_property/screens/pin_google_map_screen/GoogleMapsScreen.dart';
 import 'package:nostra_casa/presentation/add_property/screens/submit_property.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/add_property_bottom_navigator.dart';
-
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 

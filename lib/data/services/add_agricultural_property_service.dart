@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
-import 'package:nostra_casa/business_logic/post-bloc/post_bloc.dart';
-
 import '../../utility/endpoints.dart';
 import '../../utility/network_helper.dart';
 
 class AddAgriculturalsPropertyService {
+
   static Future addAgriculturalsService(AddPropertyEvent event) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       url: EndPoints.verifyAndSignUp,

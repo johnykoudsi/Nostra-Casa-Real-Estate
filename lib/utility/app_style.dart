@@ -14,22 +14,21 @@ class AppStyle {
   static const String fontName = "Cairo";
 
   static ThemeData theme = ThemeData(
-    bottomSheetTheme: const BottomSheetThemeData(backgroundColor: kBackGroundColor),
+    bottomSheetTheme:
+        const BottomSheetThemeData(backgroundColor: kBackGroundColor),
     primaryColor: mainColor,
     useMaterial3: true,
     scaffoldBackgroundColor: kBackGroundColor,
     colorScheme: ColorScheme.fromSwatch().copyWith(
       primary: const Color(0xFF145770),
       secondary: const Color(0xFF145770),
-
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData()
         .copyWith(refreshBackgroundColor: kBackGroundColor),
-    radioTheme: const RadioThemeData().copyWith(
-        fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
-    checkboxTheme: const CheckboxThemeData().copyWith(
-        fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
-
+    radioTheme: const RadioThemeData()
+        .copyWith(fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
+    checkboxTheme: const CheckboxThemeData()
+        .copyWith(fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
       backgroundColor: kBackGroundColor,
@@ -42,7 +41,6 @@ class AppStyle {
         fontWeight: AppFontWeight.bold,
       ),
     ),
-
     dividerColor: const Color(0xFFD9D9D9),
     fontFamily: fontName,
     textTheme: const TextTheme(
@@ -51,39 +49,46 @@ class AppStyle {
         fontSize: 35,
         fontWeight: AppFontWeight.bold,
         fontFamily: fontName,
+        overflow: TextOverflow.ellipsis,
         color: blackColor,
       ),
       headline2: TextStyle(
         fontSize: 28,
         fontWeight: AppFontWeight.bold,
+        overflow: TextOverflow.ellipsis,
         color: blackColor,
       ),
       headline3: TextStyle(
         fontSize: 24,
         fontWeight: AppFontWeight.bold,
+        overflow: TextOverflow.ellipsis,
         color: blackColor,
       ),
       headline4: TextStyle(
         fontSize: 20,
         color: blackColor,
         fontWeight: AppFontWeight.bold,
+        overflow: TextOverflow.ellipsis,
       ),
       headline5: TextStyle(fontSize: 18, color: blackColor),
       headline6: TextStyle(
-          fontSize: 16,
-          color: blackColor,
-          fontWeight: AppFontWeight.medium
+        fontSize: 16,
+        color: blackColor,
+        fontWeight: AppFontWeight.medium,
+        overflow: TextOverflow.ellipsis,
       ),
 
       bodyText1: TextStyle(
-          fontSize: 18,
-          color: blackColor,
-          fontWeight: AppFontWeight.light
+        fontSize: 18,
+        color: blackColor,
+        fontWeight: AppFontWeight.light,
+        overflow: TextOverflow.ellipsis,
       ),
       bodyText2: TextStyle(
-          fontSize: 14,
-          color: blackColor,
-          fontWeight: AppFontWeight.light
+        fontSize: 14,
+        color: blackColor,
+        fontWeight: AppFontWeight.light,
+        overflow: TextOverflow.ellipsis,
       ),
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(

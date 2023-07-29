@@ -1,31 +1,53 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 
-import '../../../data/models/amenities_model.dart';
-import '../../../utility/app_assets.dart';
-import '../../../utility/app_style.dart';
+import '../../../../../data/models/amenities_model.dart';
+import '../../../../../utility/app_assets.dart';
+import '../../../../../utility/app_style.dart';
+import '../../../../global_widgets/elevated_button_widget.dart';
+import '../../../../global_widgets/shimmer.dart';
+import '../../../../global_widgets/somthing_wrong.dart';
 
 class CustomAmenityGrid extends StatefulWidget {
-  const CustomAmenityGrid(
-      {Key? key, required this.svgPaths, required this.title})
-      : super(key: key);
-  final List<String> svgPaths;
-  final List<String> title;
+  const CustomAmenityGrid({Key? key}) : super(key: key);
   @override
   State<CustomAmenityGrid> createState() => _CustomAmenityGridState();
 }
 
 class _CustomAmenityGridState extends State<CustomAmenityGrid> {
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
+        context.read<AmenityBloc>().add(
+              GetAmenityApiEvent(
+                searchFilterProperties: AmenitiesSearchFilter(),
+              ),
+            );
+      }
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    double getWidth = MediaQuery.of(context).size.width;
+    double getHeight = MediaQuery.of(context).size.height;
     return BlocBuilder<AmenityBloc, AmenityState>(
       builder: (context, state) {
         if (state is AmenityLoadedState) {
           return GridView.builder(
-              itemCount: state.amenities.length,
+            controller: scrollController,
+              itemCount: state.hasReachedMax
+                  ? state.amenities.length
+                  : state.amenities.length + 2,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 1.6,
                 crossAxisCount: 2,
@@ -33,13 +55,37 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (BuildContext context, int index) {
+                if (index >= state.amenities.length) {
+                  return const ShimmerLoader();
+                }
                 return AmenityItemWidget(
                   amenity: state.amenities[index],
                 );
               });
         }
-        return const Center(child: CircularProgressIndicator());
-      },
+        if (state is AmenityInitial) {
+          return GridView.builder(
+              itemCount: 8,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.6,
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return const ShimmerLoader();
+              });
+        }
+        return SomethingWrongWidget(
+          elevatedButtonWidget: ElevatedButtonWidget(
+            title: "Refresh".tr(),
+            onPressed: (){
+              context.read<AmenityBloc>().add(ChangeToLoadingApiEvent());
+              //search(userS);
+            },
+          ),
+        );
+        },
     );
   }
 }
@@ -74,7 +120,9 @@ class AmenityItemWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: EdgeInsets.only(
-                    left: screenWidth * 0.03, right: screenWidth * 0.03,top: screenWidth*0.01),
+                    left: screenWidth * 0.03,
+                    right: screenWidth * 0.03,
+                    top: screenWidth * 0.01),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,12 +134,11 @@ class AmenityItemWidget extends StatelessWidget {
                         height: screenHeight * 0.045,
                       ),
                     ),
-
                     Expanded(
                       child: Text(
                         amenity.name,
                         style: Theme.of(context).textTheme.headline5,
-                        textAlign: TextAlign.center,
+                        //textAlign: TextAlign.center,
                       ),
                     )
                   ],

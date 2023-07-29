@@ -28,7 +28,7 @@ class _WelcomeStepState extends State<WelcomeStep> {
                 height: screenHeight * 0.1,
               ),
               Padding(
-                padding:EdgeInsets.symmetric(
+                padding: EdgeInsets.symmetric(
                     horizontal: screenWidth * 0.038,
                     vertical: screenWidth * 0.038),
                 child: const Image(
@@ -54,7 +54,6 @@ class _WelcomeStepState extends State<WelcomeStep> {
                           .tr(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
-
                   ],
                 ),
               ),
