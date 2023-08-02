@@ -36,24 +36,49 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   left: screenWidth * 0.05,
                   right: screenWidth * 0.05,
                   bottom: screenHeight * 0.02),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "user account".tr(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3
-                        ?.copyWith(color: AppStyle.kBackGroundColor),
-                  ),
-                  Text(
-                    "+963 784487474",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5
-                        ?.copyWith(color: AppStyle.kBackGroundColor),
-                  ),
-                ],
+              child: BlocBuilder<UserBloc, UserState>(
+                builder: (context, state) {
+                  if (state is UserLoggedState) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          state.user.user.name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline3
+                              ?.copyWith(color: AppStyle.kBackGroundColor),
+                        ),
+                        Text(
+                          state.user.user.mobile,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5
+                              ?.copyWith(color: AppStyle.kBackGroundColor),
+                        ),
+                      ],
+                    );
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nostra Casa Guest".tr(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline3
+                            ?.copyWith(color: AppStyle.kBackGroundColor),
+                      ),
+                      // Text(
+                      //   "",
+                      //   style: Theme.of(context)
+                      //       .textTheme
+                      //       .headline5
+                      //       ?.copyWith(color: AppStyle.kBackGroundColor),
+                      // ),
+                    ],
+                  );
+                },
               ),
             ),
             Expanded(
@@ -110,7 +135,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           //todo navigate to edit profile
                         },
                         color: Colors.white),
-                    if (userIsLoggedIn(context))
+                    if (!userIsLoggedIn(context))
                       MyProfileItem(
                           svgPath: AppAssets.share,
                           name: "Login".tr(),
@@ -118,7 +143,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             Navigator.of(context).pushNamed(AppRoutes.login);
                           },
                           color: AppStyle.kBackGroundColor),
-                    if (!userIsLoggedIn(context))
+                    if (userIsLoggedIn(context))
                       MyProfileItem(
                           svgPath: AppAssets.share,
                           name: "Sign Out".tr(),
