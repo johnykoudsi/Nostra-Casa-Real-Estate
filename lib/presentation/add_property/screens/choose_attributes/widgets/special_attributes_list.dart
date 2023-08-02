@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_button.dart';
-import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
-import '../../../utility/app_style.dart';
-import '../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
+import '../../../../../business_logic/add_property_bloc/add_property_bloc.dart';
+import '../../../../../utility/app_style.dart';
+import '../../../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 
-class AttributesList extends StatefulWidget {
-  AttributesList({
+class SpecialAttributesList extends StatefulWidget {
+  SpecialAttributesList({
     Key? key,
     required this.propertyTypeAttributes,
     required this.enableDelete,
@@ -16,10 +16,10 @@ class AttributesList extends StatefulWidget {
   bool enableDelete;
 
   @override
-  State<AttributesList> createState() => _AttributesListState();
+  State<SpecialAttributesList> createState() => _SpecialAttributesListState();
 }
 
-class _AttributesListState extends State<AttributesList> {
+class _SpecialAttributesListState extends State<SpecialAttributesList> {
   static final GlobalKey<FormState> validationKey = GlobalKey<FormState>();
 
   @override
@@ -27,13 +27,13 @@ class _AttributesListState extends State<AttributesList> {
     TextEditingController editAttributeName = TextEditingController();
     TextEditingController editAttributeNumber = TextEditingController();
     final addPropertyBloc = context.watch<AddPropertyBloc>();
-    if (widget.enableDelete) {
-      addPropertyBloc.state.propertyTypeSpecialAttributes =
-          widget.propertyTypeAttributes;
-    } else {
-      addPropertyBloc.state.propertyTypeConstAttributes =
-          widget.propertyTypeAttributes;
-    }
+    // if (widget.enableDelete) {
+    //   addPropertyBloc.state.propertyTypeSpecialAttributes =
+    //       widget.propertyTypeAttributes;
+    // } else {
+    //   addPropertyBloc.state.propertyTypeConstAttributes =
+    //       widget.propertyTypeAttributes;
+    // }
 
     void plus(int index) {
       setState(() {
@@ -46,8 +46,8 @@ class _AttributesListState extends State<AttributesList> {
             addPropertyBloc.state.propertyTypeSpecialAttributes =
                 widget.propertyTypeAttributes;
           } else {
-            addPropertyBloc.state.propertyTypeConstAttributes =
-                widget.propertyTypeAttributes;
+            //addPropertyBloc.state.propertyTypeConstAttributes =
+             //   widget.propertyTypeAttributes;
           }
         }
       });
@@ -63,8 +63,8 @@ class _AttributesListState extends State<AttributesList> {
             addPropertyBloc.state.propertyTypeSpecialAttributes =
                 widget.propertyTypeAttributes;
           } else {
-            addPropertyBloc.state.propertyTypeConstAttributes =
-                widget.propertyTypeAttributes;
+          //  addPropertyBloc.state.propertyTypeConstAttributes =
+             //   widget.propertyTypeAttributes;
           }
         }
       });
@@ -79,8 +79,8 @@ class _AttributesListState extends State<AttributesList> {
             addPropertyBloc.state.propertyTypeSpecialAttributes =
                 widget.propertyTypeAttributes;
           } else {
-            addPropertyBloc.state.propertyTypeConstAttributes =
-                widget.propertyTypeAttributes;
+           // addPropertyBloc.state.propertyTypeConstAttributes =
+            //    widget.propertyTypeAttributes;
           }
           Navigator.of(context).pop(false);
         }
@@ -96,8 +96,8 @@ class _AttributesListState extends State<AttributesList> {
           addPropertyBloc.state.propertyTypeSpecialAttributes =
               widget.propertyTypeAttributes;
         } else {
-          addPropertyBloc.state.propertyTypeConstAttributes =
-              widget.propertyTypeAttributes;
+        //  addPropertyBloc.state.propertyTypeConstAttributes =
+          //    widget.propertyTypeAttributes;
         }
       });
     }

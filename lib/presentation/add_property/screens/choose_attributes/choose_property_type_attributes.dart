@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/attributes_list.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_attributes/widgets/const_attributes_list.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_attributes/widgets/special_attributes_list.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_button.dart';
 
-import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
-import '../../../utility/app_style.dart';
-import '../../../utility/enums.dart';
-import '../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
+import '../../../../business_logic/add_property_bloc/add_property_bloc.dart';
+import '../../../../utility/app_style.dart';
+import '../../../../utility/enums.dart';
+import '../../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 
 class ChoosePropertyTypeAttributes extends StatefulWidget {
   const ChoosePropertyTypeAttributes({Key? key}) : super(key: key);
@@ -23,38 +24,37 @@ class _ChoosePropertyTypeAttributesState
 
   @override
   Widget build(BuildContext context) {
-    Map<String, int>? propertyTypeConstAttributes = {
-      'none': 0,
-    };
-
+    // Map<String, int>? propertyTypeConstAttributes = {
+    //   'none': 0,
+    // };
+    List<String> attributesNames=[];
+    List<int>? attributesValue=[];
+    int numberOfBathrooms=2;
+    int numberOfBedrooms=4;
+    int numberOfBalconies=3;
+    int numberOfLivingRooms=1;
+    int livestockInventory =200;
+    int waterUsage=50;
+    int fertilizerUsage=20;
+    int floor=2;
     final addPropertyBloc = context.watch<AddPropertyBloc>();
 
     if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.residential) {
-      propertyTypeConstAttributes = {
-        "Bathrooms".tr(): 2,
-        "Bedrooms".tr(): 6,
-        "Balconies".tr(): 2,
-        "Living rooms".tr(): 3,
-        "Floor": 2
-      };
+      attributesNames=["Bathrooms","Bedrooms","Balconies","Living rooms","Floor"];
+      attributesValue=[numberOfBathrooms,numberOfBedrooms,numberOfBalconies,numberOfLivingRooms,floor];
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.agricultural) {
-      propertyTypeConstAttributes = {
-        "Livestock inventory".tr(): 25,
-        "Water usage (by liter)".tr(): 100,
-        "Fertilizer usage (by pound)".tr(): 15,
-      };
+      attributesNames=["Livestock inventory","Water usage (by liter)","Fertilizer usage (by pound)"];
+      attributesValue=[livestockInventory,waterUsage,fertilizerUsage];
     } else if (addPropertyBloc.state.selectedPropertyType ==
         PropertyType.commercial) {
-      propertyTypeConstAttributes = {
-        "Bathrooms".tr(): 2,
-        "Balconies".tr(): 2,
-        "Floor".tr(): 1
-      };
+      attributesNames=["Bathrooms","Balconies","Floor"];
+      attributesValue=[numberOfBathrooms,numberOfBalconies,floor];
+
     }
     if (addPropertyBloc.state.propertyTypeConstAttributes != null) {
-      propertyTypeConstAttributes =
+      attributesValue =
           addPropertyBloc.state.propertyTypeConstAttributes;
     }
     TextEditingController newSpecialAttributeName = TextEditingController();
@@ -62,8 +62,8 @@ class _ChoosePropertyTypeAttributesState
     addPropertySpecialTypeAttribute() {
       if (validationKey.currentState!.validate()) {
         setState(() {
-          if (propertyTypeConstAttributes!
-              .containsKey(newSpecialAttributeName.text)) {
+          if (attributesNames!
+              .contains(newSpecialAttributeName.text)) {
             DialogsWidgetsYesNo.validationDialog(
                 context: context, name: newSpecialAttributeName.text);
           } else if (addPropertyBloc.state.propertyTypeSpecialAttributes == null) {
@@ -130,8 +130,9 @@ class _ChoosePropertyTypeAttributesState
               height: screenHeight * 0.03,
             ),
             Expanded(
-              child: AttributesList(
-                propertyTypeAttributes: propertyTypeConstAttributes,
+              child: ConstAttributesList(
+               attributesNames: attributesNames,
+               attributesValues: attributesValue,
                 enableDelete: false,
               ),
             ),
@@ -142,7 +143,7 @@ class _ChoosePropertyTypeAttributesState
               visible:
                   addPropertyBloc.state.propertyTypeSpecialAttributes != null,
               child: Expanded(
-                child: AttributesList(
+                child: SpecialAttributesList(
                   propertyTypeAttributes:
                       addPropertyBloc.state.propertyTypeSpecialAttributes,
                   enableDelete: true,

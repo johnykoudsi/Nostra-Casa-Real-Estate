@@ -22,7 +22,7 @@ class AddPropertyState extends Equatable implements GetRequestModel {
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
   LatLng? selectedLocation;
-  Map<String, int>? propertyTypeConstAttributes;
+  List<int>? propertyTypeConstAttributes;
   Map<String, int>? propertyTypeSpecialAttributes;
   String? region;
   List<Amenity> selectedAmenity;
@@ -35,7 +35,7 @@ class AddPropertyState extends Equatable implements GetRequestModel {
   AddPropertyState copyWith(
           {List<File>? images,
           List<String>? tags,
-          Map<String, int>? propertyTypeConstAttributes,
+          List<int>? propertyTypeConstAttributes,
           Map<String, int>? propertyTypeSpecialAttributes,
           PropertyType? selectedPropertyType,
           PropertyService? propertyService,
@@ -73,15 +73,21 @@ class AddPropertyState extends Equatable implements GetRequestModel {
     Map<String,dynamic> basicInfo = toJson();
 
     if(selectedPropertyType == PropertyType.agricultural){
-      propertyTypeConstAttributes?.forEach((key, value) { basicInfo[key] = value; });
+      basicInfo ={
+        "livestock_inventory":propertyTypeConstAttributes![0],
+      };
       return basicInfo;
     }
     if(selectedPropertyType == PropertyType.residential){
-      propertyTypeConstAttributes?.forEach((key, value) { basicInfo[key] = value; });
+      basicInfo ={
+        "number_of_bathrooms":propertyTypeConstAttributes![0],
+      };
       return basicInfo;
     }
     if(selectedPropertyType == PropertyType.commercial){
-      propertyTypeConstAttributes?.forEach((key, value) { basicInfo[key] = value; });
+      basicInfo ={
+        "number_of_bathrooms":propertyTypeConstAttributes![0],
+      };
       return basicInfo;
     }
     return basicInfo;

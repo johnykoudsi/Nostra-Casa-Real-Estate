@@ -54,7 +54,7 @@ class SelectedImagesEvent extends AddPropertyEvent {
 class SelectedTypeConstAttributesEvent extends AddPropertyEvent {
   SelectedTypeConstAttributesEvent({required this.propertyTypeConstAttributes});
 
-  Map<String, int>? propertyTypeConstAttributes;
+  List<int>? propertyTypeConstAttributes;
 
   @override
   List<Object?> get props => [propertyTypeConstAttributes];
@@ -107,9 +107,7 @@ class PropertyArea extends AddPropertyEvent {
 }
 class OnTagItemPressEvent extends AddPropertyEvent {
   OnTagItemPressEvent({required this.tag});
-
   Tag tag;
-
   @override
   List<Object?> get props => [tag];
 }

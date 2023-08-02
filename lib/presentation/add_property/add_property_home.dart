@@ -8,7 +8,7 @@ import 'package:nostra_casa/presentation/add_property/screens/add_property_price
 import 'package:nostra_casa/presentation/add_property/screens/add_property_title.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_region.dart';
 import 'package:nostra_casa/presentation/add_property/screens/amenity/choose_amenities.dart';
-import 'package:nostra_casa/presentation/add_property/screens/choose_property_type_attributes.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_attributes/choose_property_type_attributes.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_service.dart';
 import 'package:nostra_casa/presentation/add_property/screens/tag/choose_tags.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';

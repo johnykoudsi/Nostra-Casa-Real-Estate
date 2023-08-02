@@ -28,7 +28,6 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
     on<SelectServiceTypeEvent>((event, emit) {
       emit(state.copyWith(propertyService: event.propertyService));
     });
-
     on<SelectLocationEvent>((event, emit) {
       emit(state.copyWith(selectedLocation: event.latLng));
     });
