@@ -4,28 +4,38 @@ abstract class GetState extends Equatable {
   const GetState();
 }
 
-class GetInitial extends GetState {
+class GetInitialState extends GetState {
   @override
   List<Object> get props => [];
 }
-class GetLoading extends GetState {
+class GetLoadingState extends GetState {
   @override
   List<Object> get props => [];
 }
-class GetDone extends GetState {
 
-  GetDone({required this.getRequestModel});
+class GetPropertiesState extends GetState {
+
+  GetPropertiesState({required this.properties});
+
+  List<Properties> properties;
+
+  @override
+  List<Object> get props => [properties];
+}
+class GetDoneState extends GetState {
+
+  GetDoneState({required this.getRequestModel});
 
   GetRequestModel getRequestModel;
 
   @override
   List<Object> get props => [getRequestModel];
 }
-class GetError extends GetState {
+class GetErrorState extends GetState {
 
-  GetError({required this.servicesResponseStatues,required this.error});
+  GetErrorState({required this.servicesResponseStatues,required this.error});
   ServicesResponseStatues servicesResponseStatues;
   String error;
   @override
-  List<Object> get props => [error,servicesResponseStatues];
+  List<Object> get props => [servicesResponseStatues,error];
 }

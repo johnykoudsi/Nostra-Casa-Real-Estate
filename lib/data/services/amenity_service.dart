@@ -8,7 +8,6 @@ import '../../utility/network_helper.dart';
 
 class AmenityService {
   Future getAmenityService({
-    String? sessionToken,
     required GetAmenityApiEvent event,
   }) async {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
@@ -21,13 +20,12 @@ class AmenityService {
     print(helperResponse.servicesResponse);
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-      // try {
+      try {
       WelcomeAmenities data = welcomeAmenitiesFromJson(helperResponse.response);
       return data.amenities;
-      // } catch (e) {
-      //   print(e);
-      //   return serviceValues.reverse[ServicesResponseStatues.modelError];
-      // }
+      } catch (e) {
+        return helperResponse.copyWith(servicesResponse: ServicesResponseStatues.modelError);
+      }
     }
     return helperResponse;
   }

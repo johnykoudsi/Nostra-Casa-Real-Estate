@@ -1,6 +1,6 @@
 part of 'add_property_bloc.dart';
 
-class AddPropertyState extends Equatable implements GetRequestModel {
+class AddPropertyState extends Equatable {
   AddPropertyState(
       {this.tags = const [],
       this.selectedPropertyType,

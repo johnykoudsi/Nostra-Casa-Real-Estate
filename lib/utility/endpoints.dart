@@ -12,4 +12,7 @@ class EndPoints{
 
   static String getAmenities({required int page, required int limit}) => "/amenities?per_page=$limit&page=$page";
   static String getTags({required int page, required int limit}) => "/tags?per_page=$limit&page=$page";
+
+  static const String nearbyProperties = "/properties/near-by-places";
+
 }

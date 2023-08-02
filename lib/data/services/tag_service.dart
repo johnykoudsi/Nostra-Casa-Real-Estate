@@ -8,7 +8,6 @@ import '../../utility/network_helper.dart';
 
 class TagService {
   Future getTagService({
-    String? sessionToken,
     required GetTagApiEvent event,
   }) async {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
@@ -21,13 +20,12 @@ class TagService {
     print(helperResponse.servicesResponse);
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-      // try {
+      try {
       WelcomeTags data = welcomeTagsFromJson(helperResponse.response);
       return data.tags;
-      // } catch (e) {
-      //   print(e);
-      //   return serviceValues.reverse[ServicesResponseStatues.modelError];
-      // }
+      } catch (e) {
+        return helperResponse.copyWith(servicesResponse: ServicesResponseStatues.modelError);
+      }
     }
     return helperResponse;
   }
