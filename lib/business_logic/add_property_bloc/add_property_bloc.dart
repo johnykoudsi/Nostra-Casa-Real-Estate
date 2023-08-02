@@ -17,7 +17,12 @@ part 'add_property_state.dart';
 class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
   AddPropertyBloc() : super(AddPropertyState()) {
     on<SelectPropertyTypeEvent>((event, emit) {
-      emit(state.copyWith(selectedPropertyType: event.propertyType));
+
+      emit(state.copyWith(
+          selectedPropertyType: event.propertyType,
+          propertyTypeConstAttributes: null,
+          propertyTypeSpecialAttributes: null,
+      ));
     });
 
     on<SelectServiceTypeEvent>((event, emit) {
@@ -73,6 +78,5 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
       }
       emit(state.copyWith(selectedTag: List.of(selectedTag.toList())));
     });
-
   }
 }

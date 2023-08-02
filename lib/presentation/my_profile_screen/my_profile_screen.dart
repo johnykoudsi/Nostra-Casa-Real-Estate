@@ -149,9 +149,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           name: "Sign Out".tr(),
                           onPressed: () {
                             DialogsWidgetsYesNo.showYesNoDialog(
-                                title: "Are you sure you want to logout",
+                                title: "Are you sure you want to sign out",
                                 noTitle: "Cancel",
-                                yesTitle: "Logout",
+                                yesTitle: "Sign Out",
                                 onYesTap: () {
                                   context.read<UserBloc>().add(LogoutEvent());
                                   Navigator.of(context).pushNamedAndRemoveUntil(

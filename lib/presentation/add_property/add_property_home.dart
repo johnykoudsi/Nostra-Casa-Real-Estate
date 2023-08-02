@@ -55,22 +55,8 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
 void onSubmit(){
   final addPropertyBloc = context.read<AddPropertyBloc>();
 
-  print(
-      "tags: " + addPropertyBloc.state.tags.toString()+
-          "\ntype: "+ addPropertyBloc.state.selectedPropertyType.toString()+
-          "\nservice "+addPropertyBloc.state.propertyService.toString()+
-          "\ntype const attributes "+addPropertyBloc.state.propertyTypeConstAttributes.toString()+
-      "\ntype special attributes "+addPropertyBloc.state.propertyTypeSpecialAttributes.toString()+
-      "\namenities "+addPropertyBloc.state.selectedAmenity.toString()+
-      "\nimages "+addPropertyBloc.state.images.length.toString()+
-      "\ncountry + city "+"not yet"+
-      "\nlat "+addPropertyBloc.state.selectedLocation!.latitude.toString()+
-      "\nlon "+addPropertyBloc.state.selectedLocation!.longitude.toString()+
-      "\ntitle "+addPropertyBloc.state.title.toString()+
-      "\ndescriptions "+addPropertyBloc.state.description.toString()+
-      "\nprice "+addPropertyBloc.state.price.toString()+
-      "\narea "+addPropertyBloc.state.area.toString()
-  );
+  print(addPropertyBloc.state);
+
 }
   bool isDisabledBack() {
     if (stepNumber == 0) {

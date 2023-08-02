@@ -1,6 +1,6 @@
 part of 'add_property_bloc.dart';
 
-class AddPropertyState extends Equatable implements GetRequestModel{
+class AddPropertyState extends Equatable implements GetRequestModel {
   AddPropertyState(
       {this.tags = const [],
       this.selectedPropertyType,
@@ -66,6 +66,27 @@ class AddPropertyState extends Equatable implements GetRequestModel{
         area: area ?? this.area,
       );
 
+  Map<String, dynamic> toJson() => {
+        "name": title,
+      };
+  Map<String, dynamic> toJsonWithTypeAttributes(){
+    Map<String,dynamic> basicInfo = toJson();
+
+    if(selectedPropertyType == PropertyType.agricultural){
+      propertyTypeConstAttributes?.forEach((key, value) { basicInfo[key] = value; });
+      return basicInfo;
+    }
+    if(selectedPropertyType == PropertyType.residential){
+      propertyTypeConstAttributes?.forEach((key, value) { basicInfo[key] = value; });
+      return basicInfo;
+    }
+    if(selectedPropertyType == PropertyType.commercial){
+      propertyTypeConstAttributes?.forEach((key, value) { basicInfo[key] = value; });
+      return basicInfo;
+    }
+    return basicInfo;
+  }
+
   @override
   List<Object?> get props => [
         tags,
@@ -85,5 +106,3 @@ class AddPropertyState extends Equatable implements GetRequestModel{
         area
       ];
 }
-
-
