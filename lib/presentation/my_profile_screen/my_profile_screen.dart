@@ -5,6 +5,7 @@ import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_
 import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
+import 'package:nostra_casa/utility/constant_logic_validations.dart';
 
 import '../../business_logic/user/user_bloc.dart';
 import '../../utility/app_routes.dart';
@@ -109,26 +110,35 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           //todo navigate to edit profile
                         },
                         color: Colors.white),
-                    MyProfileItem(
-                        svgPath: AppAssets.share,
-                        name: "Sign Out".tr(),
-                        onPressed: () {
-                          DialogsWidgetsYesNo.showYesNoDialog(
-                              title: "Are you sure you want to logout",
-                              noTitle: "Cancel",
-                              yesTitle: "Logout",
-                              onYesTap: () {
-                                context.read<UserBloc>().add(LogoutEvent());
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                    AppRoutes.welcome,
-                                    (Route<dynamic> route) => false);
-                              },
-                              onNoTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              context: context);
-                        },
-                        color: AppStyle.kBackGroundColor),
+                    if (userIsLoggedIn(context))
+                      MyProfileItem(
+                          svgPath: AppAssets.share,
+                          name: "Login".tr(),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(AppRoutes.login);
+                          },
+                          color: AppStyle.kBackGroundColor),
+                    if (!userIsLoggedIn(context))
+                      MyProfileItem(
+                          svgPath: AppAssets.share,
+                          name: "Sign Out".tr(),
+                          onPressed: () {
+                            DialogsWidgetsYesNo.showYesNoDialog(
+                                title: "Are you sure you want to logout",
+                                noTitle: "Cancel",
+                                yesTitle: "Logout",
+                                onYesTap: () {
+                                  context.read<UserBloc>().add(LogoutEvent());
+                                  Navigator.of(context).pushNamedAndRemoveUntil(
+                                      AppRoutes.welcome,
+                                      (Route<dynamic> route) => false);
+                                },
+                                onNoTap: () {
+                                  Navigator.of(context).pop();
+                                },
+                                context: context);
+                          },
+                          color: AppStyle.kBackGroundColor),
                     MyProfileItem(
                       svgPath: AppAssets.delete,
                       name: "Delete Account".tr(),
