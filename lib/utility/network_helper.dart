@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 
+import '../data/models/user_model_local_storage.dart';
 import 'constant_logic_validations.dart';
 import 'endpoints.dart';
 import 'enums.dart';
@@ -69,7 +70,7 @@ class NetworkHelpers {
       Map<String, dynamic> jsonError = json.decode(streamRes);
 
       if (response.statusCode == 401) {
-        //todo : delete user
+        deleteUserFromLocal();
         globalNavigatorKey.currentState?.pushNamedAndRemoveUntil(
             AppRoutes.welcome, (Route<dynamic> route) => false);
       }
@@ -127,8 +128,7 @@ class NetworkHelpers {
       Map<String, dynamic> jsonError = json.decode(streamRes);
 
       if (response.statusCode == 401) {
-        //todo : delete user
-
+        deleteUserFromLocal();
         globalNavigatorKey.currentState?.pushNamedAndRemoveUntil(
             AppRoutes.welcome, (Route<dynamic> route) => false);
       }

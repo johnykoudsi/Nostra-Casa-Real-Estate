@@ -1,9 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 
 import '../../utility/app_style.dart';
+import '../../utility/constant_logic_validations.dart';
 import '../global_widgets/elevated_button_widget.dart';
 
 class WelcomeStep extends StatefulWidget {
@@ -72,6 +75,22 @@ class _WelcomeStepState extends State<WelcomeStep> {
             ElevatedButtonWidget(
               title: "Add Now".tr(),
               onPressed: () {
+                if(!userIsLoggedIn(context)){
+                  DialogsWidgetsYesNo.showYesNoDialog(
+                    title: "You must login to continue",
+                    noTitle: "Cancel",
+                    yesTitle: "Login",
+                    onYesTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pushNamed(AppRoutes.login);
+                    },
+                    onNoTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    context: context,
+                  );
+                  return;
+                }
                 Navigator.of(context).pushNamed(AppRoutes.addProperty);
               },
             )

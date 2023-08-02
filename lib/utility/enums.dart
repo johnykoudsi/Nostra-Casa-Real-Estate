@@ -9,7 +9,17 @@ enum ServicesResponseStatues {
   wrongData,
   locationError,
 }
+enum PropertyType {
+  residential,
+  agricultural,
+  commercial,
+}
 
+enum PropertyService {
+  sale,
+  rent,
+  holiday,
+}
 final serviceValues = EnumValues({
   "Sent Successfully" : ServicesResponseStatues.success,
   "Connection error !": ServicesResponseStatues.networkError,
@@ -18,6 +28,17 @@ final serviceValues = EnumValues({
   "Data sent is not correct !":ServicesResponseStatues.wrongData,
   "The form is saved locally":ServicesResponseStatues.savedToLocal,
   "No Location Permission !":ServicesResponseStatues.locationError
+});
+
+final propertyType = EnumValues({
+  "residential" : PropertyType.residential,
+  "agricultural": PropertyType.agricultural,
+  "commercial": PropertyType.commercial,
+});
+final propertyService = EnumValues({
+  "Sent Successfully" : PropertyService.sale,
+  "Connection error !": PropertyService.rent,
+  "Something went wrong !": PropertyService.holiday,
 });
 
 enum GetRequestType{

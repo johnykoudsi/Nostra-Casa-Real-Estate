@@ -1,6 +1,6 @@
 part of 'add_property_bloc.dart';
 
-class AddPropertyState extends Equatable {
+class AddPropertyState extends Equatable implements GetRequestModel{
   AddPropertyState(
       {this.tags = const [],
       this.selectedPropertyType,
@@ -86,10 +86,4 @@ class AddPropertyState extends Equatable {
       ];
 }
 
-enum PropertyType {
-  residential,
-  agricultural,
-  commercial,
-}
 
-enum PropertyService { sale, rent, holiday }

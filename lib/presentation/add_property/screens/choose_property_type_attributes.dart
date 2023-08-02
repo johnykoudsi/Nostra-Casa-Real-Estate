@@ -6,6 +6,7 @@ import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_b
 
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
+import '../../../utility/enums.dart';
 import '../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 
 class ChoosePropertyTypeAttributes extends StatefulWidget {
@@ -63,18 +64,17 @@ class _ChoosePropertyTypeAttributesState
         setState(() {
           if (propertyTypeConstAttributes!
               .containsKey(newSpecialAttributeName.text)) {
-            DialogsWidgetsYesNo.alreadyExistDialog(
-                context, newSpecialAttributeName.text);
-          } else if (addPropertyBloc.state.propertyTypeSpecialAttributes ==
-              null) {
+            DialogsWidgetsYesNo.validationDialog(
+                context: context, name: newSpecialAttributeName.text);
+          } else if (addPropertyBloc.state.propertyTypeSpecialAttributes == null) {
             addPropertyBloc.state.propertyTypeSpecialAttributes = {
               newSpecialAttributeName.text:
                   int.parse(newSpecialAttributeNumber.text)
             };
           } else if (addPropertyBloc.state.propertyTypeSpecialAttributes!
               .containsKey(newSpecialAttributeName.text)) {
-            DialogsWidgetsYesNo.alreadyExistDialog(
-                context, newSpecialAttributeName.text);
+            DialogsWidgetsYesNo.validationDialog(
+                context:context, name:newSpecialAttributeName.text);
           } else {
             addPropertyBloc.state.propertyTypeSpecialAttributes![
                     newSpecialAttributeName.text] =

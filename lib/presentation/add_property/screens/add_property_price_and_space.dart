@@ -1,13 +1,10 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/custstom_insert_number_field.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_button.dart';
-
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
+import '../../../utility/enums.dart';
 
 class AddPropertyPriceAndSpace extends StatefulWidget {
    AddPropertyPriceAndSpace({Key? key,this.priceController,this.areaController}) : super(key: key);

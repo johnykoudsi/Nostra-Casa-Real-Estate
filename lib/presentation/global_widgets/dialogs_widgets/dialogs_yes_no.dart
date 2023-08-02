@@ -197,7 +197,7 @@ class DialogsWidgetsYesNo {
         false;
   }
 
-  static Future<bool> alreadyExistDialog(BuildContext context, name) async {
+  static Future<bool> validationDialog({required BuildContext context, required String name,String val=" is already exist"}) async {
     double getWidth = MediaQuery.of(context).size.width;
     double getHeight = MediaQuery.of(context).size.height;
 
@@ -225,7 +225,7 @@ class DialogsWidgetsYesNo {
                   child: Column(
                     children: [
                       Center(
-                        child: Text(name + " is already exist".tr(),
+                        child: Text(name + val.tr(),
                             style: Theme.of(context).textTheme.headline3,
                             textAlign: TextAlign.center),
                       ),

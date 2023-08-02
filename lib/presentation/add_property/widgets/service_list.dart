@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
+import '../../../utility/enums.dart';
 
 class ServicesList extends StatefulWidget {
   const ServicesList({Key? key}) : super(key: key);

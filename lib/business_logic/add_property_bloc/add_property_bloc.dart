@@ -5,8 +5,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../../data/models/GetRequestModel.dart';
 import '../../data/models/amenities_model.dart';
 import '../../data/models/tags_model.dart';
+import '../../utility/enums.dart';
 
 part 'add_property_event.dart';
 
