@@ -107,12 +107,12 @@ class _MapScreenState extends State<MapScreen> {
             ),
             PropertyTypeFilterWidget(
                 selectedFilter: selectedFilter,
-                onChange: (bool value, int index) {
+                onChange: (bool value, PropertyType? propertyType) {
                   setState(() {
                     if (value) {
-                      selectedFilter = PropertyType.values[index];
+                      selectedFilter = propertyType;
                     } else {
-                      selectedFilter == PropertyType.values[index];
+                      selectedFilter == propertyType;
                     }
                   });
                 }),
