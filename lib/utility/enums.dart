@@ -13,6 +13,7 @@ enum PropertyType {
   residential,
   agricultural,
   commercial,
+  all,
 }
 
 enum PropertyService {
@@ -30,15 +31,20 @@ final serviceValues = EnumValues({
   "No Location Permission !":ServicesResponseStatues.locationError
 });
 
-final propertyType = EnumValues({
+final propertyTypeUi = EnumValues({
   "Residential" : PropertyType.residential,
   "Agricultural": PropertyType.agricultural,
   "Commercial": PropertyType.commercial,
 });
+final propertyTypeBackEnd = EnumValues({
+  "RESIDENTIAL" : PropertyType.residential,
+  "AGRICULTURAL": PropertyType.agricultural,
+  "COMMERCIAL": PropertyType.commercial,
+});
 final propertyService = EnumValues({
-  "Sent Successfully" : PropertyService.sale,
-  "Connection error !": PropertyService.rent,
-  "Something went wrong !": PropertyService.holiday,
+  "Sale" : PropertyService.sale,
+  "Rent": PropertyService.rent,
+  "Holiday": PropertyService.holiday,
 });
 
 enum GetRequestType{

@@ -32,8 +32,8 @@ class AddPropertyState extends Equatable {
   String? price;
   String? area;
 
-  AddPropertyState copyWith(
-          {List<File>? images,
+  AddPropertyState copyWith({
+    List<File>? images,
           List<String>? tags,
           List<int>? propertyTypeConstAttributes,
           Map<String, int>? propertyTypeSpecialAttributes,

@@ -5,9 +5,19 @@ abstract class GetEvent extends Equatable {
 }
 
 class GetNearbyMapsEvent extends GetEvent {
-  GetNearbyMapsEvent({required this.center});
+  GetNearbyMapsEvent({required this.center, this.propertyType = PropertyType.all});
   LatLng center;
-  // Set<PropertyType> selsectedPropertyType;
+  PropertyType? propertyType;
+
+  GetNearbyMapsEvent copyWith({
+    LatLng? center,
+    PropertyType? propertyType,
+  }) =>
+      GetNearbyMapsEvent(
+        center: center ?? this.center,
+        propertyType: propertyType ?? this.propertyType,
+      );
+
   @override
-  List<Object?> get props => [center];
+  List<Object?> get props => [center, propertyType];
 }

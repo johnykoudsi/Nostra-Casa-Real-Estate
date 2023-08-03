@@ -6,8 +6,8 @@ class PropertyTypeFilterWidget extends StatefulWidget {
   PropertyTypeFilterWidget(
       {required this.selectedFilter, required this.onChange, Key? key})
       : super(key: key);
-  PropertyType? selectedFilter;
-  Function(bool, PropertyType?) onChange;
+  PropertyType selectedFilter;
+  Function(PropertyType) onChange;
   @override
   State<PropertyTypeFilterWidget> createState() =>
       _PropertyTypeFilterWidgetState();
@@ -19,8 +19,8 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
     final selectedTextTheme = Theme.of(context)
         .textTheme
         .headline6!
-        .copyWith(color: AppStyle.kBackGroundColor);
-    final unSelectedTextTheme = Theme.of(context).textTheme.headline6;
+        .copyWith(color: AppStyle.kBackGroundColor,fontSize: 14);
+    final unSelectedTextTheme = Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14);
     return SizedBox(
       height: 150,
       child: ListView(
@@ -31,14 +31,14 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
           ),
           ChoiceChip(
               label: const Text(
-                "All",
+                "All Property Types",
               ),
-              labelStyle: widget.selectedFilter == null
+              labelStyle: widget.selectedFilter == PropertyType.all
                   ? selectedTextTheme
                   : unSelectedTextTheme,
-              selected: widget.selectedFilter == null,
+              selected: widget.selectedFilter == PropertyType.all,
               onSelected: (bool value) {
-                widget.onChange(value, null);
+                widget.onChange(PropertyType.all);
               }),
           ListView.separated(
             padding: const EdgeInsets.all(18),
@@ -48,7 +48,7 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
             itemBuilder: (BuildContext context, int index) {
               return ChoiceChip(
                   label: Text(
-                    propertyType.reverse[PropertyType.values[index]] ?? '',
+                    propertyTypeUi.reverse[PropertyType.values[index]] ?? '',
                   ),
                   labelStyle:
                       widget.selectedFilter == PropertyType.values[index]
@@ -56,7 +56,7 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
                           : unSelectedTextTheme,
                   selected: widget.selectedFilter == PropertyType.values[index],
                   onSelected: (bool value) {
-                    widget.onChange(value, PropertyType.values[index]);
+                    widget.onChange(PropertyType.values[index]);
                   });
             },
             separatorBuilder: (BuildContext context, int index) {

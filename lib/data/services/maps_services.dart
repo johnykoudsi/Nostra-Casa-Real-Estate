@@ -11,14 +11,16 @@ class MapsServices {
   static Future getNearbyPlacesService({
     required GetNearbyMapsEvent event,
   }) async {
-    print({"longitude": event.center.longitude});
-    print({"latitude": event.center.latitude});
+    Map<String,dynamic> mapBody ={
+      "longitude": event.center.longitude,
+      "latitude": event.center.latitude,
+    };
+    if(event.propertyType != PropertyType.all){
+      mapBody["property_type"] = propertyTypeBackEnd.reverse[event.propertyType];
+    }
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       url: EndPoints.nearbyProperties,
-      body: json.encode({
-        "longitude": event.center.longitude,
-        "latitude": event.center.latitude,
-      }),
+      body: json.encode(mapBody),
       useUserToken: true,
     );
 

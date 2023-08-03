@@ -24,8 +24,9 @@ class _MapScreenState extends State<MapScreen> {
   late GoogleMapController _googleMapController;
   final Set<Marker> _markers = {};
 
-  PropertyType? selectedFilter;
-
+  PropertyType selectedFilterPropertyType = PropertyType.all;
+  GetNearbyMapsEvent getNearbyMapsEvent =
+      GetNearbyMapsEvent(center: const LatLng(33.513914, 36.276143));
   @override
   void initState() {
     super.initState();
@@ -44,7 +45,6 @@ class _MapScreenState extends State<MapScreen> {
       (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) /
           2,
     );
-    print(centerLatLng);
     return centerLatLng;
   }
 
@@ -64,7 +64,6 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print(selectedFilter);
     return BlocListener<GetBloc, GetState>(
       listener: (context, state) {
         if (state is GetPropertiesState) {
@@ -78,18 +77,14 @@ class _MapScreenState extends State<MapScreen> {
               initialCameraPosition: _defaultLocation,
               zoomGesturesEnabled: true,
               zoomControlsEnabled: true,
-              //tiltGesturesEnabled: false,
               buildingsEnabled: false,
               mapType: MapType.normal,
               myLocationButtonEnabled: true,
               minMaxZoomPreference: const MinMaxZoomPreference(10, 15),
-              // onCameraMove: (position) {
-              //   //todo : get only visible estates inside boundaries
-              // },
               onCameraIdle: () {
                 getCenter().then(
                   (value) => context.read<GetBloc>().add(
-                        GetNearbyMapsEvent(center: value),
+                        getNearbyMapsEvent.copyWith(center: value),
                       ),
                 );
               },
@@ -98,24 +93,23 @@ class _MapScreenState extends State<MapScreen> {
                 completer.complete(controller);
                 _googleMapController = controller;
                 getCenter().then(
-                  (value) => context.read<GetBloc>().add(
-                        GetNearbyMapsEvent(center: value),
-                      ),
+                  (value) => context
+                      .read<GetBloc>()
+                      .add(getNearbyMapsEvent.copyWith(center: value)),
                 );
               },
               markers: _markers,
             ),
             PropertyTypeFilterWidget(
-                selectedFilter: selectedFilter,
-                onChange: (bool value, PropertyType? propertyType) {
-                  setState(() {
-                    if (value) {
-                      selectedFilter = propertyType;
-                    } else {
-                      selectedFilter == propertyType;
-                    }
-                  });
-                }),
+              selectedFilter: selectedFilterPropertyType,
+              onChange: (PropertyType propertyType) {
+                setState(() {
+                  _markers.clear();
+                  selectedFilterPropertyType = propertyType;
+                  context.read<GetBloc>().add(getNearbyMapsEvent.copyWith(propertyType: selectedFilterPropertyType));
+                });
+              },
+            ),
             BlocBuilder<GetBloc, GetState>(
               builder: (context, state) {
                 if (state is GetLoadingState) {
