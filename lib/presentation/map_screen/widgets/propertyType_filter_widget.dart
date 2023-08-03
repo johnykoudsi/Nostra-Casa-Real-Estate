@@ -3,10 +3,11 @@ import '../../../utility/app_style.dart';
 import '../../../utility/enums.dart';
 
 class PropertyTypeFilterWidget extends StatefulWidget {
-  PropertyTypeFilterWidget({required this.selectedFilter, Key? key})
+  PropertyTypeFilterWidget(
+      {required this.selectedFilter, required this.onChange, Key? key})
       : super(key: key);
-  Set<PropertyType> selectedFilter;
-
+  PropertyType? selectedFilter;
+  Function(bool, int) onChange;
   @override
   State<PropertyTypeFilterWidget> createState() =>
       _PropertyTypeFilterWidgetState();
@@ -20,7 +21,6 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
         .headline6!
         .copyWith(color: AppStyle.kBackGroundColor);
     final unSelectedTextTheme = Theme.of(context).textTheme.headline6;
-    final selectedFilter = widget.selectedFilter;
     return SizedBox(
       height: 150,
       child: ListView.separated(
@@ -29,24 +29,17 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
         itemCount: 3,
         scrollDirection: Axis.horizontal,
         itemBuilder: (BuildContext context, int index) {
-          return FilterChip(
-            label: Text(
-              propertyType.reverse[PropertyType.values[index]] ?? '',
-            ),
-            labelStyle: selectedFilter.contains(PropertyType.values[index])
-                ? selectedTextTheme
-                : unSelectedTextTheme,
-            selected: selectedFilter.contains(PropertyType.values[index]),
-            onSelected: (bool value) {
-              setState(() {
-                if (value) {
-                  selectedFilter.add(PropertyType.values[index]);
-                } else {
-                  selectedFilter.remove(PropertyType.values[index]);
-                }
+          return ChoiceChip(
+              label: Text(
+                propertyType.reverse[PropertyType.values[index]] ?? '',
+              ),
+              labelStyle: widget.selectedFilter == PropertyType.values[index]
+                  ? selectedTextTheme
+                  : unSelectedTextTheme,
+              selected: widget.selectedFilter == PropertyType.values[index],
+              onSelected: (bool value) {
+                widget.onChange(value, index);
               });
-            },
-          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(

@@ -24,12 +24,7 @@ class _MapScreenState extends State<MapScreen> {
   late GoogleMapController _googleMapController;
   final Set<Marker> _markers = {};
 
-  Set<PropertyType> selectedFilter = {
-    PropertyType.commercial,
-    PropertyType.agricultural,
-    PropertyType.residential,
-  };
-
+  PropertyType? selectedFilter;
 
   @override
   void initState() {
@@ -69,7 +64,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-
+    print(selectedFilter);
     return BlocListener<GetBloc, GetState>(
       listener: (context, state) {
         if (state is GetPropertiesState) {
@@ -110,7 +105,17 @@ class _MapScreenState extends State<MapScreen> {
               },
               markers: _markers,
             ),
-            PropertyTypeFilterWidget(selectedFilter: selectedFilter,),
+            PropertyTypeFilterWidget(
+                selectedFilter: selectedFilter,
+                onChange: (bool value, int index) {
+                  setState(() {
+                    if (value) {
+                      selectedFilter = PropertyType.values[index];
+                    } else {
+                      selectedFilter == PropertyType.values[index];
+                    }
+                  });
+                }),
             BlocBuilder<GetBloc, GetState>(
               builder: (context, state) {
                 if (state is GetLoadingState) {
