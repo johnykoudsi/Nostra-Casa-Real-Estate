@@ -31,9 +31,9 @@ final serviceValues = EnumValues({
 });
 
 final propertyType = EnumValues({
-  "residential" : PropertyType.residential,
-  "agricultural": PropertyType.agricultural,
-  "commercial": PropertyType.commercial,
+  "Residential" : PropertyType.residential,
+  "Agricultural": PropertyType.agricultural,
+  "Commercial": PropertyType.commercial,
 });
 final propertyService = EnumValues({
   "Sent Successfully" : PropertyService.sale,

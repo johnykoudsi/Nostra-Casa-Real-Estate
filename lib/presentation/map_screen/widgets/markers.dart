@@ -11,7 +11,7 @@ class MapsMarkers{
   static initMarkers() async {
 
     homeLocation =
-    await getBytesFromAsset(path: AppAssets.homeLocation, width: 100);
+    await getBytesFromAsset(path: AppAssets.homeLocation, width: 130);
 
   }
 

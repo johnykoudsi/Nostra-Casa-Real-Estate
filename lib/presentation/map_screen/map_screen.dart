@@ -4,7 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/get_bloc/get_bloc.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/markers.dart';
+import 'package:nostra_casa/presentation/map_screen/widgets/propertyType_filter_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
+import '../../data/models/properties_model.dart';
+import '../../utility/enums.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -15,17 +18,18 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   static const CameraPosition _defaultLocation =
-  CameraPosition(target: LatLng(33.513914, 36.276143), zoom: 15);
+      CameraPosition(target: LatLng(33.513914, 36.276143), zoom: 15);
 
   Completer<GoogleMapController> completer = Completer();
   late GoogleMapController _googleMapController;
-  final Set<Marker> _markers = {
-    // Marker(
-    //   markerId: const MarkerId('from'),
-    //   position: const LatLng(33.513914, 36.276143),
-    //   icon: BitmapDescriptor.fromBytes(MapsMarkers.homeLocation!),
-    // ),
+  final Set<Marker> _markers = {};
+
+  Set<PropertyType> selectedFilter = {
+    PropertyType.commercial,
+    PropertyType.agricultural,
+    PropertyType.residential,
   };
+
 
   @override
   void initState() {
@@ -49,23 +53,27 @@ class _MapScreenState extends State<MapScreen> {
     return centerLatLng;
   }
 
+  void addMarkersFromPropertiesList(List<Properties> prop) {
+    for (var property in prop) {
+      if (_markers.every((mark) => mark.position != property.location)) {
+        setState(() {
+          _markers.add(Marker(
+            markerId: MarkerId(property.id.toString()),
+            position: property.location,
+            icon: BitmapDescriptor.fromBytes(MapsMarkers.homeLocation!),
+          ));
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return BlocListener<GetBloc, GetState>(
       listener: (context, state) {
         if (state is GetPropertiesState) {
-          print("Markers length ${_markers.length}");
-          state.properties.forEach((property) {
-            if (_markers.every((mark) => mark.position != property.location)) {
-              setState(() {
-                _markers.add(Marker(
-                  markerId: MarkerId(property.id.toString()),
-                  position: property.location,
-                  icon: BitmapDescriptor.fromBytes(MapsMarkers.homeLocation!),
-                ));
-              });
-            }
-          });
+          addMarkersFromPropertiesList(state.properties);
         }
       },
       child: Scaffold(
@@ -77,7 +85,6 @@ class _MapScreenState extends State<MapScreen> {
               zoomControlsEnabled: true,
               //tiltGesturesEnabled: false,
               buildingsEnabled: false,
-
               mapType: MapType.normal,
               myLocationButtonEnabled: true,
               minMaxZoomPreference: const MinMaxZoomPreference(10, 15),
@@ -86,8 +93,7 @@ class _MapScreenState extends State<MapScreen> {
               // },
               onCameraIdle: () {
                 getCenter().then(
-                      (value) =>
-                      context.read<GetBloc>().add(
+                  (value) => context.read<GetBloc>().add(
                         GetNearbyMapsEvent(center: value),
                       ),
                 );
@@ -97,23 +103,22 @@ class _MapScreenState extends State<MapScreen> {
                 completer.complete(controller);
                 _googleMapController = controller;
                 getCenter().then(
-                      (value) =>
-                      context.read<GetBloc>().add(
+                  (value) => context.read<GetBloc>().add(
                         GetNearbyMapsEvent(center: value),
                       ),
                 );
               },
               markers: _markers,
             ),
+            PropertyTypeFilterWidget(selectedFilter: selectedFilter,),
             BlocBuilder<GetBloc, GetState>(
               builder: (context, state) {
-                if(state is GetLoadingState){
+                if (state is GetLoadingState) {
                   return Center(
                     child: Container(
                       decoration: const BoxDecoration(
                           color: Colors.white,
-                          borderRadius: AppStyle.k15BorderRadius
-                      ),
+                          borderRadius: AppStyle.k15BorderRadius),
                       padding: const EdgeInsets.all(25),
                       child: const CircularProgressIndicator(),
                     ),

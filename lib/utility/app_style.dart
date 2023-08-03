@@ -23,6 +23,10 @@ class AppStyle {
       primary: const Color(0xFF145770),
       secondary: const Color(0xFF145770),
     ),
+    chipTheme: ChipThemeData(
+        backgroundColor: Colors.white,
+        selectedColor: mainColor
+    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData()
         .copyWith(refreshBackgroundColor: kBackGroundColor),
     radioTheme: const RadioThemeData()
