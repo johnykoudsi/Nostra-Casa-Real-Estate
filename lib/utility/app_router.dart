@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
+import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
@@ -52,7 +53,8 @@ class AppRouter {
 
         case AppRoutes.notifications:
           return const Notifications();
-
+        case AppRoutes.editProfile:
+          return const EditProfile();
         case AppRoutes.addProperty:
           return MultiBlocProvider(
             providers: [

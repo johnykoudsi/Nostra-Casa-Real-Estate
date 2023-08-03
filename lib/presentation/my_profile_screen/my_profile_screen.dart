@@ -132,7 +132,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                         svgPath: AppAssets.edit,
                         name: "Edit Profile".tr(),
                         onPressed: () {
-                          //todo navigate to edit profile
+                          Navigator.pushNamed(context, AppRoutes.editProfile);
                         },
                         color: Colors.white),
                     if (!userIsLoggedIn(context))
