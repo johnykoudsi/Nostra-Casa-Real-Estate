@@ -60,7 +60,7 @@ class AppRouter {
                 create: (context) => EditUserBloc(),
               ),
             ],
-            child: EditProfile(),
+            child: const EditProfile(),
           );
         case AppRoutes.addProperty:
           return MultiBlocProvider(

@@ -18,14 +18,19 @@ class EditUserBloc extends Bloc<EditUserEvent, EditUserState> {
     on<EditUserApiEvent>((event, emit) async {
       emit(EditUserLoadingState());
 
-      final response = await UserServices.editUserService(event);
+      HelperResponse response = await UserServices.editUserService(event);
 
-      if (response is UserModel) {
-        saveUserToLocalStorage(response);
-        //emit(UserLoggedState(user: response));
-      } else {
-       // emit(UserErrorState(helperResponse: response));
+      if(response.servicesResponse == ServicesResponseStatues.success){
+        emit(EditUserDoneState());
+      }else{
+        emit(EditUserErrorState(helperResponse: response));
       }
+      // if (response is UserModel) {
+      //   //saveUserToLocalStorage(response);
+      //   emit(EditUserDoneState());
+      // } else {
+      //  emit(UserErrorState(helperResponse: response));
+      // }
     });
 
   }

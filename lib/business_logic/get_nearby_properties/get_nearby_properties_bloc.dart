@@ -1,20 +1,19 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nostra_casa/data/models/GetRequestModel.dart';
 import 'package:nostra_casa/data/models/properties_model.dart';
 import 'package:nostra_casa/data/services/maps_services.dart';
 import 'package:nostra_casa/utility/network_helper.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import '../../utility/enums.dart';
 
-part 'get_event.dart';
-part 'get_state.dart';
+part 'get_nearby_properties_event.dart';
+part 'get_nearby_properties_state.dart';
 
-class GetBloc extends Bloc<GetEvent, GetState> {
-  GetBloc() : super(GetLoadingState(),) {
+class GetNearbyPropertiesBloc extends Bloc<GetNearbyPropertiesEvent, GetNearbyPropertiesState> {
+  GetNearbyPropertiesBloc() : super(GetLoadingState(),) {
 
-    on<GetEvent>((event, emit) async {
+    on<GetNearbyPropertiesEvent>((event, emit) async {
 
       emit(GetLoadingState());
 
@@ -28,11 +27,11 @@ class GetBloc extends Bloc<GetEvent, GetState> {
 
       // casting and emit
       if (getRequest is List<Properties>) {
-        emit(GetPropertiesState(properties: getRequest));
+        emit(GetNearbyPropertiesDoneState(properties: getRequest));
       }
 
       if (getRequest is HelperResponse) {
-        emit(GetErrorState(
+        emit(GetNearbyPropertiesErrorState(
             servicesResponseStatues: getRequest.servicesResponse,
             error: getRequest.response));
       }

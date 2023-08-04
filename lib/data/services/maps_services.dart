@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:nostra_casa/data/models/properties_model.dart';
 
-import '../../business_logic/get_bloc/get_bloc.dart';
+import '../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import '../../utility/endpoints.dart';
 import '../../utility/enums.dart';
 import '../../utility/network_helper.dart';

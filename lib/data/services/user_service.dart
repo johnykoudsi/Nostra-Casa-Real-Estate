@@ -30,8 +30,10 @@ class UserServices {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       url: EndPoints.editUser,
       body: json.encode(event.toJson()),
+      useUserToken: true
     );
 
+    return helperResponse;
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         return welcomeUserFromJson(helperResponse.response).data;

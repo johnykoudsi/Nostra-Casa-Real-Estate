@@ -1,10 +1,10 @@
-part of 'get_bloc.dart';
+part of 'get_nearby_properties_bloc.dart';
 
-abstract class GetEvent extends Equatable {
-  const GetEvent();
+abstract class GetNearbyPropertiesEvent extends Equatable {
+  const GetNearbyPropertiesEvent();
 }
 
-class GetNearbyMapsEvent extends GetEvent {
+class GetNearbyMapsEvent extends GetNearbyPropertiesEvent {
   GetNearbyMapsEvent({required this.center, this.propertyType = PropertyType.all});
   LatLng center;
   PropertyType? propertyType;

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostra_casa/business_logic/get_bloc/get_bloc.dart';
-import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
-import 'package:nostra_casa/utility/app_style.dart';
+import '../../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import '../../add_property/welcome_step.dart';
 import '../../map_screen/map_screen.dart';
 import '../../my_profile_screen/my_profile_screen.dart';
@@ -23,7 +21,7 @@ class GetSelectedScreenByIndex extends StatelessWidget {
           }
           if (screenIndex == 1) {
             return BlocProvider(
-              create: (context) => GetBloc(),
+              create: (context) => GetNearbyPropertiesBloc(),
               child: const MapScreen(),
             );
           }

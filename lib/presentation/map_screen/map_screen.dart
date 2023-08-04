@@ -2,10 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nostra_casa/business_logic/get_bloc/get_bloc.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/markers.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/propertyType_filter_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
+import '../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import '../../data/models/properties_model.dart';
 import '../../utility/enums.dart';
 
@@ -63,9 +63,9 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<GetBloc, GetState>(
+    return BlocListener<GetNearbyPropertiesBloc, GetNearbyPropertiesState>(
       listener: (context, state) {
-        if (state is GetPropertiesState) {
+        if (state is GetNearbyPropertiesDoneState) {
           addMarkersFromPropertiesList(state.properties);
         }
       },
@@ -82,7 +82,7 @@ class _MapScreenState extends State<MapScreen> {
               minMaxZoomPreference: const MinMaxZoomPreference(10, 15),
               onCameraIdle: () {
                 getCenter().then(
-                  (value) => context.read<GetBloc>().add(
+                  (value) => context.read<GetNearbyPropertiesBloc>().add(
                         getNearbyMapsEvent.copyWith(center: value),
                       ),
                 );
@@ -93,7 +93,7 @@ class _MapScreenState extends State<MapScreen> {
                 _googleMapController = controller;
                 getCenter().then(
                   (value) => context
-                      .read<GetBloc>()
+                      .read<GetNearbyPropertiesBloc>()
                       .add(getNearbyMapsEvent.copyWith(center: value)),
                 );
               },
@@ -105,11 +105,11 @@ class _MapScreenState extends State<MapScreen> {
                 setState(() {
                   _markers.clear();
                   selectedFilterPropertyType = propertyType;
-                  context.read<GetBloc>().add(getNearbyMapsEvent.copyWith(propertyType: selectedFilterPropertyType));
+                  context.read<GetNearbyPropertiesBloc>().add(getNearbyMapsEvent.copyWith(propertyType: selectedFilterPropertyType));
                 });
               },
             ),
-            BlocBuilder<GetBloc, GetState>(
+            BlocBuilder<GetNearbyPropertiesBloc, GetNearbyPropertiesState>(
               builder: (context, state) {
                 if (state is GetLoadingState) {
                   return Center(
