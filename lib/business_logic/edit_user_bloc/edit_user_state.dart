@@ -23,7 +23,6 @@ class EditUserDoneState extends EditUserState {
   @override
   List<Object> get props => [];
 }
-
 class EditUserErrorState extends EditUserState {
   EditUserErrorState({required this.helperResponse});
   HelperResponse helperResponse;

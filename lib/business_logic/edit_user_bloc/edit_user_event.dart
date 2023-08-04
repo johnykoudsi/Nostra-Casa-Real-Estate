@@ -10,25 +10,32 @@ class EditUserApiEvent extends EditUserEvent {
         required this.email,
         required this.fullName,
         required this.gender,
-        required this.facebook
+          this.facebook,
+         this.dateOfBirth,
+
       });
   String phoneNumber;
   String email;
   String fullName;
   Gender gender;
-  String facebook;
+  String? facebook;
+  String? dateOfBirth;
 
 
-  Map<String, dynamic> toJson() => {
-
-    "name": fullName,
-    "email": email,
-    "mobile": phoneNumber,
-    "gender": gender.name,
-    "facebook":facebook,
-  };
+  Map<String, dynamic> toJson() {
+    final json = {
+      "name": fullName,
+      "email": email,
+      "mobile": phoneNumber,
+      "gender": gender.name,
+      "facebook": facebook,
+      "date_of_birth": dateOfBirth,
+    };
+    json.removeWhere((key, value) => value==null||value ==""||value.isEmpty);
+    return json;
+  }
 
   @override
   List<Object?> get props =>
-      [phoneNumber, email, fullName, gender,facebook];
+      [phoneNumber, email, fullName, gender,facebook,dateOfBirth];
 }
