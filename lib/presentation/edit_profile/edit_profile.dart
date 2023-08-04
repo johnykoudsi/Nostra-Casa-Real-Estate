@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/edit_user_bloc/edit_user_bloc.dart';
@@ -19,7 +20,9 @@ class EditProfile extends StatefulWidget {
 
 class _EditProfileState extends State<EditProfile> {
 
-  DateTime _selectedDate = DateTime.now();
+  DateTime? selectedDate;
+  TextEditingController dateTextController = TextEditingController();
+
   Gender genderRadioValue = Gender.female;
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
@@ -27,10 +30,24 @@ class _EditProfileState extends State<EditProfile> {
   TextEditingController mobileController = TextEditingController();
   TextEditingController facebookController = TextEditingController();
 
-  void _handleDateSelected(DateTime date) {
-    setState(() {
-      _selectedDate = date;
-    });
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+        context: context,
+        builder: (BuildContext context) => Container(
+          height: 216,
+          padding: const EdgeInsets.only(top: 6.0),
+          // The Bottom margin is provided to align the popup above the system navigation bar.
+          margin: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          // Provide a background color for the popup.
+          color: CupertinoColors.systemBackground.resolveFrom(context),
+          // Use a SafeArea widget to avoid system overlaps.
+          child: SafeArea(
+            top: false,
+            child: child,
+          ),
+        ));
   }
 
   @override
@@ -133,11 +150,37 @@ class _EditProfileState extends State<EditProfile> {
                 passwordBool: false,
                 label: "Facebook".tr(), controller: facebookController,),
               SizedBox(height: screenHeight * 0.01,),
-              CustomDatePicker(onDateSelected: _handleDateSelected,
-                label: "Date of birth".tr(),
-                onChange: (value) {
-                  _selectedDate = value;
-                },),
+              GestureDetector(
+                onTap: (){
+                  DateTime date = selectedDate ?? DateTime(2012, 1, 1);
+                  DateTime difference = DateTime(8);
+                  DateTime now = DateTime.now();
+
+                  _showDialog(CupertinoDatePicker(
+                    initialDateTime: date,
+                    minimumYear: 1930,
+                    maximumYear: now.year - difference.year,
+                    mode: CupertinoDatePickerMode.date,
+                    onDateTimeChanged: (DateTime value) {
+                      setState(() {
+                        selectedDate = value;
+                        dateTextController.text = DateFormat.yMEd().format(value);
+                      });
+
+                    },
+                  ));
+                },
+                child: CustomTextField(
+                    hintText: "Date of birth".tr(),
+                  enabled: false,
+                  controller: dateTextController ,
+                ),
+              ),
+              // CustomDatePicker(onDateSelected: _handleDateSelected,
+              //   label: "Date of birth".tr(),
+              //   onChange: (value) {
+              //     _selectedDate = value;
+              //   },),
               SizedBox(height: screenHeight * 0.03,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

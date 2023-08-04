@@ -22,15 +22,7 @@ class GetPropertiesState extends GetState {
   @override
   List<Object> get props => [properties];
 }
-class GetDoneState extends GetState {
 
-  GetDoneState({required this.getRequestModel});
-
-  GetRequestModel getRequestModel;
-
-  @override
-  List<Object> get props => [getRequestModel];
-}
 class GetErrorState extends GetState {
 
   GetErrorState({required this.servicesResponseStatues,required this.error});

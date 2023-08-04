@@ -8,6 +8,7 @@ class PropertyTypeFilterWidget extends StatefulWidget {
       : super(key: key);
   PropertyType selectedFilter;
   Function(PropertyType) onChange;
+
   @override
   State<PropertyTypeFilterWidget> createState() =>
       _PropertyTypeFilterWidgetState();
@@ -19,8 +20,9 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
     final selectedTextTheme = Theme.of(context)
         .textTheme
         .headline6!
-        .copyWith(color: AppStyle.kBackGroundColor,fontSize: 14);
-    final unSelectedTextTheme = Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14);
+        .copyWith(color: AppStyle.kBackGroundColor, fontSize: 14);
+    final unSelectedTextTheme =
+        Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14);
     return SizedBox(
       height: 150,
       child: ListView(
@@ -39,7 +41,8 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
               selected: widget.selectedFilter == PropertyType.all,
               onSelected: (bool value) {
                 widget.onChange(PropertyType.all);
-              }),
+              },
+          ),
           ListView.separated(
             padding: const EdgeInsets.all(18),
             shrinkWrap: true,
@@ -50,8 +53,7 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
                   label: Text(
                     propertyTypeUi.reverse[PropertyType.values[index]] ?? '',
                   ),
-                  labelStyle:
-                      widget.selectedFilter == PropertyType.values[index]
+                  labelStyle: widget.selectedFilter == PropertyType.values[index]
                           ? selectedTextTheme
                           : unSelectedTextTheme,
                   selected: widget.selectedFilter == PropertyType.values[index],

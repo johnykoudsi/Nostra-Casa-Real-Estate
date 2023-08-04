@@ -11,13 +11,16 @@ class MapsServices {
   static Future getNearbyPlacesService({
     required GetNearbyMapsEvent event,
   }) async {
+
     Map<String,dynamic> mapBody ={
       "longitude": event.center.longitude,
       "latitude": event.center.latitude,
     };
+
     if(event.propertyType != PropertyType.all){
       mapBody["property_type"] = propertyTypeBackEnd.reverse[event.propertyType];
     }
+
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       url: EndPoints.nearbyProperties,
       body: json.encode(mapBody),
@@ -25,15 +28,15 @@ class MapsServices {
     );
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-      //try {
+      try {
         WelcomeProperties data =
             welcomePropertiesFromJson(helperResponse.response);
 
         return data.properties;
-      // } catch (e) {
-      //   return helperResponse.copyWith(
-      //       servicesResponse: ServicesResponseStatues.modelError);
-      // }
+      } catch (e) {
+        return helperResponse.copyWith(
+            servicesResponse: ServicesResponseStatues.modelError);
+      }
     }
     return helperResponse;
   }

@@ -25,8 +25,7 @@ class _MapScreenState extends State<MapScreen> {
   final Set<Marker> _markers = {};
 
   PropertyType selectedFilterPropertyType = PropertyType.all;
-  GetNearbyMapsEvent getNearbyMapsEvent =
-      GetNearbyMapsEvent(center: const LatLng(33.513914, 36.276143));
+  GetNearbyMapsEvent getNearbyMapsEvent = GetNearbyMapsEvent(center: const LatLng(33.513914, 36.276143));
   @override
   void initState() {
     super.initState();

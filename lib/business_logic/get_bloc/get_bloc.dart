@@ -20,10 +20,11 @@ class GetBloc extends Bloc<GetEvent, GetState> {
 
       var getRequest;
 
-      // get th request
+      // get the request
       if (event is GetNearbyMapsEvent) {
         getRequest = await MapsServices.getNearbyPlacesService(event: event);
       }
+
 
       // casting and emit
       if (getRequest is List<Properties>) {

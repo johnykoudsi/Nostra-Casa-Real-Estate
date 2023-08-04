@@ -33,7 +33,7 @@ class CustomTextField extends StatelessWidget {
       this.fontSize,
       this.controller,
       this.validator,
-      required this.passwordBool,
+      this.passwordBool = false,
       this.onlyNumber = false,
       this.onSubmit,
       this.onTap,
