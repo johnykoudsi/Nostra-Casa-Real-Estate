@@ -46,41 +46,39 @@ class _NotificationsState extends State<Notifications> {
               onLongPress: () {
                 // showEditPropertyTypeAttributeDialog(index);
               },
-              child: Expanded(
-                child: Container(
+              child: Container(
 
-                  decoration:  BoxDecoration(
-                    color: index.isEven ? AppStyle.kBackGroundColor:AppStyle.kLightGrey,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: screenWidth * 0.038, right: screenWidth * 0.038,top: screenHeight*0.02,bottom: screenHeight*0.02),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: AppStyle.blackColor),
-                          ),
-                          child: const CircleAvatar(
-                            radius: 37,
-                            backgroundColor: AppStyle.blackColor,
-                            child: CircleAvatar(
-                              radius: 35,
-                              foregroundImage: AssetImage(AppAssets.logo),
-                            ),
+                decoration:  BoxDecoration(
+                  color: index.isEven ? AppStyle.kBackGroundColor:AppStyle.kLightGrey,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: screenWidth * 0.038, right: screenWidth * 0.038,top: screenHeight*0.02,bottom: screenHeight*0.02),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: AppStyle.blackColor),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 37,
+                          backgroundColor: AppStyle.blackColor,
+                          child: CircleAvatar(
+                            radius: 35,
+                            foregroundImage: AssetImage(AppAssets.logo),
                           ),
                         ),
-                        SizedBox(width: screenWidth*0.02,),
-                        Expanded(
-                          child: Text(
-                            notifications[index],
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
+                      ),
+                      SizedBox(width: screenWidth*0.02,),
+                      Expanded(
+                        child: Text(
+                          notifications[index],
+                          style: Theme.of(context).textTheme.headline5,
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
