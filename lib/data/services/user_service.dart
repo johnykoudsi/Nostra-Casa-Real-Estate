@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../business_logic/edit_user_bloc/edit_user_bloc.dart';
 import '../../business_logic/user/user_bloc.dart';
 import '../../utility/endpoints.dart';
 import '../../utility/enums.dart';
@@ -25,7 +26,24 @@ class UserServices {
 
     return helperResponse;
   }
+  static Future editUserService(EditUserApiEvent event) async {
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      url: EndPoints.editUser,
+      body: json.encode(event.toJson()),
+    );
 
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      try {
+        return welcomeUserFromJson(helperResponse.response).data;
+      } catch (e) {
+        return helperResponse.copyWith(
+          servicesResponse: ServicesResponseStatues.modelError,
+        );
+      }
+    }
+
+    return helperResponse;
+  }
   static Future sendSMSVerificationCode(SendSMSEvent event) async {
     final response = await NetworkHelpers.postDataHelper(
         url: EndPoints.sendSMS,

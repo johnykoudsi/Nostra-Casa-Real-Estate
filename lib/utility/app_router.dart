@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
@@ -9,6 +8,7 @@ import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dar
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
+import '../business_logic/edit_user_bloc/edit_user_bloc.dart';
 import '../business_logic/tag_bloc/tag_bloc.dart';
 import '../business_logic/user/user_bloc.dart';
 import '../presentation/about_us/about_us.dart';
@@ -54,7 +54,14 @@ class AppRouter {
         case AppRoutes.notifications:
           return const Notifications();
         case AppRoutes.editProfile:
-          return const EditProfile();
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => EditUserBloc(),
+              ),
+            ],
+            child: EditProfile(),
+          );
         case AppRoutes.addProperty:
           return MultiBlocProvider(
             providers: [
@@ -67,7 +74,7 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) =>
-                TagBloc()..add(ChangeToLoadingTagApiEvent()),
+                    TagBloc()..add(ChangeToLoadingTagApiEvent()),
               ),
             ],
             child: const AddPropertyHome(),

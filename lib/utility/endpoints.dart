@@ -8,6 +8,7 @@ class EndPoints{
   static const String verifyAndSignUp = "/sms/verify-and-register";
   static const String login = "/login";
   static const String logout = "/user/logout";
+  static const String editUser = "/user/update";
 
 
   static String getAmenities({required int page, required int limit}) => "/amenities?per_page=$limit&page=$page";

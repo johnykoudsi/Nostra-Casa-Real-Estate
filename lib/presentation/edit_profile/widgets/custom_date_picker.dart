@@ -5,13 +5,13 @@ import '../../../utility/app_style.dart';
 class CustomDatePicker extends StatefulWidget {
   final Function(DateTime) onDateSelected;
   final String label;
-  DateTime selectedDate;
+ // DateTime selectedDate;
   Function(DateTime value)? onChange;
 
   CustomDatePicker({
     required this.onDateSelected,
     required this.label,
-    required this.selectedDate,
+   // required this.selectedDate,
     this.onChange,
   });
 
@@ -20,7 +20,7 @@ class CustomDatePicker extends StatefulWidget {
 }
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
-  // DateTime _selectedDate = DateTime.now();
+   DateTime _selectedDate = DateTime.now();
   bool datePicked = false;
 
   @override
@@ -58,23 +58,23 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
                   width: screenWidth * 0.05,
                 ),
                 Text(
-                  "${widget.selectedDate.day} /",
+                  "${_selectedDate.day} /",
                   style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: datePicked ? AppStyle.kGreyColor : Colors.black,
+                        color:datePicked ? Colors.black : AppStyle.kGreyColor,
                       ),
                 ),
                 const SizedBox(width: 8.0),
                 Text(
-                  "${widget.selectedDate.month} /",
+                  "${_selectedDate.month} /",
                   style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: datePicked ? AppStyle.kGreyColor : Colors.black,
+                        color: datePicked ? Colors.black : AppStyle.kGreyColor,
                       ),
                 ),
                 const SizedBox(width: 8.0),
                 Text(
-                  '${widget.selectedDate.year}',
+                  '${_selectedDate.year}',
                   style: Theme.of(context).textTheme.headline5!.copyWith(
-                        color: datePicked ? AppStyle.kGreyColor : Colors.black,
+                        color: datePicked ? Colors.black : AppStyle.kGreyColor,
                       ),
                 ),
               ],
@@ -88,18 +88,19 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   void _showDatePicker() async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: widget.selectedDate,
+      initialDate: _selectedDate,
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
     );
-    if (pickedDate != null && pickedDate != widget.selectedDate) {
+    if (pickedDate != null && pickedDate != _selectedDate) {
       setState(() {
-       // datePicked = true;
-        //widget.onChange;
-        widget.selectedDate = pickedDate;
+        _selectedDate = pickedDate;
+        datePicked = true;
+        widget.onChange;
+
 
       });
-      widget.onDateSelected(widget.selectedDate);
+      widget.onDateSelected(_selectedDate);
     }
   }
 }
