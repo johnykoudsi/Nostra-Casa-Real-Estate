@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/presentation/explore/explore.dart';
 import '../../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import '../../add_property/welcome_step.dart';
 import '../../map_screen/map_screen.dart';
@@ -17,7 +18,7 @@ class GetSelectedScreenByIndex extends StatelessWidget {
     return Builder(
         builder: (context) {
           if (screenIndex == 0) {
-            return Policy(title: 'From nav bar',);
+            return const Explore();
           }
           if (screenIndex == 1) {
             return BlocProvider(

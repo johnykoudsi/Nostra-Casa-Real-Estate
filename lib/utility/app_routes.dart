@@ -12,6 +12,7 @@ class AppRoutes {
   static const String myProfile ="/my_profile";
   static const String addPropertyWelcome="/add_welcome";
   static const String addProperty="/add";
+  static const String homePage="/home";
   static const String aboutUs="/about_us";
   static const String notifications="/notifications";
   static const String editProfile="/edit_profile";

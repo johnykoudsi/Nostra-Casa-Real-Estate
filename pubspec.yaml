@@ -36,6 +36,7 @@ dependencies:
   csc_picker: ^0.2.7
   shimmer: ^2.0.0
   bloc_concurrency: ^0.2.2
+  card_swiper: ^3.0.1
 
 
 

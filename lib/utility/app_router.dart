@@ -14,6 +14,8 @@ import '../business_logic/user/user_bloc.dart';
 import '../presentation/about_us/about_us.dart';
 import '../presentation/add_property/welcome_step.dart';
 import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
+
+import '../presentation/explore/explore.dart';
 import '../presentation/login_screen/login_screen.dart';
 import '../presentation/notifications/notifications.dart';
 import '../presentation/policy/policy.dart';
@@ -81,6 +83,8 @@ class AppRouter {
           );
         case AppRoutes.aboutUs:
           return const AboutUs();
+        case AppRoutes.homePage:
+          return const Explore();
 
         default:
           return const Scaffold(
