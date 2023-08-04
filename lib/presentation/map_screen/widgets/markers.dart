@@ -7,11 +7,15 @@ import '../../../utility/app_assets.dart';
 
 class MapsMarkers{
 
-  static Uint8List? homeLocation, storeLocation, deliveryLocation;
+  static Uint8List? homeLocation, shopLocation, barnLocation;
   static initMarkers() async {
 
     homeLocation =
-    await getBytesFromAsset(path: AppAssets.homeLocation, width: 130);
+    await getBytesFromAsset(path: AppAssets.homeLocation, width: 115);
+    shopLocation =
+    await getBytesFromAsset(path: AppAssets.shopLocation, width: 115);
+    barnLocation =
+    await getBytesFromAsset(path: AppAssets.barnLocation, width: 115);
 
   }
 

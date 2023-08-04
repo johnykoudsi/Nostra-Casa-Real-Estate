@@ -25,9 +25,8 @@ class GetNearbyPropertiesDoneState extends GetNearbyPropertiesState {
 
 class GetNearbyPropertiesErrorState extends GetNearbyPropertiesState {
 
-  GetNearbyPropertiesErrorState({required this.servicesResponseStatues,required this.error});
-  ServicesResponseStatues servicesResponseStatues;
-  String error;
+  GetNearbyPropertiesErrorState({required this.helperResponse});
+  HelperResponse helperResponse;
   @override
-  List<Object> get props => [servicesResponseStatues,error];
+  List<Object> get props => [helperResponse];
 }

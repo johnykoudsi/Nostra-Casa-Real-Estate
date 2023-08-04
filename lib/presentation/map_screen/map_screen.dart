@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
+import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/markers.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/propertyType_filter_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
@@ -25,7 +27,8 @@ class _MapScreenState extends State<MapScreen> {
   final Set<Marker> _markers = {};
 
   PropertyType selectedFilterPropertyType = PropertyType.all;
-  GetNearbyMapsEvent getNearbyMapsEvent = GetNearbyMapsEvent(center: const LatLng(33.513914, 36.276143));
+  GetNearbyMapsEvent getNearbyMapsEvent =
+      GetNearbyMapsEvent(center: const LatLng(33.513914, 36.276143));
   @override
   void initState() {
     super.initState();
@@ -68,6 +71,10 @@ class _MapScreenState extends State<MapScreen> {
         if (state is GetNearbyPropertiesDoneState) {
           addMarkersFromPropertiesList(state.properties);
         }
+        if (state is GetNearbyPropertiesErrorState) {
+          DialogsWidgetsSnackBar.showSnackBarFromStatus(
+              context: context, helperResponse: state.helperResponse);
+        }
       },
       child: Scaffold(
         body: Stack(
@@ -105,7 +112,8 @@ class _MapScreenState extends State<MapScreen> {
                 setState(() {
                   _markers.clear();
                   selectedFilterPropertyType = propertyType;
-                  context.read<GetNearbyPropertiesBloc>().add(getNearbyMapsEvent.copyWith(propertyType: selectedFilterPropertyType));
+                  context.read<GetNearbyPropertiesBloc>().add(getNearbyMapsEvent
+                      .copyWith(propertyType: selectedFilterPropertyType));
                 });
               },
             ),

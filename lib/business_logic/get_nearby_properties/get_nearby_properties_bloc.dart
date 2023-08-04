@@ -32,8 +32,8 @@ class GetNearbyPropertiesBloc extends Bloc<GetNearbyPropertiesEvent, GetNearbyPr
 
       if (getRequest is HelperResponse) {
         emit(GetNearbyPropertiesErrorState(
-            servicesResponseStatues: getRequest.servicesResponse,
-            error: getRequest.response));
+            helperResponse: getRequest
+        ));
       }
 
     },

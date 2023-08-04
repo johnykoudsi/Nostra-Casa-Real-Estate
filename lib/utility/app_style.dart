@@ -23,7 +23,7 @@ class AppStyle {
       primary: const Color(0xFF145770),
       secondary: const Color(0xFF145770),
     ),
-    chipTheme: ChipThemeData(
+    chipTheme: const ChipThemeData(
         backgroundColor: Colors.white,
         selectedColor: mainColor
     ),

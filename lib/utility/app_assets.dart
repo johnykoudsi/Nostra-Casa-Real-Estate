@@ -9,7 +9,9 @@ class AppAssets{
   static const heart = "assets/images/fav.svg";
   static const more = "assets/images/more.svg";
   static const welcome = "assets/images/welcome1.jpeg";
-  static const homeLocation = "assets/images/home_location.png";
+  static const homeLocation = "assets/images/icon_map_house.png";
+  static const shopLocation = "assets/images/icon_map_shop.png";
+  static const barnLocation = "assets/images/icon_map_barn.png";
   static const language = "assets/images/language.svg";
   static const house = "assets/images/house.svg";
   static const favorites ="assets/images/fav.svg";

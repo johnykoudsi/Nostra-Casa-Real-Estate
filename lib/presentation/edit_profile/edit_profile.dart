@@ -263,7 +263,7 @@ class _EditProfileState extends State<EditProfile> {
                                 fullName: nameController.text,
                                 facebook: facebookController.text,
                                 gender: genderRadioValue,
-                                dateOfBirth: dateTextController.text,
+                                dateOfBirth: selectedDate.toString(),
                               ));
                         }
                       },
