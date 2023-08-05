@@ -11,6 +11,7 @@ UserBloc globalUserBloc = UserBloc();
 
 const int kProductsGetLimit = 10;
 
+const double mapRadius = 200;
 bool userIsLoggedIn(BuildContext context){
 
   final state = context.read<UserBloc>().state;

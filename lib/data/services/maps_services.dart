@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:nostra_casa/data/models/properties_model.dart';
 
 import '../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
+import '../../utility/constant_logic_validations.dart';
 import '../../utility/endpoints.dart';
 import '../../utility/enums.dart';
 import '../../utility/network_helper.dart';
@@ -15,6 +16,7 @@ class MapsServices {
     Map<String,dynamic> mapBody ={
       "longitude": event.center.longitude,
       "latitude": event.center.latitude,
+      "radius": mapRadius,
     };
 
     if(event.propertyType != PropertyType.all){
