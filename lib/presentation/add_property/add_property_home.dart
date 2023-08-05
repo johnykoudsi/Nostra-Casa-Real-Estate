@@ -2,6 +2,7 @@ import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/business_logic/country_bloc/country_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_description.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_images.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_price_and_space.dart';
@@ -27,10 +28,10 @@ class AddPropertyHome extends StatefulWidget {
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
   int screensNumber = 11;
-  TextEditingController titleController =TextEditingController();
-  TextEditingController descriptionController =TextEditingController();
-  TextEditingController priceController=TextEditingController();
-  TextEditingController areaController=TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController areaController = TextEditingController();
 
   bool isDisabledNext() {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
@@ -43,29 +44,28 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     if (addPropertyBloc.state.propertyService == null && stepNumber == 2) {
       return true;
     }
-    if (addPropertyBloc.state.images.length < 3 && stepNumber == 5) {
-      return true;
-    }
+    // if (addPropertyBloc.state.images.length < 3 && stepNumber == 5) {
+    //   return true;
+    // }
     if (addPropertyBloc.state.selectedLocation == null && stepNumber == 7) {
       return true;
     }
 
     return false;
   }
-void onSubmit(){
-  final addPropertyBloc = context.read<AddPropertyBloc>();
 
-  print(addPropertyBloc.state);
+  void onSubmit() {
+    final addPropertyBloc = context.read<AddPropertyBloc>();
 
-}
+    print(addPropertyBloc.state);
+  }
+
   bool isDisabledBack() {
     if (stepNumber == 0) {
       return true;
     }
     return false;
   }
-
-
 
   @override
   void dispose() {
@@ -90,9 +90,8 @@ void onSubmit(){
           appBar: AppBar(),
           body: PageTransitionSwitcher(
             duration: const Duration(milliseconds: 600),
-            reverse: context.locale.languageCode == 'ar'
-                ? !isReverse
-                : isReverse,
+            reverse:
+                context.locale.languageCode == 'ar' ? !isReverse : isReverse,
             transitionBuilder: (Widget child, Animation<double> animation,
                 Animation<double> secondaryAnimation) {
               return SharedAxisTransition(
@@ -130,13 +129,20 @@ void onSubmit(){
                     return const GoogleMapsScreen();
                   }
                   if (stepNumber == 8) {
-                    return  AddPropertyTitle(titleController: titleController,);
+                    return AddPropertyTitle(
+                      titleController: titleController,
+                    );
                   }
                   if (stepNumber == 9) {
-                    return  AddPropertyDescription(descriptionController: descriptionController,);
+                    return AddPropertyDescription(
+                      descriptionController: descriptionController,
+                    );
                   }
                   if (stepNumber == 10) {
-                    return  AddPropertyPriceAndSpace(priceController: priceController,areaController: areaController,);
+                    return AddPropertyPriceAndSpace(
+                      priceController: priceController,
+                      areaController: areaController,
+                    );
                   }
                   if (stepNumber == 11) {
                     return const SubmitProperty();
@@ -155,29 +161,32 @@ void onSubmit(){
             onPressedBack: isDisabledBack()
                 ? null
                 : () {
-              setState(() {
-                stepNumber--;
-              });
-            },
+                    setState(() {
+                      stepNumber--;
+                    });
+                  },
             onPressedNext: isDisabledNext()
                 ? null
                 : () {
-              setState(() {
-                if(stepNumber==8){
-                  context.read<AddPropertyBloc>().state.title=titleController.text;
-                }
-                if(stepNumber==9){
-                  context.read<AddPropertyBloc>().state.description=descriptionController.text;
-                }
-                if(stepNumber==10){
-                  context.read<AddPropertyBloc>().state.price=priceController.text;
-                  context.read<AddPropertyBloc>().state.area=areaController.text;
-                }
+                    setState(() {
+                      if (stepNumber == 8) {
+                        context.read<AddPropertyBloc>().state.title =
+                            titleController.text;
+                      }
+                      if (stepNumber == 9) {
+                        context.read<AddPropertyBloc>().state.description =
+                            descriptionController.text;
+                      }
+                      if (stepNumber == 10) {
+                        context.read<AddPropertyBloc>().state.price =
+                            priceController.text;
+                        context.read<AddPropertyBloc>().state.area =
+                            areaController.text;
+                      }
 
-                stepNumber++;
-
-              });
-            },
+                      stepNumber++;
+                    });
+                  },
             progress: progress,
             stepNumber: stepNumber,
             onSubmit: onSubmit,

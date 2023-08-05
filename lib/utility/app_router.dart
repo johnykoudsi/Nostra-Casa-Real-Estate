@@ -8,6 +8,7 @@ import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dar
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
+import '../business_logic/country_bloc/country_bloc.dart';
 import '../business_logic/edit_user_bloc/edit_user_bloc.dart';
 import '../business_logic/tag_bloc/tag_bloc.dart';
 import '../business_logic/user/user_bloc.dart';
@@ -77,6 +78,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) =>
                     TagBloc()..add(ChangeToLoadingTagApiEvent()),
+              ),
+              BlocProvider(
+                create: (context) => CountryBloc()..add(GetCountryCityEvent()),
               ),
             ],
             child: const AddPropertyHome(),

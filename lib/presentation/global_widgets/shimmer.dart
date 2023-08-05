@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:nostra_casa/utility/app_style.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ShimmerLoader extends StatelessWidget {
   final double? height;
   final double? width;
+  BorderRadiusGeometry? border;
 
-  const ShimmerLoader({Key? key, this.height = 120, this.width = 50})
+  ShimmerLoader({Key? key, this.height = 120, this.width = 50,this.border = AppStyle.k15BorderRadius})
       : super(key: key);
 
   @override
@@ -17,7 +19,8 @@ class ShimmerLoader extends StatelessWidget {
          // margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 7),
           decoration: BoxDecoration(
               color: Colors.grey.shade100,
-              borderRadius: const BorderRadius.all(Radius.circular(15))),
+              borderRadius: border,
+          ),
           height: height,
           width: width,
         ));

@@ -55,7 +55,7 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
               ),
               itemBuilder: (BuildContext context, int index) {
                 if (index >= state.amenities.length) {
-                  return const ShimmerLoader();
+                  return ShimmerLoader();
                 }
                 return AmenityItemWidget(
                   amenity: state.amenities[index],
@@ -72,7 +72,7 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return const ShimmerLoader();
+                return ShimmerLoader();
               });
         }
         return SomethingWrongWidget(

@@ -5,19 +5,29 @@ import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_b
 import '../../../utility/app_style.dart';
 
 class CustomInsertNumberField extends StatelessWidget {
-   CustomInsertNumberField({Key? key,required this.decrease,required this.increase,required this.controller,this.unit,this.additionalText,this.hintText}) : super(key: key);
+  CustomInsertNumberField(
+      {Key? key,
+      required this.decrease,
+      required this.increase,
+      required this.controller,
+      this.unit,
+      this.additionalText,
+        this.label,
+      this.hintText})
+      : super(key: key);
   Function() decrease;
   Function() increase;
   TextEditingController controller = TextEditingController();
   String? unit;
   String? additionalText;
   String? hintText;
+  String? label;
 
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    return  Container(
-      height: screenHeight * 0.25,
+    return Container(
+      height: screenHeight * 0.2,
       decoration: BoxDecoration(
         color: AppStyle.kLightGrey,
         borderRadius: AppStyle.k15BorderRadius,
@@ -28,6 +38,13 @@ class CustomInsertNumberField extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Text(
+            label ?? '',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+          SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -49,8 +66,9 @@ class CustomInsertNumberField extends StatelessWidget {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      hintText : hintText,
+                      hintText: hintText,
                     ),
+                    textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     controller: controller,
                     cursorColor: AppStyle.blackColor,
@@ -69,12 +87,12 @@ class CustomInsertNumberField extends StatelessWidget {
               ),
             ],
           ),
-          Text(unit == null ? "": unit.toString(), ),
+          Text(unit ?? ""),
           SizedBox(
             height: screenHeight * 0.02,
           ),
           Text(
-              additionalText == null ? "": additionalText.toString(),
+            additionalText == null ? "" : additionalText.toString(),
             style: Theme.of(context).textTheme.headline5,
             textAlign: TextAlign.center,
             maxLines: 3,

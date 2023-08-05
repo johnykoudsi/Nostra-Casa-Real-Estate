@@ -1,10 +1,10 @@
-import 'package:csc_picker/csc_picker.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/custom_insert_text.dart';
-
+import 'package:nostra_casa/business_logic/country_bloc/country_bloc.dart';
 import '../../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../../utility/app_style.dart';
+import '../../global_widgets/shimmer.dart';
 
 class AddRegion extends StatefulWidget {
   const AddRegion({Key? key}) : super(key: key);
@@ -14,20 +14,18 @@ class AddRegion extends StatefulWidget {
 }
 
 class _AddRegionState extends State<AddRegion> {
+  String? selectedCity;
   @override
   Widget build(BuildContext context) {
-    String countryValue = "";
-    String? stateValue = "";
-    String? cityValue = "";
-    String address = "";
+
     final addPropertyBloc = context.watch<AddPropertyBloc>();
     TextEditingController regionController = TextEditingController();
-    if(addPropertyBloc.state.region != null){
-      regionController.text=addPropertyBloc.state.region!;
+    if (addPropertyBloc.state.region != null) {
+      regionController.text = addPropertyBloc.state.region!;
     }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-     return Scaffold(
+    return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
       body: Padding(
         padding: EdgeInsets.only(
@@ -42,39 +40,82 @@ class _AddRegionState extends State<AddRegion> {
               'Please add your property country, state and city',
               style: Theme.of(context).textTheme.headline2,
             ),
-            Text(
-              'if your city is not listed feel free to add it manually.',
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6!
-                  .copyWith(color: AppStyle.kGreyColor),
-            ),
+            // Text(
+            //   'if your city is not listed feel free to add it manually.',
+            //   style: Theme.of(context)
+            //       .textTheme
+            //       .headline6!
+            //       .copyWith(color: AppStyle.kGreyColor),
+            // ),
             SizedBox(
               height: screenHeight * 0.03,
             ),
             Expanded(
               child: ListView(
                 children: [
-                  CSCPicker(
-                    onCountryChanged: (value) {
-                      setState(() {
-                        countryValue = value;
-                      });
-                    },
-                    onStateChanged:(value) {
-                      setState(() {
-                        stateValue = value;
-                      });
-                    },
-                    onCityChanged:(value) {
-                      setState(() {
-                        cityValue = value;
-                      });
-                    },
+                  Text("Select City You Live In",
+                  style: Theme.of(context).textTheme.headline5,
                   ),
-                  SizedBox(height: screenHeight*0.05,),
-                 CustomInsertText(
-                   controller: regionController,hintText: "Damascus",additionalText: "here you can add more additional details about you property region",),
+                  const SizedBox(height: 10,),
+                  BlocBuilder<CountryBloc, CountryState>(
+                    builder: (context, state) {
+                      if(state is CountryLoadingState){
+                        return ShimmerLoader(
+                          height: 50,
+                          border: AppStyle.k4RadiusLowerPadding,
+                        );
+                      }
+                      if(state is CountryDoneState){
+                        List<String> cityList(){
+                          List<String> stringCity = [];
+                          for (var element in state.countryModel.cities) {
+                            stringCity.add(element.name);
+                          }
+                          return stringCity;
+                        }
+                        return Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: AppStyle.k4RadiusLowerPadding
+                          ),
+                          child: DropdownSearch<String>(
+                            popupProps:  const PopupProps.dialog(
+                              showSearchBox: true,
+                              showSelectedItems: true,
+                            ),
+                            items: cityList(),
+                            selectedItem: selectedCity??cityList()[0],
+                            onChanged: (value){
+                              selectedCity = value;
+                            },
+                          ),
+                        );
+                      }
+                      return  ShimmerLoader(
+                        height: 50,
+                      );
+                    },
+                  )
+                  //  CSCPicker(
+                  //    onCountryChanged: (value) {
+                  //      setState(() {
+                  //        countryValue = value;
+                  //      });
+                  //    },
+                  //    onStateChanged:(value) {
+                  //      setState(() {
+                  //        stateValue = value;
+                  //      });
+                  //    },
+                  //    onCityChanged:(value) {
+                  //      setState(() {
+                  //        cityValue = value;
+                  //      });
+                  //    },
+                  //  ),
+                  //  SizedBox(height: screenHeight*0.05,),
+                  // CustomInsertText(
+                  //   controller: regionController,hintText: "Damascus",additionalText: "here you can add more additional details about you property region",),
                 ],
               ),
             ),

@@ -56,7 +56,7 @@ class _CustomTagGridState extends State<CustomTagGrid> {
               ),
               itemBuilder: (BuildContext context, int index) {
                 if (index >= state.tags.length) {
-                  return const ShimmerLoader();
+                  return ShimmerLoader();
                 }
                 return TagItemWidget(
                   tag: state.tags[index],
@@ -73,7 +73,7 @@ class _CustomTagGridState extends State<CustomTagGrid> {
                 mainAxisSpacing: 15,
               ),
               itemBuilder: (BuildContext context, int index) {
-                return const ShimmerLoader();
+                return ShimmerLoader();
               });
         }
         return SomethingWrongWidget(

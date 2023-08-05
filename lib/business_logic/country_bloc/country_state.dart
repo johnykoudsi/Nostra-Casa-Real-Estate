@@ -25,5 +25,5 @@ class CountryErrorState extends CountryState {
   HelperResponse helperResponse;
 
   @override
-  List<Object> get props => [helperResponse];
+  List<Object> get props => [helperResponse.servicesResponse,helperResponse.response];
 }
