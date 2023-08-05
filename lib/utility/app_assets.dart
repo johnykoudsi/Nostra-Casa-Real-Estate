@@ -31,6 +31,7 @@ class AppAssets{
   static const wifi="assets/images/wifi.svg";
   static const tv="assets/images/tv.svg";
   static const logo="assets/images/logo_5.png";
+  static const greyLogo="assets/images/grey_logo.png";
 
 
 
