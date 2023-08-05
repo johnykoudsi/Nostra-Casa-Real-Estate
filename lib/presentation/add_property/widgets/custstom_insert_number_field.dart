@@ -1,27 +1,36 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/rounded_elevated_button.dart';
-
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import '../../../utility/app_style.dart';
 
-class CustomInsertNumberField extends StatelessWidget {
-  CustomInsertNumberField(
-      {Key? key,
-      required this.decrease,
-      required this.increase,
-      required this.controller,
-      this.unit,
-      this.additionalText,
-        this.label,
-      this.hintText})
-      : super(key: key);
-  Function() decrease;
-  Function() increase;
-  TextEditingController controller = TextEditingController();
+class CustomInsertNumberField extends StatefulWidget {
+  CustomInsertNumberField({
+    Key? key,
+    required this.onChange,
+    this.unit,
+    this.additionalText,
+    this.label,
+    required this.value,
+  }) : super(key: key);
+
+  Function(String value)? onChange;
+  num value;
   String? unit;
   String? additionalText;
-  String? hintText;
   String? label;
+
+  @override
+  State<CustomInsertNumberField> createState() =>
+      _CustomInsertNumberFieldState();
+}
+
+class _CustomInsertNumberFieldState extends State<CustomInsertNumberField> {
+  late TextEditingController controller;
+  @override
+  void initState() {
+    controller = TextEditingController(text: widget.value.toString());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,22 +48,24 @@ class CustomInsertNumberField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            label ?? '',
+            widget.label ?? '',
             style: Theme.of(context).textTheme.headline4,
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              RoundedElevatedButton(
-                iconData: Icons.remove,
-                backgroundColor: AppStyle.kLightGrey,
-                onTap: () {
-                  decrease();
-                },
-              ),
+              // RoundedElevatedButton(
+              //   iconData: Icons.remove,
+              //   backgroundColor: AppStyle.kLightGrey,
+              //   onTap: () {
+              //     widget.decrease();
+              //     controller.text = widget.value.toString();
+              //   },
+              // ),
+              const SizedBox(width: 18,),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
@@ -64,12 +75,13 @@ class CustomInsertNumberField extends StatelessWidget {
                       color: AppStyle.kGreyColor,
                     ),
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: hintText,
-                    ),
+                  child: TextFormField(
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
+                    onChanged: widget.onChange,
                     controller: controller,
                     cursorColor: AppStyle.blackColor,
                     style: const TextStyle(
@@ -78,21 +90,26 @@ class CustomInsertNumberField extends StatelessWidget {
                   ),
                 ),
               ),
-              RoundedElevatedButton(
-                iconData: Icons.add,
-                backgroundColor: AppStyle.kLightGrey,
-                onTap: () {
-                  increase();
-                },
-              ),
+              const SizedBox(width: 18,),
+
+              // RoundedElevatedButton(
+              //   iconData: Icons.add,
+              //   backgroundColor: AppStyle.kLightGrey,
+              //   onTap: () {
+              //     widget.increase();
+              //     controller.text = widget.value.toString();
+              //   },
+              // ),
             ],
           ),
-          Text(unit ?? ""),
+          Text(widget.unit ?? ""),
           SizedBox(
             height: screenHeight * 0.02,
           ),
           Text(
-            additionalText == null ? "" : additionalText.toString(),
+            widget.additionalText == null
+                ? ""
+                : widget.additionalText.toString(),
             style: Theme.of(context).textTheme.headline5,
             textAlign: TextAlign.center,
             maxLines: 3,

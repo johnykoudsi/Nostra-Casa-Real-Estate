@@ -1,5 +1,7 @@
 
 
+import 'package:easy_localization/easy_localization.dart';
+
 enum ServicesResponseStatues {
   success,
   networkError,
@@ -45,6 +47,12 @@ final propertyService = EnumValues({
   "Sale" : PropertyService.sale,
   "Rent": PropertyService.rent,
   "Holiday": PropertyService.holiday,
+});
+
+final propertyServicePriceUI = EnumValues({
+  "" : PropertyService.sale,
+  "sp per month".tr() : PropertyService.rent,
+  "sp per day".tr() : PropertyService.holiday,
 });
 
 enum GetRequestType{

@@ -91,7 +91,7 @@ class PropertyDescription extends AddPropertyEvent {
 class PropertyPrice extends AddPropertyEvent {
   PropertyPrice({required this.price});
 
-  String? price;
+  num price;
 
   @override
   List<Object?> get props => [price];
@@ -100,7 +100,7 @@ class PropertyPrice extends AddPropertyEvent {
 class PropertyArea extends AddPropertyEvent {
   PropertyArea({required this.area});
 
-  String? area;
+  num area;
 
   @override
   List<Object?> get props => [area];

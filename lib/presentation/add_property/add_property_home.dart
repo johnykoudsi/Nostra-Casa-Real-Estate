@@ -38,15 +38,28 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     if (screensNumber == stepNumber) {
       return true;
     }
+    if (addPropertyBloc.state.selectedTag.isEmpty && stepNumber == 0) {
+      return true;
+    }
     if (addPropertyBloc.state.selectedPropertyType == null && stepNumber == 1) {
       return true;
     }
     if (addPropertyBloc.state.propertyService == null && stepNumber == 2) {
       return true;
     }
-    // if (addPropertyBloc.state.images.length < 3 && stepNumber == 5) {
-    //   return true;
-    // }
+    if (addPropertyBloc.state.selectedAmenity.isEmpty && stepNumber == 4) {
+      return true;
+    }
+    if (addPropertyBloc.state.images.length < 3 && stepNumber == 5) {
+      return true;
+    }
+    if (addPropertyBloc.state.selectedLocation == null && stepNumber == 7) {
+      return true;
+    }
+    if (addPropertyBloc.state.title.length < 5 && stepNumber == 8) {
+      return true;
+    }
+
     if (addPropertyBloc.state.selectedLocation == null && stepNumber == 7) {
       return true;
     }
@@ -129,20 +142,13 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
                     return const GoogleMapsScreen();
                   }
                   if (stepNumber == 8) {
-                    return AddPropertyTitle(
-                      titleController: titleController,
-                    );
+                    return AddPropertyTitle();
                   }
                   if (stepNumber == 9) {
-                    return AddPropertyDescription(
-                      descriptionController: descriptionController,
-                    );
+                    return AddPropertyDescription();
                   }
                   if (stepNumber == 10) {
-                    return AddPropertyPriceAndSpace(
-                      priceController: priceController,
-                      areaController: areaController,
-                    );
+                    return const AddPropertyPriceAndSpace();
                   }
                   if (stepNumber == 11) {
                     return const SubmitProperty();
@@ -169,21 +175,6 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
                 ? null
                 : () {
                     setState(() {
-                      if (stepNumber == 8) {
-                        context.read<AddPropertyBloc>().state.title =
-                            titleController.text;
-                      }
-                      if (stepNumber == 9) {
-                        context.read<AddPropertyBloc>().state.description =
-                            descriptionController.text;
-                      }
-                      if (stepNumber == 10) {
-                        context.read<AddPropertyBloc>().state.price =
-                            priceController.text;
-                        context.read<AddPropertyBloc>().state.area =
-                            areaController.text;
-                      }
-
                       stepNumber++;
                     });
                   },

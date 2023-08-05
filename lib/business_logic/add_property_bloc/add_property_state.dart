@@ -2,7 +2,7 @@ part of 'add_property_bloc.dart';
 
 class AddPropertyState extends Equatable {
   AddPropertyState(
-      {this.tags = const [],
+      {
       this.selectedPropertyType,
       this.propertyService,
       this.selectedLocation,
@@ -12,12 +12,12 @@ class AddPropertyState extends Equatable {
       this.region,
       this.selectedAmenity = const [],
       this.selectedTag = const [],
-      this.title,
-      this.description,
-      this.price,
-      this.area});
+      this.title = "",
+      this.description = "",
+      this.price = 250,
+      this.area = 300,
+      });
 
-  List<String> tags;
   List<File> images;
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
@@ -27,14 +27,13 @@ class AddPropertyState extends Equatable {
   String? region;
   List<Amenity> selectedAmenity;
   List<Tag> selectedTag;
-  String? title;
-  String? description;
-  String? price;
-  String? area;
+  String title;
+  String description;
+  num price;
+  num area;
 
   AddPropertyState copyWith({
     List<File>? images,
-          List<String>? tags,
           List<int>? propertyTypeConstAttributes,
           Map<String, int>? propertyTypeSpecialAttributes,
           PropertyType? selectedPropertyType,
@@ -45,15 +44,14 @@ class AddPropertyState extends Equatable {
           String? region,
           String? title,
           String? description,
-          String? price,
-          String? area}) =>
+    num? price,
+    num? area}) =>
       AddPropertyState(
         propertyTypeConstAttributes:
             propertyTypeConstAttributes ?? this.propertyTypeConstAttributes,
         propertyTypeSpecialAttributes:
             propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
         images: images ?? this.images,
-        tags: tags ?? this.tags,
         selectedPropertyType: selectedPropertyType ?? this.selectedPropertyType,
         propertyService: propertyService ?? this.propertyService,
         selectedLocation: selectedLocation ?? this.selectedLocation,
@@ -95,7 +93,6 @@ class AddPropertyState extends Equatable {
 
   @override
   List<Object?> get props => [
-        tags,
         selectedPropertyType,
         propertyService,
         selectedLocation,

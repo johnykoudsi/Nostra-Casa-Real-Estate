@@ -46,10 +46,10 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
       emit(state.copyWith(region: event.region));
     });
     on<PropertyTitle>((event, emit) {
-      emit(state.copyWith(region: event.title));
+      emit(state.copyWith(title: event.title));
     });
     on<PropertyDescription>((event, emit) {
-      emit(state.copyWith(region: event.description));
+      emit(state.copyWith(description: event.description));
     });
     on<PropertyPrice>((event, emit) {
       emit(state.copyWith(price: event.price));
