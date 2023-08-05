@@ -16,4 +16,6 @@ class EndPoints{
 
   static const String nearbyProperties = "/properties/near-by-places";
 
+  static const String country = "/regions/get-all";
+
 }

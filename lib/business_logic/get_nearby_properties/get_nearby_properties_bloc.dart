@@ -13,17 +13,11 @@ part 'get_nearby_properties_state.dart';
 class GetNearbyPropertiesBloc extends Bloc<GetNearbyPropertiesEvent, GetNearbyPropertiesState> {
   GetNearbyPropertiesBloc() : super(GetLoadingState(),) {
 
-    on<GetNearbyPropertiesEvent>((event, emit) async {
+    on<GetNearbyMapsEvent>((event, emit) async {
 
       emit(GetLoadingState());
 
-      var getRequest;
-
-      // get the request
-      if (event is GetNearbyMapsEvent) {
-        getRequest = await MapsServices.getNearbyPlacesService(event: event);
-      }
-
+      var  getRequest = await MapsServices.getNearbyPlacesService(event: event);;
 
       // casting and emit
       if (getRequest is List<Properties>) {
