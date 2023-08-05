@@ -7,13 +7,19 @@ import '../../../utility/app_style.dart';
 import '../widgets/add_title_text_field.dart';
 
 class AddPropertyDescription extends StatefulWidget {
-   AddPropertyDescription({Key? key, this.descriptionController}) : super(key: key);
-final TextEditingController? descriptionController;
+   AddPropertyDescription({Key? key}) : super(key: key);
   @override
   State<AddPropertyDescription> createState() => _AddPropertyDescriptionState();
 }
 
 class _AddPropertyDescriptionState extends State<AddPropertyDescription> {
+  TextEditingController descriptionController = TextEditingController();
+
+  @override
+  void initState() {
+    descriptionController.text = context.read<AddPropertyBloc>().state.description;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -36,7 +42,12 @@ class _AddPropertyDescriptionState extends State<AddPropertyDescription> {
             SizedBox(
               height: screenHeight * 0.03,
             ),
-            AddTitleTextField(controller: widget.descriptionController!),
+            AddTitleTextField(
+              controller: descriptionController,
+              onChange: (value){
+                context.read<AddPropertyBloc>().add(PropertyDescription(description: value));
+              },
+            ),
           ],
         ),
       ),

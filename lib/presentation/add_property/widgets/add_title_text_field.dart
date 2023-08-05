@@ -5,9 +5,14 @@ import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.d
 import 'package:nostra_casa/utility/app_style.dart';
 
 class AddTitleTextField extends StatelessWidget {
-  AddTitleTextField({Key? key, required this.controller})
+  AddTitleTextField({
+    Key? key,
+    required this.controller,
+    required this.onChange
+  })
       : super(key: key);
   TextEditingController controller;
+  Function(String value)? onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +41,7 @@ class AddTitleTextField extends StatelessWidget {
               ); // display a custom character counter
             },
             controller: controller,
+            onChanged: onChange,
             maxLines: null,
           ),
         );

@@ -7,73 +7,32 @@ import '../../../utility/app_style.dart';
 import '../../../utility/enums.dart';
 
 class AddPropertyPriceAndSpace extends StatefulWidget {
-   AddPropertyPriceAndSpace({Key? key,this.priceController,this.areaController}) : super(key: key);
-TextEditingController? priceController;
-TextEditingController? areaController;
+  const AddPropertyPriceAndSpace({Key? key}) : super(key: key);
 
   @override
-  State<AddPropertyPriceAndSpace> createState() => _AddPropertyPriceAndSpaceState();
+  State<AddPropertyPriceAndSpace> createState() =>
+      _AddPropertyPriceAndSpaceState();
 }
 
 class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
 
+  String priceTimePeriod = "";
 
-  double price = 225;
-  double space = 100;
-  String timePeriod = "sp per month".tr();
-  double lowEstimation = 200;
-  double highEstimation = 250;
+  @override
+  void initState() {
+    final addPropertyBloc = context.read<AddPropertyBloc>();
+
+    priceTimePeriod =
+        propertyServicePriceUI.reverse[addPropertyBloc.state.propertyService] ??
+            "";
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final addPropertyBloc = context.watch<AddPropertyBloc>();
-    if (addPropertyBloc.state.propertyService == PropertyService.rent) {
-      timePeriod = "sp per month".tr();
-    } else if (addPropertyBloc.state.propertyService == PropertyService.sale) {
-      timePeriod = "";
-    } else if (addPropertyBloc.state.propertyService ==
-        PropertyService.holiday) {
-      timePeriod = "sp per day".tr();
-    }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    widget.priceController!.text = price.toString();
-    widget.areaController!.text = space.toString();
-    void increasePrice() {
-      setState(() {
-        if (widget.priceController!.text != "") {
-          price = double.parse(widget.priceController!.text);
-          price++;
-        }
-      });
-    }
-
-    void decreasePrice() {
-      setState(() {
-        if (widget.priceController!.text != "") {
-          price = double.parse(widget.priceController!.text);
-          price--;
-        }
-      });
-    }
-
-    void increaseSpace() {
-      setState(() {
-        if (widget.areaController!.text != "") {
-          space = double.parse(widget.areaController!.text);
-          space++;
-        }
-      });
-    }
-
-    void decreaseSpace() {
-      setState(() {
-        if (widget.areaController!.text != "") {
-          space = double.parse(widget.areaController!.text);
-          space--;
-        }
-      });
-    }
 
     return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
@@ -103,27 +62,47 @@ class _AddPropertyPriceAndSpaceState extends State<AddPropertyPriceAndSpace> {
             Expanded(
               child: ListView(
                 children: [
-
-                  CustomInsertNumberField(
-                    decrease: decreasePrice,
-                    increase: increasePrice,
-                    controller: widget.priceController!,
-                    unit: timePeriod,
-                    additionalText:
-                        "Places like yours in your area usually range from\n"
-                                .tr() +
-                            lowEstimation.toString() +
-                            " to ".tr() +
-                            highEstimation.toString(),
+                  BlocBuilder<AddPropertyBloc, AddPropertyState>(
+                    builder: (context, state) {
+                      return CustomInsertNumberField(
+                        value: state.price,
+                        onChange: (value) {
+                          num? input = num.tryParse(value);
+                          if(input != null){
+                            context.read<AddPropertyBloc>()
+                                .add(PropertyPrice(price: input));
+                          }else{
+                            context.read<AddPropertyBloc>()
+                                .add(PropertyPrice(price: 0));
+                          }
+                        },
+                        unit: priceTimePeriod,
+                        label: "Price",
+                      );
+                    },
                   ),
                   SizedBox(
                     height: screenHeight * 0.05,
                   ),
-                  CustomInsertNumberField(
-                    decrease: decreaseSpace,
-                    increase: increaseSpace,
-                    controller: widget.areaController!,
-                    unit: "square meters".tr(),
+
+                  BlocBuilder<AddPropertyBloc, AddPropertyState>(
+                    builder: (context, state) {
+                      return CustomInsertNumberField(
+                        value: state.area,
+                        onChange: (value) {
+                          num? input = num.tryParse(value);
+                          if(input != null){
+                            context.read<AddPropertyBloc>()
+                                .add(PropertyArea(area: input));
+                          }else{
+                            context.read<AddPropertyBloc>()
+                                .add(PropertyArea(area: 0));
+                          }
+                        },
+                        unit: "square meters".tr(),
+                        label: "Area",
+                      );
+                    },
                   ),
                 ],
               ),
