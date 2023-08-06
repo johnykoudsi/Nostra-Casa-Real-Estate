@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/presentation/global_widgets/property_widgets/property_card.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 class Explore extends StatefulWidget {
@@ -19,14 +20,14 @@ class _ExploreState extends State<Explore> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
       body: ListView.builder(
           itemCount: properties.length,
           itemBuilder: (BuildContext context, int index) {
-            return PropertyCard(properties: properties, indexInTheVerticalList: index);
+            return GestureDetector(
+                onTap: (){Navigator.pushNamed(context, AppRoutes.viewProperty);},
+                child: PropertyCard(properties: properties, indexInTheVerticalList: index));
           }),
     );
   }

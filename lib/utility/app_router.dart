@@ -7,6 +7,7 @@ import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/my_profile_screen/my_profile_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
+import 'package:nostra_casa/presentation/view_property/view_property.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
 import '../business_logic/country_bloc/country_bloc.dart';
 import '../business_logic/edit_user_bloc/edit_user_bloc.dart';
@@ -87,6 +88,8 @@ class AppRouter {
           );
         case AppRoutes.aboutUs:
           return const AboutUs();
+        case AppRoutes.viewProperty:
+          return const ViewProperty();
         case AppRoutes.homePage:
           return const Explore();
 

@@ -16,6 +16,7 @@ class AppRoutes {
   static const String aboutUs="/about_us";
   static const String notifications="/notifications";
   static const String editProfile="/edit_profile";
+  static const String viewProperty="/view_property";
 
 
 
