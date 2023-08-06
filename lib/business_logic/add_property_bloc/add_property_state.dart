@@ -7,7 +7,7 @@ class AddPropertyState extends Equatable {
       this.propertyService,
       this.selectedLocation,
       this.images = const [],
-      this.propertyTypeConstAttributes,
+      this.propertyAttributes,
       this.propertyTypeSpecialAttributes,
       this.region,
       this.selectedAmenity = const [],
@@ -22,7 +22,7 @@ class AddPropertyState extends Equatable {
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
   LatLng? selectedLocation;
-  List<int>? propertyTypeConstAttributes;
+  PropertyAttributes? propertyAttributes;
   Map<String, int>? propertyTypeSpecialAttributes;
   String? region;
   List<Amenity> selectedAmenity;
@@ -34,7 +34,7 @@ class AddPropertyState extends Equatable {
 
   AddPropertyState copyWith({
     List<File>? images,
-          List<int>? propertyTypeConstAttributes,
+         PropertyAttributes? propertyAttributes,
           Map<String, int>? propertyTypeSpecialAttributes,
           PropertyType? selectedPropertyType,
           PropertyService? propertyService,
@@ -47,10 +47,8 @@ class AddPropertyState extends Equatable {
     num? price,
     num? area}) =>
       AddPropertyState(
-        propertyTypeConstAttributes:
-            propertyTypeConstAttributes ?? this.propertyTypeConstAttributes,
-        propertyTypeSpecialAttributes:
-            propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
+        propertyAttributes: propertyAttributes ?? this.propertyAttributes,
+        propertyTypeSpecialAttributes: propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
         images: images ?? this.images,
         selectedPropertyType: selectedPropertyType ?? this.selectedPropertyType,
         propertyService: propertyService ?? this.propertyService,
@@ -67,29 +65,29 @@ class AddPropertyState extends Equatable {
   Map<String, dynamic> toJson() => {
         "name": title,
       };
-  Map<String, dynamic> toJsonWithTypeAttributes(){
-    Map<String,dynamic> basicInfo = toJson();
-
-    if(selectedPropertyType == PropertyType.agricultural){
-      basicInfo ={
-        "livestock_inventory":propertyTypeConstAttributes![0],
-      };
-      return basicInfo;
-    }
-    if(selectedPropertyType == PropertyType.residential){
-      basicInfo ={
-        "number_of_bathrooms":propertyTypeConstAttributes![0],
-      };
-      return basicInfo;
-    }
-    if(selectedPropertyType == PropertyType.commercial){
-      basicInfo ={
-        "number_of_bathrooms":propertyTypeConstAttributes![0],
-      };
-      return basicInfo;
-    }
-    return basicInfo;
-  }
+  // Map<String, dynamic> toJsonWithTypeAttributes(){
+  //   Map<String,dynamic> basicInfo = toJson();
+  //
+  //   if(selectedPropertyType == PropertyType.agricultural){
+  //     basicInfo ={
+  //       "livestock_inventory":propertyTypeConstAttributes![0],
+  //     };
+  //     return basicInfo;
+  //   }
+  //   if(selectedPropertyType == PropertyType.residential){
+  //     basicInfo ={
+  //       "number_of_bathrooms":propertyTypeConstAttributes![0],
+  //     };
+  //     return basicInfo;
+  //   }
+  //   if(selectedPropertyType == PropertyType.commercial){
+  //     basicInfo ={
+  //       "number_of_bathrooms":propertyTypeConstAttributes![0],
+  //     };
+  //     return basicInfo;
+  //   }
+  //   return basicInfo;
+  // }
 
   @override
   List<Object?> get props => [
@@ -97,8 +95,7 @@ class AddPropertyState extends Equatable {
         propertyService,
         selectedLocation,
         images,
-        images.length,
-        propertyTypeConstAttributes,
+        propertyAttributes,
         propertyTypeSpecialAttributes,
         region,
         selectedAmenity,

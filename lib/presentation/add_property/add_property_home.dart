@@ -27,7 +27,7 @@ class AddPropertyHome extends StatefulWidget {
 }
 
 class AddPropertyHomeState extends State<AddPropertyHome> {
-  int screensNumber = 11;
+  int screensNumber = 10;
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
@@ -35,9 +35,7 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
 
   bool isDisabledNext() {
     final addPropertyBloc = context.watch<AddPropertyBloc>();
-    if (screensNumber == stepNumber) {
-      return true;
-    }
+
     if (addPropertyBloc.state.selectedTag.isEmpty && stepNumber == 0) {
       return true;
     }
@@ -60,17 +58,7 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
       return true;
     }
 
-    if (addPropertyBloc.state.selectedLocation == null && stepNumber == 7) {
-      return true;
-    }
-
     return false;
-  }
-
-  void onSubmit() {
-    final addPropertyBloc = context.read<AddPropertyBloc>();
-
-    print(addPropertyBloc.state);
   }
 
   bool isDisabledBack() {
@@ -80,6 +68,11 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     return false;
   }
 
+  void onSubmit() {
+    final addPropertyBloc = context.read<AddPropertyBloc>();
+
+    print(addPropertyBloc.state);
+  }
   @override
   void dispose() {
     super.dispose();
@@ -149,9 +142,6 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
                   }
                   if (stepNumber == 10) {
                     return const AddPropertyPriceAndSpace();
-                  }
-                  if (stepNumber == 11) {
-                    return const SubmitProperty();
                   }
                   return const Scaffold(
                     body: Center(

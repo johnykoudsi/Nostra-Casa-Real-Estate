@@ -52,12 +52,12 @@ class SelectedImagesEvent extends AddPropertyEvent {
 }
 
 class SelectedTypeConstAttributesEvent extends AddPropertyEvent {
-  SelectedTypeConstAttributesEvent({required this.propertyTypeConstAttributes});
+  SelectedTypeConstAttributesEvent({required this.propertyAttributes});
 
-  List<int>? propertyTypeConstAttributes;
+  PropertyAttributes propertyAttributes;
 
   @override
-  List<Object?> get props => [propertyTypeConstAttributes];
+  List<Object?> get props => [propertyAttributes];
 }
 
 class SelectedTypeSpecialAttributesEvent extends AddPropertyEvent {

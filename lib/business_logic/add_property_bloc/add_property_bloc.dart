@@ -4,8 +4,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../data/models/GetRequestModel.dart';
+import 'package:nostra_casa/data/models/special_attributes.dart';
 import '../../data/models/amenities_model.dart';
 import '../../data/models/tags_model.dart';
 import '../../utility/enums.dart';
@@ -17,12 +16,25 @@ part 'add_property_state.dart';
 class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
   AddPropertyBloc() : super(AddPropertyState()) {
     on<SelectPropertyTypeEvent>((event, emit) {
+      PropertyAttributes propertyAttributes ;
+
+      if (event.propertyType == PropertyType.residential) {
+        propertyAttributes = ResidentialPropertyAttributes();
+      }
+      if (event.propertyType ==
+          PropertyType.agricultural) {
+        propertyAttributes = AgriculturalPropertyAttributes();
+      }
+      else{
+        propertyAttributes = CommercialPropertyAttributes();
+      }
 
       emit(state.copyWith(
           selectedPropertyType: event.propertyType,
-          propertyTypeConstAttributes: null,
+          propertyAttributes: propertyAttributes,
           propertyTypeSpecialAttributes: null,
       ));
+
     });
 
     on<SelectServiceTypeEvent>((event, emit) {
@@ -36,7 +48,8 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
     });
     on<SelectedTypeConstAttributesEvent>((event, emit) {
       emit(state.copyWith(
-          propertyTypeConstAttributes: event.propertyTypeConstAttributes));
+          propertyAttributes: event.propertyAttributes
+      ));
     });
     on<SelectedTypeSpecialAttributesEvent>((event, emit) {
       emit(state.copyWith(
