@@ -28,7 +28,6 @@
   "Login to Continue": "تسجيل الدخول للمتابعة",
   "Please enter phone number first !": "الرجاء ادخال رقم الهاتف أولا !",
   "Verification code will be send to this number :": "سيتم ارسال رمز التأكيد الى هذا الرقم :",
-  "Cancel": "الغاء",
   "Send": "ارسال",
   "Forgot Password ": "نسيت كلمة المرور ",
   "Send a code": "ارسال رمز",
@@ -102,5 +101,12 @@
   "Attribute value should be between 0 and 1000": "القيمة يجب أن تكون بين 0 و 1000",
   "Add": "إضافة",
   "Your special attributes": "الصفة المميزة الخاصة بعقارك",
-  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way.": "أهلاً بك في منصة Nostra Casa.\nهنا يمكنك أن تجد أنواع مختلفة من العقارات لشرائها,استئجارها,أو قضاء الإجازة فيها!\nيمكنك حتى أن تعرض عقارك الخاص أو إنشاء وكالة لعرض العقارات المختلفة التي تعتقد أنها ستنال الإعجاب.\nNostra Casa سيساعدك في وصف عقارك بأفضل طريقة."
+  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way.": "أهلاً بك في منصة Nostra Casa.\nهنا يمكنك أن تجد أنواع مختلفة من العقارات لشرائها,استئجارها,أو قضاء الإجازة فيها!\nيمكنك حتى أن تعرض عقارك الخاص أو إنشاء وكالة لعرض العقارات المختلفة التي تعتقد أنها ستنال الإعجاب.\nNostra Casa سيساعدك في وصف عقارك بأفضل طريقة.",
+  "Full Name": "الاسم الكامل",
+  "Facebook":"فيسبوك",
+  "Date of birth": "تاريخ الولادة",
+  "Edit": "تعديل",
+  "This property provides": "هذه الملكية تقدم",
+  "And in top of that": "وعلاوة على ذلك",
+  "Feel free to rate this property": "اشعر بالراحة لتقييم الملكية"
 }

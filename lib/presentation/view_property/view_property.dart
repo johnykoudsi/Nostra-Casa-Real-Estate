@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/property_rating.dart';
@@ -80,7 +81,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                       ),
                       const Spacing(),
                       Text(
-                        "This property provides",
+                        "This property provides".tr(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
@@ -89,7 +90,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                       ViewPropertyAttributes(),
                       const Spacing(),
                       Text(
-                        "And in top of that",
+                        "And in top of that".tr(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
@@ -98,7 +99,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                       const ViewPropertyAmenities(),
                       const Spacing(),
                       Text(
-                        "Feel free to rate this property",
+                        "Feel free to rate this property".tr(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
