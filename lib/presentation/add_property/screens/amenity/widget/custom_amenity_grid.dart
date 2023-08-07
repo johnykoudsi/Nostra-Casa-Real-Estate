@@ -37,8 +37,6 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
 
   @override
   Widget build(BuildContext context) {
-    double getWidth = MediaQuery.of(context).size.width;
-    double getHeight = MediaQuery.of(context).size.height;
     return BlocBuilder<AmenityBloc, AmenityState>(
       builder: (context, state) {
         if (state is AmenityLoadedState) {

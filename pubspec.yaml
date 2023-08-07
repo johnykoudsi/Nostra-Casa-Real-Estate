@@ -39,6 +39,7 @@ dependencies:
   card_swiper: ^3.0.1
   dropdown_search: 5.0.5
   intl: ^0.17.0
+  flutter_rating_bar: ^4.0.1
 
 
 
