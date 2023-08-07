@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
-import 'package:nostra_casa/presentation/my_profile_screen/widgets/MyProfileItem.dart';
+import 'package:nostra_casa/presentation/more/widgets/MyProfileItem.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:nostra_casa/utility/constant_logic_validations.dart';
@@ -10,14 +10,14 @@ import 'package:nostra_casa/utility/constant_logic_validations.dart';
 import '../../business_logic/user/user_bloc.dart';
 import '../../utility/app_routes.dart';
 
-class MyProfileScreen extends StatefulWidget {
-  const MyProfileScreen({Key? key}) : super(key: key);
+class MoreScreen extends StatefulWidget {
+  const MoreScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyProfileScreen> createState() => _MyProfileScreenState();
+  State<MoreScreen> createState() => _MoreScreenState();
 }
 
-class _MyProfileScreenState extends State<MyProfileScreen> {
+class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -69,13 +69,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                             .headline3
                             ?.copyWith(color: AppStyle.kBackGroundColor),
                       ),
-                      // Text(
-                      //   "",
-                      //   style: Theme.of(context)
-                      //       .textTheme
-                      //       .headline5
-                      //       ?.copyWith(color: AppStyle.kBackGroundColor),
-                      // ),
                     ],
                   );
                 },
@@ -91,29 +84,38 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                 ),
                 child: ListView(
                   children: [
-                    MyProfileItem(
-                      svgPath: AppAssets.house,
-                      name: "My Estates".tr(),
-                      onPressed: () {
-                        //todo navigate to my estates
-                      },
-                      color: AppStyle.kBackGroundColor,
-                      borderRad: 40,
+                    Visibility(
+                      visible: userIsLoggedIn(context),
+                      child: MyProfileItem(
+                        svgPath: AppAssets.house,
+                        name: "My Estates".tr(),
+                        onPressed: () {
+                          //todo navigate to my estates
+                        },
+                        color: AppStyle.kBackGroundColor,
+                        borderRad: 40,
+                      ),
                     ),
-                    MyProfileItem(
-                        svgPath: AppAssets.favorites,
-                        name: "My Favorites".tr(),
-                        onPressed: () {
-                          //todo navigate to my favorite
-                        },
-                        color: Colors.white),
-                    MyProfileItem(
-                        svgPath: AppAssets.bell,
-                        name: "Notifications".tr(),
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.notifications);
-                        },
-                        color: AppStyle.kBackGroundColor),
+                    Visibility(
+                      visible: userIsLoggedIn(context),
+                      child: MyProfileItem(
+                          svgPath: AppAssets.favorites,
+                          name: "My Favorites".tr(),
+                          onPressed: () {
+                            //todo navigate to my favorite
+                          },
+                          color: Colors.white),
+                    ),
+                    Visibility(
+                      visible: userIsLoggedIn(context),
+                      child: MyProfileItem(
+                          svgPath: AppAssets.bell,
+                          name: "Notifications".tr(),
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.notifications);
+                          },
+                          color: AppStyle.kBackGroundColor),
+                    ),
                     MyProfileItem(
                         svgPath: AppAssets.about,
                         name: "About Us".tr(),
@@ -128,13 +130,16 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                           DialogsWidgetsYesNo.showLanguageBottomSheet(context);
                         },
                         color: AppStyle.kBackGroundColor),
-                    MyProfileItem(
-                        svgPath: AppAssets.edit,
-                        name: "Edit Profile".tr(),
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.editProfile);
-                        },
-                        color: Colors.white),
+                    Visibility(
+                      visible: userIsLoggedIn(context),
+                      child: MyProfileItem(
+                          svgPath: AppAssets.edit,
+                          name: "Edit Profile".tr(),
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.editProfile);
+                          },
+                          color: Colors.white),
+                    ),
                     if (!userIsLoggedIn(context))
                       MyProfileItem(
                           svgPath: AppAssets.share,
@@ -164,14 +169,17 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                 context: context);
                           },
                           color: AppStyle.kBackGroundColor),
-                    MyProfileItem(
-                      svgPath: AppAssets.delete,
-                      name: "Delete Account".tr(),
-                      onPressed: () {
-                        //todo delete account
-                      },
-                      color: Colors.white,
-                      isDelete: true,
+                    Visibility(
+                      visible: userIsLoggedIn(context),
+                      child: MyProfileItem(
+                        svgPath: AppAssets.delete,
+                        name: "Delete Account".tr(),
+                        onPressed: () {
+                          //todo delete account
+                        },
+                        color: Colors.white,
+                        isDelete: true,
+                      ),
                     ),
                   ],
                 ),
