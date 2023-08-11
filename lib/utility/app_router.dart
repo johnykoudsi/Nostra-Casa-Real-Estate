@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
+import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
+import 'package:nostra_casa/presentation/promote_to_agency/add_agency_location.dart';
+import 'package:nostra_casa/presentation/promote_to_agency/promote_to_agency.dart';
+import 'package:nostra_casa/presentation/promote_to_agency/welcome_to_promote.dart';
 import 'package:nostra_casa/presentation/review_property/review_property_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
@@ -103,6 +107,19 @@ class AppRouter {
 
         case AppRoutes.homePage:
           return const Explore();
+        case AppRoutes.welcomeToPromote:
+          return const WelcomeToPromote();
+        case AppRoutes.promoteToAgency:
+          return const PromoteToAgency();
+        case AppRoutes.addAgencyLocation:
+          return    MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) => PromoteToAgencyBloc(),
+              ),
+            ],
+            child: const AddAgencyLocation(),
+          );
 
         default:
           return const Scaffold(
