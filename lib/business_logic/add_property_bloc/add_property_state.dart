@@ -68,10 +68,11 @@ class AddPropertyState extends Equatable {
       "name": title,
       "area": area.toString(),
       "price": price.toString(),
-      "description": description.toString(),
+      "description": description,
       "latitude": "${selectedLocation?.latitude}",
       "longitude": "${selectedLocation?.longitude}",
-      "specialAttributes": json.encode(propertyTypeSpecialAttributes),
+      "specialAttributes": json.encode(propertyTypeSpecialAttributes) == "null"
+          ? "{}" : json.encode(propertyTypeSpecialAttributes).toString(),
     }..addAll(propertyAttributes!.toJson());
     if(selectedAmenity.isNotEmpty){
       for (int i = 0; i < selectedAmenity.length; i++) {

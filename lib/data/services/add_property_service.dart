@@ -4,11 +4,10 @@ import '../../utility/endpoints.dart';
 import '../../utility/network_helper.dart';
 
 class AddPropertyService {
-
-  static Future addAgriculturalService(SendPropertyApiEvent event) async {
-
+  static Future addPropertyService(
+      {required String endPoints, required SendPropertyApiEvent event}) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
-      url: EndPoints.addAgricultural,
+      url: endPoints,
       useUserToken: true,
       body: event.addPropertyState.toMapBody(),
       files: event.addPropertyState.images,
@@ -16,5 +15,4 @@ class AddPropertyService {
 
     return helperResponse;
   }
-
 }

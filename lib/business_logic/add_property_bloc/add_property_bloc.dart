@@ -22,7 +22,7 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
       if (event.propertyType == PropertyType.residential) {
         propertyAttributes = ResidentialPropertyAttributes();
       }
-      if (event.propertyType ==
+      else if (event.propertyType ==
           PropertyType.agricultural) {
         propertyAttributes = AgriculturalPropertyAttributes();
       }
