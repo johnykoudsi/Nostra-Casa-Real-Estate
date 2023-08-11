@@ -2,10 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
 import 'package:nostra_casa/presentation/promote_to_agency/widgets/files_list.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 
@@ -24,19 +24,16 @@ class PromoteToAgency extends StatefulWidget {
 class _PromoteToAgencyState extends State<PromoteToAgency> {
   List<File>? files;
 
-  final ImagePicker _picker = ImagePicker();
-
-  Future<void> _chooseFiles() async {
-    final pickedFiles = await _picker.pickMultiImage();
-    setState(() {
-      if (files != null) {
-        files?.addAll(
-            pickedFiles.map((pickedFile) => File(pickedFile.path)).toList());
-      } else {
-        files = pickedFiles.map((pickedFile) => File(pickedFile.path)).toList();
-      }
-    });
+  void _chooseFiles() async{
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    if (result != null) {
+       files = result.paths.map((path) => File(path!)).toList();
+    } else {
+      // User canceled the picker
+    }
   }
+
+
   void _removeFile(File image) {
     setState(() {
       files!.remove(image);
@@ -103,7 +100,7 @@ super.dispose();
               CustomElevatedButton(
                   backgroundColor: Colors.white,
                   onPress: _chooseFiles,
-                  title: "Add your agency files",
+                  title: "Add your agency files".tr(),
                   iconData: Icons.add),
               SizedBox(
                 height: screenHeight * 0.03,
@@ -118,7 +115,7 @@ super.dispose();
                   width: screenWidth,
                   height: screenHeight * 0.3,
                   child: FilesList(
-                    files: files,
+                    files: files ,
                     onImageRemoved: _removeFile,
                   ),
                 ),
@@ -128,11 +125,17 @@ super.dispose();
                   onPress: () {
                     Navigator.pushNamed(context, AppRoutes.addAgencyLocation);
                   },
-                  title: "Add your agency location",
+                  title: "Add your agency location".tr(),
                   iconData: Icons.map_outlined),
+
+
             ],
           ),
         ),
+      ),
+      bottomSheet:  Padding(
+        padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.038,vertical: screenHeight*0.038),
+        child: ElevatedButtonWidget(title: "Request Promotion".tr(),onPressed: (){},),
       ),
     );
   }

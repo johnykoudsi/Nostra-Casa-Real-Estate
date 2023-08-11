@@ -155,7 +155,7 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
           SizedBox(height: screenHeight*0.05,),
           Padding(
             padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.038),
-            child: ElevatedButtonWidget(title: "add location",onPressed: (){},),
+            child: ElevatedButtonWidget(title: "add location",onPressed: (){Navigator.pop(context);},),
           ),
           SizedBox(height: screenHeight*0.05,),
         ],
