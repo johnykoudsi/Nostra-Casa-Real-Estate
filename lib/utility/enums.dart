@@ -43,6 +43,11 @@ final propertyTypeBackEnd = EnumValues({
   "AGRICULTURAL": PropertyType.agricultural,
   "COMMERCIAL": PropertyType.commercial,
 });
+final propertyTypeBackEnd2 = EnumValues({
+  "residential" : PropertyType.residential,
+  "agricultural": PropertyType.agricultural,
+  "commercial": PropertyType.commercial,
+});
 final propertyService = EnumValues({
   "Sale" : PropertyService.sale,
   "Rent": PropertyService.rent,

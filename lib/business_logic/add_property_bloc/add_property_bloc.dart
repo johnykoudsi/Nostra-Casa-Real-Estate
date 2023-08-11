@@ -18,7 +18,7 @@ part 'add_property_state.dart';
 class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
   AddPropertyBloc() : super(AddPropertyState()) {
     on<SelectPropertyTypeEvent>((event, emit) {
-      PropertyAttributes propertyAttributes ;
+      AbstractPropertyAttributes propertyAttributes ;
 
       if (event.propertyType == PropertyType.residential) {
         propertyAttributes = ResidentialPropertyAttributes();

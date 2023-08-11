@@ -50,7 +50,6 @@ class NetworkHelpers {
       http.StreamedResponse response;
 
       request = http.Request('POST', Uri.parse(EndPoints.kMainUrl + url));
-
       request.headers.addAll(headers);
       request.body = body;
 

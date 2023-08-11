@@ -22,7 +22,7 @@ class AddPropertyState extends Equatable {
   PropertyType? selectedPropertyType;
   PropertyService? propertyService;
   LatLng? selectedLocation;
-  PropertyAttributes? propertyAttributes;
+  AbstractPropertyAttributes? propertyAttributes;
   Map<String, int>? propertyTypeSpecialAttributes;
   List<Amenity> selectedAmenity;
   List<Tag> selectedTag;
@@ -35,7 +35,7 @@ class AddPropertyState extends Equatable {
 
   AddPropertyState copyWith({
     List<File>? images,
-    PropertyAttributes? propertyAttributes,
+    AbstractPropertyAttributes? propertyAttributes,
     Map<String, int>? propertyTypeSpecialAttributes,
     PropertyType? selectedPropertyType,
     PropertyService? propertyService,

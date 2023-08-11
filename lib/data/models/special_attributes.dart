@@ -1,18 +1,26 @@
-abstract class PropertyAttributes {
+abstract class AbstractPropertyAttributes {
   Map<String, String> toJson() => {};
 }
 
-class CommercialPropertyAttributes extends PropertyAttributes {
+class CommercialPropertyAttributes extends AbstractPropertyAttributes {
   CommercialPropertyAttributes({
+    this.id = -1,
     this.floor = 0,
     this.numberOfBathrooms = 0,
     this.numberOfBalconies = 0,
   });
-
+  int id;
   int floor;
   int numberOfBalconies;
   int numberOfBathrooms;
 
+  factory CommercialPropertyAttributes.fromJson(Map<String, dynamic> json) =>
+      CommercialPropertyAttributes(
+        id: json["id"],
+        numberOfBathrooms: json["num_of_bathrooms"],
+        numberOfBalconies: json["num_of_balconies"],
+        floor: json["floor"],
+      );
   @override
   Map<String, String> toJson() => {
         "num_of_bathrooms": numberOfBathrooms.toString(),
@@ -20,28 +28,41 @@ class CommercialPropertyAttributes extends PropertyAttributes {
         "floor": floor.toString(),
       };
   CommercialPropertyAttributes copyWith({
+    int? id,
     int? floor,
     int? numberOfBalconies,
     int? numberOfBathrooms,
   }) =>
       CommercialPropertyAttributes(
+        id: id ?? this.id,
         floor: floor ?? this.floor,
         numberOfBalconies: numberOfBalconies ?? this.numberOfBalconies,
         numberOfBathrooms: numberOfBathrooms ?? this.numberOfBathrooms,
       );
 }
 
-class ResidentialPropertyAttributes extends PropertyAttributes {
+class ResidentialPropertyAttributes extends AbstractPropertyAttributes {
   ResidentialPropertyAttributes({
+    this.id = -1,
     this.numberOfBedrooms = 0,
     this.numberOfBathrooms = 0,
     this.numberOfBalconies = 0,
     this.numberOfLivingRooms = 0,
   });
+  int id;
   int numberOfBalconies;
   int numberOfBathrooms;
   int numberOfBedrooms;
   int numberOfLivingRooms;
+
+  factory ResidentialPropertyAttributes.fromJson(Map<String, dynamic> json) =>
+      ResidentialPropertyAttributes(
+        id: json["id"],
+        numberOfBedrooms: json["num_of_bedrooms"],
+        numberOfBathrooms: json["num_of_bathrooms"],
+        numberOfBalconies: json["num_of_balconies"],
+        numberOfLivingRooms: json["num_of_living_rooms"],
+      );
 
   @override
   Map<String, String> toJson() => {
@@ -56,8 +77,10 @@ class ResidentialPropertyAttributes extends PropertyAttributes {
     int? numberOfLivingRooms,
     int? numberOfBalconies,
     int? numberOfBathrooms,
+    int? id,
   }) =>
       ResidentialPropertyAttributes(
+        id: id ?? this.id,
         numberOfBedrooms: numberOfBedrooms ?? this.numberOfBedrooms,
         numberOfLivingRooms: numberOfLivingRooms ?? this.numberOfLivingRooms,
         numberOfBalconies: numberOfBalconies ?? this.numberOfBalconies,
@@ -65,4 +88,12 @@ class ResidentialPropertyAttributes extends PropertyAttributes {
       );
 }
 
-class AgriculturalPropertyAttributes extends PropertyAttributes {}
+class AgriculturalPropertyAttributes extends AbstractPropertyAttributes {
+  AgriculturalPropertyAttributes();
+
+  factory AgriculturalPropertyAttributes.fromJson(Map<String, dynamic> json) =>
+      AgriculturalPropertyAttributes();
+
+  @override
+  Map<String, String> toJson() => {};
+}
