@@ -63,17 +63,28 @@ class AddPropertyState extends Equatable {
         area: area ?? this.area,
       );
 
-  Map<String, String> toMapBody() => {
-
-        "name": title,
-        "area": area.toString(),
-        "price": price.toString(),
-        "description": description,
-        "latitude": "${selectedLocation?.latitude}",
-        "longitude": "${selectedLocation?.longitude}",
-        "specialAttributes": json.encode(propertyTypeSpecialAttributes),
-
-      }..addAll(propertyAttributes!.toJson());
+  Map<String, String> toMapBody() {
+    Map<String, String> map = {
+      "name": title,
+      "area": area.toString(),
+      "price": price.toString(),
+      "description": description.toString(),
+      "latitude": "${selectedLocation?.latitude}",
+      "longitude": "${selectedLocation?.longitude}",
+      "specialAttributes": json.encode(propertyTypeSpecialAttributes),
+    }..addAll(propertyAttributes!.toJson());
+    if(selectedAmenity.isNotEmpty){
+      for (int i = 0; i < selectedAmenity.length; i++) {
+        map["amenities[$i]"] = selectedAmenity[i].id.toString();
+      }
+    }
+    if(selectedTag.isNotEmpty){
+      for (int i = 0; i < selectedTag.length; i++) {
+        map["tags[$i]"] = selectedTag[i].id.toString();
+      }
+    }
+    return map;
+  }
 
   @override
   List<Object?> get props => [
