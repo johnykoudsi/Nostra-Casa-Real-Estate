@@ -16,10 +16,12 @@ class EndPoints{
 
   static const String nearbyProperties = "/properties/near-by-places";
 
-  static const String country = "/cities/get-all";
+  static const String country = "/regions/get-all";
 
   static const String addAgricultural = "/agriculturals";
   static const String addCommercial = "/commercials";
   static const String addResidential = "/residentials";
+
+
 
 }

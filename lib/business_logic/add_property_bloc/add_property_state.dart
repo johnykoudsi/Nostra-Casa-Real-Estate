@@ -8,13 +8,14 @@ class AddPropertyState extends Equatable {
     this.images = const [],
     this.propertyAttributes,
     this.propertyTypeSpecialAttributes,
-    this.region,
     this.selectedAmenity = const [],
     this.selectedTag = const [],
     this.title = "",
     this.description = "",
     this.price = 250,
     this.area = 300,
+    this.countryModel,
+    this.city,
   });
 
   List<File> images;
@@ -23,13 +24,14 @@ class AddPropertyState extends Equatable {
   LatLng? selectedLocation;
   PropertyAttributes? propertyAttributes;
   Map<String, int>? propertyTypeSpecialAttributes;
-  String? region;
   List<Amenity> selectedAmenity;
   List<Tag> selectedTag;
   String title;
   String description;
   num price;
   num area;
+  City? city;
+  CountryModel? countryModel;
 
   AddPropertyState copyWith({
     List<File>? images,
@@ -45,6 +47,8 @@ class AddPropertyState extends Equatable {
     String? description,
     num? price,
     num? area,
+    City? city,
+    CountryModel? countryModel,
   }) =>
       AddPropertyState(
         propertyAttributes: propertyAttributes ?? this.propertyAttributes,
@@ -56,7 +60,8 @@ class AddPropertyState extends Equatable {
         selectedLocation: selectedLocation ?? this.selectedLocation,
         selectedAmenity: selectedAmenity ?? this.selectedAmenity,
         selectedTag: selectedTag ?? this.selectedTag,
-        region: region ?? this.region,
+        city: city ?? this.city,
+        countryModel: countryModel ?? this.countryModel,
         title: title ?? this.title,
         description: description ?? this.description,
         price: price ?? this.price,
@@ -96,7 +101,8 @@ class AddPropertyState extends Equatable {
         images,
         propertyAttributes,
         propertyTypeSpecialAttributes,
-        region,
+        city,
+        countryModel,
         selectedAmenity,
         selectedTag,
         title,

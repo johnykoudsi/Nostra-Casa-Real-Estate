@@ -17,7 +17,7 @@ class CountryServices{
       url: EndPoints.country,
       useUserToken: true,
     );
-
+    print(helperResponse);
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
         WelcomeCountryAndCity data =

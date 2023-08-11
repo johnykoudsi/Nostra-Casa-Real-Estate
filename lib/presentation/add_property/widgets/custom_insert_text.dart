@@ -40,7 +40,7 @@ class CustomInsertText extends StatelessWidget {
                   ),
                   child: TextField(
                     onChanged: (value) {
-                      addPropertyBloc.state.region = controller.text;
+                      //addPropertyBloc.state.region = controller.text;
                     },
                     decoration: InputDecoration(
                       hintText: hintText,

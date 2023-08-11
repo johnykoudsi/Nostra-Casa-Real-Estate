@@ -7,6 +7,7 @@ import 'package:equatable/equatable.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/data/models/special_attributes.dart';
 import '../../data/models/amenities_model.dart';
+import '../../data/models/country_and_city_model.dart';
 import '../../data/models/tags_model.dart';
 import '../../utility/enums.dart';
 
@@ -56,9 +57,11 @@ class AddPropertyBloc extends Bloc<AddPropertyEvent, AddPropertyState> {
       emit(state.copyWith(
           propertyTypeSpecialAttributes: event.propertyTypeSpecialAttributes));
     });
-    on<SelectRegionEvent>((event, emit) {
-      emit(state.copyWith(region: event.region));
+
+    on<SelectCountryRegionEvent>((event, emit) {
+      emit(state.copyWith(countryModel: event.countryModel,city: event.city));
     });
+
     on<PropertyTitle>((event, emit) {
       emit(state.copyWith(title: event.title));
     });

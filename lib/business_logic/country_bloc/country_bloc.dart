@@ -17,11 +17,9 @@ class CountryBloc extends Bloc<CountryEvent, CountryState> {
       var getRequest = await CountryServices.getNearbyPlacesService(event: event);
 
       // casting and emit
-      if (getRequest is CountryModel) {
+      if (getRequest is List<CountryModel>) {
         emit(CountryDoneState(countryModel: getRequest));
-      }
-
-      if (getRequest is HelperResponse) {
+      }else{
         emit(CountryErrorState(
             helperResponse: getRequest
         ));

@@ -4,14 +4,14 @@ WelcomeCountryAndCity welcomeCountryAndCityFromJson(String str) => WelcomeCountr
 
 
 class WelcomeCountryAndCity {
-  CountryModel country;
+  List<CountryModel> country;
 
   WelcomeCountryAndCity({
     required this.country,
   });
 
   factory WelcomeCountryAndCity.fromJson(Map<String, dynamic> json) => WelcomeCountryAndCity(
-    country: CountryModel.fromJson(json["data"]["SY"]),
+    country: List<CountryModel>.from(json["data"].map((x) => CountryModel.fromJson(x))),
   );
 
 
@@ -20,15 +20,18 @@ class WelcomeCountryAndCity {
 
 class CountryModel {
   String name;
+  int id;
   List<City> cities;
 
   CountryModel({
     this.name = "",
+    this.id = -1,
     this.cities = const[],
   });
 
   factory CountryModel.fromJson(Map<String, dynamic> json) => CountryModel(
     name: json["name"]??"",
+    id: json["id"]??-1,
     cities: List<City>.from(json["cities"]?.map((x) => City.fromJson(x)) ?? []),
   );
 

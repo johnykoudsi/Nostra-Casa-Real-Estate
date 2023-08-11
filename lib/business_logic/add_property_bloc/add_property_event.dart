@@ -24,13 +24,13 @@ class SelectServiceTypeEvent extends AddPropertyEvent {
   List<Object?> get props => [propertyService];
 }
 
-class SelectRegionEvent extends AddPropertyEvent {
-  SelectRegionEvent({required this.region});
+class SelectCountryRegionEvent extends AddPropertyEvent {
+  SelectCountryRegionEvent({required this.countryModel,required this.city});
 
-  String region;
-
+  City? city;
+  CountryModel? countryModel;
   @override
-  List<Object?> get props => [region];
+  List<Object?> get props => [city,countryModel];
 }
 
 class SelectLocationEvent extends AddPropertyEvent {
