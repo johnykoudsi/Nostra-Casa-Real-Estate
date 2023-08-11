@@ -87,11 +87,11 @@ class NetworkHelpers {
     }
   }
 
-  static Future<HelperResponse> postDataWithImage({
+  static Future<HelperResponse> postDataWithFile({
     required String url,
     required Map<String, String> body,
     bool useUserToken = false,
-    List<File> filesPath = const[],
+    List<File> files = const[],
   }) async {
     try {
       Map<String, String> headers;
@@ -115,8 +115,8 @@ class NetworkHelpers {
 
       request.fields.addAll(body);
 
-      if (filesPath.isNotEmpty) {
-        for (var element in filesPath) {
+      if (files.isNotEmpty) {
+        for (var element in files) {
           request.files
               .add(await http.MultipartFile.fromPath('images', element.path));
         }

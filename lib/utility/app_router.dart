@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
-import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
+import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
-import 'package:nostra_casa/presentation/promote_to_agency/add_agency_location.dart';
-import 'package:nostra_casa/presentation/promote_to_agency/promote_to_agency.dart';
-import 'package:nostra_casa/presentation/promote_to_agency/welcome_to_promote.dart';
+import 'package:nostra_casa/presentation/review_property/review_property_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/view_property/view_property.dart';
@@ -32,7 +30,6 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
-
         case AppRoutes.splashScreen:
           return const SplashScreen();
 
@@ -41,7 +38,6 @@ class AppRouter {
 
         case AppRoutes.policy:
           return Policy(title: 'Usage and Privacy Policy');
-
         case AppRoutes.signup:
           return const SignUpScreen(title: 'Welcome');
 
@@ -63,7 +59,6 @@ class AppRouter {
 
         case AppRoutes.notifications:
           return const Notifications();
-
         case AppRoutes.editProfile:
           return MultiBlocProvider(
             providers: [
@@ -96,24 +91,15 @@ class AppRouter {
         case AppRoutes.aboutUs:
           return const AboutUs();
 
-        case AppRoutes.promoteToAgency:
-          return const PromoteToAgency();
-
-        case AppRoutes.welcomeToPromote:
-          return const WelcomeToPromote();
-
-        case AppRoutes.addAgencyLocation:
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => PromoteToAgencyBloc(),
-              ),
-            ],
-            child: const AddAgencyLocation(),
-          );
-
         case AppRoutes.viewProperty:
           return const ViewProperty();
+
+        case AppRoutes.reviewProperty:
+          AddPropertyState args = settings.arguments as AddPropertyState;
+          return BlocProvider(
+            create: (context) => SendPropertyBloc(),
+            child: ReviewProperty(addPropertyState: args),
+          );
 
         case AppRoutes.homePage:
           return const Explore();

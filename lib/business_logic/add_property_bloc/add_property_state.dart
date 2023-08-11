@@ -1,22 +1,21 @@
 part of 'add_property_bloc.dart';
 
 class AddPropertyState extends Equatable {
-  AddPropertyState(
-      {
-      this.selectedPropertyType,
-      this.propertyService,
-      this.selectedLocation,
-      this.images = const [],
-      this.propertyAttributes,
-      this.propertyTypeSpecialAttributes,
-      this.region,
-      this.selectedAmenity = const [],
-      this.selectedTag = const [],
-      this.title = "",
-      this.description = "",
-      this.price = 250,
-      this.area = 300,
-      });
+  AddPropertyState({
+    this.selectedPropertyType,
+    this.propertyService,
+    this.selectedLocation,
+    this.images = const [],
+    this.propertyAttributes,
+    this.propertyTypeSpecialAttributes,
+    this.region,
+    this.selectedAmenity = const [],
+    this.selectedTag = const [],
+    this.title = "",
+    this.description = "",
+    this.price = 250,
+    this.area = 300,
+  });
 
   List<File> images;
   PropertyType? selectedPropertyType;
@@ -34,21 +33,23 @@ class AddPropertyState extends Equatable {
 
   AddPropertyState copyWith({
     List<File>? images,
-         PropertyAttributes? propertyAttributes,
-          Map<String, int>? propertyTypeSpecialAttributes,
-          PropertyType? selectedPropertyType,
-          PropertyService? propertyService,
-          LatLng? selectedLocation,
-          List<Amenity>? selectedAmenity,
-          List<Tag>? selectedTag,
-          String? region,
-          String? title,
-          String? description,
+    PropertyAttributes? propertyAttributes,
+    Map<String, int>? propertyTypeSpecialAttributes,
+    PropertyType? selectedPropertyType,
+    PropertyService? propertyService,
+    LatLng? selectedLocation,
+    List<Amenity>? selectedAmenity,
+    List<Tag>? selectedTag,
+    String? region,
+    String? title,
+    String? description,
     num? price,
-    num? area}) =>
+    num? area,
+  }) =>
       AddPropertyState(
         propertyAttributes: propertyAttributes ?? this.propertyAttributes,
-        propertyTypeSpecialAttributes: propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
+        propertyTypeSpecialAttributes:
+            propertyTypeSpecialAttributes ?? this.propertyTypeSpecialAttributes,
         images: images ?? this.images,
         selectedPropertyType: selectedPropertyType ?? this.selectedPropertyType,
         propertyService: propertyService ?? this.propertyService,
@@ -62,32 +63,17 @@ class AddPropertyState extends Equatable {
         area: area ?? this.area,
       );
 
-  Map<String, dynamic> toJson() => {
+  Map<String, String> toMapBody() => {
+
         "name": title,
-      };
-  // Map<String, dynamic> toJsonWithTypeAttributes(){
-  //   Map<String,dynamic> basicInfo = toJson();
-  //
-  //   if(selectedPropertyType == PropertyType.agricultural){
-  //     basicInfo ={
-  //       "livestock_inventory":propertyTypeConstAttributes![0],
-  //     };
-  //     return basicInfo;
-  //   }
-  //   if(selectedPropertyType == PropertyType.residential){
-  //     basicInfo ={
-  //       "number_of_bathrooms":propertyTypeConstAttributes![0],
-  //     };
-  //     return basicInfo;
-  //   }
-  //   if(selectedPropertyType == PropertyType.commercial){
-  //     basicInfo ={
-  //       "number_of_bathrooms":propertyTypeConstAttributes![0],
-  //     };
-  //     return basicInfo;
-  //   }
-  //   return basicInfo;
-  // }
+        "area": area.toString(),
+        "price": price.toString(),
+        "description": description,
+        "latitude": "${selectedLocation?.latitude}",
+        "longitude": "${selectedLocation?.longitude}",
+        "specialAttributes": json.encode(propertyTypeSpecialAttributes),
+
+      }..addAll(propertyAttributes!.toJson());
 
   @override
   List<Object?> get props => [
