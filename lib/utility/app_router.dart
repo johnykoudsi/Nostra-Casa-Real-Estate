@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
+import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
@@ -89,13 +90,16 @@ class AppRouter {
           );
         case AppRoutes.aboutUs:
           return const AboutUs();
+
         case AppRoutes.viewProperty:
           return const ViewProperty();
 
         case AppRoutes.reviewProperty:
           AddPropertyState args = settings.arguments as AddPropertyState;
-          return ReviewProperty(addPropertyState: args);
-
+          return BlocProvider(
+            create: (context) => SendPropertyBloc(),
+            child: ReviewProperty(addPropertyState: args),
+          );
 
         case AppRoutes.homePage:
           return const Explore();

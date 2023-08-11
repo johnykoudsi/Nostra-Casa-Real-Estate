@@ -1,5 +1,5 @@
 abstract class PropertyAttributes {
-  Map<String, dynamic> toJson() => {};
+  Map<String, String> toJson() => {};
 }
 
 class CommercialPropertyAttributes extends PropertyAttributes {
@@ -14,10 +14,10 @@ class CommercialPropertyAttributes extends PropertyAttributes {
   int numberOfBathrooms;
 
   @override
-  Map<String, dynamic> toJson() => {
-        "num_of_bathrooms": numberOfBathrooms,
-        "num_of_balconies": numberOfBalconies,
-        "floor": floor,
+  Map<String, String> toJson() => {
+        "num_of_bathrooms": numberOfBathrooms.toString(),
+        "num_of_balconies": numberOfBalconies.toString(),
+        "floor": floor.toString(),
       };
   CommercialPropertyAttributes copyWith({
     int? floor,
@@ -44,11 +44,11 @@ class ResidentialPropertyAttributes extends PropertyAttributes {
   int numberOfLivingRooms;
 
   @override
-  Map<String, dynamic> toJson() => {
-        "num_of_bathrooms": numberOfBathrooms,
-        "num_of_balconies": numberOfBalconies,
-        "num_of_bedrooms": numberOfBedrooms,
-        "num_of_living_rooms": numberOfLivingRooms,
+  Map<String, String> toJson() => {
+        "num_of_bathrooms": numberOfBathrooms.toString(),
+        "num_of_balconies": numberOfBalconies.toString(),
+        "num_of_bedrooms": numberOfBedrooms.toString(),
+        "num_of_living_rooms": numberOfLivingRooms.toString(),
       };
 
   ResidentialPropertyAttributes copyWith({

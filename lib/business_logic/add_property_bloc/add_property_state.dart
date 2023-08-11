@@ -63,13 +63,13 @@ class AddPropertyState extends Equatable {
         area: area ?? this.area,
       );
 
-  Map<String, dynamic> toMapBody() => {
+  Map<String, String> toMapBody() => {
         "name": title,
-        "area": area,
-        "price": price,
+        "area": area.toString(),
+        "price": price.toString(),
         "description": description,
-        "latitude": selectedLocation?.latitude,
-        "longitude": selectedLocation?.longitude,
+        "latitude": "${selectedLocation?.latitude}",
+        "longitude": "${selectedLocation?.longitude}",
       }..addAll(propertyAttributes!.toJson());
 
   @override
