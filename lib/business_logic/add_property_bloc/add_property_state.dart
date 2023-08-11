@@ -72,14 +72,15 @@ class AddPropertyState extends Equatable {
       "latitude": "${selectedLocation?.latitude}",
       "longitude": "${selectedLocation?.longitude}",
       "specialAttributes": json.encode(propertyTypeSpecialAttributes) == "null"
-          ? "{}" : json.encode(propertyTypeSpecialAttributes).toString(),
+          ? "{}"
+          : json.encode(propertyTypeSpecialAttributes).toString(),
     }..addAll(propertyAttributes!.toJson());
-    if(selectedAmenity.isNotEmpty){
+    if (selectedAmenity.isNotEmpty) {
       for (int i = 0; i < selectedAmenity.length; i++) {
         map["amenities[$i]"] = selectedAmenity[i].id.toString();
       }
     }
-    if(selectedTag.isNotEmpty){
+    if (selectedTag.isNotEmpty) {
       for (int i = 0; i < selectedTag.length; i++) {
         map["tags[$i]"] = selectedTag[i].id.toString();
       }

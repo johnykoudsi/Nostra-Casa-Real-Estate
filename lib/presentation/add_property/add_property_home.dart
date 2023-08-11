@@ -58,6 +58,9 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
     if (addPropertyBloc.state.title.length < 5 && stepNumber == 8) {
       return true;
     }
+    if (addPropertyBloc.state.description.length < 5 && stepNumber == 8) {
+      return true;
+    }
 
     return false;
   }
