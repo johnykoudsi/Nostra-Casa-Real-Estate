@@ -17,6 +17,9 @@ class AppRoutes {
   static const String notifications="/notifications";
   static const String editProfile="/edit_profile";
   static const String viewProperty="/view_property";
+  static const String promoteToAgency="/promote_to_agency";
+  static const String welcomeToPromote="/welcome_to_promote";
+  static const String addAgencyLocation="/add_agency_location";
 
 
 

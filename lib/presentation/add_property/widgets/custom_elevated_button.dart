@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../utility/app_style.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-    CustomElevatedButton({Key? key,required this.onPress,required this.title,required this.iconData})
+    CustomElevatedButton({Key? key,required this.onPress,required this.title,required this.iconData,this.backgroundColor})
         : super(key: key);
     Function()? onPress;
     String title;
     IconData iconData;
+    Color? backgroundColor;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -25,7 +26,7 @@ class CustomElevatedButton extends StatelessWidget {
 
         onPressed: onPress,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppStyle.kBackGroundColor,
+          backgroundColor: backgroundColor ?? AppStyle.kBackGroundColor,
           elevation: 0,
           shape: const RoundedRectangleBorder(
             borderRadius: AppStyle.k15BorderRadius, // <-- Radius

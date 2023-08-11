@@ -32,6 +32,8 @@ class AppAssets{
   static const tv="assets/images/tv.svg";
   static const logo="assets/images/logo_5.png";
   static const greyLogo="assets/images/grey_logo.png";
+  static const promote="assets/images/promote.svg";
+  static const agency="assets/images/agency.png";
 
 
 

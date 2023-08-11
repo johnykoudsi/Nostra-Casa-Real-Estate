@@ -22,8 +22,8 @@ class _EditProfileState extends State<EditProfile> {
 
   DateTime? selectedDate;
   Gender genderRadioValue = Gender.female;
-  TextEditingController dateTextController = TextEditingController();
 
+  TextEditingController dateTextController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController mobileController = TextEditingController();

@@ -92,7 +92,7 @@ class _MoreScreenState extends State<MoreScreen> {
                         onPressed: () {
                           //todo navigate to my estates
                         },
-                        color: AppStyle.kBackGroundColor,
+                        color:Colors.white,
                         borderRad: 40,
                       ),
                     ),
@@ -104,7 +104,7 @@ class _MoreScreenState extends State<MoreScreen> {
                           onPressed: () {
                             //todo navigate to my favorite
                           },
-                          color: Colors.white),
+                          color: AppStyle.kBackGroundColor),
                     ),
                     Visibility(
                       visible: userIsLoggedIn(context),
@@ -114,7 +114,7 @@ class _MoreScreenState extends State<MoreScreen> {
                           onPressed: () {
                             Navigator.pushNamed(context, AppRoutes.notifications);
                           },
-                          color: AppStyle.kBackGroundColor),
+                          color: Colors.white),
                     ),
                     MyProfileItem(
                         svgPath: AppAssets.about,
@@ -122,14 +122,14 @@ class _MoreScreenState extends State<MoreScreen> {
                         onPressed: () {
                           Navigator.pushNamed(context, AppRoutes.aboutUs);
                         },
-                        color: Colors.white),
+                        color: AppStyle.kBackGroundColor),
                     MyProfileItem(
                         svgPath: AppAssets.language,
                         name: "Language".tr(),
                         onPressed: () {
                           DialogsWidgetsYesNo.showLanguageBottomSheet(context);
                         },
-                        color: AppStyle.kBackGroundColor),
+                        color: Colors.white),
                     Visibility(
                       visible: userIsLoggedIn(context),
                       child: MyProfileItem(
@@ -137,6 +137,16 @@ class _MoreScreenState extends State<MoreScreen> {
                           name: "Edit Profile".tr(),
                           onPressed: () {
                             Navigator.pushNamed(context, AppRoutes.editProfile);
+                          },
+                          color: AppStyle.kBackGroundColor),
+                    ),
+                    Visibility(
+                      visible: userIsLoggedIn(context),
+                      child: MyProfileItem(
+                          svgPath: AppAssets.promote,
+                          name: "Promote To Agency".tr(),
+                          onPressed: () {
+                            Navigator.pushNamed(context, AppRoutes.welcomeToPromote);
                           },
                           color: Colors.white),
                     ),
