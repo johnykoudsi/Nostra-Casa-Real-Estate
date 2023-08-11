@@ -57,15 +57,14 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Promote now and get your badge',
+                      "Promote now and get your badge".tr(),
                       style: Theme.of(context).textTheme.headline2,
                     ),
                     const SizedBox(
                       height: 18,
                     ),
                     Text(
-                      "We will need more information about your agency in order to confirm you promotion request"
-                          ,
+                      "We will need more information about your agency in order to confirm you promotion request".tr(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
@@ -88,9 +87,9 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
               onPressed: () {
                 if(!userIsLoggedIn(context)){
                   DialogsWidgetsYesNo.showYesNoDialog(
-                    title: "You must login to continue",
-                    noTitle: "Cancel",
-                    yesTitle: "Login",
+                    title: "You must login to continue".tr(),
+                    noTitle: "Cancel".tr(),
+                    yesTitle: "Login".tr(),
                     onYesTap: () {
                       Navigator.of(context).pop();
                       Navigator.of(context).pushNamed(AppRoutes.login);

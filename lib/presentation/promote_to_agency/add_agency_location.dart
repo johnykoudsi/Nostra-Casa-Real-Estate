@@ -6,9 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
-import 'package:nostra_casa/presentation/add_property/widgets/custom_elevated_button.dart';
 import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -30,10 +28,10 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
 
   @override
   void initState() {
+
     askPermission();
 
     final promoteToAgencyBloc = context.read<PromoteToAgencyBloc>().state;
-
 
     if (promoteToAgencyBloc.selectedLocation != null) {
       _defaultLocation =
@@ -51,7 +49,6 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
         ),
       );
     }
-
     super.initState();
   }
 
@@ -84,10 +81,11 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
           ),
         );
         _selectedLocation = location;
+
       });
     }
-    final state = context.read<AddPropertyBloc>();
-    state.add(SelectLocationEvent(latLng: _selectedLocation!));
+    final state = context.read<PromoteToAgencyBloc>();
+    state.add(AgencyLocationEvent(latLng: _selectedLocation!));
   }
 
   Future<Position> getUserCurrentLocation() async {

@@ -31,6 +31,7 @@ import '../presentation/splash_screen/splash_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
+  PromoteToAgencyBloc promoteToAgencyBloc = PromoteToAgencyBloc();
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
@@ -110,12 +111,19 @@ class AppRouter {
         case AppRoutes.welcomeToPromote:
           return const WelcomeToPromote();
         case AppRoutes.promoteToAgency:
-          return const PromoteToAgency();
-        case AppRoutes.addAgencyLocation:
-          return    MultiBlocProvider(
+          return   MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) => PromoteToAgencyBloc(),
+              BlocProvider.value(
+                value: promoteToAgencyBloc,
+              ),
+            ],
+            child: const PromoteToAgency(),
+          );
+        case AppRoutes.addAgencyLocation:
+          return   MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: promoteToAgencyBloc,
               ),
             ],
             child: const AddAgencyLocation(),
