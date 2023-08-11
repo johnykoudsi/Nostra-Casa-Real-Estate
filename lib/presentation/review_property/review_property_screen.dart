@@ -18,7 +18,10 @@ class ReviewProperty extends StatelessWidget {
       listener: (context, state) {
         if (state is SendPropertyStatus) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
-              context: context, helperResponse: state.helperResponse,showServerError: true);
+              context: context,
+              helperResponse: state.helperResponse,
+              showServerError: true,
+              popOnSuccessCount: 2);
         }
       },
       child: Scaffold(
@@ -27,13 +30,18 @@ class ReviewProperty extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
           child: BlocBuilder<SendPropertyBloc, SendPropertyState>(
             builder: (context, state) {
-              return ElevatedButtonWidget(
-                title: "Add",
-                isLoading: state is SendPropertyLoading,
-                onPressed: () {
-                  context.read<SendPropertyBloc>().add(SendPropertyApiEvent(
-                      addPropertyState: addPropertyState!));
-                },
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButtonWidget(
+                    title: "Add",
+                    isLoading: state is SendPropertyLoading,
+                    onPressed: () {
+                      context.read<SendPropertyBloc>().add(SendPropertyApiEvent(
+                          addPropertyState: addPropertyState!));
+                    },
+                  ),
+                ],
               );
             },
           ),

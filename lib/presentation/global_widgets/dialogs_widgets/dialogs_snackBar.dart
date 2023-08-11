@@ -37,18 +37,26 @@ class DialogsWidgetsSnackBar {
     required BuildContext context,
     required HelperResponse helperResponse,
     bool showServerError = false,
+    bool popOnSuccess = true,
+    int popOnSuccessCount = 1,
   }) {
+    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
+      if(popOnSuccess){
+        for(int i=0;i<popOnSuccessCount;i++){
+          Navigator.of(context).pop();
+        }
+      }
+      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
+          title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
+          color: AppStyle.kGreenColor,
+          context: context
+      );
+
+    }
     if(showServerError){
       return DialogsWidgetsSnackBar.showScaffoldSnackBar(
           title: helperResponse.response ,
           color: AppStyle.redColor,
-          context: context
-      );
-    }
-    if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
-      return DialogsWidgetsSnackBar.showScaffoldSnackBar(
-          title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
-          color: AppStyle.kGreenColor,
           context: context
       );
     }
