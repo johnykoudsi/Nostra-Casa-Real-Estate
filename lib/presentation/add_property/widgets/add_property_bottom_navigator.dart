@@ -44,8 +44,7 @@ class AddPropertyBottomNavigator extends StatelessWidget {
                 // }
                 return Expanded(
                   child: Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
+                    padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
                     child: ElevatedButtonWidget(
                       title: 'Back'.tr(),
                       onPressed: onPressedBack,
@@ -58,7 +57,7 @@ class AddPropertyBottomNavigator extends StatelessWidget {
                   padding:
                       EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
                   child: ElevatedButtonWidget(
-                    title: stepNumber < 10 ? 'Next'.tr() : 'Submit',
+                    title: stepNumber < 10 ? 'Next'.tr() : 'Review',
                     onPressed: stepNumber < 10 ? onPressedNext : onSubmit,
                   ),
                 ),

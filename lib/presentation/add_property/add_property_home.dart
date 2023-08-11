@@ -16,6 +16,7 @@ import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';
 import 'package:nostra_casa/presentation/add_property/screens/pin_google_map_screen/GoogleMapsScreen.dart';
 import 'package:nostra_casa/presentation/add_property/screens/submit_property.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/add_property_bottom_navigator.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 
@@ -70,9 +71,10 @@ class AddPropertyHomeState extends State<AddPropertyHome> {
 
   void onSubmit() {
     final addPropertyBloc = context.read<AddPropertyBloc>();
-
-    print(addPropertyBloc.state);
+    Navigator.of(context)
+        .pushNamed(AppRoutes.reviewProperty, arguments: addPropertyBloc.state);
   }
+
   @override
   void dispose() {
     super.dispose();

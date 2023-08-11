@@ -5,6 +5,7 @@ import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
+import 'package:nostra_casa/presentation/review_property/review_property_screen.dart';
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/view_property/view_property.dart';
@@ -90,6 +91,12 @@ class AppRouter {
           return const AboutUs();
         case AppRoutes.viewProperty:
           return const ViewProperty();
+
+        case AppRoutes.reviewProperty:
+          AddPropertyState args = settings.arguments as AddPropertyState;
+          return ReviewProperty(addPropertyState: args);
+
+
         case AppRoutes.homePage:
           return const Explore();
 
