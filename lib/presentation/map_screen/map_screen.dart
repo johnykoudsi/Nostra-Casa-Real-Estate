@@ -27,8 +27,7 @@ class _MapScreenState extends State<MapScreen> {
   final Set<Marker> _markers = {};
 
   PropertyType selectedFilterPropertyType = PropertyType.all;
-  GetNearbyMapsEvent getNearbyMapsEvent =
-      GetNearbyMapsEvent(center: const LatLng(33.513914, 36.276143));
+
   @override
   void initState() {
     super.initState();
@@ -90,7 +89,9 @@ class _MapScreenState extends State<MapScreen> {
               onCameraIdle: () {
                 getCenter().then(
                   (value) => context.read<GetNearbyPropertiesBloc>().add(
-                        getNearbyMapsEvent.copyWith(center: value),
+                        GetNearbyMapsEvent(
+                            center: value,
+                            propertyType: selectedFilterPropertyType),
                       ),
                 );
               },
@@ -99,9 +100,10 @@ class _MapScreenState extends State<MapScreen> {
                 completer.complete(controller);
                 _googleMapController = controller;
                 getCenter().then(
-                  (value) => context
-                      .read<GetNearbyPropertiesBloc>()
-                      .add(getNearbyMapsEvent.copyWith(center: value)),
+                  (value) => context.read<GetNearbyPropertiesBloc>().add(
+                      GetNearbyMapsEvent(
+                          center: value,
+                          propertyType: selectedFilterPropertyType)),
                 );
               },
               markers: _markers,
@@ -112,8 +114,14 @@ class _MapScreenState extends State<MapScreen> {
                 setState(() {
                   _markers.clear();
                   selectedFilterPropertyType = propertyType;
-                  context.read<GetNearbyPropertiesBloc>().add(getNearbyMapsEvent
-                      .copyWith(propertyType: selectedFilterPropertyType));
+                  getCenter().then(
+                    (value) => context.read<GetNearbyPropertiesBloc>().add(
+                          GetNearbyMapsEvent(
+                            propertyType: selectedFilterPropertyType,
+                            center: value,
+                          ),
+                        ),
+                  );
                 });
               },
             ),
