@@ -23,22 +23,33 @@ class PromoteToAgency extends StatefulWidget {
 
 class _PromoteToAgencyState extends State<PromoteToAgency> {
   List<File> files=[];
-
   void _chooseFiles() async{
+    final promoteToAgencyBloc = context.read<PromoteToAgencyBloc>();
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
     setState(() {
       if (result != null) {
         files = result.paths.map((path) => File(path!)).toList();
+        promoteToAgencyBloc.state.files=files;
       } else {
-        // User canceled the picker
+
       }
     });
 
   }
   void _removeFile(File image) {
+    final promoteToAgencyBloc = context.read<PromoteToAgencyBloc>();
     setState(() {
-      files!.remove(image);
+      files.remove(image);
+      promoteToAgencyBloc.state.files=files;
     });
+  }
+  bool isInfoCompleted() {
+    final promoteToAgencyBloc=context.read<PromoteToAgencyBloc>().state;
+
+    if (promoteToAgencyBloc.selectedLocation != null && promoteToAgencyBloc.files != []) {
+      return true;
+    }
+    return false;
   }
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   TextEditingController promotionRequestController = TextEditingController();
@@ -133,20 +144,18 @@ super.dispose();
         padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.038,vertical: screenHeight*0.038),
         child: BlocBuilder<PromoteToAgencyBloc, PromoteToAgencyState>(
   builder: (context, state) {
-    return ElevatedButtonWidget(title: "Request Promotion".tr(),
+    return ElevatedButtonWidget(
+      title: "Request Promotion".tr(),
         isLoading: state is PromoteToAgencyLoadingState,
-      onPressed: (){
-
+        onPressed: isInfoCompleted()  ?   (){
       final promoteToAgencyBloc = context.read<PromoteToAgencyBloc>();
           if (_key.currentState!.validate()) {
-
-          promoteToAgencyBloc.state.files=files;
           promoteToAgencyBloc.state.reason=promotionRequestController.text;
             context.read<PromoteToAgencyBloc>().add(PromoteAgencyApiEvent(
                 promoteToAgencyState: promoteToAgencyBloc.state,
             ));
           }
-        },);
+        }:null,);
   },
 ),
       ),

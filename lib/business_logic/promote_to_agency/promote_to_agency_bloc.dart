@@ -19,24 +19,7 @@ class PromoteToAgencyBloc extends Bloc<PromoteToAgencyEvent, PromoteToAgencyStat
       emit(PromoteToAgencyLoadingState());
 
       final response = await PromoteToAgencyService.promoteToAgencyService(endPoints: EndPoints.promoteToAgency, event: event);
-print(response);
-      // if (response is UserInfo) {
-      //   print("asbhjdjksadksakasd1234567890-");
-      //   UserModel? userModel = await getUserFromLocalStorage();
-      //
-      //   if (userModel != null) {
-      //     userModel.user = response;
-      //     print("User Model${userModel.toJson()}");
-      //     saveUserToLocalStorage(userModel);
-      //     globalUserBloc.add(CheckUserFromLocalStorage());
-      //   }
-      //   emit(EditUserStatusState(
-      //       helperResponse: HelperResponse(
-      //         servicesResponse: ServicesResponseStatues.success,
-      //       )));
-      // } else {
-      //  emit(PromoteToAgencyStatusState(helperResponse: response));
-    //  }
+              //print(response.toString());
     });
   }
 }

@@ -46,7 +46,6 @@ class PromoteToAgencyState extends Equatable {
 }
 
 class PromoteToAgencyLoadingState extends PromoteToAgencyState {
-
   @override
   List<Object> get props => [];
 }
