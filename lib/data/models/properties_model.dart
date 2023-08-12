@@ -14,7 +14,7 @@ WelcomeProperties welcomePropertiesFromJson2(String str) =>
     WelcomeProperties.welcomeFromJson2(json.decode(str));
 
 class WelcomeProperties {
-  List<Properties> properties;
+  List<Property> properties;
 
   WelcomeProperties({
     required this.properties,
@@ -22,18 +22,18 @@ class WelcomeProperties {
 
   factory WelcomeProperties.fromJson(Map<String, dynamic> json) =>
       WelcomeProperties(
-        properties: List<Properties>.from(
-            json["data"].map((x) => Properties.fromJson(x))),
+        properties: List<Property>.from(
+            json["data"].map((x) => Property.fromJson(x))),
       );
 
   factory WelcomeProperties.welcomeFromJson2(Map<String, dynamic> json) =>
       WelcomeProperties(
-        properties: List<Properties>.from(
-            json["data"]["data"].map((x) => Properties.fromJson(x))),
+        properties: List<Property>.from(
+            json["data"]["data"].map((x) => Property.fromJson(x))),
       );
 }
 
-class Properties {
+class Property {
   int id;
   String name;
   num area;
@@ -51,7 +51,7 @@ class Properties {
   AgriculturalPropertyAttributes? agricultural;
   List<String> media;
 
-  Properties({
+  Property({
     this.id = -1,
     this.name = "",
     this.area = 0,
@@ -66,10 +66,10 @@ class Properties {
     this.agricultural,
     this.residential,
     this.commercial,
-    this.media = const [],
+    this.media = const [""],
   });
 
-  factory Properties.fromJson(Map<String, dynamic> json) => Properties(
+  factory Property.fromJson(Map<String, dynamic> json) => Property(
         id: json["id"] ?? 0,
         name: json["name"] ?? '',
         area: json["area"] ?? 0,
@@ -96,6 +96,6 @@ class Properties {
             ? AgriculturalPropertyAttributes.fromJson(json["agricultural"])
             : AgriculturalPropertyAttributes(),
         media: List<String>.from(
-            json["media"]?.map((x) => x["original_url"]) ?? []),
+            json["media"]?.map((x) => x["original_url"]) ?? [""]),
       );
 }

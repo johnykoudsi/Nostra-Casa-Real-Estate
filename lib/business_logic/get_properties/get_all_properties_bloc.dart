@@ -36,7 +36,7 @@ class GetAllPropertiesBloc extends Bloc<GetAllPropertiesEvent, GetAllPropertiesS
         event: event,
       );
 
-      if (getAllProperties is List<Properties>) {
+      if (getAllProperties is List<Property>) {
         if (getAllProperties.isNotEmpty) {
           // copy previous state
           if (currentState is AllPropertiesLoadedState) {

@@ -17,7 +17,7 @@ class GetNearbyPropertiesDoneState extends GetNearbyPropertiesState {
 
   GetNearbyPropertiesDoneState({required this.properties});
 
-  List<Properties> properties;
+  List<Property> properties;
 
   @override
   List<Object> get props => [properties];

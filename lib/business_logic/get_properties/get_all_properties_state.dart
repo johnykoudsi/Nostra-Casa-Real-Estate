@@ -9,15 +9,15 @@ class AllPropertiesInitial extends GetAllPropertiesState {
   List<Object> get props => [];
 }
 class AllPropertiesLoadedState extends GetAllPropertiesState {
-  List<Properties> properties;
+  List<Property> properties;
   bool hasReachedMax;
 
   AllPropertiesLoadedState(
-      {this.properties = const <Properties>[],
+      {this.properties = const <Property>[],
         required this.hasReachedMax});
 
   AllPropertiesLoadedState copyWith({
-    List<Properties>? properties,
+    List<Property>? properties,
     bool? hasReachedMax,
   }) {
     return AllPropertiesLoadedState(

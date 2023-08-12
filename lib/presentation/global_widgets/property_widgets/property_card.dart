@@ -1,13 +1,16 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/models/properties_model.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class PropertyCard extends StatelessWidget {
-   PropertyCard({Key? key,required this.properties,required this.indexInTheVerticalList}) : super(key: key);
-  List<List<String>> properties = [];
-  int indexInTheVerticalList;
+  PropertyCard({
+    Key? key,
+    required this.property,
+  }) : super(key: key);
+  Property property;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -28,27 +31,33 @@ class PropertyCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Swiper(
-                  itemBuilder: (context, indexInTheHorizontalList) {
-                    final image = properties[indexInTheVerticalList][indexInTheHorizontalList];
-                    return FadeInImage(placeholder: const AssetImage(AppAssets.greyLogo), image: AssetImage(image),
+                  itemCount: property.media.isEmpty?1:property.media.length,
+                  indicatorLayout: PageIndicatorLayout.COLOR,
+                  autoplay: false,
+                  loop: false,
+                  pagination: const SwiperPagination(),
+                  itemBuilder: (context, index) {
+                    return FadeInImage(
+                      placeholder: const AssetImage(AppAssets.greyLogo),
+                      image: NetworkImage(property.media.isEmpty?"":property.media[index]),
                       fit: BoxFit.fill,
                       imageErrorBuilder: (context, error, stackTrace) {
                         return Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              border: Border.all(width: 1,color: AppStyle.kGreyColor),
+                              border: Border.all(
+                                  width: 1, color: AppStyle.kGreyColor),
                             ),
                             child: ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(AppAssets.greyLogo,fit: BoxFit.contain,)));
+                                child: Image.asset(
+                                  AppAssets.greyLogo,
+                                  fit: BoxFit.contain,
+                                )));
                       },
                     );
                   },
-                  indicatorLayout: PageIndicatorLayout.COLOR,
-                  autoplay: false,
-                  itemCount: properties[indexInTheVerticalList].length,
-                  pagination: const SwiperPagination(),
-                  control: null,
+
                 ),
               ),
             ),
@@ -60,19 +69,28 @@ class PropertyCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 Padding(
-                  padding:  EdgeInsets.only(left: screenWidth*0.03,right: screenWidth*0.03,top: screenWidth*0.01),
+                  padding: EdgeInsets.only(
+                      left: screenWidth * 0.03,
+                      right: screenWidth * 0.03,
+                      top: screenWidth * 0.01),
                   child: Row(
                     children: [
                       const Icon(Icons.star),
-                      Text("4.88",style: Theme.of(context).textTheme.headline5,),
+                      Text(
+                        "4.88",
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
             Text(
-              "Great House",
-              style: Theme.of(context).textTheme.headline5!.copyWith(color: AppStyle.kGreyColor),
+              property.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5!
+                  .copyWith(color: AppStyle.kGreyColor),
             ),
             Row(
               children: [
@@ -82,7 +100,10 @@ class PropertyCard extends StatelessWidget {
                 ),
                 Text(
                   " month",
-                  style: Theme.of(context).textTheme.headline5!.copyWith(color: AppStyle.kGreyColor),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5!
+                      .copyWith(color: AppStyle.kGreyColor),
                 ),
               ],
             ),

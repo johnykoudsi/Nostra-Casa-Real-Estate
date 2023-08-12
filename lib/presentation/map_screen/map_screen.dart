@@ -49,7 +49,7 @@ class _MapScreenState extends State<MapScreen> {
     return centerLatLng;
   }
 
-  void addMarkersFromPropertiesList(List<Properties> prop) {
+  void addMarkersFromPropertiesList(List<Property> prop) {
     for (var property in prop) {
       if (_markers.every((mark) => mark.position != property.location)) {
         setState(() {
