@@ -22,8 +22,8 @@ class WelcomeProperties {
 
   factory WelcomeProperties.fromJson(Map<String, dynamic> json) =>
       WelcomeProperties(
-        properties: List<Property>.from(
-            json["data"].map((x) => Property.fromJson(x))),
+        properties:
+            List<Property>.from(json["data"].map((x) => Property.fromJson(x))),
       );
 
   factory WelcomeProperties.welcomeFromJson2(Map<String, dynamic> json) =>

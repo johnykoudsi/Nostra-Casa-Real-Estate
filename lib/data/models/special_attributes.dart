@@ -89,11 +89,19 @@ class ResidentialPropertyAttributes extends AbstractPropertyAttributes {
 }
 
 class AgriculturalPropertyAttributes extends AbstractPropertyAttributes {
-  AgriculturalPropertyAttributes();
+  AgriculturalPropertyAttributes({
+    this.waterSources = 0
+});
+
+  int waterSources;
 
   factory AgriculturalPropertyAttributes.fromJson(Map<String, dynamic> json) =>
-      AgriculturalPropertyAttributes();
+      AgriculturalPropertyAttributes(
+        waterSources: json["water_sources"]
+      );
 
   @override
-  Map<String, String> toJson() => {};
+  Map<String, String> toJson() => {
+    "water_sources": waterSources.toString(),
+  };
 }

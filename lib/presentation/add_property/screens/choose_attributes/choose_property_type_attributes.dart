@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/data/models/special_attributes.dart';
+import 'package:nostra_casa/presentation/add_property/screens/choose_attributes/widgets/agricaltural_types.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_attributes/widgets/commercial_types.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_attributes/widgets/residential_types.dart';
 import '../../../../business_logic/add_property_bloc/add_property_bloc.dart';
@@ -79,7 +80,14 @@ class _ChoosePropertyTypeAttributesState
                       )
                   );
                 }
-                return Container();
+                if(propertyAttributes is AgriculturalPropertyAttributes){
+                  return Expanded(
+                      child: AgriculturalTypesWidget(
+                        agriculturalPropertyAttributes: propertyAttributes,
+                      )
+                  );
+                }
+                return const SizedBox();
               },
             ),
 
