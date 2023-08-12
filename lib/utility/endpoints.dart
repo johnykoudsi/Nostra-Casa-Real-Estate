@@ -26,5 +26,8 @@ class EndPoints{
   static const String addResidential = "/residentials";
 
 
+  static const String promoteToAgency = "/agencies";
+
+
 
 }

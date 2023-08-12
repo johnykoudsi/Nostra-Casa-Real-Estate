@@ -91,6 +91,7 @@ class NetworkHelpers {
     required Map<String, String> body,
     bool useUserToken = false,
     List<File> files = const[],
+    required String name,
   }) async {
     try {
       Map<String, String> headers;
@@ -117,7 +118,7 @@ class NetworkHelpers {
       if (files.isNotEmpty) {
         for (var element in files) {
           request.files
-              .add(await http.MultipartFile.fromPath('images', element.path));
+              .add(await http.MultipartFile.fromPath(name, element.path));
         }
       }
 

@@ -3,37 +3,56 @@ part of 'promote_to_agency_bloc.dart';
 class PromoteToAgencyState extends Equatable {
   PromoteToAgencyState(
       {
-        this.selectedLocation,
+         this.selectedLocation,
         this.files = const [],
-        this.region,
+         this.reason
 
       });
 
   List<File> files;
   LatLng? selectedLocation;
-  String? region;
+  String? reason;
 
   PromoteToAgencyState copyWith({
     List<File>? files,
     LatLng? selectedLocation,
-    String? region,
+    String? reason,
 
   }) =>
       PromoteToAgencyState(
         files: files ?? this.files,
         selectedLocation: selectedLocation ?? this.selectedLocation,
-        region: region ?? this.region,
+        reason: reason?? this.reason,
       );
 
-  Map<String, dynamic> toJson() => {
-
+  Map<String, String> toMapBody()  {
+  Map<String, String> map = {
+    "latitude": "${selectedLocation?.latitude}",
+    "longitude": "${selectedLocation?.longitude}",
+    "reason":reason.toString()
   };
+  return map;
+
+  }
   @override
   List<Object?> get props => [
 
     selectedLocation,
     files,
-    region,
+    reason,
 
   ];
+
+}
+
+class PromoteToAgencyLoadingState extends PromoteToAgencyState {
+
+  @override
+  List<Object> get props => [];
+}
+class PromoteToAgencyStatusState extends PromoteToAgencyState {
+  PromoteToAgencyStatusState({required this.helperResponse});
+  HelperResponse helperResponse;
+  @override
+  List<Object> get props => [helperResponse.servicesResponse,helperResponse.response];
 }

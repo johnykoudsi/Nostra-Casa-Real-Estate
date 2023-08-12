@@ -22,15 +22,18 @@ class PromoteToAgency extends StatefulWidget {
 }
 
 class _PromoteToAgencyState extends State<PromoteToAgency> {
-  List<File>? files;
+  List<File> files=[];
 
   void _chooseFiles() async{
     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
-    if (result != null) {
-       files = result.paths.map((path) => File(path!)).toList();
-    } else {
-      // User canceled the picker
-    }
+    setState(() {
+      if (result != null) {
+        files = result.paths.map((path) => File(path!)).toList();
+      } else {
+        // User canceled the picker
+      }
+    });
+
   }
   void _removeFile(File image) {
     setState(() {
@@ -81,18 +84,7 @@ super.dispose();
           child: ListView(
             children: [
               CustomTextField(
-                hintText: "reason for promotion request".tr(),
-                passwordBool: false,
-                label: "Application Request".tr(),
-                controller: promotionRequestController,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Name can not be empty".tr();
-                  }
-                  return null;
-                },
-              ),
-              CustomTextField(
+
                 hintText: "reason for promotion request".tr(),
                 passwordBool: false,
                 label: "Application Request".tr(),
@@ -116,11 +108,7 @@ super.dispose();
                 height: screenHeight * 0.03,
               ),
               Visibility(
-                visible: files == null
-                    ? false
-                    : files!.isEmpty
-                        ? false
-                        : true,
+                visible: files == null ? false : files!.isEmpty ?false : true,
                 child: SizedBox(
                   width: screenWidth,
                   height: screenHeight * 0.3,
@@ -137,15 +125,30 @@ super.dispose();
                   },
                   title: "Add your agency location".tr(),
                   iconData: Icons.map_outlined),
-
-
             ],
           ),
         ),
       ),
       bottomSheet:  Padding(
         padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.038,vertical: screenHeight*0.038),
-        child: ElevatedButtonWidget(title: "Request Promotion".tr(),onPressed: (){},),
+        child: BlocBuilder<PromoteToAgencyBloc, PromoteToAgencyState>(
+  builder: (context, state) {
+    return ElevatedButtonWidget(title: "Request Promotion".tr(),
+        isLoading: state is PromoteToAgencyLoadingState,
+      onPressed: (){
+
+      final promoteToAgencyBloc = context.read<PromoteToAgencyBloc>();
+          if (_key.currentState!.validate()) {
+
+          promoteToAgencyBloc.state.files=files;
+          promoteToAgencyBloc.state.reason=promotionRequestController.text;
+            context.read<PromoteToAgencyBloc>().add(PromoteAgencyApiEvent(
+                promoteToAgencyState: promoteToAgencyBloc.state,
+            ));
+          }
+        },);
+  },
+),
       ),
     );
   }

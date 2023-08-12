@@ -15,29 +15,13 @@ class AgencyLocationEvent extends PromoteToAgencyEvent {
   List<Object?> get props => [latLng];
 }
 
-// class PromoteAgencyApiEvent extends PromoteToAgencyEvent {
-//   PromoteAgencyApiEvent({
-//     //  required this.applicationRequest,
-//     required this.selectedLocation,
-//     required this.files,
-//   });
+class PromoteAgencyApiEvent extends PromoteToAgencyEvent{
 
-  //String applicationRequest;
-  // LatLng? selectedLocation;
-  // List<File> files;
+  PromoteAgencyApiEvent({required this.promoteToAgencyState});
 
-  // Map<String, dynamic> toJson() {
-  //   final json = {
-  //     "latitude":"${selectedLocation?.latitude}",
-  //     "longitude":"${selectedLocation?.longitude}",
-  //     "files":
-  //   };
-  //   json.removeWhere(
-  //       (key, value) => value == null || value == "" || value.isEmpty);
-  //   return json;
-  // }
+  PromoteToAgencyState promoteToAgencyState;
+  @override
+  List<Object?> get props => [promoteToAgencyState];
 
-//   @override
-//   List<Object?> get props =>
-//       [phoneNumber, email, fullName, gender, facebook, dateOfBirth];
-// }
+}
+
