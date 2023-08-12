@@ -83,23 +83,19 @@ class Properties {
         tags: List<Tag>.from(json["tags"]?.map((x) => Tag.fromJson(x)) ?? []),
         amenities: List<Amenity>.from(
             json["amenities"]?.map((x) => Amenity.fromJson(x)) ?? []),
-
         userInfo: json["user"] != null
             ? UserInfo.fromJson(json["user"])
             : UserInfo(id: -1),
-
         residential: json["residential"] != null
             ? ResidentialPropertyAttributes.fromJson(json["residential"])
             : ResidentialPropertyAttributes(),
-
         commercial: json["commercial"] != null
             ? CommercialPropertyAttributes.fromJson(json["commercial"])
             : CommercialPropertyAttributes(),
-
         agricultural: json["agricultural"] != null
             ? AgriculturalPropertyAttributes.fromJson(json["agricultural"])
             : AgriculturalPropertyAttributes(),
-
-        media: List<String>.from(json["media"]?.map((x) => x["original_url"])??[]),
+        media: List<String>.from(
+            json["media"]?.map((x) => x["original_url"]) ?? []),
       );
 }
