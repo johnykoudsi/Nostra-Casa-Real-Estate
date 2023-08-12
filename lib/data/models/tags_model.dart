@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import '../../utility/endpoints.dart';
+
 WelcomeTags welcomeTagsFromJson(String str) =>
     WelcomeTags.fromJson(json.decode(str));
 
@@ -25,13 +27,14 @@ class Tag extends Equatable{
   String description;
   int active;
   dynamic tagTypeId;
-
+  String file;
   Tag({
     this.id = -1,
     this.name = "",
     this.description = "",
     this.active = 0,
     this.tagTypeId,
+    this.file = "",
   });
 
   factory Tag.fromJson(Map<String, dynamic> json) => Tag(
@@ -40,6 +43,8 @@ class Tag extends Equatable{
     description: json["description"] ?? '',
     active: json["active"] ?? 0,
     tagTypeId: json["tag_type_id"],
+    file: "${EndPoints.kMainUrl}/${json["file"]}",
+
   );
 
   @override

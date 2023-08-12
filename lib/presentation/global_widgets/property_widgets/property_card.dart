@@ -23,11 +23,12 @@ class PropertyCard extends StatelessWidget {
           top: screenWidth * 0.038),
       child: SizedBox(
         width: screenWidth * 0.7,
-        height: screenHeight * 0.56,
+        //height: screenHeight * 0.56,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
+            SizedBox(
+              height: screenWidth * 0.7,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Swiper(

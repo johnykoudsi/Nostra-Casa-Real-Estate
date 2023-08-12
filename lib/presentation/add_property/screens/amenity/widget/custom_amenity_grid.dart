@@ -125,10 +125,13 @@ class AmenityItemWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: SvgPicture.asset(
-                        AppAssets.tv,
+                      child: SvgPicture.network(
+                        amenity.file,
                         width: screenWidth * 0.07,
                         height: screenHeight * 0.045,
+                        placeholderBuilder: (context){
+                          return ShimmerLoader(border: AppStyle.k4RadiusLowerPadding,);
+                        },
                       ),
                     ),
                     Expanded(
