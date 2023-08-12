@@ -32,8 +32,6 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
       // User canceled the picker
     }
   }
-
-
   void _removeFile(File image) {
     setState(() {
       files!.remove(image);
@@ -82,6 +80,18 @@ super.dispose();
           key: _key,
           child: ListView(
             children: [
+              CustomTextField(
+                hintText: "reason for promotion request".tr(),
+                passwordBool: false,
+                label: "Application Request".tr(),
+                controller: promotionRequestController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Name can not be empty".tr();
+                  }
+                  return null;
+                },
+              ),
               CustomTextField(
                 hintText: "reason for promotion request".tr(),
                 passwordBool: false,
