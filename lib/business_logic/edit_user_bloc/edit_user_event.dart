@@ -3,6 +3,7 @@ part of 'edit_user_bloc.dart';
 abstract class EditUserEvent extends Equatable {
   const EditUserEvent();
 }
+
 class EditUserApiEvent extends EditUserEvent {
   EditUserApiEvent(
       {
@@ -11,7 +12,7 @@ class EditUserApiEvent extends EditUserEvent {
         required this.fullName,
         required this.gender,
           this.facebook,
-         this.dateOfBirth,
+          this.dateOfBirth,
 
       });
   String phoneNumber;
@@ -31,7 +32,7 @@ class EditUserApiEvent extends EditUserEvent {
       "facebook": facebook,
       "date_of_birth": dateOfBirth,
     };
-    json.removeWhere((key, value) => value==null||value ==""||value.isEmpty);
+    json.removeWhere((key, value) => value==null||value ==""||value.isEmpty||value=="null");
     return json;
   }
 

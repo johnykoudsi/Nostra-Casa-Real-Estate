@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/edit_user_bloc/edit_user_bloc.dart';
+import 'package:nostra_casa/data/models/user_model.dart';
 import 'package:nostra_casa/presentation/global_widgets/custom_text_field.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import 'package:nostra_casa/utility/app_style.dart';
@@ -32,12 +33,16 @@ class _EditProfileState extends State<EditProfile> {
   void _showDialog(Widget child) {
     showCupertinoModalPopup<void>(
         context: context,
-        builder: (BuildContext context) => Container(
+        builder: (BuildContext context) =>
+            Container(
               height: 216,
               padding: const EdgeInsets.only(top: 6.0),
               // The Bottom margin is provided to align the popup above the system navigation bar.
               margin: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
+                bottom: MediaQuery
+                    .of(context)
+                    .viewInsets
+                    .bottom,
               ),
               // Provide a background color for the popup.
               color: CupertinoColors.systemBackground.resolveFrom(context),
@@ -77,20 +82,31 @@ class _EditProfileState extends State<EditProfile> {
     });
   }
 
+// @override
+//   void dispose() {
+//     context.read<EditUserBloc>().close();
+//     super.dispose();
+//   }
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    final screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     return BlocListener<EditUserBloc, EditUserState>(
       listener: (context, state) {
-        if(state is EditUserErrorState){
+        if (state is EditUserErrorState) {
           DialogsWidgetsSnackBar.showSnackBarFromStatus(
               context: context,
               helperResponse: state.helperResponse,
-            showServerError: true
+              showServerError: true
           );
         }
-        if(state is EditUserDoneState){
+        if (state is EditUserDoneState) {
           Navigator.of(context).pop();
         }
       },
@@ -109,7 +125,8 @@ class _EditProfileState extends State<EditProfile> {
           ),
           title: Text(
             "Edit Profile",
-            style: Theme.of(context)
+            style: Theme
+                .of(context)
                 .textTheme
                 .headline4!
                 .copyWith(color: AppStyle.kBackGroundColor),
@@ -223,7 +240,10 @@ class _EditProfileState extends State<EditProfile> {
                             }),
                         Text(
                           "Male".tr(),
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyText2,
                         ),
                       ],
                     ),
@@ -241,7 +261,10 @@ class _EditProfileState extends State<EditProfile> {
                             }),
                         Text(
                           "Female".tr(),
-                          style: Theme.of(context).textTheme.bodyText2,
+                          style: Theme
+                              .of(context)
+                              .textTheme
+                              .bodyText2,
                         ),
                       ],
                     ),
@@ -257,14 +280,15 @@ class _EditProfileState extends State<EditProfile> {
                       isLoading: state is EditUserLoadingState,
                       onPressed: () {
                         if (_key.currentState!.validate()) {
+
                           context.read<EditUserBloc>().add(EditUserApiEvent(
-                                phoneNumber: mobileController.text,
-                                email: emailController.text,
-                                fullName: nameController.text,
-                                facebook: facebookController.text,
-                                gender: genderRadioValue,
-                                dateOfBirth: selectedDate.toString(),
-                              ));
+                            phoneNumber: mobileController.text,
+                            email: emailController.text,
+                            fullName: nameController.text,
+                            facebook: facebookController.text,
+                            gender: genderRadioValue,
+                            dateOfBirth: selectedDate.toString(),
+                          ));
                         }
                       },
                     );
