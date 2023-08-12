@@ -9,7 +9,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../../global_widgets/elevated_button_widget.dart';
 
 class GoogleMapsScreen extends StatefulWidget {
   const GoogleMapsScreen({Key? key}) : super(key: key);

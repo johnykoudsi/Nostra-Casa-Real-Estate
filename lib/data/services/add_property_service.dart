@@ -11,7 +11,7 @@ class AddPropertyService {
       useUserToken: true,
       body: event.addPropertyState.toMapBody(),
       files: event.addPropertyState.images,
-      name: 'images',
+      name: 'images[]',
     );
 
     return helperResponse;

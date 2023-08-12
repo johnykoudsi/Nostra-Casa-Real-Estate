@@ -43,7 +43,7 @@ class Tag extends Equatable{
     description: json["description"] ?? '',
     active: json["active"] ?? 0,
     tagTypeId: json["tag_type_id"],
-    file: "${EndPoints.kMainUrl}/${json["file"]}",
+    file: "${EndPoints.kMainUrlAssets}${json["file"]}",
 
   );
 

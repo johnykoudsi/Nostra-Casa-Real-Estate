@@ -31,7 +31,7 @@ class AddTitleTextField extends StatelessWidget {
           child: TextField(
             cursorColor: AppStyle.blackColor,
             // set the cursor color to red
-            maxLength: 32,
+            maxLength: 250,
             buildCounter: (BuildContext context,
                 {required int currentLength,
                   required bool isFocused,

@@ -13,20 +13,22 @@ class MapsServices {
     required GetNearbyMapsEvent event,
   }) async {
 
-    Map<String,dynamic> mapBody ={
-      "longitude": event.center.longitude,
-      "latitude": event.center.latitude,
-      "radius": mapRadius,
+    Map<String,String> mapBody ={
+      "longitude": event.center.longitude.toString(),
+      "latitude": event.center.latitude.toString(),
+      "radius": mapRadius.toString(),
     };
 
     if(event.propertyType != PropertyType.all){
-      mapBody["property_type"] = propertyTypeBackEnd.reverse[event.propertyType];
+      mapBody["filter[property-type]"] = propertyTypeBackEnd.reverse[event.propertyType].toString();
     }
+    print(mapBody.toString());
 
-    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+    HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
       url: EndPoints.nearbyProperties,
-      body: json.encode(mapBody),
+      body: mapBody,
       useUserToken: true,
+      name: '',
     );
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {

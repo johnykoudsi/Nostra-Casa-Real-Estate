@@ -56,7 +56,7 @@ class _MapScreenState extends State<MapScreen> {
           _markers.add(Marker(
             markerId: MarkerId(property.id.toString()),
             position: property.location,
-            icon: BitmapDescriptor.fromBytes(MapsMarkers.homeLocation!),
+            icon: BitmapDescriptor.fromBytes(MapsMarkers.getMarkerFromPropertyType(property.propertyType)!),
           ));
         });
       }
