@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
-import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
+import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
@@ -31,7 +31,8 @@ import '../presentation/splash_screen/splash_screen.dart';
 import 'app_routes.dart';
 
 class AppRouter {
-  PromoteToAgencyBloc promoteToAgencyBloc = PromoteToAgencyBloc();
+  GoogleMapsBloc promoteToAgencyMapBloc = GoogleMapsBloc();
+
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
@@ -114,7 +115,7 @@ class AppRouter {
           return   MultiBlocProvider(
             providers: [
               BlocProvider.value(
-                value: promoteToAgencyBloc,
+                value: promoteToAgencyMapBloc,
               ),
             ],
             child: const PromoteToAgency(),
@@ -123,7 +124,7 @@ class AppRouter {
           return   MultiBlocProvider(
             providers: [
               BlocProvider.value(
-                value: promoteToAgencyBloc,
+                value: promoteToAgencyMapBloc,
               ),
             ],
             child: const AddAgencyLocation(),

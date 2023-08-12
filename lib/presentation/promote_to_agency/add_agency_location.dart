@@ -6,10 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import '../../business_logic/google_maps/google_maps_bloc.dart';
 
 class AddAgencyLocation extends StatefulWidget {
   const AddAgencyLocation({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class AddAgencyLocation extends StatefulWidget {
 
 class _AddAgencyLocationState extends State<AddAgencyLocation> {
   static CameraPosition _defaultLocation =
-  const CameraPosition(target: LatLng(33.513914, 36.276143), zoom: 15);
+      const CameraPosition(target: LatLng(33.513914, 36.276143), zoom: 15);
   Completer<GoogleMapController> completer = Completer();
   late GoogleMapController _googleMapController;
   final Set<Marker> _markers = {};
@@ -28,21 +29,19 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
 
   @override
   void initState() {
-
     askPermission();
 
-    final promoteToAgencyBloc = context.read<PromoteToAgencyBloc>().state;
+    final blocLocation = context.read<GoogleMapsBloc>().state;
 
-    if (promoteToAgencyBloc.selectedLocation != null) {
-      _defaultLocation =
-          CameraPosition(target: promoteToAgencyBloc.selectedLocation!, zoom: 15);
-      _selectedLocation = promoteToAgencyBloc.selectedLocation;
+    if (blocLocation is GoogleMapsPinSelected) {
+      _defaultLocation = CameraPosition(target: blocLocation.latLng, zoom: 15);
+      _selectedLocation = blocLocation.latLng;
       _markers.add(
         Marker(
           markerId: const MarkerId("0"),
-          position: promoteToAgencyBloc.selectedLocation!,
-          infoWindow: InfoWindow(
-            title: "Location".tr(),
+          position: blocLocation.latLng,
+          infoWindow: const InfoWindow(
+            title: "Location",
           ),
           icon: BitmapDescriptor.defaultMarker,
           onDrag: (location) => addMarker(location: location, isInit: true),
@@ -81,11 +80,8 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
           ),
         );
         _selectedLocation = location;
-
       });
     }
-    final state = context.read<PromoteToAgencyBloc>();
-    state.add(AgencyLocationEvent(latLng: _selectedLocation!));
   }
 
   Future<Position> getUserCurrentLocation() async {
@@ -152,16 +148,28 @@ class _AddAgencyLocationState extends State<AddAgencyLocation> {
               ],
             ),
           ),
-          SizedBox(height: screenHeight*0.05,),
-          Padding(
-            padding:  EdgeInsets.symmetric(horizontal: screenWidth*0.038),
-            child: ElevatedButtonWidget(title: "add location".tr(),onPressed: (){Navigator.pop(context);},),
+          SizedBox(
+            height: screenHeight * 0.05,
           ),
-          SizedBox(height: screenHeight*0.05,),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
+            child: ElevatedButtonWidget(
+              title: "add location".tr(),
+              onPressed: () {
+                if (_selectedLocation == null) return;
+                final state = context.read<GoogleMapsBloc>();
+                state.add(GoogleAddPinEvent(latLng: _selectedLocation!));
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          SizedBox(
+            height: screenHeight * 0.05,
+          ),
         ],
       ),
       floatingActionButton: Padding(
-        padding: const EdgeInsets.symmetric(vertical:120),
+        padding: const EdgeInsets.symmetric(vertical: 120),
         child: FloatingActionButton(
           onPressed: () async {
             getUserCurrentLocation().then((value) async {

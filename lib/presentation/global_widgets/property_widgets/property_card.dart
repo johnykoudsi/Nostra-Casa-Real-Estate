@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../data/models/properties_model.dart';
@@ -32,7 +33,7 @@ class PropertyCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Swiper(
-                  itemCount: property.media.isEmpty?1:property.media.length,
+                  itemCount: property.media.isEmpty ? 1 : property.media.length,
                   indicatorLayout: PageIndicatorLayout.COLOR,
                   autoplay: false,
                   loop: false,
@@ -40,25 +41,27 @@ class PropertyCard extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return FadeInImage(
                       placeholder: const AssetImage(AppAssets.greyLogo),
-                      image: NetworkImage(property.media.isEmpty?"":property.media[index]),
-                      fit: BoxFit.fill,
+                      image: NetworkImage(
+                          property.media.isEmpty ? "" : property.media[index]),
+                      fit: BoxFit.cover,
                       imageErrorBuilder: (context, error, stackTrace) {
                         return Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                  width: 1, color: AppStyle.kGreyColor),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                width: 1, color: AppStyle.kGreyColor),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              AppAssets.greyLogo,
+                              fit: BoxFit.cover,
                             ),
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.asset(
-                                  AppAssets.greyLogo,
-                                  fit: BoxFit.contain,
-                                )));
+                          ),
+                        );
                       },
                     );
                   },
-
                 ),
               ),
             ),
@@ -76,7 +79,7 @@ class PropertyCard extends StatelessWidget {
                       top: screenWidth * 0.01),
                   child: Row(
                     children: [
-                      const Icon(Icons.star),
+                      const Icon(Icons.star,color: Colors.amber,),
                       Text(
                         "4.88",
                         style: Theme.of(context).textTheme.headline5,
@@ -96,7 +99,9 @@ class PropertyCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "90000 \$",
+                  "${NumberFormat
+                      .decimalPattern()
+                      .format(property.price)}\$",
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 Text(

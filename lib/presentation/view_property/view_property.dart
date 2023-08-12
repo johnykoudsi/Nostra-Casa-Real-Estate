@@ -7,6 +7,7 @@ import 'package:nostra_casa/presentation/view_property/widgets/view_property_ame
 import 'package:nostra_casa/presentation/view_property/widgets/view_property_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/view_property_images.dart';
 import 'package:nostra_casa/utility/app_style.dart';
+
 class ViewProperty extends StatefulWidget {
   const ViewProperty({Key? key}) : super(key: key);
 

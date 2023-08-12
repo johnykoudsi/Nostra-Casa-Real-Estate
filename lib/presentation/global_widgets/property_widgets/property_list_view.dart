@@ -5,8 +5,6 @@ import 'package:nostra_casa/business_logic/get_properties/get_all-properties_sea
 import 'package:nostra_casa/business_logic/get_properties/get_all_properties_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/property_widgets/property_card.dart';
 import 'package:nostra_casa/presentation/global_widgets/somthing_wrong.dart';
-import 'package:nostra_casa/utility/app_assets.dart';
-
 import '../../../utility/app_routes.dart';
 
 class AllPropertyListView extends StatefulWidget {
@@ -47,7 +45,7 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, AppRoutes.viewProperty);
+                        Navigator.pushNamed(context, AppRoutes.viewProperty,arguments: state.properties[index]);
                       },
                       child: PropertyCard(
                         property: state.properties[index],
