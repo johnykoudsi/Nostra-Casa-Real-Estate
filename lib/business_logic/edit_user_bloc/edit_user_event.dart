@@ -7,7 +7,6 @@ abstract class EditUserEvent extends Equatable {
 class EditUserApiEvent extends EditUserEvent {
   EditUserApiEvent(
       {
-        required this.phoneNumber,
         required this.email,
         required this.fullName,
         required this.gender,
@@ -15,7 +14,6 @@ class EditUserApiEvent extends EditUserEvent {
           this.dateOfBirth,
 
       });
-  String phoneNumber;
   String email;
   String fullName;
   Gender gender;
@@ -27,7 +25,6 @@ class EditUserApiEvent extends EditUserEvent {
     final json = {
       "name": fullName,
       "email": email,
-      "mobile": phoneNumber,
       "gender": gender.name,
       "facebook": facebook,
       "date_of_birth": dateOfBirth,
@@ -38,5 +35,5 @@ class EditUserApiEvent extends EditUserEvent {
 
   @override
   List<Object?> get props =>
-      [phoneNumber, email, fullName, gender,facebook,dateOfBirth];
+      [ email, fullName, gender,facebook,dateOfBirth];
 }

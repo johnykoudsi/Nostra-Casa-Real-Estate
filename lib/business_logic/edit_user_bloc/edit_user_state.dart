@@ -15,16 +15,8 @@ class EditUserLoadingState extends EditUserState {
   List<Object> get props => [];
 }
 
-class EditUserDoneState extends EditUserState {
-
-  // @override
-  // EditUserDoneState({required this.user});
-  // UserModel user;
-  @override
-  List<Object> get props => [];
-}
-class EditUserErrorState extends EditUserState {
-  EditUserErrorState({required this.helperResponse});
+class EditUserStatusState extends EditUserState {
+  EditUserStatusState({required this.helperResponse});
   HelperResponse helperResponse;
   @override
   List<Object> get props => [helperResponse.servicesResponse,helperResponse.response];

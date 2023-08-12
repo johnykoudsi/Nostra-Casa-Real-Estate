@@ -33,10 +33,10 @@ class UserServices {
       useUserToken: true
     );
 
-    return helperResponse;
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        return welcomeUserFromJson(helperResponse.response).data;
+        UserInfo userInfo = UserInfo.fromJson(json.decode(helperResponse.response)["data"]);
+        return userInfo;
       } catch (e) {
         return helperResponse.copyWith(
           servicesResponse: ServicesResponseStatues.modelError,

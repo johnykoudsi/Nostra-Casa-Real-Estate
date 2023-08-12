@@ -15,27 +15,29 @@ part 'edit_user_event.dart';
 part 'edit_user_state.dart';
 
 class EditUserBloc extends Bloc<EditUserEvent, EditUserState> {
-
   EditUserBloc() : super(EditUserInitial()) {
     on<EditUserApiEvent>((event, emit) async {
       emit(EditUserLoadingState());
 
-      //HelperResponse response = await UserServices.editUserService(event);
       final response = await UserServices.editUserService(event);
-      // if(response.servicesResponse == ServicesResponseStatues.success){
-      //   emit(EditUserDoneState());
-      // }else{
-      //   emit(EditUserErrorState(helperResponse: response));
-      // }
-      if (response is UserModel) {
 
-        saveUserToLocalStorage(response);
-        globalUserBloc.add(CheckUserFromLocalStorage());
-        emit(EditUserDoneState());
+      if (response is UserInfo) {
+        print("asbhjdjksadksakasd1234567890-");
+        UserModel? userModel = await getUserFromLocalStorage();
+
+        if (userModel != null) {
+          userModel.user = response;
+          print("User Model${userModel.toJson()}");
+          saveUserToLocalStorage(userModel);
+          globalUserBloc.add(CheckUserFromLocalStorage());
+        }
+        emit(EditUserStatusState(
+            helperResponse: HelperResponse(
+                servicesResponse: ServicesResponseStatues.success,
+            )));
       } else {
-       emit(EditUserErrorState(helperResponse: response));
+        emit(EditUserStatusState(helperResponse: response));
       }
     });
-
   }
 }

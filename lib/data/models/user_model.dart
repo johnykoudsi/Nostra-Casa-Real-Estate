@@ -108,6 +108,6 @@ class UserInfo {
     "mobile": mobile,
     "facebook": facebook,
     "gender": gender.name,
-    "date_of_birth": dateOfBirth,
+    "date_of_birth": dateOfBirth.toString(),
   };
 }

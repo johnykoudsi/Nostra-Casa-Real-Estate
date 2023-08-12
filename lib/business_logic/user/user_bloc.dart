@@ -15,7 +15,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<CheckUserFromLocalStorage>((event, emit) async {
       UserModel? user = await getUserFromLocalStorage();
 
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(milliseconds: 100));
 
       if (user != null) {
         emit(UserLoggedState(user: user));
