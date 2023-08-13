@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
+import 'package:nostra_casa/presentation/promote_to_agency/add_agency_location.dart';
 import 'package:nostra_casa/presentation/promote_to_agency/widgets/files_list.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/enums.dart';
@@ -52,7 +53,8 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
   static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   @override
   void dispose() {
-    context.read<GoogleMapsBloc>().close();
+
+    context.watch<GoogleMapsBloc>().close();
 
     super.dispose();
   }

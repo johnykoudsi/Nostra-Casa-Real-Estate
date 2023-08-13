@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
+import 'package:nostra_casa/business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
@@ -65,8 +66,10 @@ class AppRouter {
         case AppRoutes.addPropertyWelcome:
           return const WelcomeStep();
 
+
         case AppRoutes.notifications:
           return const Notifications();
+
         case AppRoutes.editProfile:
           return MultiBlocProvider(
             providers: [
@@ -120,7 +123,11 @@ class AppRouter {
           return ImagesStaggeredView(images: args);
 
         case AppRoutes.welcomeToPromote:
-          return const WelcomeToPromote();
+          return
+              BlocProvider(
+                create: (context) => AgencyPromotionStatusBloc()..add(GetPromotionStatusEvent()),
+                child: const WelcomeToPromote(),
+          );
         case AppRoutes.promoteToAgency:
           return MultiBlocProvider(
             providers: [

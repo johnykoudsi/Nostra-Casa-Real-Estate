@@ -27,6 +27,7 @@ class EndPoints{
 
 
   static const String promoteToAgency = "/agencies";
+  static const String requestAgencyStatus = "/agencies/request-status";
 
 
 

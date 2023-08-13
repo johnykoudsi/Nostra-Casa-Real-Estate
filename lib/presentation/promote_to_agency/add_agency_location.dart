@@ -15,11 +15,16 @@ import '../../business_logic/google_maps/google_maps_bloc.dart';
 class AddAgencyLocation extends StatefulWidget {
   const AddAgencyLocation({Key? key}) : super(key: key);
 
+
   @override
-  State<AddAgencyLocation> createState() => _AddAgencyLocationState();
+  State<AddAgencyLocation> createState() => AddAgencyLocationState();
+
+
 }
 
-class _AddAgencyLocationState extends State<AddAgencyLocation> {
+class AddAgencyLocationState extends State<AddAgencyLocation> {
+
+
   static CameraPosition _defaultLocation =
       const CameraPosition(target: LatLng(33.513914, 36.276143), zoom: 15);
   Completer<GoogleMapController> completer = Completer();

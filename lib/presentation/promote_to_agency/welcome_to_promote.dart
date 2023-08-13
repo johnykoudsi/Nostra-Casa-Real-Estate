@@ -1,9 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 
+import '../../business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import '../../utility/app_style.dart';
 import '../../utility/constant_logic_validations.dart';
 import '../global_widgets/elevated_button_widget.dart';
@@ -16,6 +18,10 @@ class WelcomeToPromote extends StatefulWidget {
 }
 
 class _WelcomeToPromoteState extends State<WelcomeToPromote> {
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -64,7 +70,8 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                       height: 18,
                     ),
                     Text(
-                      "We will need more information about your agency in order to confirm you promotion request".tr(),
+                      "We will need more information about your agency in order to confirm you promotion request"
+                          .tr(),
                       style: Theme.of(context).textTheme.headline6,
                     ),
                   ],
@@ -76,32 +83,49 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
       ),
       bottomSheet: Padding(
         padding: EdgeInsets.only(
-            left: screenWidth * 0.038, right: screenWidth * 0.038,bottom:  screenWidth * 0.1),
+            left: screenWidth * 0.038,
+            right: screenWidth * 0.038,
+            bottom: screenWidth * 0.1),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButtonWidget(
-              title: "Promote Now".tr(),
-              onPressed: () {
-                if(!userIsLoggedIn(context)){
-                  DialogsWidgetsYesNo.showYesNoDialog(
-                    title: "You must login to continue".tr(),
-                    noTitle: "Cancel".tr(),
-                    yesTitle: "Login".tr(),
-                    onYesTap: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushNamed(AppRoutes.login);
-                    },
-                    onNoTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    context: context,
-                  );
-                  return;
+            BlocBuilder<AgencyPromotionStatusBloc, AgencyPromotionStatusState>(
+              builder: (context, state) {
+                if(state is AgencyPromotionStatusLoadingState){
+
+                  return Text("");
                 }
-                Navigator.of(context).pushNamed(AppRoutes.promoteToAgency);
+                if(state is AgencyPromotionStatusDoneState){
+                  if(state.status=="No request submitted"){
+                    print("No request submitted");
+                  }
+
+                }
+                return ElevatedButtonWidget(
+                  isLoading: state is AgencyPromotionStatusLoadingState,
+                  title: "Promote Now".tr(),
+                  onPressed: () {
+                    if (!userIsLoggedIn(context)) {
+                      DialogsWidgetsYesNo.showYesNoDialog(
+                        title: "You must login to continue".tr(),
+                        noTitle: "Cancel".tr(),
+                        yesTitle: "Login".tr(),
+                        onYesTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pushNamed(AppRoutes.login);
+                        },
+                        onNoTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        context: context,
+                      );
+                      return;
+                    }
+                    Navigator.of(context).pushNamed(AppRoutes.promoteToAgency);
+                  },
+                );
               },
             )
           ],
