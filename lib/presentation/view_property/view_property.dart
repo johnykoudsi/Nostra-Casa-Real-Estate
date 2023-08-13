@@ -1,6 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nostra_casa/business_logic/add_to_favorite/add_favorite_bloc.dart';
 import 'package:nostra_casa/data/models/special_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/property_rating.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
@@ -178,15 +180,31 @@ class ViewProperty extends StatelessWidget {
                   },
                 ),
                 actions: [
-                  IconButton(
-                    icon: const CircleAvatar(
-                        backgroundColor: AppStyle.kBackGroundColor,
-                        child: Icon(
-                          Icons.favorite_outline_sharp,
-                          color: AppStyle.blackColor,
-                        )),
-                    onPressed: () {
-                      //todo add property to favorite
+                  BlocBuilder<OnePropertyBloc, OnePropertyState>(
+                    builder: (context, state) {
+                      if (state is OnePropertyDoneState) {
+                        return IconButton(
+                          icon: CircleAvatar(
+                              backgroundColor: AppStyle.kBackGroundColor,
+                              child: Icon(
+                                state.favouriteState
+                                    ? Icons.favorite
+                                    : Icons.favorite_outline_sharp,
+                                color: state.favouriteState
+                                    ? AppStyle.redColor
+                                    : AppStyle.blackColor,
+                              )),
+                          onPressed: () {
+                            context.read<OnePropertyBloc>().add(
+                                ToggleFavouriteEvent(
+                                    productObjectId: property.id));
+                          },
+                        );
+                      }
+                      return const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
                     },
                   ),
                 ],

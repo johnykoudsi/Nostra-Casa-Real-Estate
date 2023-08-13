@@ -17,6 +17,7 @@ import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/view_property/view_property.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
+import '../business_logic/add_to_favorite/add_favorite_bloc.dart';
 import '../business_logic/country_bloc/country_bloc.dart';
 import '../business_logic/edit_user_bloc/edit_user_bloc.dart';
 import '../business_logic/tag_bloc/tag_bloc.dart';
@@ -66,7 +67,6 @@ class AppRouter {
         case AppRoutes.addPropertyWelcome:
           return const WelcomeStep();
 
-
         case AppRoutes.notifications:
           return const Notifications();
 
@@ -104,8 +104,12 @@ class AppRouter {
 
         case AppRoutes.viewProperty:
           Property args = settings.arguments as Property;
-          return ViewProperty(
-            property: args,
+          return BlocProvider(
+            create: (context) => OnePropertyBloc()
+              ..add(GetPropertyFavouriteEvent(productObjectId: args.id)),
+            child: ViewProperty(
+              property: args,
+            ),
           );
 
         case AppRoutes.reviewProperty:
@@ -123,10 +127,10 @@ class AppRouter {
           return ImagesStaggeredView(images: args);
 
         case AppRoutes.welcomeToPromote:
-          return
-              BlocProvider(
-                create: (context) => AgencyPromotionStatusBloc()..add(GetPromotionStatusEvent()),
-                child: const WelcomeToPromote(),
+          return BlocProvider(
+            create: (context) =>
+                AgencyPromotionStatusBloc()..add(GetPromotionStatusEvent()),
+            child: const WelcomeToPromote(),
           );
         case AppRoutes.promoteToAgency:
           return MultiBlocProvider(

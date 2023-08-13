@@ -49,7 +49,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       //   return;
       // }
       FirebaseMessaging.instance.getToken().then((fcm) async {
-        print('FCM Token :$fcm');
+        print('$fcm');
         FirebaseMessaging.instance.subscribeToTopic("Public");
         //add fcm to user
         // todo : send fcm service
