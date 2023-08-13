@@ -1,33 +1,45 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:nostra_casa/data/models/special_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/property_rating.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/view_property_amenities.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/view_property_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/view_property_images.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
-class ViewProperty extends StatefulWidget {
-  const ViewProperty({Key? key}) : super(key: key);
+import '../../data/models/properties_model.dart';
+import '../map_location_square_widget/map_location_widget.dart';
 
-  @override
-  State<ViewProperty> createState() => _ViewPropertyState();
-}
+class ViewProperty extends StatelessWidget {
+  ViewProperty({required this.property, Key? key}) : super(key: key);
 
-class _ViewPropertyState extends State<ViewProperty> {
+  Property property;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: AppStyle.kBackGroundColor,
         body: Stack(
           children: [
             ListView(
               children: [
-                ViewPropertyImages(),
+                GestureDetector(
+                    onTap: () {
+                      if (property.media.isEmpty) {
+                        return;
+                      }
+                      Navigator.of(context).pushNamed(
+                          AppRoutes.staggeredImagesView,
+                          arguments: property.media);
+                    },
+                    child: Hero(
+                      tag: property.id,
+                      child: ViewPropertyImages(imagesUrl: property.media),
+                    )),
                 Padding(
                   padding: EdgeInsets.only(
                       left: screenWidth * 0.038,
@@ -38,7 +50,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Property Name",
+                        property.name,
                         style: Theme.of(context).textTheme.headline2,
                       ),
                       SizedBox(
@@ -60,7 +72,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                       Row(
                         children: [
                           Text(
-                            "90000000 sp",
+                            "${NumberFormat.decimalPattern().format(property.price)} SYP",
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
@@ -74,7 +86,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                       ),
                       const Spacing(),
                       Text(
-                        "This house is so great you can see the whole city from the roof ",
+                        property.description,
                         style: Theme.of(context)
                             .textTheme
                             .headline4!
@@ -88,16 +100,49 @@ class _ViewPropertyState extends State<ViewProperty> {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
-                      ViewPropertyAttributes(),
+                      ViewPropertyAttributes(
+                        abstractPropertyAttributes: property.agricultural ??
+                            property.commercial ??
+                            property.residential ??
+                            AgriculturalPropertyAttributes(waterSources: 20),
+                      ),
+                      if (property.amenities.isNotEmpty)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Spacing(),
+                            Text(
+                              "And in top of that".tr(),
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.02,
+                            ),
+                            ViewPropertyAmenities(
+                              amenities: property.amenities,
+                            ),
+                          ],
+                        ),
                       const Spacing(),
                       Text(
-                        "And in top of that".tr(),
+                        "Where you will be".tr(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
-                      const ViewPropertyAmenities(),
+                      MapLocationSquareWidget(
+                        latLng: property.location,
+                        propertyType: property.propertyType,
+                      ),
+                      const Spacing(),
+                      Text(
+                        "Connect Now".tr(),
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
                       const Spacing(),
                       Text(
                         "Feel free to rate this property".tr(),

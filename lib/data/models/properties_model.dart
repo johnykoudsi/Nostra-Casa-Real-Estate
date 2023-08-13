@@ -88,13 +88,13 @@ class Property {
             : UserInfo(id: -1),
         residential: json["residential"] != null
             ? ResidentialPropertyAttributes.fromJson(json["residential"])
-            : ResidentialPropertyAttributes(),
+            : null,
         commercial: json["commercial"] != null
             ? CommercialPropertyAttributes.fromJson(json["commercial"])
-            : CommercialPropertyAttributes(),
+            :null,
         agricultural: json["agricultural"] != null
             ? AgriculturalPropertyAttributes.fromJson(json["agricultural"])
-            : AgriculturalPropertyAttributes(),
+            : null,
         media: List<String>.from(
             json["media"]?.map((x) => x["original_url"]) ?? [""]),
       );

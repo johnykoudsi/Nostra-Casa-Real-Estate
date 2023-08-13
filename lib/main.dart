@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_maps_flutter_android/google_maps_flutter_android.dart';
@@ -46,7 +47,12 @@ Future<void> main() async {
   const AndroidInitializationSettings('@drawable/app_icon');
   FirebaseMessaging.instance.requestPermission();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: AppStyle.mainColor, // status bar color
+      statusBarIconBrightness: Brightness.light, // status bar icons' color
+      systemNavigationBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: AppStyle.kBackGroundColor
+  ));
   Bloc.observer = MyBlocObserver();
 
   runApp(EasyLocalization(

@@ -16,7 +16,7 @@ class AgriculturalTypesWidget extends StatelessWidget {
     return ListView(
       children: [
         OneAttributeWidget(
-          name: "Bath Rooms",
+          name: "Water Sources",
           value: agriculturalPropertyAttributes.waterSources,
           onTapMinus: () {
             if(agriculturalPropertyAttributes.waterSources == 0){

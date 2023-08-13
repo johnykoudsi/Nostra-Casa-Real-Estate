@@ -4,6 +4,7 @@ import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.d
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
+import 'package:nostra_casa/data/models/properties_model.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
@@ -28,6 +29,7 @@ import '../presentation/login_screen/login_screen.dart';
 import '../presentation/notifications/notifications.dart';
 import '../presentation/policy/policy.dart';
 import '../presentation/splash_screen/splash_screen.dart';
+import '../presentation/view_property/widgets/images_staggered_view.dart';
 import 'app_routes.dart';
 
 class AppRouter {
@@ -98,7 +100,10 @@ class AppRouter {
           return const AboutUs();
 
         case AppRoutes.viewProperty:
-          return const ViewProperty();
+          Property args = settings.arguments as Property;
+          return ViewProperty(
+            property: args,
+          );
 
         case AppRoutes.reviewProperty:
           AddPropertyState args = settings.arguments as AddPropertyState;
@@ -109,10 +114,15 @@ class AppRouter {
 
         case AppRoutes.homePage:
           return const Explore();
+
+        case AppRoutes.staggeredImagesView:
+          List<String> args = settings.arguments as List<String>;
+          return ImagesStaggeredView(images: args);
+
         case AppRoutes.welcomeToPromote:
           return const WelcomeToPromote();
         case AppRoutes.promoteToAgency:
-          return   MultiBlocProvider(
+          return MultiBlocProvider(
             providers: [
               BlocProvider.value(
                 value: promoteToAgencyMapBloc,
@@ -121,7 +131,7 @@ class AppRouter {
             child: const PromoteToAgency(),
           );
         case AppRoutes.addAgencyLocation:
-          return   MultiBlocProvider(
+          return MultiBlocProvider(
             providers: [
               BlocProvider.value(
                 value: promoteToAgencyMapBloc,

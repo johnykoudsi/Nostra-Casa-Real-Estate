@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import 'package:nostra_casa/business_logic/get_properties/get_all-properties_search_filter.dart';
 import 'package:nostra_casa/business_logic/get_properties/get_all_properties_bloc.dart';
+import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
 import 'package:nostra_casa/presentation/global_widgets/property_widgets/property_card.dart';
+import 'package:nostra_casa/presentation/global_widgets/property_widgets/property_shimmer.dart';
 import 'package:nostra_casa/presentation/global_widgets/somthing_wrong.dart';
 import '../../../utility/app_routes.dart';
 
@@ -37,7 +39,13 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
       child: BlocBuilder<GetAllPropertiesBloc, GetAllPropertiesState>(
         builder: (context, state) {
           if (state is AllPropertiesInitial) {
-            return const Center(child: CircularProgressIndicator());
+            return ListView(
+              children: [
+                PropertyShimmer(),
+                PropertyShimmer(),
+                PropertyShimmer(),
+              ],
+            );
           }
           if (state is AllPropertiesLoadedState) {
             return ListView.builder(
@@ -47,13 +55,24 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                       onTap: () {
                         Navigator.pushNamed(context, AppRoutes.viewProperty,arguments: state.properties[index]);
                       },
-                      child: PropertyCard(
-                        property: state.properties[index],
+                      child: Hero(
+                        tag: state.properties[index].id,
+                        child: PropertyCard(
+                          property: state.properties[index],
+                        ),
                       ));
                 });
           }
-
-          return SomethingWrongWidget();
+          return SomethingWrongWidget(
+            elevatedButtonWidget: ElevatedButtonWidget(
+              title: "Refresh",
+              onPressed: (){
+                context.read<GetAllPropertiesBloc>().add(ChangeToLoadingApiEvent(
+                  searchFilterProperties: propertiesSearchFilter.copyWith(page: 1),
+                ));
+              },
+            ),
+          );
         },
       ),
     );

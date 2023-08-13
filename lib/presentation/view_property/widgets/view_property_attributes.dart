@@ -1,38 +1,28 @@
 import 'package:flutter/material.dart';
 
+import '../../../data/models/special_attributes.dart';
+
 class ViewPropertyAttributes extends StatelessWidget {
-   ViewPropertyAttributes({Key? key}) : super(key: key);
-  List<String> propertyAttributesList = [
-    "guests",
-    "bedrooms",
-    "beds",
-    "bathrooms",
-    "balconies",
-    "beds"
-  ];
-  List<int> propertyAttributesListValue = [2, 5, 25, 5, 3, 7];
+  ViewPropertyAttributes({required this.abstractPropertyAttributes, Key? key})
+      : super(key: key);
+  AbstractPropertyAttributes abstractPropertyAttributes;
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      children: List.generate(propertyAttributesList.length,
-              (index) {
-            return Wrap(
-              children: [
-                Text(
-                  index > 0 ? ", " : "",
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                Text(
-                  "${propertyAttributesListValue[index]} ",
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-                Text(
-                  propertyAttributesList[index],
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ],
-            );
-          }),
+      children:abstractPropertyAttributes.toScreen().entries.map((entry) {
+       return Row(
+          children: [
+            Text(
+              "${entry.value} ",
+              style: Theme.of(context).textTheme.headline5,
+            ),
+            Text(
+              entry.key,
+              style: Theme.of(context).textTheme.headline5,
+            ),
+          ],
+        );
+      }).toList()
     );
   }
 }

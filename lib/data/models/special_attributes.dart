@@ -1,5 +1,6 @@
 abstract class AbstractPropertyAttributes {
   Map<String, String> toJson() => {};
+  Map<String, String> toScreen() => {};
 }
 
 class CommercialPropertyAttributes extends AbstractPropertyAttributes {
@@ -26,6 +27,12 @@ class CommercialPropertyAttributes extends AbstractPropertyAttributes {
         "num_of_bathrooms": numberOfBathrooms.toString(),
         "num_of_balconies": numberOfBalconies.toString(),
         "floor": floor.toString(),
+      };
+  @override
+  Map<String, String> toScreen() => {
+        "Bathrooms": numberOfBathrooms.toString(),
+        "Balconies": numberOfBalconies.toString(),
+        "Floor": floor.toString(),
       };
   CommercialPropertyAttributes copyWith({
     int? id,
@@ -71,6 +78,13 @@ class ResidentialPropertyAttributes extends AbstractPropertyAttributes {
         "num_of_bedrooms": numberOfBedrooms.toString(),
         "num_of_living_rooms": numberOfLivingRooms.toString(),
       };
+  @override
+  Map<String, String> toScreen() => {
+        "Bathrooms": numberOfBathrooms.toString(),
+        "Balconies": numberOfBalconies.toString(),
+        "Bedrooms": numberOfBedrooms.toString(),
+        "Living_rooms": numberOfLivingRooms.toString(),
+      };
 
   ResidentialPropertyAttributes copyWith({
     int? numberOfBedrooms,
@@ -103,5 +117,9 @@ class AgriculturalPropertyAttributes extends AbstractPropertyAttributes {
   @override
   Map<String, String> toJson() => {
     "water_sources": waterSources.toString(),
+  };
+  @override
+  Map<String, String> toScreen() => {
+    "Water Sources": waterSources.toString(),
   };
 }

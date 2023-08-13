@@ -41,7 +41,7 @@ class ReviewProperty extends StatelessWidget {
               children: [
                 ListView(
                   children: [
-                    ViewPropertyImages(),
+                    //ViewPropertyImages(),
                     Padding(
                       padding: EdgeInsets.only(
                           left: screenWidth * 0.038,
@@ -102,7 +102,7 @@ class ReviewProperty extends StatelessWidget {
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
-                          ViewPropertyAttributes(),
+                          //ViewPropertyAttributes(),
                           const Spacing(),
                           Text(
                             "And in top of that".tr(),
@@ -111,7 +111,7 @@ class ReviewProperty extends StatelessWidget {
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
-                          const ViewPropertyAmenities(),
+                         // const ViewPropertyAmenities(),
                           const Spacing(),
                           Text(
                             "Feel free to rate this property".tr(),

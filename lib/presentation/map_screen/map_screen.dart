@@ -9,7 +9,9 @@ import 'package:nostra_casa/presentation/map_screen/widgets/propertyType_filter_
 import 'package:nostra_casa/utility/app_style.dart';
 import '../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import '../../data/models/properties_model.dart';
+import '../../utility/app_routes.dart';
 import '../../utility/enums.dart';
+import '../global_widgets/property_widgets/property_card.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -56,7 +58,54 @@ class _MapScreenState extends State<MapScreen> {
           _markers.add(Marker(
             markerId: MarkerId(property.id.toString()),
             position: property.location,
-            icon: BitmapDescriptor.fromBytes(MapsMarkers.getMarkerFromPropertyType(property.propertyType)!),
+            onTap: () {
+              _googleMapController
+                  .animateCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target: property.location,
+                    zoom: 18,
+                  ),
+                ),
+              ).then((value) {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (builder) {
+                    return Column(
+                      children: [
+                        Container(
+                          width: 100,
+                          margin: const EdgeInsets.all(8),
+                          height: 5,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: AppStyle.k4RadiusLowerPadding,
+                            color: Theme.of(context)
+                                .primaryColor
+                                .withOpacity(0.5),
+                          ),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pushNamed(
+                                    AppRoutes.viewProperty,
+                                    arguments: property);
+                              },
+                              child: PropertyCard(
+                                property: property,
+                              )),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              });
+            },
+            icon: BitmapDescriptor.fromBytes(
+                MapsMarkers.getMarkerFromPropertyType(property.propertyType)!),
           ));
         });
       }

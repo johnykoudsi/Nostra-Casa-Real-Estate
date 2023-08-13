@@ -2,32 +2,34 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utility/app_assets.dart';
+import '../../../utility/app_style.dart';
 
 class ViewPropertyImages extends StatelessWidget {
-   ViewPropertyImages({Key? key}) : super(key: key);
-  List<String> property = [
-    AppAssets.welcome,
-    AppAssets.welcome,
-    AppAssets.welcome,
-  ];
-
+  ViewPropertyImages({required this.imagesUrl, Key? key}) : super(key: key);
+  List<String> imagesUrl;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
-      height: screenHeight * 0.35,
+      height: screenWidth ,
       width: screenWidth,
       child: Swiper(
         loop: false,
         itemBuilder: (context, index) {
-          final image = property[index];
           return Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(
-                image,
+              FadeInImage(
+                placeholder: const AssetImage(AppAssets.greyLogo),
+                image: NetworkImage(imagesUrl.isEmpty ? "" : imagesUrl[index]),
                 fit: BoxFit.cover,
+                imageErrorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    AppAssets.greyLogo,
+                    fit: BoxFit.cover,
+                  );
+                },
               ),
               Positioned(
                 bottom: 10,
@@ -40,11 +42,8 @@ class ViewPropertyImages extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      "${index + 1}/${property.length}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5!
-                          .copyWith(
+                      "${index + 1}/${imagesUrl.length}",
+                      style: Theme.of(context).textTheme.headline5!.copyWith(
                           color: Colors.white,
                           fontSize: 15,
                           fontWeight: FontWeight.bold),
@@ -57,7 +56,7 @@ class ViewPropertyImages extends StatelessWidget {
         },
         indicatorLayout: PageIndicatorLayout.COLOR,
         autoplay: false,
-        itemCount: property.length,
+        itemCount: imagesUrl.isNotEmpty? imagesUrl.length : 1,
         control: null,
       ),
     );

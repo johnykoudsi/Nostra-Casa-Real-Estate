@@ -70,7 +70,7 @@ class PropertyCard extends StatelessWidget {
               children: [
                 Text(
                   "Damascus, Syria",
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headline4,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -94,14 +94,14 @@ class PropertyCard extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .headline5!
-                  .copyWith(color: AppStyle.kGreyColor),
+                 // .copyWith(color: AppStyle.kGreyColor),
             ),
             Row(
               children: [
                 Text(
                   "${NumberFormat
                       .decimalPattern()
-                      .format(property.price)}\$",
+                      .format(property.price)} SYP",
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 Text(

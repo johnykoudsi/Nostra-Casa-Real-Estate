@@ -3,14 +3,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
 import 'package:nostra_casa/presentation/promote_to_agency/widgets/files_list.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
+import 'package:nostra_casa/utility/enums.dart';
 import '../../utility/app_style.dart';
 import '../add_property/widgets/custom_elevated_button.dart';
 import '../global_widgets/custom_text_field.dart';
+import '../map_location_square_widget/map_location_widget.dart';
 
 class PromoteToAgency extends StatefulWidget {
   const PromoteToAgency({Key? key}) : super(key: key);
@@ -20,10 +21,7 @@ class PromoteToAgency extends StatefulWidget {
 }
 
 class _PromoteToAgencyState extends State<PromoteToAgency> {
-
   List<File> files = [];
-
-  GoogleMapController? googleMapController;
 
   TextEditingController promotionRequestController = TextEditingController();
 
@@ -45,7 +43,7 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
 
   bool isInfoCompleted() {
     //final googleMapState = context.rea<GoogleMapsBloc>().state;
-    if ( files.isNotEmpty) {
+    if (files.isNotEmpty) {
       return true;
     }
     return false;
@@ -55,7 +53,6 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
   @override
   void dispose() {
     context.read<GoogleMapsBloc>().close();
-    googleMapController?.dispose();
 
     super.dispose();
   }
@@ -135,46 +132,15 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
                   if (state is GoogleMapsPinSelected) {
                     return Stack(
                       children: [
-                        SizedBox(
-                          height: 150,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                  color: AppStyle.kGreyColor),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: GoogleMap(
-                                onMapCreated: (mapController) =>
-                                googleMapController = mapController,
-                                markers: {
-                                  Marker(
-                                    markerId:
-                                    const MarkerId('location'),
-                                    position: state.latLng,
-                                  )
-                                },
-                                initialCameraPosition: CameraPosition(
-                                  target: state.latLng,
-                                  zoom: 15,
-                                ),
-                                zoomControlsEnabled: false,
-                                scrollGesturesEnabled: false,
-                                compassEnabled: false,
-                                zoomGesturesEnabled: false,
-                                rotateGesturesEnabled: false,
-                                trafficEnabled: false,
-                                mapToolbarEnabled: false,
-                                tiltGesturesEnabled: false,
-                                indoorViewEnabled: false,
-                              ),
-                            ),
-                          ),
+                        MapLocationSquareWidget(
+                          latLng: state.latLng,
+                          propertyType: PropertyType.commercial,
+                          key: UniqueKey(),
                         ),
                         GestureDetector(
-                          onTap:() {
-                            Navigator.of(context).pushNamed(AppRoutes.addAgencyLocation);
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed(AppRoutes.addAgencyLocation);
                           },
                           child: Container(
                             height: 150,
@@ -188,13 +154,13 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
                   return CustomElevatedButton(
                       backgroundColor: Colors.white,
                       onPress: () {
-                        Navigator.of(context).pushNamed(AppRoutes.addAgencyLocation);
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.addAgencyLocation);
                       },
                       title: "Add your agency location".tr(),
                       iconData: Icons.map_outlined);
                 },
               ),
-
             ],
           ),
         ),

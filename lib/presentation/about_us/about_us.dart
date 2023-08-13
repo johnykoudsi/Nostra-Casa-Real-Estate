@@ -57,7 +57,8 @@ class _AboutUsState extends State<AboutUs> {
               Padding(
                 padding: EdgeInsets.only(top: screenHeight * 0.05),
                 child: Text(
-                  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way.".tr(),
+                  "Welcome to Nostra Casa platform.\nHere you can find different type of properties to buy, rent, or to have your holiday in!\nYou can even publish your own property or create agency to publish other properties people may be interest in.\nNostra Casa will help you to describe your place in the best way."
+                      .tr(),
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme

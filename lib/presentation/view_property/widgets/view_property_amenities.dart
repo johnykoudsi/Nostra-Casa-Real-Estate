@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nostra_casa/data/models/amenities_model.dart';
 
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class ViewPropertyAmenities extends StatelessWidget {
-  const ViewPropertyAmenities({Key? key}) : super(key: key);
+  ViewPropertyAmenities({required this.amenities,Key? key}) : super(key: key);
 
+  List<Amenity> amenities;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -14,14 +16,13 @@ class ViewPropertyAmenities extends StatelessWidget {
     return SizedBox(
       height: 100,
       child: GridView.builder(
-          gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             childAspectRatio: 1,
             crossAxisCount: 1,
             crossAxisSpacing: 2,
             mainAxisSpacing: 25,
           ),
-          itemCount: 5,
+          itemCount: amenities.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (BuildContext context, int index) {
             return Container(
@@ -45,8 +46,8 @@ class ViewPropertyAmenities extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Center(
-                          child: SvgPicture.asset(
-                            AppAssets.tv,
+                          child: SvgPicture.network(
+                            amenities[index].file,
                             width: screenWidth * 0.07,
                             height: screenHeight * 0.045,
                           ),
@@ -55,7 +56,7 @@ class ViewPropertyAmenities extends StatelessWidget {
                       Expanded(
                         child: Center(
                           child: Text(
-                            "Wifi",
+                            amenities[index].name,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5,
