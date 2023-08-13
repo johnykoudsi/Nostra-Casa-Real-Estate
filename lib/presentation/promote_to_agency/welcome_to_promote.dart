@@ -59,22 +59,53 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                 padding: EdgeInsets.symmetric(
                     horizontal: screenWidth * 0.038,
                     vertical: screenWidth * 0.038),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Promote now and get your badge".tr(),
-                      style: Theme.of(context).textTheme.headline2,
-                    ),
-                    const SizedBox(
-                      height: 18,
-                    ),
-                    Text(
-                      "We will need more information about your agency in order to confirm you promotion request"
-                          .tr(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ],
+                child: BlocBuilder<AgencyPromotionStatusBloc,
+                    AgencyPromotionStatusState>(
+                  builder: (context, state) {
+                    if (state is AgencyPromotionStatusLoadingState) {
+                      return const CircularProgressIndicator();
+                    }
+                    if (state is AgencyPromotionStatusDoneState) {
+                      if (state.status == "No request submitted") {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Promote now and get your badge".tr(),
+                              style: Theme.of(context).textTheme.headline2,
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Text(
+                              "We will need more information about your agency in order to confirm you promotion request"
+                                  .tr(),
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
+                        );
+                      } else if (state.status == "Pending") {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Your request is on pending ".tr(),
+                              style: Theme.of(context).textTheme.headline2,
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Text(
+                              "We will let you know about your request result "
+                                  .tr(),
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
+                        );
+                      }
+                    }
+                    return Text("");
+                  },
                 ),
               ),
             ],
@@ -93,39 +124,40 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
           children: [
             BlocBuilder<AgencyPromotionStatusBloc, AgencyPromotionStatusState>(
               builder: (context, state) {
-                if(state is AgencyPromotionStatusLoadingState){
-
-                  return Text("");
+                if (state is AgencyPromotionStatusLoadingState) {
+                  return const Text("");
                 }
-                if(state is AgencyPromotionStatusDoneState){
-                  if(state.status=="No request submitted"){
-                    print("No request submitted");
+                if (state is AgencyPromotionStatusDoneState) {
+                  if (state.status == "No request submitted") {
+                    return ElevatedButtonWidget(
+                      isLoading: state is AgencyPromotionStatusLoadingState,
+                      title: "Promote Now".tr(),
+                      onPressed: () {
+                        if (!userIsLoggedIn(context)) {
+                          DialogsWidgetsYesNo.showYesNoDialog(
+                            title: "You must login to continue".tr(),
+                            noTitle: "Cancel".tr(),
+                            yesTitle: "Login".tr(),
+                            onYesTap: () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pushNamed(AppRoutes.login);
+                            },
+                            onNoTap: () {
+                              Navigator.of(context).pop();
+                            },
+                            context: context,
+                          );
+                          return;
+                        }
+                        Navigator.of(context)
+                            .pushNamed(AppRoutes.promoteToAgency);
+                      },
+                    );
+                  } else if (state.status == "Pending") {
+                    return const Text("");
                   }
-
                 }
-                return ElevatedButtonWidget(
-                  isLoading: state is AgencyPromotionStatusLoadingState,
-                  title: "Promote Now".tr(),
-                  onPressed: () {
-                    if (!userIsLoggedIn(context)) {
-                      DialogsWidgetsYesNo.showYesNoDialog(
-                        title: "You must login to continue".tr(),
-                        noTitle: "Cancel".tr(),
-                        yesTitle: "Login".tr(),
-                        onYesTap: () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pushNamed(AppRoutes.login);
-                        },
-                        onNoTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        context: context,
-                      );
-                      return;
-                    }
-                    Navigator.of(context).pushNamed(AppRoutes.promoteToAgency);
-                  },
-                );
+                return const Text("");
               },
             )
           ],

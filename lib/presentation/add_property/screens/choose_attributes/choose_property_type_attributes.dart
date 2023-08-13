@@ -26,7 +26,6 @@ class _ChoosePropertyTypeAttributesState
 
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -66,26 +65,23 @@ class _ChoosePropertyTypeAttributesState
               builder: (context, state) {
                 final propertyAttributes = state.propertyAttributes;
 
-                if(propertyAttributes is ResidentialPropertyAttributes){
+                if (propertyAttributes is ResidentialPropertyAttributes) {
                   return Expanded(
                       child: ResidentialTypesWidget(
-                        residentialPropertyAttributes: propertyAttributes,
-                      )
-                  );
+                    residentialPropertyAttributes: propertyAttributes,
+                  ));
                 }
-                if(propertyAttributes is CommercialPropertyAttributes){
+                if (propertyAttributes is CommercialPropertyAttributes) {
                   return Expanded(
                       child: CommercialTypesWidget(
-                        commercialPropertyAttributes: propertyAttributes,
-                      )
-                  );
+                    commercialPropertyAttributes: propertyAttributes,
+                  ));
                 }
-                if(propertyAttributes is AgriculturalPropertyAttributes){
+                if (propertyAttributes is AgriculturalPropertyAttributes) {
                   return Expanded(
                       child: AgriculturalTypesWidget(
-                        agriculturalPropertyAttributes: propertyAttributes,
-                      )
-                  );
+                    agriculturalPropertyAttributes: propertyAttributes,
+                  ));
                 }
                 return const SizedBox();
               },

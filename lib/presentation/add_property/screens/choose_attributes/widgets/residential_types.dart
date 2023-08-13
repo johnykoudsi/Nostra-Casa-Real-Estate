@@ -19,7 +19,10 @@ class ResidentialTypesWidget extends StatelessWidget {
           name: "Bath Rooms",
           value: residentialPropertyAttributes.numberOfBathrooms,
           onTapMinus: () {
-            int newValue = residentialPropertyAttributes.numberOfBathrooms - 1;
+            int newValue = residentialPropertyAttributes.numberOfBathrooms;
+            if(residentialPropertyAttributes.numberOfBathrooms>0){
+              newValue = residentialPropertyAttributes.numberOfBathrooms-1;
+            }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
                     propertyAttributes: residentialPropertyAttributes.copyWith(

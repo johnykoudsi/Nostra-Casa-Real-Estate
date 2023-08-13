@@ -76,9 +76,9 @@ class _CustomInsertNumberFieldState extends State<CustomInsertNumberField> {
                     ),
                   ),
                   child: TextFormField(
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
+                    // inputFormatters: <TextInputFormatter>[
+                    //   FilteringTextInputFormatter.digitsOnly,
+                    // ],
                     textAlign: TextAlign.center,
                     keyboardType: TextInputType.number,
                     onChanged: widget.onChange,
