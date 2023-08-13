@@ -68,11 +68,25 @@ class AddPropertyState extends Equatable {
         area: area ?? this.area,
       );
 
+  String getPropertyService(PropertyService? service){
+    if(propertyService == PropertyService.sale){
+      return "SALE";
+    }
+    if(propertyService == PropertyService.rent){
+      return "RENT";
+    }
+    if(propertyService == PropertyService.holiday){
+      return "HOLIDAY";
+    }
+    return "";
+
+  }
   Map<String, String> toMapBody() {
     Map<String, String> map = {
       "name": title,
       "area": area.toString(),
       "price": price.toString(),
+      "service": getPropertyService(propertyService),
       "description": description,
       "latitude": "${selectedLocation?.latitude}",
       "longitude": "${selectedLocation?.longitude}",

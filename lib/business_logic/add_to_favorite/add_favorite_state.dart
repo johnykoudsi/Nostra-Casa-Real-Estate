@@ -20,9 +20,9 @@ class OnePropertyDoneState extends OnePropertyState {
 class OnePropertyErrorState extends OnePropertyState {
 
 
-  OnePropertyErrorState({required this.error});
-  String error;
+  OnePropertyErrorState({required this.helperResponse});
+  HelperResponse helperResponse;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [helperResponse];
 }

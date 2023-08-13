@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:nostra_casa/utility/network_helper.dart';
 import '../../data/services/add_favorite_service.dart';
 
 part 'add_favorite_event.dart';
@@ -12,23 +13,21 @@ class OnePropertyBloc extends Bloc<OnePropertyEvent, OnePropertyState> {
 
       final favouriteState =
           await AddToFavoriteServices.getAmenityService(event: event);
-      print(favouriteState);
       if (favouriteState is bool) {
         emit(OnePropertyDoneState(favouriteState: favouriteState));
       } else {
-        emit(OnePropertyErrorState(error: favouriteState));
+        emit(OnePropertyErrorState(helperResponse: favouriteState));
       }
     });
     on<ToggleFavouriteEvent>((event, emit) async {
       emit(OnePropertyLoadingState());
       final favouriteState =
           await AddToFavoriteServices.toggleFavouriteService(event: event);
-      print(favouriteState);
 
       if (favouriteState is bool) {
         emit(OnePropertyDoneState(favouriteState: favouriteState));
       } else {
-        emit(OnePropertyErrorState(error: favouriteState));
+        emit(OnePropertyErrorState(helperResponse: favouriteState));
       }
     });
   }

@@ -43,6 +43,7 @@ class Property {
   String status;
 
   PropertyType propertyType;
+  PropertyService? propertyService;
   List<Tag> tags;
   List<Amenity> amenities;
   UserInfo? userInfo;
@@ -67,35 +68,41 @@ class Property {
     this.residential,
     this.commercial,
     this.media = const [""],
+    this.propertyService,
   });
 
-  factory Property.fromJson(Map<String, dynamic> json) => Property(
-        id: json["id"] ?? 0,
-        name: json["name"] ?? '',
-        area: json["area"] ?? 0,
-        price: json["price"] ?? 0,
-        description: json["description"] ?? "",
-        location: LatLng(double.tryParse(json["latitude"]) ?? 0,
-            double.tryParse(json["longitude"]) ?? 0),
-        status: json["status"] ?? '',
-        propertyType:
-            propertyTypeBackEnd2.map[json["type"]] ?? PropertyType.all,
-        tags: List<Tag>.from(json["tags"]?.map((x) => Tag.fromJson(x)) ?? []),
-        amenities: List<Amenity>.from(
-            json["amenities"]?.map((x) => Amenity.fromJson(x)) ?? []),
-        userInfo: json["user"] != null
-            ? UserInfo.fromJson(json["user"])
-            : UserInfo(id: -1),
-        residential: json["residential"] != null
-            ? ResidentialPropertyAttributes.fromJson(json["residential"])
-            : null,
-        commercial: json["commercial"] != null
-            ? CommercialPropertyAttributes.fromJson(json["commercial"])
-            :null,
-        agricultural: json["agricultural"] != null
-            ? AgriculturalPropertyAttributes.fromJson(json["agricultural"])
-            : null,
-        media: List<String>.from(
-            json["media"]?.map((x) => x["original_url"]) ?? [""]),
-      );
+  factory Property.fromJson(Map<String, dynamic> json) {
+    print(json["service"]);
+    print(propertyServiceBackEnd2.map[json["service"]]);
+
+    return Property(
+      id: json["id"] ?? 0,
+      name: json["name"] ?? '',
+      area: json["area"] ?? 0,
+      price: json["price"] ?? 0,
+      description: json["description"] ?? "",
+      location: LatLng(double.tryParse(json["latitude"]) ?? 0,
+          double.tryParse(json["longitude"]) ?? 0),
+      status: json["status"] ?? '',
+      propertyType: propertyTypeBackEnd2.map[json["type"]] ?? PropertyType.all,
+      propertyService: propertyServiceBackEnd2.map[json["service"]],
+      tags: List<Tag>.from(json["tags"]?.map((x) => Tag.fromJson(x)) ?? []),
+      amenities: List<Amenity>.from(
+          json["amenities"]?.map((x) => Amenity.fromJson(x)) ?? []),
+      userInfo: json["user"] != null
+          ? UserInfo.fromJson(json["user"])
+          : UserInfo(id: -1),
+      residential: json["residential"] != null
+          ? ResidentialPropertyAttributes.fromJson(json["residential"])
+          : null,
+      commercial: json["commercial"] != null
+          ? CommercialPropertyAttributes.fromJson(json["commercial"])
+          : null,
+      agricultural: json["agricultural"] != null
+          ? AgriculturalPropertyAttributes.fromJson(json["agricultural"])
+          : null,
+      media: List<String>.from(
+          json["media"]?.map((x) => x["original_url"]) ?? [""]),
+    );
+  }
 }

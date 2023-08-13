@@ -41,7 +41,7 @@ class ViewProperty extends StatelessWidget {
                     },
                     child: Hero(
                       tag: property.id,
-                      child: ViewPropertyImages(imagesUrl: property.media),
+                      child: ViewPropertyImages(imagesUrl: property.media,propertyService: property.propertyService,),
                     )),
                 Padding(
                   padding: EdgeInsets.only(
