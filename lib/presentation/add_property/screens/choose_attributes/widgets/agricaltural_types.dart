@@ -22,7 +22,10 @@ class AgriculturalTypesWidget extends StatelessWidget {
             if(agriculturalPropertyAttributes.waterSources == 0){
               return;
             }
-            int newValue = agriculturalPropertyAttributes.waterSources - 1;
+            int newValue = agriculturalPropertyAttributes.waterSources;
+            if(agriculturalPropertyAttributes.waterSources >0){
+              newValue = agriculturalPropertyAttributes.waterSources - 1;
+            }
             context
                 .read<AddPropertyBloc>()
                 .add(SelectedTypeConstAttributesEvent(

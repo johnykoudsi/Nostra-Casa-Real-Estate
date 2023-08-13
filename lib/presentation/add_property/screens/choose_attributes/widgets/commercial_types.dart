@@ -38,7 +38,10 @@ class CommercialTypesWidget extends StatelessWidget {
           name: "Balconies",
           value: commercialPropertyAttributes.numberOfBalconies,
           onTapMinus: () {
-            int newValue = commercialPropertyAttributes.numberOfBalconies - 1;
+            int newValue=commercialPropertyAttributes.numberOfBalconies;
+            if(commercialPropertyAttributes.numberOfBalconies>0){
+               newValue = commercialPropertyAttributes.numberOfBalconies - 1;
+            }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
                     propertyAttributes: commercialPropertyAttributes.copyWith(
