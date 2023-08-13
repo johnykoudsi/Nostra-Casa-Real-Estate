@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_to_favorite/add_favorite_bloc.dart';
+import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/data/models/special_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/property_rating.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
@@ -180,6 +181,7 @@ class ViewProperty extends StatelessWidget {
                   },
                 ),
                 actions: [
+                  if(context.read<UserBloc>().state is UserLoggedState)
                   BlocBuilder<OnePropertyBloc, OnePropertyState>(
                     builder: (context, state) {
                       if (state is OnePropertyDoneState) {
