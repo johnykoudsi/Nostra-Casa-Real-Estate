@@ -25,13 +25,10 @@ class AllPropertyListView extends StatefulWidget {
 class _AllPropertyListViewState extends State<AllPropertyListView> {
   late GetAllPropertiesSearchFilter propertiesSearchFilter;
   GetAllPropertiesBloc propertiesBloc = GetAllPropertiesBloc();
-  PropertySorts propertySorts = PropertySorts.suggested;
   @override
   void initState() {
     propertiesSearchFilter =
         widget.propertiesSearchFilter ?? GetAllPropertiesSearchFilter();
-
-    propertySorts = propertiesSearchFilter.propertySorts;
 
     propertiesBloc.add(GetAllPropertiesApiEvent(
         searchFilterProperties: propertiesSearchFilter,
@@ -147,11 +144,10 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                                             '',
                                       ),
                                       value: PropertySorts.values[index],
-                                      groupValue: propertySorts,
+                                      groupValue: propertiesSearchFilter.propertySorts,
                                       onChanged: (value) {
                                         Navigator.of(context).pop();
                                         setState((){
-                                          propertySorts = value!;
                                           propertiesSearchFilter = propertiesSearchFilter.copyWith(propertySorts: value);
                                         });
                                         search();
