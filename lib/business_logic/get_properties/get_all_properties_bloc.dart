@@ -78,7 +78,7 @@ class GetAllPropertiesBloc extends Bloc<GetAllPropertiesEvent, GetAllPropertiesS
       emit(AllPropertiesInitial());
 
       add(GetAllPropertiesApiEvent(
-          searchFilterProperties: GetAllPropertiesSearchFilter(page: 1)
+          searchFilterProperties: event.searchFilterProperties
       ));
     });
   }

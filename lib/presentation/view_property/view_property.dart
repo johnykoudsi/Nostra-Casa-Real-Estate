@@ -134,9 +134,24 @@ class ViewProperty extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
-                      MapLocationSquareWidget(
-                        latLng: property.location,
-                        propertyType: property.propertyType,
+                      Stack(
+                        children: [
+                          MapLocationSquareWidget(
+                            latLng: property.location,
+                            propertyType: property.propertyType,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.streetViewMaps,arguments: property.location );
+                            },
+                            child: Container(
+                              height: 150,
+                              width: screenWidth,
+                              color: Colors.white10,
+                            ),
+                          )
+                        ],
                       ),
                       const Spacing(),
                       Text(

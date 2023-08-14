@@ -34,6 +34,7 @@ class AppAssets{
   static const greyLogo="assets/images/grey_logo.png";
   static const promote="assets/images/promote.svg";
   static const agency="assets/images/agency.png";
+  static const filter="assets/images/filter.svg";
 
 
 

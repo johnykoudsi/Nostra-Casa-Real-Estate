@@ -30,9 +30,9 @@ class AppStyle {
     progressIndicatorTheme: const ProgressIndicatorThemeData()
         .copyWith(refreshBackgroundColor: kBackGroundColor),
     radioTheme: const RadioThemeData()
-        .copyWith(fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
+        .copyWith(fillColor: MaterialStateProperty.all<Color>(mainColor)),
     checkboxTheme: const CheckboxThemeData()
-        .copyWith(fillColor: MaterialStateProperty.all<Color>(kGreyColor)),
+        .copyWith(fillColor: MaterialStateProperty.all<Color>(mainColor)),
     appBarTheme: const AppBarTheme(
       scrolledUnderElevation: 0,
       backgroundColor: kBackGroundColor,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
@@ -31,6 +32,7 @@ import '../presentation/login_screen/login_screen.dart';
 import '../presentation/notifications/notifications.dart';
 import '../presentation/policy/policy.dart';
 import '../presentation/splash_screen/splash_screen.dart';
+import '../presentation/view_property/widgets/google_maps_street_view.dart';
 import '../presentation/view_property/widgets/images_staggered_view.dart';
 import 'app_routes.dart';
 
@@ -125,6 +127,10 @@ class AppRouter {
         case AppRoutes.staggeredImagesView:
           List<String> args = settings.arguments as List<String>;
           return ImagesStaggeredView(images: args);
+
+          case AppRoutes.streetViewMaps:
+          LatLng args = settings.arguments as LatLng ;
+          return StreetViewPanoramaInitDemo(initial: args,);
 
         case AppRoutes.welcomeToPromote:
           return BlocProvider(

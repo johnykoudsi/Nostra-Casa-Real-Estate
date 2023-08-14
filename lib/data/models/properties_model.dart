@@ -72,9 +72,6 @@ class Property {
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
-    print(json["service"]);
-    print(propertyServiceBackEnd2.map[json["service"]]);
-
     return Property(
       id: json["id"] ?? 0,
       name: json["name"] ?? '',

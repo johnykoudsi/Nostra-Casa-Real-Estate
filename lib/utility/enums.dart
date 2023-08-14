@@ -22,7 +22,35 @@ enum PropertyService {
   rent,
   holiday,
 }
+enum PropertySorts {
+  newToOld,
+  oldToNew,
+  priceHigh,
+  priceLow,
+  areaHigh,
+  areaLow,
+  suggested
+}
+final EnumValues propertySortsUi = EnumValues({
+  "Price (low to high)": PropertySorts.priceHigh,
+  "Price (high to low)": PropertySorts.priceLow,
+  "New To Old": PropertySorts.newToOld,
+  "Old To New": PropertySorts.oldToNew,
+  "Area (low to high)": PropertySorts.areaHigh,
+  "Area (high to low)": PropertySorts.areaLow,
+  "Suggested Dealers": PropertySorts.suggested,
 
+});
+final EnumValues propertySortsUBackEnd = EnumValues({
+  "price": PropertySorts.priceHigh,
+  "-price": PropertySorts.priceLow,
+  "created-at": PropertySorts.oldToNew,
+  "-created-at": PropertySorts.newToOld,
+  "area": PropertySorts.areaHigh,
+  "-area": PropertySorts.areaLow,
+  "owner-priority": PropertySorts.suggested,
+
+});
 final EnumValues serviceValues = EnumValues({
   "Sent Successfully": ServicesResponseStatues.success,
   "Connection error !": ServicesResponseStatues.networkError,

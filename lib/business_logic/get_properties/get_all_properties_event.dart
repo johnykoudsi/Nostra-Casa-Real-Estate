@@ -15,9 +15,9 @@ class GetAllPropertiesApiEvent extends GetAllPropertiesEvent{
 
 class ChangeToLoadingApiEvent extends GetAllPropertiesEvent{
   ChangeToLoadingApiEvent(
-      { this.searchFilterProperties});
+      { required this.searchFilterProperties});
 
-  GetAllPropertiesSearchFilter? searchFilterProperties;
+  GetAllPropertiesSearchFilter searchFilterProperties;
 
   @override
   List<Object?> get props => [searchFilterProperties];

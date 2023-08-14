@@ -22,6 +22,7 @@ class AppRoutes {
   static const String welcomeToPromote="/welcome_to_promote";
   static const String addAgencyLocation="/add_agency_location";
   static const String staggeredImagesView="/staggered_images_view";
+  static const String streetViewMaps="/street_view_maps";
 
 
 

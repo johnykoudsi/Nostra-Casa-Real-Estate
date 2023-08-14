@@ -6,12 +6,8 @@ import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';
 import '../../utility/app_style.dart';
 import '../global_widgets/elevated_button_widget.dart';
-import '../view_property/view_property.dart';
 import '../view_property/widgets/property_rating.dart';
 import '../view_property/widgets/spacing.dart';
-import '../view_property/widgets/view_property_amenities.dart';
-import '../view_property/widgets/view_property_attributes.dart';
-import '../view_property/widgets/view_property_images.dart';
 
 class ReviewProperty extends StatelessWidget {
   const ReviewProperty({required this.addPropertyState, Key? key})

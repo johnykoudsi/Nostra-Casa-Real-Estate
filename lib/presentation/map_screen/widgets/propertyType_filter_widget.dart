@@ -32,16 +32,16 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
             width: 18,
           ),
           ChoiceChip(
-              label: const Text(
-                "All Property Types",
-              ),
-              labelStyle: widget.selectedFilter == PropertyType.all
-                  ? selectedTextTheme
-                  : unSelectedTextTheme,
-              selected: widget.selectedFilter == PropertyType.all,
-              onSelected: (bool value) {
-                widget.onChange(PropertyType.all);
-              },
+            label: const Text(
+              "All Property Types",
+            ),
+            labelStyle: widget.selectedFilter == PropertyType.all
+                ? selectedTextTheme
+                : unSelectedTextTheme,
+            selected: widget.selectedFilter == PropertyType.all,
+            onSelected: (bool value) {
+              widget.onChange(PropertyType.all);
+            },
           ),
           ListView.separated(
             padding: const EdgeInsets.all(18),
@@ -53,7 +53,8 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
                   label: Text(
                     propertyTypeUi.reverse[PropertyType.values[index]] ?? '',
                   ),
-                  labelStyle: widget.selectedFilter == PropertyType.values[index]
+                  labelStyle:
+                      widget.selectedFilter == PropertyType.values[index]
                           ? selectedTextTheme
                           : unSelectedTextTheme,
                   selected: widget.selectedFilter == PropertyType.values[index],
