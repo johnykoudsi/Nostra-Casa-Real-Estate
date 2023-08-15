@@ -33,7 +33,7 @@ class _VirtualRealityScreenState extends State<VirtualRealityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Street View'),
+        title: const Text('Virtual Reality'),
       ),
       body: SafeArea(
         child: WebViewWidget(

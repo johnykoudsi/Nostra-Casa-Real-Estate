@@ -158,7 +158,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
             Column(
               children: [
-                SizedBox(height: 50,),
+                const SizedBox(height: 50,),
                 PropertyTypeFilterWidget(
                   selectedFilter: selectedFilterPropertyType,
                   onChange: (PropertyType propertyType) {

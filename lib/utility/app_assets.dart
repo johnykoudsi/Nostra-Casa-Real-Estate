@@ -36,6 +36,11 @@ class AppAssets{
   static const agency="assets/images/agency.png";
   static const filter="assets/images/filter.svg";
   static const virtualReality="assets/images/VR2.jpeg";
+  static const whatsapp = 'assets/images/whatsapp.svg';
+  static const facebook = 'assets/images/facebook.svg';
+  static const phoneOut = 'assets/images/phone_out.svg';
+
+
 
 
 

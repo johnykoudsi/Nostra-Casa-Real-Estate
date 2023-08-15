@@ -24,7 +24,6 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
     final unSelectedTextTheme =
         Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14);
     return SizedBox(
-      //width: 100000,
       height: 35,
       child: Align(
         alignment: Alignment.bottomCenter,
