@@ -44,8 +44,7 @@ class _MapScreenState extends State<MapScreen> {
     LatLngBounds visibleRegion = await _googleMapController.getVisibleRegion();
     LatLng centerLatLng = LatLng(
       (visibleRegion.northeast.latitude + visibleRegion.southwest.latitude) / 2,
-      (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) /
-          2,
+      (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) / 2,
     );
     return centerLatLng;
   }
@@ -125,6 +124,7 @@ class _MapScreenState extends State<MapScreen> {
       },
       child: Scaffold(
         body: Stack(
+          alignment: Alignment.topCenter,
           children: [
             GoogleMap(
               initialCameraPosition: _defaultLocation,
@@ -156,25 +156,27 @@ class _MapScreenState extends State<MapScreen> {
               },
               markers: _markers,
             ),
-            Positioned(
-              top: 55,
-              child: PropertyTypeFilterWidget(
-                selectedFilter: selectedFilterPropertyType,
-                onChange: (PropertyType propertyType) {
-                  setState(() {
-                    _markers.clear();
-                    selectedFilterPropertyType = propertyType;
-                    getCenter().then(
-                      (value) => context.read<GetNearbyPropertiesBloc>().add(
-                            GetNearbyMapsEvent(
-                              propertyType: selectedFilterPropertyType,
-                              center: value,
+            Column(
+              children: [
+                SizedBox(height: 50,),
+                PropertyTypeFilterWidget(
+                  selectedFilter: selectedFilterPropertyType,
+                  onChange: (PropertyType propertyType) {
+                    setState(() {
+                      _markers.clear();
+                      selectedFilterPropertyType = propertyType;
+                      getCenter().then(
+                        (value) => context.read<GetNearbyPropertiesBloc>().add(
+                              GetNearbyMapsEvent(
+                                propertyType: selectedFilterPropertyType,
+                                center: value,
+                              ),
                             ),
-                          ),
-                    );
-                  });
-                },
-              ),
+                      );
+                    });
+                  },
+                ),
+              ],
             ),
             BlocBuilder<GetNearbyPropertiesBloc, GetNearbyPropertiesState>(
               builder: (context, state) {

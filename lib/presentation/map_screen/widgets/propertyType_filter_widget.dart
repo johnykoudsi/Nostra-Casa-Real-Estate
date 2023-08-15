@@ -24,52 +24,56 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
     final unSelectedTextTheme =
         Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14);
     return SizedBox(
+      //width: 100000,
       height: 35,
-      child: ListView(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        children: [
-          const SizedBox(
-            width: 18,
-          ),
-          ChoiceChip(
-            label: const Text(
-              "All Property Types",
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          children: [
+            const SizedBox(
+              width: 18,
             ),
-            labelStyle: widget.selectedFilter == PropertyType.all
-                ? selectedTextTheme
-                : unSelectedTextTheme,
-            selected: widget.selectedFilter == PropertyType.all,
-            onSelected: (bool value) {
-              widget.onChange(PropertyType.all);
-            },
-          ),
-          ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 18),
-            shrinkWrap: true,
-            itemCount: 3,
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, int index) {
-              return ChoiceChip(
-                  label: Text(
-                    propertyTypeUi.reverse[PropertyType.values[index]] ?? '',
-                  ),
-                  labelStyle:
-                      widget.selectedFilter == PropertyType.values[index]
-                          ? selectedTextTheme
-                          : unSelectedTextTheme,
-                  selected: widget.selectedFilter == PropertyType.values[index],
-                  onSelected: (bool value) {
-                    widget.onChange(PropertyType.values[index]);
-                  });
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(
-                width: 18,
-              );
-            },
-          ),
-        ],
+            ChoiceChip(
+              label: const Text(
+                "All Property Types",
+              ),
+              labelStyle: widget.selectedFilter == PropertyType.all
+                  ? selectedTextTheme
+                  : unSelectedTextTheme,
+              selected: widget.selectedFilter == PropertyType.all,
+              onSelected: (bool value) {
+                widget.onChange(PropertyType.all);
+              },
+            ),
+            ListView.separated(
+              padding: const EdgeInsets.symmetric(horizontal: 18,),
+              shrinkWrap: true,
+              itemCount: 3,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return ChoiceChip(
+                    label: Text(
+                      propertyTypeUi.reverse[PropertyType.values[index]] ?? '',
+                    ),
+                    labelStyle:
+                        widget.selectedFilter == PropertyType.values[index]
+                            ? selectedTextTheme
+                            : unSelectedTextTheme,
+                    selected: widget.selectedFilter == PropertyType.values[index],
+                    onSelected: (bool value) {
+                      widget.onChange(PropertyType.values[index]);
+                    });
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(
+                  width: 18,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
