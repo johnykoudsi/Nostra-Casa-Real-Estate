@@ -5,12 +5,20 @@ import 'package:nostra_casa/utility/enums.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
-class ViewPropertyImages extends StatelessWidget {
+class ViewPropertyImages extends StatefulWidget {
   ViewPropertyImages(
       {required this.propertyService, required this.imagesUrl, Key? key})
       : super(key: key);
   List<String> imagesUrl;
   PropertyService? propertyService;
+
+  @override
+  State<ViewPropertyImages> createState() => _ViewPropertyImagesState();
+}
+
+class _ViewPropertyImagesState extends State<ViewPropertyImages> {
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -18,16 +26,15 @@ class ViewPropertyImages extends StatelessWidget {
     return SizedBox(
       height: screenWidth,
       width: screenWidth,
-      child: Swiper(
-        loop: false,
-        itemBuilder: (context, index) {
-          return Stack(
-            //fit: StackFit.,
-            alignment: Alignment.bottomLeft,
-            children: [
-              FadeInImage(
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: [
+          Swiper(
+            loop: false,
+            itemBuilder: (context, index) {
+              return FadeInImage(
                 placeholder: const AssetImage(AppAssets.greyLogo),
-                image: NetworkImage(imagesUrl.isEmpty ? "" : imagesUrl[index]),
+                image: NetworkImage(widget.imagesUrl.isEmpty ? "" : widget.imagesUrl[index],),
                 fit: BoxFit.cover,
                 imageErrorBuilder: (context, error, stackTrace) {
                   return Image.asset(
@@ -35,50 +42,55 @@ class ViewPropertyImages extends StatelessWidget {
                     fit: BoxFit.cover,
                   );
                 },
+              );
+            },
+            onIndexChanged: (value){
+              setState((){
+                index = value;
+              });
+            },
+            indicatorLayout: PageIndicatorLayout.COLOR,
+            autoplay: false,
+            itemCount: widget.imagesUrl.isNotEmpty ? widget.imagesUrl.length : 1,
+            control: null,
+          ),
+          if (widget.propertyService != null)
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+              decoration: BoxDecoration(
+                borderRadius: AppStyle.k4RadiusLowerPadding,
+                color: AppStyle.mainColor.withOpacity(0.8),
               ),
-              if (propertyService != null)
-                Container(
-                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: AppStyle.k4RadiusLowerPadding,
-                    color: AppStyle.mainColor.withOpacity(0.8),
-                  ),
-                  child: Text(
-                    propertyServiceBackEnd2.reverse[propertyService].toString(),
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline4!
-                        .copyWith(color: AppStyle.kBackGroundColor),
-                  ),
-                ),
-              Positioned(
-                bottom: 10,
-                right: 10,
-                child: Container(
-                  width: screenWidth * 0.12,
-                  decoration: BoxDecoration(
-                    color: Colors.black45.withOpacity(0.6),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "${index + 1}/${imagesUrl.length}",
-                      style: Theme.of(context).textTheme.headline5!.copyWith(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
+              child: Text(
+                propertyServiceBackEnd2.reverse[widget.propertyService].toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline4!
+                    .copyWith(color: AppStyle.kBackGroundColor),
+              ),
+            ),
+          Positioned(
+            bottom: 10,
+            right: 10,
+            child: Container(
+              width: screenWidth * 0.12,
+              decoration: BoxDecoration(
+                color: Colors.black45.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Center(
+                child: Text(
+                  "${index + 1}/${widget.imagesUrl.length}",
+                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-            ],
-          );
-        },
-        indicatorLayout: PageIndicatorLayout.COLOR,
-        autoplay: false,
-        itemCount: imagesUrl.isNotEmpty ? imagesUrl.length : 1,
-        control: null,
+            ),
+          ),
+        ],
       ),
     );
   }
