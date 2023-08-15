@@ -70,7 +70,9 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                           builder: (context, state) {
                             if (state is TagLoadedState) {
                               return TabBar(
-                                onTap: (index) {},
+                                onTap: (index) {
+                                  //todo : change selected tag
+                                },
                                 isScrollable: true,
                                 padding: const EdgeInsets.all(0),
                                 // labelStyle: const TextStyle(fontFamily: kBoldFont),

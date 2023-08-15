@@ -34,7 +34,7 @@ class _SliverAppBarWidgetWithSearchState
       floating: true,
       pinned: true,
       snap: true,
-      backgroundColor: AppStyle.mainColor,
+      backgroundColor: AppStyle.kBackGroundColor,
       elevation: 0,
 
       title: Center(
@@ -50,7 +50,7 @@ class _SliverAppBarWidgetWithSearchState
               style: Theme.of(context)
                   .textTheme
                   .headline3!
-                  .copyWith(color: AppStyle.kBackGroundColor),
+                  .copyWith(color: AppStyle.mainColor),
             ),
             GestureDetector(
               onTap: () {
@@ -61,7 +61,7 @@ class _SliverAppBarWidgetWithSearchState
                 height: getWidth * 0.06,
                 child: SvgPicture.asset(
                   AppAssets.bell,
-                  color: Colors.white,
+                  color: AppStyle.mainColor,
                 ),
               ),
             ),

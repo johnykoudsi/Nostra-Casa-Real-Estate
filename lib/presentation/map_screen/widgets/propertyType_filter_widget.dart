@@ -24,9 +24,10 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
     final unSelectedTextTheme =
         Theme.of(context).textTheme.headline6!.copyWith(fontSize: 14);
     return SizedBox(
-      height: 150,
+      height: 35,
       child: ListView(
         scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
         children: [
           const SizedBox(
             width: 18,
@@ -44,7 +45,7 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
             },
           ),
           ListView.separated(
-            padding: const EdgeInsets.all(18),
+            padding: const EdgeInsets.symmetric(horizontal: 18),
             shrinkWrap: true,
             itemCount: 3,
             scrollDirection: Axis.horizontal,
