@@ -13,7 +13,7 @@ class TagService {
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: EndPoints.getTags(
         page: event.searchFilterProperties.page,
-        limit: kProductsGetLimit,
+        limit: kTagGetLimit,
       ),
       useUserToken: true,
     );

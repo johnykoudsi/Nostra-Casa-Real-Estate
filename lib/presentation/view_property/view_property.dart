@@ -14,6 +14,7 @@ import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
 import '../../data/models/properties_model.dart';
+import '../../utility/app_assets.dart';
 import '../map_location_square_widget/map_location_widget.dart';
 
 class ViewProperty extends StatelessWidget {
@@ -41,7 +42,10 @@ class ViewProperty extends StatelessWidget {
                     },
                     child: Hero(
                       tag: property.id,
-                      child: ViewPropertyImages(imagesUrl: property.media,propertyService: property.propertyService,),
+                      child: ViewPropertyImages(
+                        imagesUrl: property.media,
+                        propertyService: property.propertyService,
+                      ),
                     )),
                 Padding(
                   padding: EdgeInsets.only(
@@ -128,6 +132,32 @@ class ViewProperty extends StatelessWidget {
                         ),
                       const Spacing(),
                       Text(
+                        "Enjoy Virtual Reality View".tr(),
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).pushNamed(AppRoutes.virtualReality);
+                        },
+                        child: Container(
+                          height: 200,
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                            borderRadius: AppStyle.k15BorderRadius,
+                            image: DecorationImage(
+                               image: AssetImage(
+                                 AppAssets.virtualReality,
+                               ),
+                              fit: BoxFit.fitWidth,
+                            )
+                          ),
+                        ),
+                      ),
+                      const Spacing(),
+                      Text(
                         "Where you will be".tr(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
@@ -142,8 +172,9 @@ class ViewProperty extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(AppRoutes.streetViewMaps,arguments: property.location );
+                              Navigator.of(context).pushNamed(
+                                  AppRoutes.streetViewMaps,
+                                  arguments: property.location);
                             },
                             child: Container(
                               height: 150,
@@ -154,6 +185,7 @@ class ViewProperty extends StatelessWidget {
                         ],
                       ),
                       const Spacing(),
+
                       Text(
                         "Connect Now".tr(),
                         style: Theme.of(context).textTheme.headline4,
@@ -161,6 +193,8 @@ class ViewProperty extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
+
+
                       const Spacing(),
                       Text(
                         "Feel free to rate this property".tr(),
@@ -196,34 +230,34 @@ class ViewProperty extends StatelessWidget {
                   },
                 ),
                 actions: [
-                  if(context.read<UserBloc>().state is UserLoggedState)
-                  BlocBuilder<OnePropertyBloc, OnePropertyState>(
-                    builder: (context, state) {
-                      if (state is OnePropertyDoneState) {
-                        return IconButton(
-                          icon: CircleAvatar(
-                              backgroundColor: AppStyle.kBackGroundColor,
-                              child: Icon(
-                                state.favouriteState
-                                    ? Icons.favorite
-                                    : Icons.favorite_outline_sharp,
-                                color: state.favouriteState
-                                    ? AppStyle.redColor
-                                    : AppStyle.blackColor,
-                              )),
-                          onPressed: () {
-                            context.read<OnePropertyBloc>().add(
-                                ToggleFavouriteEvent(
-                                    productObjectId: property.id));
-                          },
+                  if (context.read<UserBloc>().state is UserLoggedState)
+                    BlocBuilder<OnePropertyBloc, OnePropertyState>(
+                      builder: (context, state) {
+                        if (state is OnePropertyDoneState) {
+                          return IconButton(
+                            icon: CircleAvatar(
+                                backgroundColor: AppStyle.kBackGroundColor,
+                                child: Icon(
+                                  state.favouriteState
+                                      ? Icons.favorite
+                                      : Icons.favorite_outline_sharp,
+                                  color: state.favouriteState
+                                      ? AppStyle.redColor
+                                      : AppStyle.blackColor,
+                                )),
+                            onPressed: () {
+                              context.read<OnePropertyBloc>().add(
+                                  ToggleFavouriteEvent(
+                                      productObjectId: property.id));
+                            },
+                          );
+                        }
+                        return const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Center(child: CircularProgressIndicator()),
                         );
-                      }
-                      return const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Center(child: CircularProgressIndicator()),
-                      );
-                    },
-                  ),
+                      },
+                    ),
                 ],
               ),
             ),

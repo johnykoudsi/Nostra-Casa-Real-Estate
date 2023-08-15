@@ -95,9 +95,9 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            if (propertiesBloc.state is! AllPropertiesLoadedState) {
-              return;
-            }
+            // if (propertiesBloc.state is! AllPropertiesLoadedState) {
+            //   return;
+            // }
             FocusManager.instance.primaryFocus?.unfocus();
             showModalBottomSheet(
                 context: context,

@@ -23,6 +23,7 @@ class AppRoutes {
   static const String addAgencyLocation="/add_agency_location";
   static const String staggeredImagesView="/staggered_images_view";
   static const String streetViewMaps="/street_view_maps";
+  static const String virtualReality="/v_r";
 
 
 

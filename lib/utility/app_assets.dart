@@ -35,6 +35,7 @@ class AppAssets{
   static const promote="assets/images/promote.svg";
   static const agency="assets/images/agency.png";
   static const filter="assets/images/filter.svg";
+  static const virtualReality="assets/images/VR2.jpeg";
 
 
 

@@ -1,27 +1,32 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class StreetViewPanoramaInitDemo extends StatefulWidget {
-  const StreetViewPanoramaInitDemo({required this.initial,super.key});
-  final LatLng initial;
+class VirtualRealityScreen extends StatefulWidget {
+  const VirtualRealityScreen({super.key});
 
   @override
-  State<StreetViewPanoramaInitDemo> createState() => _StreetViewPanoramaInitDemoState();
+  State<VirtualRealityScreen> createState() => _VirtualRealityScreenState();
 }
 
-class _StreetViewPanoramaInitDemoState extends State<StreetViewPanoramaInitDemo> {
+class _VirtualRealityScreenState extends State<VirtualRealityScreen> {
   late final WebViewController controller;
 
   @override
   void initState() {
-    String googleUrl = "https://maps.googleapis.com/maps/api/streetview"
-        "?size=400x400&location=${widget.initial.latitude},${widget.initial.longitude}"
-   "&fov=80&heading=70&pitch=0&key=AIzaSyDXSQxYFZ1CmEOcUUvXwkX30-9OMIlI-7I";
+    List<String> vrLink = [
+      "https://my.matterport.com/show/?m=tLhGBrqCHXT",
+      "https://my.matterport.com/show/?m=DGtbqvoWrFH"
+    ];
+    var num = Random().nextInt(vrLink.length);
     controller = WebViewController()
       ..loadRequest(
-        Uri.parse(googleUrl),
+        Uri.parse(vrLink[num]),
       );
+    controller.setJavaScriptMode(JavaScriptMode.unrestricted);
+    //
     super.initState();
   }
   @override
@@ -33,6 +38,7 @@ class _StreetViewPanoramaInitDemoState extends State<StreetViewPanoramaInitDemo>
       body: SafeArea(
         child: WebViewWidget(
           controller: controller,
+
         ),
       ),
     );

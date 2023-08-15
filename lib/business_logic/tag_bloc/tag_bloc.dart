@@ -18,7 +18,7 @@ class TagBloc extends Bloc<TagEvent, TagState> {
 
       int getPage() {
         if (currentState is TagLoadedState) {
-          return currentState.tags.length ~/ kProductsGetLimit + 1;
+          return currentState.tags.length ~/ kTagGetLimit + 1;
         }
         return 0;
       }
@@ -38,7 +38,7 @@ class TagBloc extends Bloc<TagEvent, TagState> {
             emit(currentState.copyWith(
                 tags: List.of(currentState.tags)..addAll(getTag),
                 hasReachedMax:
-                getTag.length < kProductsGetLimit ? true : false));
+                getTag.length < kTagGetLimit ? true : false));
           }
 
           // add loaded state
@@ -46,7 +46,7 @@ class TagBloc extends Bloc<TagEvent, TagState> {
             emit(TagLoadedState(
               tags: getTag,
               hasReachedMax:
-              getTag.length < kProductsGetLimit ? true : false,
+              getTag.length < kTagGetLimit ? true : false,
             ));
           }
         } else {
@@ -73,7 +73,8 @@ class TagBloc extends Bloc<TagEvent, TagState> {
       emit(TagInitial());
 
       add(GetTagApiEvent(
-          searchFilterProperties: TagsSearchFilter(page: 1)));
+          searchFilterProperties: TagsSearchFilter(page: 1
+          ,)));
     });
   }
 }

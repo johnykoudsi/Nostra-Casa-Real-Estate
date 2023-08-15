@@ -1,17 +1,31 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
-class SliverAppBarWidgetWithSearch extends StatelessWidget {
+class SliverAppBarWidgetWithSearch extends StatefulWidget {
   SliverAppBarWidgetWithSearch({
     required this.title,
+    required this.bottom,
     Key? key,
   }) : super(key: key);
 
   String title;
+  AppBar bottom;
+
+  @override
+  State<SliverAppBarWidgetWithSearch> createState() =>
+      _SliverAppBarWidgetWithSearchState();
+}
+
+class _SliverAppBarWidgetWithSearchState
+    extends State<SliverAppBarWidgetWithSearch> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     double getWidth = MediaQuery.of(context).size.width;
@@ -22,6 +36,7 @@ class SliverAppBarWidgetWithSearch extends StatelessWidget {
       snap: true,
       backgroundColor: AppStyle.mainColor,
       elevation: 0,
+
       title: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +46,7 @@ class SliverAppBarWidgetWithSearch extends StatelessWidget {
               height: 15,
             ),
             Text(
-              title,
+              widget.title,
               style: Theme.of(context)
                   .textTheme
                   .headline3!
@@ -53,63 +68,7 @@ class SliverAppBarWidgetWithSearch extends StatelessWidget {
           ],
         ),
       ),
-      bottom: AppBar(
-        toolbarHeight: getHeight * 0.08,
-        elevation: 0,
-        backgroundColor: AppStyle.mainColor,
-        foregroundColor: AppStyle.kBackGroundColor,
-        title: SizedBox(
-          height: getHeight * 0.045,
-          child: GestureDetector(
-            onTap: () {},
-            child: TextFormField(
-              onFieldSubmitted: (value) {},
-              style: const TextStyle(color: AppStyle.mainColor),
-              keyboardType: TextInputType.name,
-              enabled: false,
-              cursorColor: AppStyle.mainColor,
-              decoration: InputDecoration(
-                hintText: 'Search'.tr(),
-                hintStyle: const TextStyle(
-                  color: AppStyle.kGreyColor,
-                ),
-                contentPadding: const EdgeInsets.only(
-                    left: 15, bottom: 0, top: 0, right: 15),
-                suffixIcon: GestureDetector(
-                  onTap: () {},
-                  child: const Icon(
-                    Icons.search,
-                    color: AppStyle.kGreyColor,
-                  ),
-                ),
-                filled: true,
-                fillColor: Colors.white,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                    )),
-                disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: Colors.transparent,
-                    )),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      width: 2,
-                      color: AppStyle.mainColor,
-                    )),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5),
-                    borderSide: const BorderSide(
-                      color: AppStyle.mainColor,
-                    )),
-              ),
-            ),
-          ),
-        ),
-      ),
+      bottom: widget.bottom,
       // actions: const [
       //   Icon(Icons.notifications),
       // ],

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nostra_casa/data/models/properties_model.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 import '../../data/services/get_all_property_service.dart';
 import '../../utility/constant_logic_validations.dart';
@@ -12,12 +13,13 @@ import 'get_all-properties_search_filter.dart';
 part 'get_all_properties_event.dart';
 part 'get_all_properties_state.dart';
 
-class GetAllPropertiesBloc extends Bloc<GetAllPropertiesEvent, GetAllPropertiesState> {
+class GetAllPropertiesBloc
+    extends Bloc<GetAllPropertiesEvent, GetAllPropertiesState> {
   GetAllPropertiesBloc() : super(AllPropertiesInitial()) {
-    
     on<GetAllPropertiesApiEvent>((event, emit) async {
       final currentState = state;
-      if (currentState is AllPropertiesLoadedState && currentState.hasReachedMax) {
+      if (currentState is AllPropertiesLoadedState &&
+          currentState.hasReachedMax) {
         return;
       }
 
@@ -41,9 +43,11 @@ class GetAllPropertiesBloc extends Bloc<GetAllPropertiesEvent, GetAllPropertiesS
           // copy previous state
           if (currentState is AllPropertiesLoadedState) {
             emit(currentState.copyWith(
-                properties: List.of(currentState.properties)..addAll(getAllProperties),
-                hasReachedMax:
-                getAllProperties.length < kProductsGetLimit ? true : false));
+                properties: List.of(currentState.properties)
+                  ..addAll(getAllProperties),
+                hasReachedMax: getAllProperties.length < kProductsGetLimit
+                    ? true
+                    : false));
           }
 
           // add loaded state
@@ -51,7 +55,7 @@ class GetAllPropertiesBloc extends Bloc<GetAllPropertiesEvent, GetAllPropertiesS
             emit(AllPropertiesLoadedState(
               properties: getAllProperties,
               hasReachedMax:
-              getAllProperties.length < kProductsGetLimit ? true : false,
+                  getAllProperties.length < kProductsGetLimit ? true : false,
             ));
           }
         } else {
@@ -72,14 +76,18 @@ class GetAllPropertiesBloc extends Bloc<GetAllPropertiesEvent, GetAllPropertiesS
 
         emit(AllPropertiesErrorState(helperResponse: getAllProperties));
       }
-    });
+    },
+      transformer: restartable(),
+    );
 
-    on<ChangeToLoadingApiEvent>((event, emit) async {
-      emit(AllPropertiesInitial());
+    on<ChangeToLoadingApiEvent>(
+      (event, emit) async {
+        emit(AllPropertiesInitial());
 
-      add(GetAllPropertiesApiEvent(
-          searchFilterProperties: event.searchFilterProperties
-      ));
-    });
+        add(GetAllPropertiesApiEvent(
+            searchFilterProperties: event.searchFilterProperties));
+      },
+      transformer: restartable(),
+    );
   }
 }

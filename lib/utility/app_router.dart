@@ -17,6 +17,7 @@ import 'package:nostra_casa/presentation/review_property/review_property_screen.
 import 'package:nostra_casa/presentation/signup/signup.dart';
 import 'package:nostra_casa/presentation/verification_screen/code_verification_screen.dart';
 import 'package:nostra_casa/presentation/view_property/view_property.dart';
+import 'package:nostra_casa/presentation/view_property/widgets/virtual_reality_screen_view.dart';
 import 'package:nostra_casa/presentation/welcome/welcome.dart';
 import '../business_logic/add_to_favorite/add_favorite_bloc.dart';
 import '../business_logic/country_bloc/country_bloc.dart';
@@ -124,13 +125,18 @@ class AppRouter {
         case AppRoutes.homePage:
           return const Explore();
 
+          case AppRoutes.virtualReality:
+          return const VirtualRealityScreen();
+
         case AppRoutes.staggeredImagesView:
           List<String> args = settings.arguments as List<String>;
           return ImagesStaggeredView(images: args);
 
-          case AppRoutes.streetViewMaps:
-          LatLng args = settings.arguments as LatLng ;
-          return StreetViewPanoramaInitDemo(initial: args,);
+        case AppRoutes.streetViewMaps:
+          LatLng args = settings.arguments as LatLng;
+          return StreetViewPanoramaInitDemo(
+            initial: args,
+          );
 
         case AppRoutes.welcomeToPromote:
           return BlocProvider(
