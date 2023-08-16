@@ -91,9 +91,10 @@ final EnumValues propertyServiceBackEnd2 = EnumValues({
 });
 
 final propertyServiceUI = EnumValues({
-  "Sale": PropertyService.sale,
+  "Sale".tr(): PropertyService.sale,
   "Rent".tr(): PropertyService.rent,
   "Holiday".tr(): PropertyService.holiday,
+  "All Property Services".tr(): PropertyService.all,
 });
 final propertyServicePriceUI = EnumValues({
   "": PropertyService.sale,

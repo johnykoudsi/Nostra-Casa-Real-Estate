@@ -6,6 +6,7 @@ import 'package:nostra_casa/business_logic/tag_bloc/tag_bloc.dart';
 import 'package:nostra_casa/data/models/tags_model.dart';
 import 'package:nostra_casa/presentation/explore/widgets/filter_spacer_widget.dart';
 import 'package:nostra_casa/presentation/explore/widgets/handle_widget.dart';
+import 'package:nostra_casa/presentation/explore/widgets/property_service_filter_widget.dart';
 import 'package:nostra_casa/presentation/explore/widgets/property_type_filter_widget.dart';
 import 'package:nostra_casa/presentation/explore/widgets/search_text_field.dart';
 import 'package:nostra_casa/presentation/explore/widgets/sliverAppBarWidgetWithSearch.dart';
@@ -45,7 +46,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   }
 
   void search() {
-    propertiesSearchFilter = propertiesSearchFilter.copyWith(page: 1);
     propertiesBloc.add(ChangeToLoadingApiEvent(
       searchFilterProperties: propertiesSearchFilter,
     ));
@@ -175,12 +175,51 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
             body: BlocBuilder<TagBloc, TagState>(
               builder: (context, state) {
                 if (state is TagLoadedState) {
+                  final getAllState = context.watch<GetAllPropertiesBloc>().state;
                   return TabBarView(
                     controller: tabController,
                     children: List.generate(state.tags.length, (index) {
-                      return AllPropertyListView(
-                        propertiesSearchFilter: propertiesSearchFilter,
+                      if (getAllState is AllPropertiesInitial) {
+                        return ListView(
+                          children: [
+                            PropertyShimmer(),
+                            PropertyShimmer(),
+                            PropertyShimmer(),
+                          ],
+                        );
+                      }
+                      if (getAllState is AllPropertiesLoadedState
+                          && getAllState.properties.isEmpty) {
+                        return SomethingWrongWidget(
+                          title: "No properties found !",
+                          svgPath: AppAssets.search,
+                          elevatedButtonWidget: ElevatedButtonWidget(
+                            title: "Refresh",
+                            onPressed: () {
+                              search();
+                            },
+                          ),
+                        );
+                      }
+                      if (getAllState is AllPropertiesLoadedState) {
+                        return RefreshIndicator(
+                          onRefresh: ()async{
+                            search();
+                          },
+                          child: AllPropertyListView(
+                            properties: getAllState.properties,
+                          ),
+                        );
+                      }
+                      return SomethingWrongWidget(
+                        elevatedButtonWidget: ElevatedButtonWidget(
+                          title: "Refresh",
+                          onPressed: () {
+                            search();
+                          },
+                        ),
                       );
+
                     }),
                   );
                 }
@@ -207,13 +246,14 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
           floatingActionButton: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              // filter
+              // Filter FAB
               FloatingActionButton(
                 heroTag: "asdasdasd",
                 onPressed: () {
                   showModalBottomSheet(
                       context: context,
                       shape: AppStyle.k10TopBorderRectangle,
+                      isScrollControlled: true,
                       builder: (BuildContext context) {
                         return StatefulBuilder(
                           builder: (BuildContext context,
@@ -277,6 +317,21 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                               .propertyType,
                                         ),
                                         const FilterSpacing(),
+                                        PropertyServiceFilterExploreWidget(
+                                          onChanged: (value) {
+                                            Navigator.of(context).pop();
+                                            setState(() {
+                                              propertiesSearchFilter =
+                                                  propertiesSearchFilter
+                                                      .copyWith(
+                                                          propertyService:
+                                                              value);
+                                            });
+                                            search();
+                                          },
+                                          value: propertiesSearchFilter
+                                              .propertyService,
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -298,12 +353,10 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
               const SizedBox(
                 height: 18,
               ),
-              // sort
+
+              // Sort FAB
               FloatingActionButton(
                 onPressed: () {
-                  // if (propertiesBloc.state is! AllPropertiesLoadedState) {
-                  //   return;
-                  // }
                   FocusManager.instance.primaryFocus?.unfocus();
                   showModalBottomSheet(
                       context: context,

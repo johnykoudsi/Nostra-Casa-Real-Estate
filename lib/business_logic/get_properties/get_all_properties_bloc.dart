@@ -80,12 +80,11 @@ class GetAllPropertiesBloc
       transformer: restartable(),
     );
 
-    on<ChangeToLoadingApiEvent>(
-      (event, emit) async {
+    on<ChangeToLoadingApiEvent>((event, emit) async {
         emit(AllPropertiesInitial());
 
         add(GetAllPropertiesApiEvent(
-            searchFilterProperties: event.searchFilterProperties));
+            searchFilterProperties: event.searchFilterProperties.copyWith(page: 1)));
       },
       transformer: restartable(),
     );
