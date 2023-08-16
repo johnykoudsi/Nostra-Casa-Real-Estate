@@ -60,6 +60,8 @@ class SearchTextField extends StatelessWidget {
               )
                   : GestureDetector(
                 onTap: () {
+                  FocusManager.instance.primaryFocus
+                      ?.unfocus();
                   onSend(searchController.text);
                 },
                 child: const Icon(

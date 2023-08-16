@@ -76,6 +76,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
               length: state.tags.length,
               vsync: this,
             );
+            search();
           }
         },
         child: Scaffold(
@@ -175,7 +176,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
             body: BlocBuilder<TagBloc, TagState>(
               builder: (context, state) {
                 if (state is TagLoadedState) {
-                  final getAllState = context.watch<GetAllPropertiesBloc>().state;
+                  final getAllState =
+                      context.watch<GetAllPropertiesBloc>().state;
                   return TabBarView(
                     controller: tabController,
                     children: List.generate(state.tags.length, (index) {
@@ -188,8 +190,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                           ],
                         );
                       }
-                      if (getAllState is AllPropertiesLoadedState
-                          && getAllState.properties.isEmpty) {
+                      if (getAllState is AllPropertiesLoadedState &&
+                          getAllState.properties.isEmpty) {
                         return SomethingWrongWidget(
                           title: "No properties found !",
                           svgPath: AppAssets.search,
@@ -203,7 +205,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                       }
                       if (getAllState is AllPropertiesLoadedState) {
                         return RefreshIndicator(
-                          onRefresh: ()async{
+                          onRefresh: () async {
                             search();
                           },
                           child: AllPropertyListView(
@@ -219,7 +221,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                           },
                         ),
                       );
-
                     }),
                   );
                 }
@@ -276,6 +277,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                             searchController.clear();
                                             FocusManager.instance.primaryFocus
                                                 ?.unfocus();
+                                            Navigator.of(context).pop();
+
                                             setState(() {
                                               propertiesSearchFilter =
                                                   propertiesSearchFilter
@@ -289,6 +292,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                                 value.isEmpty) {
                                               return;
                                             }
+                                            Navigator.of(context).pop();
+
                                             setState(() {
                                               propertiesSearchFilter =
                                                   propertiesSearchFilter

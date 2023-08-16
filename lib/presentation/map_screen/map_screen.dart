@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/markers.dart';
+import 'package:nostra_casa/presentation/map_screen/widgets/propertyService_filter_scroll.dart';
 import 'package:nostra_casa/presentation/map_screen/widgets/propertyType_filter_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
@@ -28,6 +29,7 @@ class _MapScreenState extends State<MapScreen> {
   final Set<Marker> _markers = {};
 
   PropertyType selectedFilterPropertyType = PropertyType.all;
+  PropertyService selectedPropertyService = PropertyService.all;
 
   @override
   void initState() {
@@ -44,7 +46,8 @@ class _MapScreenState extends State<MapScreen> {
     LatLngBounds visibleRegion = await _googleMapController.getVisibleRegion();
     LatLng centerLatLng = LatLng(
       (visibleRegion.northeast.latitude + visibleRegion.southwest.latitude) / 2,
-      (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) / 2,
+      (visibleRegion.northeast.longitude + visibleRegion.southwest.longitude) /
+          2,
     );
     return centerLatLng;
   }
@@ -65,7 +68,8 @@ class _MapScreenState extends State<MapScreen> {
                     zoom: 18,
                   ),
                 ),
-              ).then((value) {
+              )
+                  .then((value) {
                 showModalBottomSheet(
                   context: context,
                   builder: (builder) {
@@ -78,9 +82,8 @@ class _MapScreenState extends State<MapScreen> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: AppStyle.k4RadiusLowerPadding,
-                            color: Theme.of(context)
-                                .primaryColor
-                                .withOpacity(0.5),
+                            color:
+                                Theme.of(context).primaryColor.withOpacity(0.5),
                           ),
                         ),
                         Container(
@@ -138,8 +141,10 @@ class _MapScreenState extends State<MapScreen> {
                 getCenter().then(
                   (value) => context.read<GetNearbyPropertiesBloc>().add(
                         GetNearbyMapsEvent(
-                            center: value,
-                            propertyType: selectedFilterPropertyType),
+                          propertyService: selectedPropertyService,
+                          propertyType: selectedFilterPropertyType,
+                          center: value,
+                        ),
                       ),
                 );
               },
@@ -148,17 +153,22 @@ class _MapScreenState extends State<MapScreen> {
                 completer.complete(controller);
                 _googleMapController = controller;
                 getCenter().then(
-                  (value) => context.read<GetNearbyPropertiesBloc>().add(
-                      GetNearbyMapsEvent(
-                          center: value,
-                          propertyType: selectedFilterPropertyType)),
+                  (value) => context
+                      .read<GetNearbyPropertiesBloc>()
+                      .add(GetNearbyMapsEvent(
+                        propertyService: selectedPropertyService,
+                        propertyType: selectedFilterPropertyType,
+                        center: value,
+                      )),
                 );
               },
               markers: _markers,
             ),
             Column(
               children: [
-                const SizedBox(height: 50,),
+                const SizedBox(
+                  height: 50,
+                ),
                 PropertyTypeFilterWidget(
                   selectedFilter: selectedFilterPropertyType,
                   onChange: (PropertyType propertyType) {
@@ -168,6 +178,28 @@ class _MapScreenState extends State<MapScreen> {
                       getCenter().then(
                         (value) => context.read<GetNearbyPropertiesBloc>().add(
                               GetNearbyMapsEvent(
+                                propertyService: selectedPropertyService,
+                                propertyType: selectedFilterPropertyType,
+                                center: value,
+                              ),
+                            ),
+                      );
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                PropertyServiceFilterWidget(
+                  selectedFilter: selectedPropertyService,
+                  onChange: (PropertyService propertyService) {
+                    setState(() {
+                      _markers.clear();
+                      selectedPropertyService = propertyService;
+                      getCenter().then(
+                        (value) => context.read<GetNearbyPropertiesBloc>().add(
+                              GetNearbyMapsEvent(
+                                propertyService: selectedPropertyService,
                                 propertyType: selectedFilterPropertyType,
                                 center: value,
                               ),

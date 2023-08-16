@@ -17,7 +17,7 @@ class GetNearbyPropertiesBloc extends Bloc<GetNearbyPropertiesEvent, GetNearbyPr
 
       emit(GetLoadingState());
 
-      var  getRequest = await MapsServices.getNearbyPlacesService(event: event);;
+      var  getRequest = await MapsServices.getNearbyPlacesService(event: event);
 
       // casting and emit
       if (getRequest is List<Property>) {

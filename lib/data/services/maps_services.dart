@@ -22,6 +22,9 @@ class MapsServices {
     if(event.propertyType != PropertyType.all){
       mapBody["filter[property-type]"] = propertyTypeBackEnd.reverse[event.propertyType].toString();
     }
+    if(event.propertyService != PropertyService.all){
+      mapBody["filter[property-service]"] = propertyServiceBackEnd1.reverse[event.propertyService].toString();
+    }
     print(mapBody.toString());
 
     HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
