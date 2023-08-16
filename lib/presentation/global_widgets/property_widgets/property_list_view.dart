@@ -11,6 +11,7 @@ import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import 'package:nostra_casa/utility/enums.dart';
 import '../../../utility/app_routes.dart';
+import '../../view_property/widgets/spacing.dart';
 
 class AllPropertyListView extends StatefulWidget {
   AllPropertyListView({this.propertiesSearchFilter, Key? key})
@@ -104,10 +105,7 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                 FocusManager.instance.primaryFocus?.unfocus();
                 showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10))),
+                    shape: AppStyle.k10TopBorderRectangle,
                     builder: (BuildContext context) {
                       return StatefulBuilder(
                         builder: (BuildContext context,
@@ -117,49 +115,51 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 25, right: 25, top: 8),
-                                  child: Center(
-                                    child: Container(
-                                      width: 100,
-                                      //margin: const EdgeInsets.all(8),
-                                      height: 5,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            AppStyle.k4RadiusLowerPadding,
-                                        color: Theme.of(context)
-                                            .primaryColor
-                                            .withOpacity(0.5),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                const HandleWidget(),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 18),
                                   child: Column(
-                                    children: List.generate(
-                                      PropertyType.values.length,
-                                      (index) => RadioListTile(
-                                        title: Text(
-                                          propertyTypeUi.reverse[PropertyType
-                                                  .values[index]] ??
-                                              '',
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 22),
+                                        child: Text(
+                                          "Property Type",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4,
                                         ),
-                                        value: PropertyType.values[index],
-                                        groupValue: propertiesSearchFilter.propertyType,
-                                        onChanged: (value) {
-                                          Navigator.of(context).pop();
-                                          setState(() {
-                                            propertiesSearchFilter =
-                                                propertiesSearchFilter.copyWith(propertyType: value);
-                                          });
-                                          search();
-                                        },
                                       ),
-                                    ),
+                                      Column(
+                                        children: List.generate(
+                                          PropertyType.values.length,
+                                          (index) => RadioListTile(
+                                            title: Text(
+                                              propertyTypeUi.reverse[
+                                                      PropertyType
+                                                          .values[index]] ??
+                                                  '',
+                                            ),
+                                            value: PropertyType.values[index],
+                                            groupValue: propertiesSearchFilter
+                                                .propertyType,
+                                            onChanged: (value) {
+                                              Navigator.of(context).pop();
+                                              setState(() {
+                                                propertiesSearchFilter =
+                                                    propertiesSearchFilter
+                                                        .copyWith(
+                                                            propertyType:
+                                                                value);
+                                              });
+                                              search();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      const FilterSpacing(),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -189,10 +189,7 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                 FocusManager.instance.primaryFocus?.unfocus();
                 showModalBottomSheet(
                     context: context,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10))),
+                    shape: AppStyle.k10TopBorderRectangle,
                     builder: (BuildContext context) {
                       return StatefulBuilder(
                         builder: (BuildContext context,
@@ -202,51 +199,48 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 25, right: 25, top: 8),
-                                  child: Center(
-                                    child: Container(
-                                      width: 100,
-                                      //margin: const EdgeInsets.all(8),
-                                      height: 5,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            AppStyle.k4RadiusLowerPadding,
-                                        color: Theme.of(context)
-                                            .primaryColor
-                                            .withOpacity(0.5),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                const HandleWidget(),
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 18),
                                   child: Column(
-                                    children: List.generate(
-                                      PropertySorts.values.length,
-                                      (index) => RadioListTile(
-                                        title: Text(
-                                          propertySortsUi.reverse[PropertySorts
-                                                  .values[index]] ??
-                                              '',
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 22),
+                                        child: Text(
+                                          "Sorts",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline4,
                                         ),
-                                        value: PropertySorts.values[index],
-                                        groupValue: propertiesSearchFilter
-                                            .propertySorts,
-                                        onChanged: (value) {
-                                          Navigator.of(context).pop();
-                                          setState(() {
-                                            propertiesSearchFilter =
-                                                propertiesSearchFilter.copyWith(
-                                                    propertySorts: value);
-                                          });
-                                          search();
-                                        },
                                       ),
-                                    ),
+                                      Column(
+                                        children: List.generate(
+                                          PropertySorts.values.length,
+                                          (index) => RadioListTile(
+                                            title: Text(
+                                              propertySortsUi.reverse[PropertySorts
+                                                      .values[index]] ??
+                                                  '',
+                                            ),
+                                            value: PropertySorts.values[index],
+                                            groupValue: propertiesSearchFilter
+                                                .propertySorts,
+                                            onChanged: (value) {
+                                              Navigator.of(context).pop();
+                                              setState(() {
+                                                propertiesSearchFilter =
+                                                    propertiesSearchFilter.copyWith(
+                                                        propertySorts: value);
+                                              });
+                                              search();
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      const FilterSpacing(),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -265,6 +259,49 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class FilterSpacing extends StatelessWidget {
+  const FilterSpacing({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 18),
+      child:  Divider(
+        height: 0,
+        color: AppStyle.kGreyColor,
+        thickness: 0.8,
+      ),
+    );
+  }
+}
+
+class HandleWidget extends StatelessWidget {
+  const HandleWidget({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 25, right: 25, top: 8),
+      child: Center(
+        child: Container(
+          width: 100,
+          //margin: const EdgeInsets.all(8),
+          height: 5,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: AppStyle.k4RadiusLowerPadding,
+            color: Theme.of(context).primaryColor.withOpacity(0.5),
+          ),
         ),
       ),
     );

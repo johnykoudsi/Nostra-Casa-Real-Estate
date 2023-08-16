@@ -24,9 +24,7 @@ class AppStyle {
       secondary: const Color(0xFF145770),
     ),
     chipTheme: const ChipThemeData(
-        backgroundColor: Colors.white,
-        selectedColor: mainColor
-    ),
+        backgroundColor: Colors.white, selectedColor: mainColor),
     progressIndicatorTheme: const ProgressIndicatorThemeData()
         .copyWith(refreshBackgroundColor: kBackGroundColor),
     radioTheme: const RadioThemeData()
@@ -120,6 +118,12 @@ class AppStyle {
   static const k30TopBorderRadius = BorderRadius.only(
     topLeft: Radius.circular(30),
     topRight: Radius.circular(30),
+  );
+  static const k10TopBorderRectangle = RoundedRectangleBorder(
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(10),
+      topRight: Radius.circular(10),
+    ),
   );
 }
 
