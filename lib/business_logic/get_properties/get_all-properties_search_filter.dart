@@ -8,16 +8,19 @@ class GetAllPropertiesSearchFilter {
     this.propertySorts = PropertySorts.suggested,
     this.propertyType = PropertyType.all,
     this.term = "",
+    this.propertyService = PropertyService.all,
   });
   int page;
   PropertySorts propertySorts;
   PropertyType propertyType;
+  PropertyService propertyService;
   String term;
 
   GetAllPropertiesSearchFilter copyWith({
     int? page,
     PropertySorts? propertySorts,
     PropertyType? propertyType,
+    PropertyService? propertyService,
     String? term,
   }) =>
       GetAllPropertiesSearchFilter(
@@ -25,6 +28,7 @@ class GetAllPropertiesSearchFilter {
         propertySorts: propertySorts ?? this.propertySorts,
         propertyType: propertyType ?? this.propertyType,
         term: term ?? this.term,
+        propertyService:propertyService ?? this.propertyService,
       );
 
   Map<String, String> toJson() => {
@@ -34,6 +38,7 @@ class GetAllPropertiesSearchFilter {
         "per_page": kProductsGetLimit.toString(),
         "sort":
             propertySortsUBackEnd.reverse[propertySorts] ?? "owner-priority",
-        "filter[term]": term
+        "filter[term]": term,
+    "filter[property-service]":propertyServiceBackEnd1.reverse[propertyService] ?? '',
       }..removeWhere((key, value) => value.isEmpty);
 }

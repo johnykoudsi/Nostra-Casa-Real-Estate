@@ -6,8 +6,10 @@ import 'package:nostra_casa/business_logic/tag_bloc/tag_bloc.dart';
 import 'package:nostra_casa/data/models/tags_model.dart';
 import 'package:nostra_casa/presentation/explore/widgets/filter_spacer_widget.dart';
 import 'package:nostra_casa/presentation/explore/widgets/handle_widget.dart';
+import 'package:nostra_casa/presentation/explore/widgets/property_type_filter_widget.dart';
 import 'package:nostra_casa/presentation/explore/widgets/search_text_field.dart';
 import 'package:nostra_casa/presentation/explore/widgets/sliverAppBarWidgetWithSearch.dart';
+import 'package:nostra_casa/presentation/explore/widgets/sorts_filter_widget.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../../business_logic/get_properties/get_all-properties_search_filter.dart';
 import '../../business_logic/get_properties/get_all_properties_bloc.dart';
@@ -18,6 +20,7 @@ import '../global_widgets/property_widgets/property_list_view.dart';
 import '../global_widgets/property_widgets/property_shimmer.dart';
 import '../global_widgets/shimmer.dart';
 import '../global_widgets/somthing_wrong.dart';
+import '../map_screen/widgets/propertyType_filter_widget.dart';
 
 class Explore extends StatefulWidget {
   const Explore({Key? key}) : super(key: key);
@@ -228,85 +231,50 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 22),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "Search".tr(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .headline4,
-                                              ),
-                                              const SizedBox(height: 8,),
-                                              SearchTextField(
-                                                onClear: () {
-                                                  searchController.clear();
-                                                  FocusManager.instance.primaryFocus?.unfocus();
-                                                  setState(() {
-                                                    propertiesSearchFilter =
-                                                        propertiesSearchFilter.copyWith(term: "");
-                                                    showSearchDeleteIcon = false;
-                                                  });
-                                                  search();
-                                                },
-                                                onSend: (value) {
-                                                  if(value == null || value.isEmpty){
-                                                    return;
-                                                  }
-                                                  setState(() {
-                                                    propertiesSearchFilter =
-                                                        propertiesSearchFilter.copyWith(term: value);
-                                                    showSearchDeleteIcon = true;
-                                                  });
-                                                  search();
-                                                },
-                                                searchController: searchController,
-                                                showSearchDeleteIcon: showSearchDeleteIcon,
-                                              ),
-                                            ],
-                                          ),
+                                        SearchTextField(
+                                          onClear: () {
+                                            searchController.clear();
+                                            FocusManager.instance.primaryFocus
+                                                ?.unfocus();
+                                            setState(() {
+                                              propertiesSearchFilter =
+                                                  propertiesSearchFilter
+                                                      .copyWith(term: "");
+                                              showSearchDeleteIcon = false;
+                                            });
+                                            search();
+                                          },
+                                          onSend: (value) {
+                                            if (value == null ||
+                                                value.isEmpty) {
+                                              return;
+                                            }
+                                            setState(() {
+                                              propertiesSearchFilter =
+                                                  propertiesSearchFilter
+                                                      .copyWith(term: value);
+                                              showSearchDeleteIcon = true;
+                                            });
+                                            search();
+                                          },
+                                          searchController: searchController,
+                                          showSearchDeleteIcon:
+                                              showSearchDeleteIcon,
                                         ),
                                         const FilterSpacing(),
-
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 22),
-                                          child: Text(
-                                            "Property Type",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4,
-                                          ),
-                                        ),
-                                        Column(
-                                          children: List.generate(
-                                            PropertyType.values.length,
-                                            (index) => RadioListTile(
-                                              title: Text(
-                                                propertyTypeUi.reverse[
-                                                        PropertyType
-                                                            .values[index]] ??
-                                                    '',
-                                              ),
-                                              value: PropertyType.values[index],
-                                              groupValue: propertiesSearchFilter
-                                                  .propertyType,
-                                              onChanged: (value) {
-                                                Navigator.of(context).pop();
-                                                setState(() {
-                                                  propertiesSearchFilter =
-                                                      propertiesSearchFilter
-                                                          .copyWith(
-                                                              propertyType:
-                                                                  value);
-                                                });
-                                                search();
-                                              },
-                                            ),
-                                          ),
+                                        PropertyTypeFilterExploreWidget(
+                                          onChanged: (value) {
+                                            Navigator.of(context).pop();
+                                            setState(() {
+                                              propertiesSearchFilter =
+                                                  propertiesSearchFilter
+                                                      .copyWith(
+                                                          propertyType: value);
+                                            });
+                                            search();
+                                          },
+                                          value: propertiesSearchFilter
+                                              .propertyType,
                                         ),
                                         const FilterSpacing(),
                                       ],
@@ -344,63 +312,17 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                         return StatefulBuilder(
                           builder: (BuildContext context,
                               void Function(void Function()) setState) {
-                            return SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const HandleWidget(),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 18),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 22),
-                                          child: Text(
-                                            "Sorts",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline4,
-                                          ),
-                                        ),
-                                        Column(
-                                          children: List.generate(
-                                            PropertySorts.values.length,
-                                            (index) => RadioListTile(
-                                              title: Text(
-                                                propertySortsUi.reverse[
-                                                        PropertySorts
-                                                            .values[index]] ??
-                                                    '',
-                                              ),
-                                              value:
-                                                  PropertySorts.values[index],
-                                              groupValue: propertiesSearchFilter
-                                                  .propertySorts,
-                                              onChanged: (value) {
-                                                Navigator.of(context).pop();
-                                                setState(() {
-                                                  propertiesSearchFilter =
-                                                      propertiesSearchFilter
-                                                          .copyWith(
-                                                              propertySorts:
-                                                                  value);
-                                                });
-                                                search();
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                        const FilterSpacing(),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            return SortsFilterWidget(
+                              value: propertiesSearchFilter.propertySorts,
+                              onChanged: (value) {
+                                Navigator.of(context).pop();
+                                setState(() {
+                                  propertiesSearchFilter =
+                                      propertiesSearchFilter.copyWith(
+                                          propertySorts: value);
+                                });
+                                search();
+                              },
                             );
                           },
                         );
@@ -421,5 +343,3 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
     );
   }
 }
-
-

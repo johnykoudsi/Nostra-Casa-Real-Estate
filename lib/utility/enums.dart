@@ -21,6 +21,7 @@ enum PropertyService {
   sale,
   rent,
   holiday,
+  all,
 }
 enum PropertySorts {
   newToOld,
@@ -65,7 +66,7 @@ final EnumValues propertyTypeUi = EnumValues({
   "Residential": PropertyType.residential,
   "Agricultural": PropertyType.agricultural,
   "Commercial": PropertyType.commercial,
-  "AllPropertyType": PropertyType.all,
+  "All Property Types": PropertyType.all,
 });
 final EnumValues propertyTypeBackEnd = EnumValues({
   "RESIDENTIAL": PropertyType.residential,
@@ -77,12 +78,23 @@ final EnumValues propertyTypeBackEnd2 = EnumValues({
   "agricultural": PropertyType.agricultural,
   "commercial": PropertyType.commercial,
 });
+
+final EnumValues propertyServiceBackEnd1 = EnumValues({
+  "SALE": PropertyService.sale,
+  "RENT": PropertyService.rent,
+  "HOLIDAY": PropertyService.holiday,
+});
 final EnumValues propertyServiceBackEnd2 = EnumValues({
   "sale": PropertyService.sale,
   "rent": PropertyService.rent,
   "holiday": PropertyService.holiday,
 });
 
+final propertyServiceUI = EnumValues({
+  "Sale": PropertyService.sale,
+  "Rent".tr(): PropertyService.rent,
+  "Holiday".tr(): PropertyService.holiday,
+});
 final propertyServicePriceUI = EnumValues({
   "": PropertyService.sale,
   "sp per month".tr(): PropertyService.rent,
