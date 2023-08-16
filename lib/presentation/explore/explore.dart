@@ -1,8 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/business_logic/tag_bloc/tag_bloc.dart';
 import 'package:nostra_casa/data/models/tags_model.dart';
+import 'package:nostra_casa/presentation/explore/widgets/filter_spacer_widget.dart';
+import 'package:nostra_casa/presentation/explore/widgets/handle_widget.dart';
+import 'package:nostra_casa/presentation/explore/widgets/search_text_field.dart';
 import 'package:nostra_casa/presentation/explore/widgets/sliverAppBarWidgetWithSearch.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 import '../../business_logic/get_properties/get_all-properties_search_filter.dart';
@@ -25,9 +29,11 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   TabController? tabController;
   late TabController shimmerController;
-
+  TextEditingController searchController = TextEditingController();
+  bool showSearchDeleteIcon = false;
   GetAllPropertiesBloc propertiesBloc = GetAllPropertiesBloc();
-  GetAllPropertiesSearchFilter propertiesSearchFilter = GetAllPropertiesSearchFilter();
+  GetAllPropertiesSearchFilter propertiesSearchFilter =
+      GetAllPropertiesSearchFilter();
 
   @override
   void initState() {
@@ -38,9 +44,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   void search() {
     propertiesSearchFilter = propertiesSearchFilter.copyWith(page: 1);
     propertiesBloc.add(ChangeToLoadingApiEvent(
-        searchFilterProperties: propertiesSearchFilter,
+      searchFilterProperties: propertiesSearchFilter,
     ));
-
   }
 
   @override
@@ -53,7 +58,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
         BlocProvider(
           create: (context) => TagBloc()
             ..add(ChangeToLoadingTagApiEvent(
-                searchFilterProperties: TagsSearchFilter(),
+              searchFilterProperties: TagsSearchFilter(),
             )),
         ),
         BlocProvider.value(
@@ -203,7 +208,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
               FloatingActionButton(
                 heroTag: "asdasdasd",
                 onPressed: () {
-                  FocusManager.instance.primaryFocus?.unfocus();
                   showModalBottomSheet(
                       context: context,
                       shape: AppStyle.k10TopBorderRectangle,
@@ -224,6 +228,49 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 22),
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                "Search".tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headline4,
+                                              ),
+                                              const SizedBox(height: 8,),
+                                              SearchTextField(
+                                                onClear: () {
+                                                  searchController.clear();
+                                                  FocusManager.instance.primaryFocus?.unfocus();
+                                                  setState(() {
+                                                    propertiesSearchFilter =
+                                                        propertiesSearchFilter.copyWith(term: "");
+                                                    showSearchDeleteIcon = false;
+                                                  });
+                                                  search();
+                                                },
+                                                onSend: (value) {
+                                                  if(value == null || value.isEmpty){
+                                                    return;
+                                                  }
+                                                  setState(() {
+                                                    propertiesSearchFilter =
+                                                        propertiesSearchFilter.copyWith(term: value);
+                                                    showSearchDeleteIcon = true;
+                                                  });
+                                                  search();
+                                                },
+                                                searchController: searchController,
+                                                showSearchDeleteIcon: showSearchDeleteIcon,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const FilterSpacing(),
+
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 22),
@@ -375,45 +422,4 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   }
 }
 
-class FilterSpacing extends StatelessWidget {
-  const FilterSpacing({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18),
-      child: Divider(
-        height: 0,
-        color: AppStyle.kGreyColor,
-        thickness: 0.8,
-      ),
-    );
-  }
-}
-
-class HandleWidget extends StatelessWidget {
-  const HandleWidget({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 25, right: 25, top: 8),
-      child: Center(
-        child: Container(
-          width: 100,
-          //margin: const EdgeInsets.all(8),
-          height: 5,
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: AppStyle.k4RadiusLowerPadding,
-            color: Theme.of(context).primaryColor.withOpacity(0.5),
-          ),
-        ),
-      ),
-    );
-  }
-}
