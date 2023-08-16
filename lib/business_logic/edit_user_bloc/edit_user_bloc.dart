@@ -22,12 +22,10 @@ class EditUserBloc extends Bloc<EditUserEvent, EditUserState> {
       final response = await UserServices.editUserService(event);
 
       if (response is UserInfo) {
-        print("asbhjdjksadksakasd1234567890-");
         UserModel? userModel = await getUserFromLocalStorage();
 
         if (userModel != null) {
           userModel.user = response;
-          print("User Model${userModel.toJson()}");
           saveUserToLocalStorage(userModel);
           globalUserBloc.add(CheckUserFromLocalStorage());
         }

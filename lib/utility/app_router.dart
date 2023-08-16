@@ -22,6 +22,7 @@ import 'package:nostra_casa/presentation/welcome/welcome.dart';
 import '../business_logic/add_to_favorite/add_favorite_bloc.dart';
 import '../business_logic/country_bloc/country_bloc.dart';
 import '../business_logic/edit_user_bloc/edit_user_bloc.dart';
+import '../business_logic/promote_to_agency/promote_to_agency_bloc.dart';
 import '../business_logic/tag_bloc/tag_bloc.dart';
 import '../business_logic/user/user_bloc.dart';
 import '../presentation/about_us/about_us.dart';
@@ -39,6 +40,7 @@ import 'app_routes.dart';
 
 class AppRouter {
   GoogleMapsBloc promoteToAgencyMapBloc = GoogleMapsBloc();
+  PromoteToAgencyBloc promoteToAgencyBloc = PromoteToAgencyBloc();
 
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
@@ -150,6 +152,7 @@ class AppRouter {
               BlocProvider.value(
                 value: promoteToAgencyMapBloc,
               ),
+              BlocProvider.value(value: promoteToAgencyBloc)
             ],
             child: const PromoteToAgency(),
           );
