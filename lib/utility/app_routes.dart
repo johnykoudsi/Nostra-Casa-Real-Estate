@@ -20,7 +20,7 @@ class AppRoutes {
   static const String reviewProperty="/review_property";
   static const String promoteToAgency="/promote_to_agency";
   static const String welcomeToPromote="/welcome_to_promote";
-  static const String addAgencyLocation="/add_agency_location";
+  // static const String addAgencyLocation="/add_agency_location";
   static const String staggeredImagesView="/staggered_images_view";
   static const String streetViewMaps="/street_view_maps";
   static const String virtualReality="/v_r";

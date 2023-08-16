@@ -14,8 +14,6 @@ import '../../business_logic/google_maps/google_maps_bloc.dart';
 
 class AddAgencyLocation extends StatefulWidget {
   const AddAgencyLocation({Key? key}) : super(key: key);
-
-
   @override
   State<AddAgencyLocation> createState() => AddAgencyLocationState();
 

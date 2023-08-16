@@ -11,6 +11,7 @@ import 'package:nostra_casa/presentation/promote_to_agency/add_agency_location.d
 import 'package:nostra_casa/presentation/promote_to_agency/widgets/files_list.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/enums.dart';
+import '../../utility/app_router.dart';
 import '../../utility/app_style.dart';
 import '../add_property/widgets/custom_elevated_button.dart';
 import '../global_widgets/custom_text_field.dart';
@@ -57,8 +58,7 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
 
   @override
   void dispose() {
-    context.read<GoogleMapsBloc>().close();
-
+    //AppRouter
     super.dispose();
   }
 
@@ -154,8 +154,17 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed(AppRoutes.addAgencyLocation);
+                              final googleBloc = context.read<GoogleMapsBloc>();
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => BlocProvider.value(
+                                    value: googleBloc,
+                                    child: const AddAgencyLocation(),
+                                  ),
+                                ),
+                              );
                             },
                             child: Container(
                               height: 150,
@@ -169,8 +178,16 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
                     return CustomElevatedButton(
                         backgroundColor: Colors.white,
                         onPress: () {
-                          Navigator.of(context)
-                              .pushNamed(AppRoutes.addAgencyLocation);
+                          final googleBloc = context.read<GoogleMapsBloc>();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BlocProvider.value(
+                                value: googleBloc,
+                                child: const AddAgencyLocation(),
+                              ),
+                            ),
+                          );
                         },
                         title: "Add your agency location".tr(),
                         iconData: Icons.map_outlined);
@@ -192,16 +209,16 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
                     isLoading: state is PromoteToAgencyLoading,
                     onPressed: isInfoCompleted()
                         ? () {
-                      if(state2 is GoogleMapsPinSelected){
-                        if (_key.currentState!.validate()) {
-                          context.read<PromoteToAgencyBloc>().add(
-                              PromoteToAgencyApiEvent(
-                                  reason: promotionRequestController.text,
-                                  location: state2.latLng,
-                                  files: files));
-                        }
-                      }
-                    }
+                            if (state2 is GoogleMapsPinSelected) {
+                              if (_key.currentState!.validate()) {
+                                context.read<PromoteToAgencyBloc>().add(
+                                    PromoteToAgencyApiEvent(
+                                        reason: promotionRequestController.text,
+                                        location: state2.latLng,
+                                        files: files));
+                              }
+                            }
+                          }
                         : null,
                   );
                 },

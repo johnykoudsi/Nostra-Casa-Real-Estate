@@ -39,9 +39,6 @@ import '../presentation/view_property/widgets/images_staggered_view.dart';
 import 'app_routes.dart';
 
 class AppRouter {
-  GoogleMapsBloc promoteToAgencyMapBloc = GoogleMapsBloc();
-  PromoteToAgencyBloc promoteToAgencyBloc = PromoteToAgencyBloc();
-
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
@@ -127,7 +124,7 @@ class AppRouter {
         case AppRoutes.homePage:
           return const Explore();
 
-          case AppRoutes.virtualReality:
+        case AppRoutes.virtualReality:
           return const VirtualRealityScreen();
 
         case AppRoutes.staggeredImagesView:
@@ -149,22 +146,15 @@ class AppRouter {
         case AppRoutes.promoteToAgency:
           return MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: promoteToAgencyMapBloc,
+              BlocProvider(
+                create: (context) => GoogleMapsBloc(),
               ),
-              BlocProvider.value(value: promoteToAgencyBloc)
+              BlocProvider(create: (context) => PromoteToAgencyBloc())
             ],
             child: const PromoteToAgency(),
           );
-        case AppRoutes.addAgencyLocation:
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider.value(
-                value: promoteToAgencyMapBloc,
-              ),
-            ],
-            child: const AddAgencyLocation(),
-          );
+        // case AppRoutes.addAgencyLocation:
+        //   return const AddAgencyLocation();
 
         default:
           return const Scaffold(
