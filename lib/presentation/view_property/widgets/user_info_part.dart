@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/data/models/user_model.dart';
+import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/app_assets.dart';
@@ -25,16 +26,15 @@ class UserInfoPart extends StatelessWidget {
           whatsappURLIos,
         ));
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Whatsapp not installed")));
+        DialogsWidgetsSnackBar.showScaffoldSnackBar(title: "Whatsapp not installed", context: context);
       }
     } else {
       // android , web
       if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
         await launchUrl(Uri.parse(whatsappURlAndroid));
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Whatsapp not installed")));
+        DialogsWidgetsSnackBar.showScaffoldSnackBar(title: "Whatsapp not installed", context: context);
+
       }
     }
   }
