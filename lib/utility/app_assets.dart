@@ -39,6 +39,7 @@ class AppAssets{
   static const whatsapp = 'assets/images/whatsapp.svg';
   static const facebook = 'assets/images/facebook.svg';
   static const phoneOut = 'assets/images/phone_out.svg';
+  static const search = 'assets/images/search.svg';
 
 
 

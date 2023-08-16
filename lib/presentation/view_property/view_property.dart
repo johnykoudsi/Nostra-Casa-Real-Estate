@@ -256,18 +256,18 @@ class ViewProperty extends StatelessWidget {
                           color: AppStyle.blackColor,
                         )),
                     onPressed: () async {
-                      if(property.media.isNotEmpty){
+                      if (property.media.isNotEmpty) {
                         File file = await urlToFile(property.media[0]);
                         await Share.shareFiles([file.path],
                             text: 'Share this ${property.name} !' +
                                 "\n Download Nostra Casa now !!" +
                                 "\n Android Link: " +
                                 "\n IOS Link:");
-                      }else{
+                      } else {
                         await Share.share('Share this ${property.name} !' +
-                                "\n Download Nostra Casa now !!" +
-                                "\n Android Link: " +
-                                "\n IOS Link:");
+                            "\n Download Nostra Casa now !!" +
+                            "\n Android Link: " +
+                            "\n IOS Link:");
                       }
                     },
                   ),

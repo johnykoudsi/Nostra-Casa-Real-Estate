@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,20 +30,23 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
         widget.propertiesSearchFilter ?? GetAllPropertiesSearchFilter();
 
     propertiesBloc.add(GetAllPropertiesApiEvent(
-        searchFilterProperties: propertiesSearchFilter,
+      searchFilterProperties: propertiesSearchFilter,
     ));
     super.initState();
   }
-  void search(){
+
+  void search() {
     propertiesSearchFilter = propertiesSearchFilter.copyWith(page: 1);
     propertiesBloc.add(ChangeToLoadingApiEvent(
         searchFilterProperties: propertiesSearchFilter));
   }
+
   @override
   void dispose() {
     propertiesBloc.close();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -93,82 +95,176 @@ class _AllPropertyListViewState extends State<AllPropertyListView> {
             );
           },
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            // if (propertiesBloc.state is! AllPropertiesLoadedState) {
-            //   return;
-            // }
-            FocusManager.instance.primaryFocus?.unfocus();
-            showModalBottomSheet(
-                context: context,
-                shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10))),
-                builder: (BuildContext context) {
-                  return StatefulBuilder(
-                    builder: (BuildContext context,
-                        void Function(void Function()) setState) {
-                      return SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 25, right: 25, top: 8),
-                              child: Center(
-                                child: Container(
-                                  width: 100,
-                                  //margin: const EdgeInsets.all(8),
-                                  height: 5,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    borderRadius: AppStyle.k4RadiusLowerPadding,
-                                    color: Theme.of(context)
-                                        .primaryColor
-                                        .withOpacity(0.5),
+        floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            // filter
+            FloatingActionButton(
+              onPressed: () {
+                FocusManager.instance.primaryFocus?.unfocus();
+                showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10))),
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 25, right: 25, top: 8),
+                                  child: Center(
+                                    child: Container(
+                                      width: 100,
+                                      //margin: const EdgeInsets.all(8),
+                                      height: 5,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            AppStyle.k4RadiusLowerPadding,
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.5),
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 18),
-                              child: Column(
-                                children: List.generate(
-                                  PropertySorts.values.length,
-                                  (index) => RadioListTile(
-                                      title: Text(
-                                        propertySortsUi.reverse[
-                                                PropertySorts.values[index]] ??
-                                            '',
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 18),
+                                  child: Column(
+                                    children: List.generate(
+                                      PropertyType.values.length,
+                                      (index) => RadioListTile(
+                                        title: Text(
+                                          propertyTypeUi.reverse[PropertyType
+                                                  .values[index]] ??
+                                              '',
+                                        ),
+                                        value: PropertyType.values[index],
+                                        groupValue: propertiesSearchFilter.propertyType,
+                                        onChanged: (value) {
+                                          Navigator.of(context).pop();
+                                          setState(() {
+                                            propertiesSearchFilter =
+                                                propertiesSearchFilter.copyWith(propertyType: value);
+                                          });
+                                          search();
+                                        },
                                       ),
-                                      value: PropertySorts.values[index],
-                                      groupValue: propertiesSearchFilter.propertySorts,
-                                      onChanged: (value) {
-                                        Navigator.of(context).pop();
-                                        setState((){
-                                          propertiesSearchFilter = propertiesSearchFilter.copyWith(propertySorts: value);
-                                        });
-                                        search();
-                                      },),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
-                        ),
+                          );
+                        },
                       );
-                    },
-                  );
-                });
-          },
-          backgroundColor: AppStyle.mainColor,
-          child: SizedBox(
-            child: SvgPicture.asset(
-              AppAssets.filter,
-              color: AppStyle.kGreyColor,
+                    });
+              },
+              backgroundColor: AppStyle.mainColor,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  AppAssets.search,
+                  color: AppStyle.kBackGroundColor,
+                ),
+              ),
             ),
-          ),
+            const SizedBox(
+              height: 18,
+            ),
+            // sort
+            FloatingActionButton(
+              onPressed: () {
+                // if (propertiesBloc.state is! AllPropertiesLoadedState) {
+                //   return;
+                // }
+                FocusManager.instance.primaryFocus?.unfocus();
+                showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10))),
+                    builder: (BuildContext context) {
+                      return StatefulBuilder(
+                        builder: (BuildContext context,
+                            void Function(void Function()) setState) {
+                          return SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 25, right: 25, top: 8),
+                                  child: Center(
+                                    child: Container(
+                                      width: 100,
+                                      //margin: const EdgeInsets.all(8),
+                                      height: 5,
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            AppStyle.k4RadiusLowerPadding,
+                                        color: Theme.of(context)
+                                            .primaryColor
+                                            .withOpacity(0.5),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 18),
+                                  child: Column(
+                                    children: List.generate(
+                                      PropertySorts.values.length,
+                                      (index) => RadioListTile(
+                                        title: Text(
+                                          propertySortsUi.reverse[PropertySorts
+                                                  .values[index]] ??
+                                              '',
+                                        ),
+                                        value: PropertySorts.values[index],
+                                        groupValue: propertiesSearchFilter
+                                            .propertySorts,
+                                        onChanged: (value) {
+                                          Navigator.of(context).pop();
+                                          setState(() {
+                                            propertiesSearchFilter =
+                                                propertiesSearchFilter.copyWith(
+                                                    propertySorts: value);
+                                          });
+                                          search();
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    });
+              },
+              backgroundColor: AppStyle.mainColor,
+              child: SizedBox(
+                child: SvgPicture.asset(
+                  AppAssets.filter,
+                  color: AppStyle.kBackGroundColor,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
