@@ -365,6 +365,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                   FocusManager.instance.primaryFocus?.unfocus();
                   showModalBottomSheet(
                       context: context,
+                      isScrollControlled: true,
                       shape: AppStyle.k10TopBorderRectangle,
                       builder: (BuildContext context) {
                         return StatefulBuilder(
