@@ -15,7 +15,7 @@ class CountryServices{
 
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: EndPoints.country,
-      useUserToken: true,
+      useUserToken: false,
     );
     print(helperResponse);
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {

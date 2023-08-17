@@ -15,7 +15,7 @@ class TagService {
         page: event.searchFilterProperties.page,
         limit: kTagGetLimit,
       ),
-      useUserToken: true,
+      useUserToken: false,
     );
     print(helperResponse.servicesResponse);
 

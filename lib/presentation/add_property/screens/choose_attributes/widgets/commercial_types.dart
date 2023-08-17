@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
@@ -7,8 +6,7 @@ import '../../../../../data/models/special_attributes.dart';
 import 'one_attribute.dart';
 
 class CommercialTypesWidget extends StatelessWidget {
-  CommercialTypesWidget(
-      {required this.commercialPropertyAttributes, Key? key})
+  CommercialTypesWidget({required this.commercialPropertyAttributes, Key? key})
       : super(key: key);
   CommercialPropertyAttributes commercialPropertyAttributes;
 
@@ -20,7 +18,10 @@ class CommercialTypesWidget extends StatelessWidget {
           name: "Bath Rooms",
           value: commercialPropertyAttributes.numberOfBathrooms,
           onTapMinus: () {
-            int newValue = commercialPropertyAttributes.numberOfBathrooms - 1;
+            int newValue = commercialPropertyAttributes.numberOfBathrooms;
+            if (newValue > 0) {
+              newValue = commercialPropertyAttributes.numberOfBathrooms - 1;
+            }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
                     propertyAttributes: commercialPropertyAttributes.copyWith(
@@ -38,9 +39,9 @@ class CommercialTypesWidget extends StatelessWidget {
           name: "Balconies",
           value: commercialPropertyAttributes.numberOfBalconies,
           onTapMinus: () {
-            int newValue=commercialPropertyAttributes.numberOfBalconies;
-            if(commercialPropertyAttributes.numberOfBalconies>0){
-               newValue = commercialPropertyAttributes.numberOfBalconies - 1;
+            int newValue = commercialPropertyAttributes.numberOfBalconies;
+            if (commercialPropertyAttributes.numberOfBalconies > 0) {
+              newValue = commercialPropertyAttributes.numberOfBalconies - 1;
             }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
@@ -59,7 +60,10 @@ class CommercialTypesWidget extends StatelessWidget {
           name: "Floor",
           value: commercialPropertyAttributes.floor,
           onTapMinus: () {
-            int newValue = commercialPropertyAttributes.floor - 1;
+            int newValue = commercialPropertyAttributes.floor;
+            if (newValue > 0) {
+              newValue = commercialPropertyAttributes.floor - 1;
+            }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
                     propertyAttributes: commercialPropertyAttributes.copyWith(
@@ -73,7 +77,6 @@ class CommercialTypesWidget extends StatelessWidget {
                         floor: newValue)));
           },
         ),
-
       ],
     );
   }

@@ -20,8 +20,8 @@ class ResidentialTypesWidget extends StatelessWidget {
           value: residentialPropertyAttributes.numberOfBathrooms,
           onTapMinus: () {
             int newValue = residentialPropertyAttributes.numberOfBathrooms;
-            if(residentialPropertyAttributes.numberOfBathrooms>0){
-              newValue = residentialPropertyAttributes.numberOfBathrooms-1;
+            if (residentialPropertyAttributes.numberOfBathrooms > 0) {
+              newValue = residentialPropertyAttributes.numberOfBathrooms - 1;
             }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
@@ -40,7 +40,10 @@ class ResidentialTypesWidget extends StatelessWidget {
           name: "Balconies",
           value: residentialPropertyAttributes.numberOfBalconies,
           onTapMinus: () {
-            int newValue = residentialPropertyAttributes.numberOfBalconies - 1;
+            int newValue = residentialPropertyAttributes.numberOfBalconies;
+            if (newValue > 0) {
+              newValue = residentialPropertyAttributes.numberOfBalconies - 1;
+            }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
                     propertyAttributes: residentialPropertyAttributes.copyWith(
@@ -58,7 +61,10 @@ class ResidentialTypesWidget extends StatelessWidget {
           name: "Bed Rooms",
           value: residentialPropertyAttributes.numberOfBedrooms,
           onTapMinus: () {
-            int newValue = residentialPropertyAttributes.numberOfBedrooms - 1;
+            int newValue = residentialPropertyAttributes.numberOfBedrooms;
+            if (newValue > 0) {
+              newValue = residentialPropertyAttributes.numberOfBedrooms - 1;
+            }
             context.read<AddPropertyBloc>().add(
                 SelectedTypeConstAttributesEvent(
                     propertyAttributes: residentialPropertyAttributes.copyWith(

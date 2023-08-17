@@ -15,7 +15,7 @@ class AmenityService {
           page: event.searchFilterProperties.page,
           limit: kProductsGetLimit,
       ),
-      useUserToken: true,
+      useUserToken: false,
     );
     print(helperResponse.servicesResponse);
 

@@ -30,7 +30,7 @@ class MapsServices {
     HelperResponse helperResponse = await NetworkHelpers.postDataWithFile(
       url: EndPoints.nearbyProperties,
       body: mapBody,
-      useUserToken: true,
+      useUserToken: false,
       name: '',
     );
 
