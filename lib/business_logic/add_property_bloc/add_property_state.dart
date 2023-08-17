@@ -88,6 +88,8 @@ class AddPropertyState extends Equatable {
       "price": price.toString(),
       "service": getPropertyService(propertyService),
       "description": description,
+      "country":countryModel!.id.toString(),
+      "city":city!.id.toString(),
       "latitude": "${selectedLocation?.latitude}",
       "longitude": "${selectedLocation?.longitude}",
       "specialAttributes": json.encode(propertyTypeSpecialAttributes) == "null"
