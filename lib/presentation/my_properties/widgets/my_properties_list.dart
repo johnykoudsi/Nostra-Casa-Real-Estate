@@ -79,41 +79,40 @@ class MyPropertyItemWidget extends StatelessWidget {
             SizedBox(
               width: screenWidth * 0.02,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Damascus,Syria",
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-                Text("this is a title",
-                    style: Theme.of(context).textTheme.headline5),
-                Text(
-                  "90000000",
-                  style: Theme.of(context).textTheme.headline5,
-                ),
-              ],
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Damascus,Syria",
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  Text("this is a title",
+                      style: Theme.of(context).textTheme.headline5),
+                  Text(
+                    "90000000 SYP",
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                ],
+              ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 RoundedElevatedButton(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   iconData: Icons.delete_forever,
                   iconColor: Colors.red,
                   backgroundColor: AppStyle.kBackGroundColor,
                 ),
                 RoundedElevatedButton(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   iconData: Icons.edit,
                   iconColor: Colors.black45,
                   backgroundColor: AppStyle.kBackGroundColor,
                 ),
                 RoundedElevatedButton(
-                  onTap: () {
-                  },
+                  onTap: () {},
                   iconData: Icons.sync_alt_sharp,
                   iconColor: Colors.black45,
                   backgroundColor: AppStyle.kBackGroundColor,
