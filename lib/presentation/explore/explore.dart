@@ -33,15 +33,30 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   TabController? tabController;
   late TabController shimmerController;
+
   TextEditingController searchController = TextEditingController();
+
   bool showSearchDeleteIcon = false;
+
+  ScrollController scrollController = ScrollController();
+
   GetAllPropertiesBloc propertiesBloc = GetAllPropertiesBloc();
-  GetAllPropertiesSearchFilter propertiesSearchFilter =
-      GetAllPropertiesSearchFilter();
+
+  GetAllPropertiesSearchFilter propertiesSearchFilter = GetAllPropertiesSearchFilter();
 
   @override
   void initState() {
     shimmerController = TabController(length: 5, vsync: this);
+    scrollController.addListener(() {
+      if (scrollController.position.maxScrollExtent ==
+          scrollController.offset) {
+        propertiesBloc.add(
+          GetAllPropertiesApiEvent(
+            searchFilterProperties: propertiesSearchFilter,
+          ),
+        );
+      }
+    });
     super.initState();
   }
 
@@ -186,7 +201,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                           children: [
                             PropertyShimmer(),
                             PropertyShimmer(),
-                            PropertyShimmer(),
                           ],
                         );
                       }
@@ -204,12 +218,15 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                         );
                       }
                       if (getAllState is AllPropertiesLoadedState) {
+                        print("maxxxxx"+getAllState.hasReachedMax.toString());
                         return RefreshIndicator(
                           onRefresh: () async {
                             search();
                           },
                           child: AllPropertyListView(
+                            hasReachedMax: getAllState.hasReachedMax,
                             properties: getAllState.properties,
+                            scrollController: scrollController,
                           ),
                         );
                       }
@@ -227,7 +244,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                 if (state is TagInitial) {
                   return ListView(
                     children: [
-                      PropertyShimmer(),
                       PropertyShimmer(),
                       PropertyShimmer(),
                     ],
