@@ -57,7 +57,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: AppAssets.mkbr,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Explore',
+                    label: 'Explore'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -65,7 +65,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: AppAssets.mapLocation,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Map',
+                    label: 'Map'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -73,7 +73,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: AppAssets.houseAdd,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'Add Property',
+                    label: 'Add Property'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -81,7 +81,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: AppAssets.heart,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'WishList',
+                    label: 'WishList'.tr(),
                   ),
                   BottomNavigationBarItem(
                     icon: CustomNavigatorWidget(
@@ -89,7 +89,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       svgPath: AppAssets.more,
                       selectedIndex: selectedIndex,
                     ),
-                    label: 'More',
+                    label: 'More'.tr(),
                   ),
                 ],
               ),

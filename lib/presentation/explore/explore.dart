@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -98,7 +99,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                 (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBarWidgetWithSearch(
-                  title: 'Explore',
+                  title: 'Explore'.tr(),
                   bottom: AppBar(
                     toolbarHeight: getHeight * 0.08,
                     elevation: 0,
@@ -204,10 +205,10 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                       if (getAllState is AllPropertiesLoadedState &&
                           getAllState.properties.isEmpty) {
                         return SomethingWrongWidget(
-                          title: "No properties found !",
+                          title: "No properties found !".tr(),
                           svgPath: AppAssets.search,
                           elevatedButtonWidget: ElevatedButtonWidget(
-                            title: "Refresh",
+                            title: "Refresh".tr(),
                             onPressed: () {
                               search();
                             },
@@ -229,7 +230,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                       }
                       return SomethingWrongWidget(
                         elevatedButtonWidget: ElevatedButtonWidget(
-                          title: "Refresh",
+                          title: "Refresh".tr(),
                           onPressed: () {
                             search();
                           },
@@ -248,7 +249,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                 }
                 return SomethingWrongWidget(
                   elevatedButtonWidget: ElevatedButtonWidget(
-                    title: "Refresh",
+                    title: "Refresh".tr(),
                     onPressed: () {
                       context.read<TagBloc>().add(ChangeToLoadingTagApiEvent());
                     },

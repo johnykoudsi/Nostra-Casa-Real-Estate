@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utility/enums.dart';
@@ -28,7 +29,7 @@ class SortsFilterWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 22),
                   child: Text(
-                    "Sorts",
+                    "Sorts".tr(),
                     style: Theme.of(context)
                         .textTheme
                         .headline4,

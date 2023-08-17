@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utility/enums.dart';
@@ -16,7 +17,7 @@ class PropertyServiceFilterExploreWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 22),
           child: Text(
-            "Property Service",
+            "Property Service".tr(),
             style: Theme.of(context).textTheme.headline4,
           ),
         ),

@@ -48,6 +48,18 @@ class _NotificationsListState extends State<NotificationsList> {
     return BlocBuilder<NotificationsBloc, NotificationsState>(
         builder: (context, state) {
       if (state is NotificationLoadedState) {
+        if(state.notifications.isEmpty){
+          return SomethingWrongWidget(
+            title: "No notification found !".tr(),
+            svgPath: AppAssets.search,
+            elevatedButtonWidget: ElevatedButtonWidget(
+              title: "Refresh".tr(),
+              onPressed: () {
+                search();
+              },
+            ),
+          );
+        }
         return ListView.builder(
           controller: scrollController,
             itemCount: state.hasReachedMax
