@@ -86,7 +86,7 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                             ),
                           ],
                         );
-                      } else if (state.status == "pending") {
+                      } else if (state.status == "Pending") {
                         return SomethingWrongWidget(
                           svgPath: AppAssets.promote,
                           title: "Your request is on pending ".tr(),
@@ -112,6 +112,7 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                     }
                     return SomethingWrongWidget(
                       elevatedButtonWidget: ElevatedButtonWidget(
+                        title: "Refresh".tr(),
                         onPressed: () {
                           context
                               .read<AgencyPromotionStatusBloc>()
