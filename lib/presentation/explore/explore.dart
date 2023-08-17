@@ -216,7 +216,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                         );
                       }
                       if (getAllState is AllPropertiesLoadedState) {
-                        print("maxxxxx"+getAllState.hasReachedMax.toString());
                         return RefreshIndicator(
                           onRefresh: () async {
                             search();

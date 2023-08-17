@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nostra_casa/data/models/properties_model.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:nostra_casa/utility/enums.dart';
 
 import '../../data/services/get_all_property_service.dart';
 import '../../utility/constant_logic_validations.dart';
@@ -33,10 +34,16 @@ class GetAllPropertiesBloc
       var getAllProperties;
 
       event.searchFilterProperties.page = getPage();
-
-      getAllProperties = await AllPropertiesService.getAllPropertiesService(
-        event: event,
-      );
+      if(event.searchFilterProperties.getPropertiesApi
+          == GetPropertiesApi.myFavorite){
+        getAllProperties = await AllPropertiesService.getMyFavoriteService(
+          event: event,
+        );
+      }else{
+        getAllProperties = await AllPropertiesService.getAllPropertiesService(
+          event: event,
+        );
+      }
 
       if (getAllProperties is List<Property>) {
         if (getAllProperties.isNotEmpty) {

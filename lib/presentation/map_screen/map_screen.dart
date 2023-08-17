@@ -136,7 +136,7 @@ class _MapScreenState extends State<MapScreen> {
               buildingsEnabled: false,
               mapType: MapType.normal,
               myLocationButtonEnabled: true,
-              minMaxZoomPreference: const MinMaxZoomPreference(10, 15),
+              minMaxZoomPreference: const MinMaxZoomPreference(5, 15),
               onCameraIdle: () {
                 getCenter().then(
                   (value) => context.read<GetNearbyPropertiesBloc>().add(
