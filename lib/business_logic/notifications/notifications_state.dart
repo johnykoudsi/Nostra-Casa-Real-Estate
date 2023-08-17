@@ -7,15 +7,15 @@ abstract class NotificationsState {
 class NotificationsInitial extends NotificationsState {
 }
 class NotificationLoadedState extends NotificationsState {
-  List<UserNotification> notifications;
+  List<NotificationModel> notifications;
   bool hasReachedMax;
 
   NotificationLoadedState(
-      {this.notifications = const <UserNotification>[],
+      {this.notifications = const <NotificationModel>[],
         required this.hasReachedMax});
 
   NotificationLoadedState copyWith({
-    List<UserNotification>? notifications,
+    List<NotificationModel>? notifications,
     bool? hasReachedMax,
   }) {
     return NotificationLoadedState(

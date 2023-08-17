@@ -1,4 +1,5 @@
 import 'package:nostra_casa/business_logic/notifications/notifications_bloc.dart';
+import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/data/models/notifications_model.dart';
 import 'package:nostra_casa/utility/constant_logic_validations.dart';
 import '../../utility/endpoints.dart';
@@ -9,9 +10,14 @@ class NotificationsService {
   Future getNotificationsService({
     required GetNotificationApiEvent event,
   }) async {
+    var id;
+    final userState = globalUserBloc.state;
+    if(userState is UserLoggedState){
+       id = userState.user.user.id;
+    }
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: EndPoints.getNotifications(
-        userId: event.userId,
+        userId: id,
         page: event.notificationsSearchFilter.page,
         limit: kProductsGetLimit,
       ),
@@ -23,7 +29,7 @@ class NotificationsService {
       try {
         WelcomeToMyNotifications data =
             welcomeToMyNotificationsFromJson(helperResponse.response);
-        return data.data;
+        return data.notificationModel;
       } catch (e) {
         return helperResponse.copyWith(
             servicesResponse: ServicesResponseStatues.modelError);

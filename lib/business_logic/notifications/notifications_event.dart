@@ -1,24 +1,22 @@
 part of 'notifications_bloc.dart';
 
-abstract class NotificationsEvent  {
+abstract class NotificationsEvent {}
 
-}
 class GetNotificationApiEvent extends NotificationsEvent {
-  GetNotificationApiEvent({required this.userId,required this.notificationsSearchFilter});
+  GetNotificationApiEvent(
+      {required this.notificationsSearchFilter});
 
-  int userId;
   NotificationsSearchFilter notificationsSearchFilter;
 
   @override
-  List<Object?> get props => [userId,notificationsSearchFilter];
+  List<Object?> get props => [ notificationsSearchFilter];
 }
 
 class ChangeToLoadingNotificatiosApiEvent extends NotificationsEvent {
-  ChangeToLoadingNotificatiosApiEvent(
-      { this.userId});
+  ChangeToLoadingNotificatiosApiEvent({this.notificationsSearchFilter});
 
-  String? userId;
+  NotificationsSearchFilter? notificationsSearchFilter;
 
   @override
-  List<Object?> get props => [userId];
+  List<Object?> get props => [notificationsSearchFilter];
 }

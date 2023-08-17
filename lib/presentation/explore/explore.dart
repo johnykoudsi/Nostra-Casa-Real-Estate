@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,13 +14,11 @@ import 'package:nostra_casa/utility/app_style.dart';
 import '../../business_logic/get_properties/get_all-properties_search_filter.dart';
 import '../../business_logic/get_properties/get_all_properties_bloc.dart';
 import '../../utility/app_assets.dart';
-import '../../utility/enums.dart';
 import '../global_widgets/elevated_button_widget.dart';
 import '../global_widgets/property_widgets/property_list_view.dart';
 import '../global_widgets/property_widgets/property_shimmer.dart';
 import '../global_widgets/shimmer.dart';
 import '../global_widgets/somthing_wrong.dart';
-import '../map_screen/widgets/propertyType_filter_widget.dart';
 
 class Explore extends StatefulWidget {
   const Explore({Key? key}) : super(key: key);

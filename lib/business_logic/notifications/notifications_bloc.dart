@@ -33,13 +33,13 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
 
       event.notificationsSearchFilter.page = getPage();
-      userId=event.userId;
+
 
       getNotifications = await notificationsService.getNotificationsService(
         event: event,
       );
 
-      if (getNotifications is List<UserNotification>) {
+      if (getNotifications is List<NotificationModel>) {
         if (getNotifications.isNotEmpty) {
           // copy previous state
           if (currentState is NotificationLoadedState) {
@@ -82,7 +82,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
 
       add(GetNotificationApiEvent(
 
-          notificationsSearchFilter: NotificationsSearchFilter(page: 1), userId: userId ));
+          notificationsSearchFilter: NotificationsSearchFilter(page: 1)));
     });
   }
 }

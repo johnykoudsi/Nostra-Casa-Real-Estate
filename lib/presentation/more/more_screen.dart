@@ -130,7 +130,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                 if(state is UserLoggedState){
                                   Navigator.pushNamed(
                                       context, AppRoutes.notifications,
-                                      arguments: state.user.user.id);
+                                      );
                                 }
 
                               },

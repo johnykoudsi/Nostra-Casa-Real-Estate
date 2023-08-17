@@ -6,8 +6,8 @@ import '../../utility/app_assets.dart';
 import '../../utility/app_style.dart';
 
 class Notifications extends StatefulWidget {
-   Notifications({Key? key, this.userId}) : super(key: key);
-   int? userId;
+   Notifications({Key? key}) : super(key: key);
+
 
   @override
   State<Notifications> createState() => _NotificationsState();
@@ -16,9 +16,7 @@ class Notifications extends StatefulWidget {
 class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
-    List<String>notifications=["The house you are interested in is sold","Your dream house is on fire","You can't afford your dream house","You pathetic"];
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+
     return SafeArea(
         child: Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
@@ -41,7 +39,7 @@ class _NotificationsState extends State<Notifications> {
               .copyWith(color: AppStyle.kBackGroundColor),
         ),
       ),
-      body: NotificationsList(notifications: notifications,userId: widget.userId),
+      body: NotificationsList(),
     ));
   }
 }

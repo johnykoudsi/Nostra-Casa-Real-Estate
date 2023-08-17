@@ -11,10 +11,7 @@ import '../../global_widgets/shimmer.dart';
 import '../../global_widgets/somthing_wrong.dart';
 
 class NotificationsList extends StatefulWidget {
-  NotificationsList({Key? key, required this.notifications, this.userId})
-      : super(key: key);
-  List<String> notifications;
-  int? userId;
+  NotificationsList({Key? key}) : super(key: key);
 
   @override
   State<NotificationsList> createState() => _NotificationsListState();
@@ -30,7 +27,6 @@ class _NotificationsListState extends State<NotificationsList> {
           scrollController.offset) {
         context.read<NotificationsBloc>().add(
               GetNotificationApiEvent(
-                userId: widget.userId!,
                 notificationsSearchFilter: NotificationsSearchFilter(),
               ),
             );
@@ -39,18 +35,65 @@ class _NotificationsListState extends State<NotificationsList> {
     super.initState();
   }
 
+  void search() {
+    context
+        .read<NotificationsBloc>()
+        .add(ChangeToLoadingNotificatiosApiEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return BlocBuilder<NotificationsBloc, NotificationsState>(
         builder: (context, state) {
       if (state is NotificationLoadedState) {
         return ListView.builder(
+          controller: scrollController,
             itemCount: state.hasReachedMax
                 ? state.notifications.length
-                : state.notifications.length + 2,
+                : state.notifications.length + 1,
             itemBuilder: (BuildContext context, int index) {
               if (index >= state.notifications.length) {
-                return ShimmerLoader();
+                return Container(
+                  decoration: BoxDecoration(
+                    color: (index % 2 == 1)
+                        ? AppStyle.kBackGroundColor
+                        : AppStyle.kLightGrey,
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        left: screenWidth * 0.038,
+                        right: screenWidth * 0.038,
+                        top: screenHeight * 0.02,
+                        bottom: screenHeight * 0.02),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(color: AppStyle.blackColor),
+                          ),
+                          child: const CircleAvatar(
+                            radius: 37,
+                            backgroundColor: AppStyle.blackColor,
+                            child: CircleAvatar(
+                              radius: 35,
+                              foregroundImage: AssetImage(AppAssets.logo),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: screenWidth * 0.02,
+                        ),
+                        Expanded(
+                          child: ShimmerLoader(),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               }
               return NotificationItemWidget(
                 notification: state.notifications[index],
@@ -60,17 +103,56 @@ class _NotificationsListState extends State<NotificationsList> {
       }
       if (state is NotificationsInitial) {
         return ListView.builder(
+            controller: scrollController,
+
             itemCount: 8,
             itemBuilder: (BuildContext context, int index) {
-              return ShimmerLoader();
+              return Container(
+                decoration: BoxDecoration(
+                  color: (index % 2 == 1)
+                      ? AppStyle.kBackGroundColor
+                      : AppStyle.kLightGrey,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      left: screenWidth * 0.038,
+                      right: screenWidth * 0.038,
+                      top: screenHeight * 0.02,
+                      bottom: screenHeight * 0.02),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          border: Border.all(color: AppStyle.blackColor),
+                        ),
+                        child: const CircleAvatar(
+                          radius: 37,
+                          backgroundColor: AppStyle.blackColor,
+                          child: CircleAvatar(
+                            radius: 35,
+                            foregroundImage: AssetImage(AppAssets.logo),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth * 0.02,
+                      ),
+                      Expanded(
+                        child: ShimmerLoader(),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             });
       }
       return SomethingWrongWidget(
         elevatedButtonWidget: ElevatedButtonWidget(
           title: "Refresh".tr(),
           onPressed: () {
-            context.read<NotificationsBloc>().add(ChangeToLoadingNotificatiosApiEvent());
-            //search(userS);
+            search();
           },
         ),
       );
@@ -82,7 +164,7 @@ class NotificationItemWidget extends StatelessWidget {
   NotificationItemWidget(
       {required this.notification, Key? key, required this.index})
       : super(key: key);
-  UserNotification notification;
+  NotificationModel notification;
   int index;
 
   @override
@@ -92,7 +174,8 @@ class NotificationItemWidget extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: index.isEven ? AppStyle.kBackGroundColor : AppStyle.kLightGrey,
+        color:
+            (index % 2 == 1) ? AppStyle.kBackGroundColor : AppStyle.kLightGrey,
       ),
       child: Padding(
         padding: EdgeInsets.only(
@@ -122,7 +205,7 @@ class NotificationItemWidget extends StatelessWidget {
             ),
             Expanded(
               child: Text(
-                notification.body,
+                notification.notification.body,
                 style: Theme.of(context).textTheme.headline5,
               ),
             ),
