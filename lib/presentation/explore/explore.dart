@@ -91,7 +91,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                 length: state.tags.length + 1,
                 vsync: this,
               );
-              propertiesSearchFilter = propertiesSearchFilter.copyWith(tagsId: null);
+              propertiesSearchFilter = propertiesSearchFilter.copyWith(tagsId: -1);
               search();
             });
             tabController?.addListener(() {
@@ -102,8 +102,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                   search();
                 }
                 else{
-                  propertiesSearchFilter = propertiesSearchFilter.copyWith(
-                      tagsId: null);
+                  propertiesSearchFilter = propertiesSearchFilter.copyWith(tagsId: -1);
                   search();
                 }
               });

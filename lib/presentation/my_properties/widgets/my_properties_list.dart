@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../../../data/models/properties_model.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 import '../../add_property/widgets/rounded_elevated_button.dart';
+import '../../global_widgets/property_widgets/property_shimmer.dart';
 
 class MyPropertiesList extends StatefulWidget {
-  const MyPropertiesList({Key? key}) : super(key: key);
-
+  MyPropertiesList({required this.scrollController,required this.hasReachedMax,required this.properties,Key? key}) : super(key: key);
+  bool hasReachedMax;
+  List<Property> properties;
+  ScrollController scrollController;
   @override
   State<MyPropertiesList> createState() => _MyPropertiesListState();
 }
@@ -15,8 +19,14 @@ class _MyPropertiesListState extends State<MyPropertiesList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: 5,
+        itemCount: widget.hasReachedMax
+            ?widget.properties.length
+            :widget.properties.length + 1,
+        controller: widget.scrollController,
         itemBuilder: (BuildContext context, int index) {
+          if (index >= widget.properties.length) {
+            return PropertyShimmer();
+          }
           return MyPropertyItemWidget(
             index: index,
           );

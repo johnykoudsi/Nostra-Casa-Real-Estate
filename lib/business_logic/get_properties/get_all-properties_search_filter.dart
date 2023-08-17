@@ -12,7 +12,7 @@ class GetAllPropertiesSearchFilter {
     this.propertyService = PropertyService.all,
     this.myFavorite = false,
     this.myProperties = false,
-    this.tagsId,
+    this.tagsId = -1,
   });
   int page;
   PropertySorts propertySorts;
@@ -21,7 +21,7 @@ class GetAllPropertiesSearchFilter {
   String term;
   bool myProperties;
   bool myFavorite;
-  int? tagsId;
+  int tagsId;
 
   GetAllPropertiesSearchFilter copyWith({
     int? page,
@@ -45,7 +45,6 @@ class GetAllPropertiesSearchFilter {
       );
 
   Map<String, String> toJson() {
-    print(tagsId?.toString()??"");
     String getUserId() {
       final userState = globalUserBloc.state;
       if (userState is UserLoggedState) {
@@ -56,7 +55,7 @@ class GetAllPropertiesSearchFilter {
 
     Map<String, String> map = {
       "page": page.toString(),
-      "filter[tags]": tagsId?.toString()??"",
+      "filter[tags]": tagsId != -1?tagsId.toString():"",
       "filter[property-type]": propertyTypeBackEnd2.reverse[propertyType] ?? '',
       "per_page": kProductsGetLimit.toString(),
       "sort": propertySortsUBackEnd.reverse[propertySorts] ?? "owner-priority",
