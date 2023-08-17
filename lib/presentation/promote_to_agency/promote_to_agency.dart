@@ -3,11 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
-import 'package:nostra_casa/presentation/promote_to_agency/add_agency_location.dart';
 import 'package:nostra_casa/presentation/promote_to_agency/widgets/files_list.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:nostra_casa/utility/enums.dart';
@@ -16,7 +14,9 @@ import '../../utility/app_style.dart';
 import '../add_property/widgets/custom_elevated_button.dart';
 import '../global_widgets/custom_text_field.dart';
 import '../global_widgets/dialogs_widgets/dialogs_snackBar.dart';
+import '../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import '../map_location_square_widget/map_location_widget.dart';
+import 'add_agency_location.dart';
 
 class PromoteToAgency extends StatefulWidget {
   const PromoteToAgency({Key? key}) : super(key: key);

@@ -24,8 +24,14 @@ class _MoreScreenState extends State<MoreScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
+    double screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppStyle.blackColor,
@@ -48,14 +54,16 @@ class _MoreScreenState extends State<MoreScreen> {
                       children: [
                         Text(
                           state.user.user.name,
-                          style: Theme.of(context)
+                          style: Theme
+                              .of(context)
                               .textTheme
                               .headline3
                               ?.copyWith(color: AppStyle.kBackGroundColor),
                         ),
                         Text(
                           state.user.user.mobile,
-                          style: Theme.of(context)
+                          style: Theme
+                              .of(context)
                               .textTheme
                               .headline5
                               ?.copyWith(color: AppStyle.kBackGroundColor),
@@ -68,7 +76,8 @@ class _MoreScreenState extends State<MoreScreen> {
                     children: [
                       Text(
                         "Nostra Casa Guest".tr(),
-                        style: Theme.of(context)
+                        style: Theme
+                            .of(context)
                             .textTheme
                             .headline3
                             ?.copyWith(color: AppStyle.kBackGroundColor),
@@ -96,7 +105,7 @@ class _MoreScreenState extends State<MoreScreen> {
                         onPressed: () {
                           //todo navigate to my estates
                         },
-                        color:Colors.white,
+                        color: Colors.white,
                         borderRad: 40,
                       ),
                     ),
@@ -112,13 +121,22 @@ class _MoreScreenState extends State<MoreScreen> {
                     ),
                     Visibility(
                       visible: userIsLoggedIn(context),
-                      child: MyProfileItem(
-                          svgPath: AppAssets.bell,
-                          name: "Notifications".tr(),
-                          onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.notifications);
-                          },
-                          color: Colors.white),
+                      child: BlocBuilder<UserBloc, UserState>(
+                        builder: (context, state) {
+                          return MyProfileItem(
+                              svgPath: AppAssets.bell,
+                              name: "Notifications".tr(),
+                              onPressed: () {
+                                if(state is UserLoggedState){
+                                  Navigator.pushNamed(
+                                      context, AppRoutes.notifications,
+                                      arguments: state.user.user.id);
+                                }
+
+                              },
+                              color: Colors.white);
+                        },
+                      ),
                     ),
                     MyProfileItem(
                         svgPath: AppAssets.about,
@@ -150,7 +168,8 @@ class _MoreScreenState extends State<MoreScreen> {
                           svgPath: AppAssets.promote,
                           name: "Promote To Agency".tr(),
                           onPressed: () {
-                            Navigator.pushNamed(context, AppRoutes.welcomeToPromote);
+                            Navigator.pushNamed(context,
+                                AppRoutes.welcomeToPromote);
                           },
                           color: Colors.white),
                     ),
@@ -175,7 +194,7 @@ class _MoreScreenState extends State<MoreScreen> {
                                   context.read<UserBloc>().add(LogoutEvent());
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                       AppRoutes.welcome,
-                                      (Route<dynamic> route) => false);
+                                          (Route<dynamic> route) => false);
                                 },
                                 onNoTap: () {
                                   Navigator.of(context).pop();

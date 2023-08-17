@@ -14,6 +14,8 @@ class EndPoints{
 
   static String getAmenities({required int page, required int limit}) => "/amenities?per_page=$limit&page=$page";
   static String getTags({required int page, required int limit}) => "/tags?per_page=$limit&page=$page";
+  static String getNotifications({required int page, required int limit,required int userId}) => "/users/$userId/notifications?per_page=$limit&page=$page";
+
 
   static String getAllProperties = "/properties";
 

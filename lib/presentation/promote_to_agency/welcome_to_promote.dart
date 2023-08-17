@@ -25,6 +25,7 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
 
   @override
   Widget build(BuildContext context) {
+    bool userNotCanceled = true;
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -68,27 +69,23 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                     }
                     if (state is AgencyPromotionStatusDoneState) {
                       if (state.status == "No request submitted") {
-                        return SomethingWrongWidget(
-                          svgPath: AppAssets.promote,
-                          title: "Account is already agency account",
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Promote now and get your badge".tr(),
+                              style: Theme.of(context).textTheme.headline2,
+                            ),
+                            const SizedBox(
+                              height: 18,
+                            ),
+                            Text(
+                              "We will need more information about your agency in order to confirm you promotion request"
+                                  .tr(),
+                              style: Theme.of(context).textTheme.headline6,
+                            ),
+                          ],
                         );
-                        // return Column(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Text(
-                        //       "Promote now and get your badge".tr(),
-                        //       style: Theme.of(context).textTheme.headline2,
-                        //     ),
-                        //     const SizedBox(
-                        //       height: 18,
-                        //     ),
-                        //     Text(
-                        //       "We will need more information about your agency in order to confirm you promotion request"
-                        //           .tr(),
-                        //       style: Theme.of(context).textTheme.headline6,
-                        //     ),
-                        //   ],
-                        // );
                       } else if (state.status == "pending") {
                         return SomethingWrongWidget(
                           svgPath: AppAssets.promote,
@@ -147,24 +144,24 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                       isLoading: state is AgencyPromotionStatusLoadingState,
                       title: "Promote Now".tr(),
                       onPressed: () {
-                        if (!userIsLoggedIn(context)) {
+                        if(userNotCanceled == true){
                           DialogsWidgetsYesNo.showYesNoDialog(
-                            title: "You must login to continue".tr(),
-                            noTitle: "Cancel".tr(),
-                            yesTitle: "Login".tr(),
-                            onYesTap: () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pushNamed(AppRoutes.login);
-                            },
-                            onNoTap: () {
-                              Navigator.of(context).pop();
-                            },
-                            context: context,
-                          );
-                          return;
+                              title: "Your current information will become your agency information. \n do you want to change it?",
+                              noTitle: "Cancel",
+                              yesTitle: "Change",
+                              onYesTap: () {
+                                Navigator.pushNamed(context, AppRoutes.editProfile);
+                              },
+                              onNoTap: () {
+                                Navigator.of(context).pop();
+                                userNotCanceled =false;
+                              },
+                              context: context);
+                        }else{
+                          Navigator.of(context)
+                              .pushNamed(AppRoutes.promoteToAgency);
                         }
-                        Navigator.of(context)
-                            .pushNamed(AppRoutes.promoteToAgency);
+
                       },
                     );
                   }
