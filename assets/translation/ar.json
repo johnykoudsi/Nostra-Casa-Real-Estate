@@ -132,8 +132,11 @@
   "More": "المزيد",
   "Property Type": "نوع العقار",
   "Property Service": "خدمة العقار",
-  "All Property Services": "كل خدمات العقار",
+  "All Property Services": "خدمات العقار",
   "Enjoy Virtual Reality View": "استمتع بالواقع الافتراضي",
   "Property Location": "موقع العقار",
-  "Host Info": "معلومات المضيف"
+  "Host Info": "معلومات المضيف",
+  "All Property Types": "أنواع العقارات",
+  "Your current information will become your agency information. \n do you want to change it?": "معلوماتك الحالية ستصبح معلومات وكالتك. \n هل تريد تغييرها",
+  "Change": "تغيير"
 }

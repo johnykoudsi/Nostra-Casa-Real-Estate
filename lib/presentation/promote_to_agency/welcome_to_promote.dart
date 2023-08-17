@@ -146,9 +146,9 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                       onPressed: () {
                         if(userNotCanceled == true){
                           DialogsWidgetsYesNo.showYesNoDialog(
-                              title: "Your current information will become your agency information. \n do you want to change it?",
-                              noTitle: "Cancel",
-                              yesTitle: "Change",
+                              title: "Your current information will become your agency information. \n do you want to change it?".tr(),
+                              noTitle: "Cancel".tr(),
+                              yesTitle: "Change".tr(),
                               onYesTap: () {
                                 Navigator.pushNamed(context, AppRoutes.editProfile);
                               },

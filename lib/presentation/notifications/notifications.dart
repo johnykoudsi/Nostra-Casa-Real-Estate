@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nostra_casa/presentation/notifications/widgets/notifications_list.dart';
@@ -32,7 +33,7 @@ class _NotificationsState extends State<Notifications> {
           ),
         ),
         title: Text(
-          "Notifications",
+          "Notifications".tr(),
           style: Theme.of(context)
               .textTheme
               .headline4!

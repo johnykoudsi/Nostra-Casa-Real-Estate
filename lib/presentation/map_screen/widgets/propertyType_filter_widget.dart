@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '../../../utility/app_style.dart';
 import '../../../utility/enums.dart';
@@ -35,8 +36,8 @@ class _PropertyTypeFilterWidgetState extends State<PropertyTypeFilterWidget> {
               width: 18,
             ),
             ChoiceChip(
-              label: const Text(
-                "All Property Types",
+              label:  Text(
+                "All Property Types".tr(),
               ),
               labelStyle: widget.selectedFilter == PropertyType.all
                   ? selectedTextTheme

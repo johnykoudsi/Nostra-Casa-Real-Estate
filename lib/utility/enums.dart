@@ -63,10 +63,10 @@ final EnumValues serviceValues = EnumValues({
 });
 
 final EnumValues propertyTypeUi = EnumValues({
-  "Residential": PropertyType.residential,
-  "Agricultural": PropertyType.agricultural,
-  "Commercial": PropertyType.commercial,
-  "All Property Types": PropertyType.all,
+  "Residential".tr(): PropertyType.residential,
+  "Agricultural".tr(): PropertyType.agricultural,
+  "Commercial".tr(): PropertyType.commercial,
+  "All Property Types".tr(): PropertyType.all,
 });
 final EnumValues propertyTypeBackEnd = EnumValues({
   "RESIDENTIAL": PropertyType.residential,
