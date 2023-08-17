@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:nostra_casa/utility/network_helper.dart';
 import '../../data/services/add_favorite_service.dart';
 
@@ -14,6 +15,12 @@ class OnePropertyBloc extends Bloc<OnePropertyEvent, OnePropertyState> {
       final favouriteState =
           await AddToFavoriteServices.getAmenityService(event: event);
       if (favouriteState is bool) {
+        if(favouriteState == true){
+          FirebaseMessaging.instance.subscribeToTopic("Property/${event.productObjectId}");
+        }
+        if(favouriteState == false){
+          FirebaseMessaging.instance.unsubscribeFromTopic("Property/${event.productObjectId}");
+        }
         emit(OnePropertyDoneState(favouriteState: favouriteState));
       } else {
         emit(OnePropertyErrorState(helperResponse: favouriteState));

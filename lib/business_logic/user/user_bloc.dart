@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:nostra_casa/utility/constant_logic_validations.dart';
 import 'package:nostra_casa/utility/enums.dart';
 import '../../data/models/user_model.dart';
 import '../../data/models/user_model_local_storage.dart';
 import '../../data/services/user_service.dart';
+import '../../utility/endpoints.dart';
 import '../../utility/network_helper.dart';
 
 part 'user_event.dart';
@@ -52,7 +56,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         print('$fcm');
         FirebaseMessaging.instance.subscribeToTopic("Public");
         //add fcm to user
-        // todo : send fcm service
+        if (globalUserBloc.state is UserLoggedState) {
+          NetworkHelpers.postDataHelper(
+              url: EndPoints.editUser,
+              body: json.encode({
+                "fcm_token": fcm,
+              }),
+              useUserToken: true,
+          );
+        }
       });
     });
 
