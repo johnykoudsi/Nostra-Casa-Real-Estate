@@ -129,5 +129,11 @@
   "Map": "خريطة",
   "Add Property": "اضافة عقار",
   "WishList": "المفضلة",
-  "More": "المزيد"
+  "More": "المزيد",
+  "Property Type": "نوع العقار",
+  "Property Service": "خدمة العقار",
+  "All Property Services": "كل خدمات العقار",
+  "Enjoy Virtual Reality View": "استمتع بالواقع الافتراضي",
+  "Property Location": "موقع العقار",
+  "Host Info": "معلومات المضيف"
 }

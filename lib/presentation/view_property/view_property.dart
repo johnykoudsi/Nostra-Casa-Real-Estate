@@ -185,7 +185,7 @@ class ViewProperty extends StatelessWidget {
                       ),
                       const Spacing(),
                       Text(
-                        "Where you will be".tr(),
+                        "Property Location".tr(),
                         style: Theme.of(context).textTheme.headline4,
                       ),
                       SizedBox(

@@ -372,7 +372,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
               const SizedBox(
                 height: 18,
               ),
-
               // Sort FAB
               FloatingActionButton(
                 onPressed: () {
