@@ -103,7 +103,7 @@ class _MoreScreenState extends State<MoreScreen> {
                         svgPath: AppAssets.house,
                         name: "My Estates".tr(),
                         onPressed: () {
-                          //todo navigate to my estates
+                          Navigator.pushNamed(context, AppRoutes.myProperties);
                         },
                         color: Colors.white,
                         borderRad: 40,

@@ -11,7 +11,6 @@ import 'package:nostra_casa/data/models/properties_model.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
-import 'package:nostra_casa/presentation/promote_to_agency/add_agency_location.dart';
 import 'package:nostra_casa/presentation/promote_to_agency/promote_to_agency.dart';
 import 'package:nostra_casa/presentation/promote_to_agency/welcome_to_promote.dart';
 import 'package:nostra_casa/presentation/review_property/review_property_screen.dart';
@@ -29,9 +28,9 @@ import '../business_logic/user/user_bloc.dart';
 import '../presentation/about_us/about_us.dart';
 import '../presentation/add_property/welcome_step.dart';
 import '../presentation/bottom_nav_bar/bottom_nav_bar.dart';
-
 import '../presentation/explore/explore.dart';
 import '../presentation/login_screen/login_screen.dart';
+import '../presentation/my_properties/my_properties.dart';
 import '../presentation/notifications/notifications.dart';
 import '../presentation/policy/policy.dart';
 import '../presentation/splash_screen/splash_screen.dart';
@@ -130,6 +129,9 @@ class AppRouter {
 
         case AppRoutes.virtualReality:
           return const VirtualRealityScreen();
+
+        case AppRoutes.myProperties:
+          return const MyProperties();
 
         case AppRoutes.staggeredImagesView:
           List<String> args = settings.arguments as List<String>;

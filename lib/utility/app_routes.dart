@@ -24,6 +24,7 @@ class AppRoutes {
   static const String staggeredImagesView="/staggered_images_view";
   static const String streetViewMaps="/street_view_maps";
   static const String virtualReality="/v_r";
+  static const String myProperties="/myProperties";
 
 
 

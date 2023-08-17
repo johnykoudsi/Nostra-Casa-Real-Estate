@@ -13,6 +13,7 @@ class PropertyCard extends StatelessWidget {
     required this.property,
   }) : super(key: key);
   Property property;
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -73,9 +74,11 @@ class PropertyCard extends StatelessWidget {
                 ),
                 if (property.propertyService != null)
                   Container(
-                    margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 1.5),
-                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-                    decoration:  BoxDecoration(
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 8, horizontal: 1.5),
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                    decoration: BoxDecoration(
                       borderRadius: AppStyle.k4RadiusLowerPadding,
                       color: AppStyle.mainColor.withOpacity(0.8),
                     ),
@@ -127,7 +130,16 @@ class PropertyCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5,
                 ),
                 Text(
-                  " month",
+                  propertyServiceBackEnd2.reverse[property.propertyService]
+                              .toString() ==
+                          "rent"
+                      ? " per month"
+                      : propertyServiceBackEnd2
+                                  .reverse[property.propertyService]
+                                  .toString() ==
+                              "holiday"
+                          ? " per day"
+                          : "",
                   style: Theme.of(context)
                       .textTheme
                       .headline5!
