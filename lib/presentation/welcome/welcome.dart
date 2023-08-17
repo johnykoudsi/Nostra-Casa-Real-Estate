@@ -67,7 +67,7 @@ class WelcomeScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           Navigator.of(context)
-                              .pushNamed(AppRoutes.bottomNavBar);
+                              .pushNamedAndRemoveUntil(AppRoutes.bottomNavBar,(Route<dynamic> route) => false);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

@@ -48,6 +48,8 @@ class ViewProperty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool loading = false;
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -248,27 +250,45 @@ class ViewProperty extends StatelessWidget {
                   },
                 ),
                 actions: [
-                  IconButton(
-                    icon: const CircleAvatar(
-                        backgroundColor: AppStyle.kBackGroundColor,
-                        child: Icon(
-                          Icons.share,
-                          color: AppStyle.blackColor,
-                        )),
-                    onPressed: () async {
-                      if (property.media.isNotEmpty) {
-                        File file = await urlToFile(property.media[0]);
-                        await Share.shareFiles([file.path],
-                            text: 'Share this ${property.name} !' +
-                                "\n Download Nostra Casa now !!" +
-                                "\n Android Link: " +
-                                "\n IOS Link:");
-                      } else {
-                        await Share.share('Share this ${property.name} !' +
-                            "\n Download Nostra Casa now !!" +
-                            "\n Android Link: " +
-                            "\n IOS Link:");
-                      }
+                  StatefulBuilder(
+                    builder: (BuildContext context,
+                        void Function(void Function()) setState) {
+                      return loading
+                          ? const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(child: CircularProgressIndicator()),
+                            )
+                          : IconButton(
+                              icon: const CircleAvatar(
+                                  backgroundColor: AppStyle.kBackGroundColor,
+                                  child: Icon(
+                                    Icons.share,
+                                    color: AppStyle.blackColor,
+                                  )),
+                              onPressed: () async {
+                                setState(() {
+                                  loading = true;
+                                });
+                                if (property.media.isNotEmpty) {
+                                  File file =
+                                      await urlToFile(property.media[0]);
+                                  await Share.shareFiles([file.path],
+                                      text: 'Share this ${property.name} !' +
+                                          "\n Download Nostra Casa now !!" +
+                                          "\n Android Link: " +
+                                          "\n IOS Link:");
+                                } else {
+                                  await Share.share(
+                                      'Share this ${property.name} !' +
+                                          "\n Download Nostra Casa now !!" +
+                                          "\n Android Link: " +
+                                          "\n IOS Link:");
+                                }
+                                setState(() {
+                                  loading = false;
+                                });
+                              },
+                            );
                     },
                   ),
                   if (context.read<UserBloc>().state is UserLoggedState)
