@@ -32,6 +32,7 @@ class EndPoints{
   static  String isFavorite(int propertyId) => "/properties/$propertyId/is-favorite";
   static  String saveFavorite = "/properties/save";
   static const String requestAgencyStatus = "/agencies/request-status";
+  static const String myFavorite = "/properties/my-favorites";
 
 
 

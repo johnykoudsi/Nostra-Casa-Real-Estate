@@ -15,12 +15,6 @@ class OnePropertyBloc extends Bloc<OnePropertyEvent, OnePropertyState> {
       final favouriteState =
           await AddToFavoriteServices.getAmenityService(event: event);
       if (favouriteState is bool) {
-        if(favouriteState == true){
-          FirebaseMessaging.instance.subscribeToTopic("Property/${event.productObjectId}");
-        }
-        if(favouriteState == false){
-          FirebaseMessaging.instance.unsubscribeFromTopic("Property/${event.productObjectId}");
-        }
         emit(OnePropertyDoneState(favouriteState: favouriteState));
       } else {
         emit(OnePropertyErrorState(helperResponse: favouriteState));
@@ -32,6 +26,14 @@ class OnePropertyBloc extends Bloc<OnePropertyEvent, OnePropertyState> {
           await AddToFavoriteServices.toggleFavouriteService(event: event);
 
       if (favouriteState is bool) {
+        if(favouriteState == true){
+         FirebaseMessaging.instance.subscribeToTopic("Property${event.productObjectId}");
+        }else{
+          await FirebaseMessaging.instance.unsubscribeFromTopic("Property${event.productObjectId}");
+        }
+        // if(favouriteState == false){
+        //
+        // }
         emit(OnePropertyDoneState(favouriteState: favouriteState));
       } else {
         emit(OnePropertyErrorState(helperResponse: favouriteState));

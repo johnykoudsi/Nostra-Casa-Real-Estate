@@ -32,6 +32,11 @@ enum PropertySorts {
   areaLow,
   suggested
 }
+enum Gender { male, female }
+enum GetPropertiesApi{
+  myFavorite,
+  getAll,
+}
 final EnumValues propertySortsUi = EnumValues({
   "Price (low to high)": PropertySorts.priceHigh,
   "Price (high to low)": PropertySorts.priceLow,
@@ -101,12 +106,6 @@ final propertyServicePriceUI = EnumValues({
   "sp per month".tr(): PropertyService.rent,
   "sp per day".tr(): PropertyService.holiday,
 });
-
-enum GetRequestType {
-  contactInfo,
-}
-
-enum Gender { male, female }
 
 final genderValues = EnumValues({
   "male": Gender.male,
