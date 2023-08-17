@@ -31,9 +31,6 @@ class OnePropertyBloc extends Bloc<OnePropertyEvent, OnePropertyState> {
         }else{
           await FirebaseMessaging.instance.unsubscribeFromTopic("Property${event.productObjectId}");
         }
-        // if(favouriteState == false){
-        //
-        // }
         emit(OnePropertyDoneState(favouriteState: favouriteState));
       } else {
         emit(OnePropertyErrorState(helperResponse: favouriteState));

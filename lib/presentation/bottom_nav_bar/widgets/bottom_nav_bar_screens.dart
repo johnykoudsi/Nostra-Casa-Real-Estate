@@ -4,6 +4,7 @@ import 'package:nostra_casa/presentation/explore/explore.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
 import '../../../business_logic/get_nearby_properties/get_nearby_properties_bloc.dart';
 import '../../add_property/welcome_step.dart';
+import '../../favorite_screen/favorite_screen.dart';
 import '../../map_screen/map_screen.dart';
 
 
@@ -27,6 +28,9 @@ class GetSelectedScreenByIndex extends StatelessWidget {
           }
           if (screenIndex == 2) {
             return const WelcomeStep();
+          }
+          if (screenIndex == 3) {
+            return const FavoriteScreen();
           }
           if (screenIndex == 4) {
             return const MoreScreen();

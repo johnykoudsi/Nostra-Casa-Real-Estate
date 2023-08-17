@@ -17,81 +17,77 @@ part 'get_all_properties_state.dart';
 class GetAllPropertiesBloc
     extends Bloc<GetAllPropertiesEvent, GetAllPropertiesState> {
   GetAllPropertiesBloc() : super(AllPropertiesInitial()) {
-    on<GetAllPropertiesApiEvent>((event, emit) async {
-      final currentState = state;
-      if (currentState is AllPropertiesLoadedState &&
-          currentState.hasReachedMax) {
-        return;
-      }
-
-      int getPage() {
-        if (currentState is AllPropertiesLoadedState) {
-          return currentState.properties.length ~/ kProductsGetLimit + 1;
+    on<GetAllPropertiesApiEvent>(
+      (event, emit) async {
+        final currentState = state;
+        if (currentState is AllPropertiesLoadedState &&
+            currentState.hasReachedMax) {
+          return;
         }
-        return 0;
-      }
 
-      var getAllProperties;
-
-      event.searchFilterProperties.page = getPage();
-      if(event.searchFilterProperties.getPropertiesApi
-          == GetPropertiesApi.myFavorite){
-        getAllProperties = await AllPropertiesService.getMyFavoriteService(
-          event: event,
-        );
-      }else{
-        getAllProperties = await AllPropertiesService.getAllPropertiesService(
-          event: event,
-        );
-      }
-
-      if (getAllProperties is List<Property>) {
-        if (getAllProperties.isNotEmpty) {
-          // copy previous state
+        int getPage() {
           if (currentState is AllPropertiesLoadedState) {
-            emit(currentState.copyWith(
-                properties: List.of(currentState.properties)
-                  ..addAll(getAllProperties),
-                hasReachedMax: getAllProperties.length < kProductsGetLimit
-                    ? true
-                    : false));
+            return currentState.properties.length ~/ kProductsGetLimit + 1;
           }
+          return 0;
+        }
 
-          // add loaded state
-          else {
-            emit(AllPropertiesLoadedState(
-              properties: getAllProperties,
-              hasReachedMax:
-                  getAllProperties.length < kProductsGetLimit ? true : false,
-            ));
+        var getAllProperties;
+
+        event.searchFilterProperties.page = getPage();
+
+        getAllProperties =
+            await AllPropertiesService.getAllPropertiesService(event: event);
+
+        if (getAllProperties is List<Property>) {
+          if (getAllProperties.isNotEmpty) {
+            // copy previous state
+            if (currentState is AllPropertiesLoadedState) {
+              emit(currentState.copyWith(
+                  properties: List.of(currentState.properties)
+                    ..addAll(getAllProperties),
+                  hasReachedMax: getAllProperties.length < kProductsGetLimit
+                      ? true
+                      : false));
+            }
+
+            // add loaded state
+            else {
+              emit(AllPropertiesLoadedState(
+                properties: getAllProperties,
+                hasReachedMax:
+                    getAllProperties.length < kProductsGetLimit ? true : false,
+              ));
+            }
+          } else {
+            // done loading
+            if (currentState is AllPropertiesLoadedState) {
+              emit(currentState.copyWith(hasReachedMax: true));
+            }
+            // done but nothing is there
+            else {
+              emit(AllPropertiesLoadedState(
+                properties: getAllProperties,
+                hasReachedMax: true,
+              ));
+            }
           }
         } else {
-          // done loading
-          if (currentState is AllPropertiesLoadedState) {
-            emit(currentState.copyWith(hasReachedMax: true));
-          }
-          // done but nothing is there
-          else {
-            emit(AllPropertiesLoadedState(
-              properties: getAllProperties,
-              hasReachedMax: true,
-            ));
-          }
-        }
-      } else {
-        print("Server ${(getAllProperties as HelperResponse).response}");
+          print("Server ${(getAllProperties as HelperResponse).response}");
 
-        emit(AllPropertiesErrorState(helperResponse: getAllProperties));
-      }
-    },
+          emit(AllPropertiesErrorState(helperResponse: getAllProperties));
+        }
+      },
       transformer: restartable(),
     );
 
-    on<ChangeToLoadingApiEvent>((event, emit) async {
+    on<ChangeToLoadingApiEvent>(
+      (event, emit) async {
         emit(AllPropertiesInitial());
 
         add(GetAllPropertiesApiEvent(
-            searchFilterProperties: event.searchFilterProperties.copyWith(page: 1)));
+            searchFilterProperties:
+                event.searchFilterProperties.copyWith(page: 1)));
       },
       transformer: restartable(),
     );

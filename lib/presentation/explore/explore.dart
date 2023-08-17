@@ -40,7 +40,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
 
   GetAllPropertiesBloc propertiesBloc = GetAllPropertiesBloc();
 
-  GetAllPropertiesSearchFilter propertiesSearchFilter = GetAllPropertiesSearchFilter();
+  GetAllPropertiesSearchFilter propertiesSearchFilter =
+      GetAllPropertiesSearchFilter();
 
   @override
   void initState() {
@@ -84,12 +85,29 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
       child: BlocListener<TagBloc, TagState>(
         listener: (context, state) {
           if (state is TagLoadedState) {
-            tabController = TabController(
-              //initialIndex: widget.subCategoryArgument.initPage,
-              length: state.tags.length,
-              vsync: this,
-            );
-            search();
+            setState(() {
+              tabController = TabController(
+                //initialIndex: widget.subCategoryArgument.initPage,
+                length: state.tags.length + 1,
+                vsync: this,
+              );
+              propertiesSearchFilter = propertiesSearchFilter.copyWith(tagsId: null);
+              search();
+            });
+            tabController?.addListener(() {
+              setState(() {
+                if(tabController!.index != 0){
+                  propertiesSearchFilter = propertiesSearchFilter.copyWith(
+                      tagsId: state.tags[tabController!.index - 1].id);
+                  search();
+                }
+                else{
+                  propertiesSearchFilter = propertiesSearchFilter.copyWith(
+                      tagsId: null);
+                  search();
+                }
+              });
+            });
           }
         },
         child: Scaffold(
@@ -114,9 +132,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                           builder: (context, state) {
                             if (state is TagLoadedState) {
                               return TabBar(
-                                onTap: (index) {
-                                  //todo : change selected tag
-                                },
+                          
                                 isScrollable: true,
                                 padding: const EdgeInsets.all(0),
                                 // labelStyle: const TextStyle(fontFamily: kBoldFont),
@@ -132,14 +148,25 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                         EdgeInsets.symmetric(horizontal: 16.0)),
                                 unselectedLabelColor: AppStyle.kGreyColor,
                                 tabs: List.generate(
-                                  state.tags.length,
-                                  (index) => Tab(
-                                    icon: SvgPicture.network(
-                                      state.tags[index].file,
-                                      height: 22,
-                                    ),
-                                    text: state.tags[index].name,
-                                  ),
+                                  state.tags.length + 1,
+                                  (index){
+                                    if(index == 0){
+                                      return Tab(
+                                        icon: SvgPicture.asset(
+                                          AppAssets.search,
+                                          height: 22,
+                                        ),
+                                        text: "All",
+                                      );
+                                    }
+                                    return Tab(
+                                      icon: SvgPicture.network(
+                                        state.tags[index - 1].file,
+                                        height: 22,
+                                      ),
+                                      text: state.tags[index - 1].name,
+                                    );
+                                  },
                                 ),
                               );
                             }
@@ -193,7 +220,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                       context.watch<GetAllPropertiesBloc>().state;
                   return TabBarView(
                     controller: tabController,
-                    children: List.generate(state.tags.length, (index) {
+                    children: List.generate(state.tags.length + 1, (index) {
                       if (getAllState is AllPropertiesInitial) {
                         return ListView(
                           children: [
