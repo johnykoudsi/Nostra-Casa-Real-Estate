@@ -208,6 +208,7 @@ class _MoreScreenState extends State<MoreScreen> {
                         svgPath: AppAssets.delete,
                         name: "Delete Account".tr(),
                         onPressed: () {
+                          Navigator.pushNamed(context, AppRoutes.viewAgency);
                           //todo delete account
                         },
                         color: Colors.white,

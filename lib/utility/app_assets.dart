@@ -40,6 +40,7 @@ class AppAssets{
   static const facebook = 'assets/images/facebook.svg';
   static const phoneOut = 'assets/images/phone_out.svg';
   static const search = 'assets/images/search.svg';
+  static const badge = 'assets/images/badge.svg';
 
 
 

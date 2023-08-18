@@ -21,6 +21,7 @@ import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import '../../data/models/properties_model.dart';
 import '../../utility/app_assets.dart';
+import '../../utility/enums.dart';
 import '../map_location_square_widget/map_location_widget.dart';
 
 class ViewProperty extends StatelessWidget {
@@ -110,7 +111,16 @@ class ViewProperty extends StatelessWidget {
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            " month",
+                            propertyServiceBackEnd2.reverse[property.propertyService]
+                                .toString() ==
+                                "rent"
+                                ? " per month"
+                                : propertyServiceBackEnd2
+                                .reverse[property.propertyService]
+                                .toString() ==
+                                "holiday"
+                                ? " per day"
+                                : "",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5!
@@ -213,6 +223,7 @@ class ViewProperty extends StatelessWidget {
                       ),
                       if (property.userInfo != null)
                         UserInfoPart(
+                          title: "Host Info".tr(),
                           userInfo: property.userInfo!,
                         ),
                       const Spacing(),
