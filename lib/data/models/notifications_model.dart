@@ -59,7 +59,7 @@ class UserNotification {
 
   factory UserNotification.fromJson(Map<String, dynamic> json) => UserNotification(
     id: json["id"],
-    head: json["head"],
+    head: json["title"],
     body: json["body"],
     createdAt: json["created_at"],
   );

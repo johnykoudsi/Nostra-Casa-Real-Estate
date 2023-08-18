@@ -12,8 +12,8 @@ class NotificationsService {
   }) async {
     var id;
     final userState = globalUserBloc.state;
-    if(userState is UserLoggedState){
-       id = userState.user.user.id;
+    if (userState is UserLoggedState) {
+      id = userState.user.user.id;
     }
     HelperResponse helperResponse = await NetworkHelpers.getDeleteDataHelper(
       url: EndPoints.getNotifications(
