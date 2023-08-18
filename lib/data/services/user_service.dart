@@ -8,10 +8,10 @@ import '../../utility/network_helper.dart';
 import '../models/user_model.dart';
 
 class UserServices {
-  static Future signInUserService(SignUpEvent event) async {
+  static Future signInUserService(SignUpEvent event, String? fcmToken) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       url: EndPoints.verifyAndSignUp,
-      body: json.encode(event.toJson()),
+      body: json.encode(event.toJson()..addAll({"fcm_token": fcmToken})),
     );
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
@@ -26,16 +26,17 @@ class UserServices {
 
     return helperResponse;
   }
+
   static Future editUserService(EditUserApiEvent event) async {
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
-      url: EndPoints.editUser,
-      body: json.encode(event.toJson()),
-      useUserToken: true
-    );
+        url: EndPoints.editUser,
+        body: json.encode(event.toJson()),
+        useUserToken: true);
 
     if (helperResponse.servicesResponse == ServicesResponseStatues.success) {
       try {
-        UserInfo userInfo = UserInfo.fromJson(json.decode(helperResponse.response)["data"]);
+        UserInfo userInfo =
+            UserInfo.fromJson(json.decode(helperResponse.response)["data"]);
         return userInfo;
       } catch (e) {
         return helperResponse.copyWith(
@@ -46,6 +47,7 @@ class UserServices {
 
     return helperResponse;
   }
+
   static Future sendSMSVerificationCode(SendSMSEvent event) async {
     final response = await NetworkHelpers.postDataHelper(
         url: EndPoints.sendSMS,
@@ -77,8 +79,6 @@ class UserServices {
 
   static Future logoutUserService() async {
     NetworkHelpers.getDeleteDataHelper(
-      url: EndPoints.logout,
-      useUserToken: true
-    );
+        url: EndPoints.logout, useUserToken: true);
   }
 }

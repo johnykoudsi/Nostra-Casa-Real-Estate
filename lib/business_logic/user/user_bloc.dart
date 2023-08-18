@@ -32,8 +32,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
     on<SignUpEvent>((event, emit) async {
       emit(UserLoading());
+      final fcm = await FirebaseMessaging.instance.getToken();
 
-      final response = await UserServices.signInUserService(event);
+      final response = await UserServices.signInUserService(event,fcm);
 
       if (response is UserModel) {
         saveUserToLocalStorage(response);

@@ -5,10 +5,8 @@ import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_
 import 'package:nostra_casa/presentation/global_widgets/somthing_wrong.dart';
 import 'package:nostra_casa/utility/app_assets.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
-
 import '../../business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import '../../utility/app_style.dart';
-import '../../utility/constant_logic_validations.dart';
 import '../global_widgets/elevated_button_widget.dart';
 
 class WelcomeToPromote extends StatefulWidget {
