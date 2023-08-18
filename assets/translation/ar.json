@@ -140,6 +140,13 @@
   "Your current information will become your agency information. \n do you want to change it?": "معلوماتك الحالية ستصبح معلومات وكالتك. \n هل تريد تغييرها",
   "Change": "تغيير",
   "Your request is on pending": "طلبك قيد المعالحة",
-  "Agency Info": "معلومات الوكالة"
+  "Agency Info": "معلومات الوكالة",
+  "Other people reviews": "تقييمات الآخرين",
+  "Review": "تقييم",
+  "it's great property": "إنه عقار رائع",
+  "Submit": "ارسال",
+  " total": " الكلي",
+  " per month": " شهريا",
+  " per day": " يوميا"
 
 }
