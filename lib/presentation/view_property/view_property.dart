@@ -9,6 +9,7 @@ import 'package:nostra_casa/business_logic/add_to_favorite/add_favorite_bloc.dar
 import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/data/models/special_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/property_rating.dart';
+import 'package:nostra_casa/presentation/view_property/widgets/reviews_list.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/user_info_part.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/view_property_amenities.dart';
@@ -230,6 +231,15 @@ class ViewProperty extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
+                      const Spacing(),
+                      Text(
+                        "Other people reviews".tr(),
+                        style: Theme.of(context).textTheme.headline4,
+                      ),
+                      SizedBox(
+                        height: screenHeight * 0.02,
+                      ),
+                      ReviewsList(),
                     ],
                   ),
                 ),
