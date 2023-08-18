@@ -74,7 +74,7 @@ class _MyPropertiesState extends State<MyProperties> {
       child: Scaffold(
         backgroundColor: AppStyle.kBackGroundColor,
         appBar: AppBar(
-          title: const Text("My Favorite"),
+          title: const Text("My Estates"),
         ),
         body: BlocBuilder<GetAllPropertiesBloc, GetAllPropertiesState>(
           builder: (context, getAllState) {
@@ -109,11 +109,6 @@ class _MyPropertiesState extends State<MyProperties> {
                   hasReachedMax: getAllState.hasReachedMax,
                   properties: getAllState.properties,
                 ),
-                // AllPropertyListView(
-                //   hasReachedMax: getAllState.hasReachedMax,
-                //   properties: getAllState.properties,
-                //   scrollController: scrollController,
-                // ),
               );
             }
             return SomethingWrongWidget(
