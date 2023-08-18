@@ -7,6 +7,7 @@ import '../../../utility/app_routes.dart';
 import '../../../utility/app_style.dart';
 import '../../add_property/widgets/rounded_elevated_button.dart';
 import '../../global_widgets/property_widgets/property_shimmer.dart';
+import 'my_properties_shimmer.dart';
 
 class MyPropertiesList extends StatefulWidget {
   MyPropertiesList(
@@ -32,7 +33,7 @@ class _MyPropertiesListState extends State<MyPropertiesList> {
         controller: widget.scrollController,
         itemBuilder: (BuildContext context, int index) {
           if (index >= widget.properties.length) {
-            return PropertyShimmer();
+            return MyPropertiesShimmer(index: index,);
           }
           return MyPropertyItemWidget(
             index: index,

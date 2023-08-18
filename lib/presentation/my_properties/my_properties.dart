@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/presentation/my_properties/widgets/my_properties_list.dart';
+import 'package:nostra_casa/presentation/my_properties/widgets/my_properties_shimmer.dart';
 
 import '../../business_logic/get_properties/get_all-properties_search_filter.dart';
 import '../../business_logic/get_properties/get_all_properties_bloc.dart';
@@ -62,9 +63,6 @@ class _MyPropertiesState extends State<MyProperties> {
 
   @override
   Widget build(BuildContext context) {
-    double getWidth = MediaQuery.of(context).size.width;
-    double getHeight = MediaQuery.of(context).size.height;
-
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
@@ -74,17 +72,18 @@ class _MyPropertiesState extends State<MyProperties> {
       child: Scaffold(
         backgroundColor: AppStyle.kBackGroundColor,
         appBar: AppBar(
-          title: const Text("My Estates"),
+          title:  Text("My Estates".tr()),
         ),
         body: BlocBuilder<GetAllPropertiesBloc, GetAllPropertiesState>(
           builder: (context, getAllState) {
             if (getAllState is AllPropertiesInitial) {
-              return ListView(
-                children: [
-                  PropertyShimmer(),
-                  PropertyShimmer(),
-                ],
-              );
+              return ListView.builder(
+                  itemCount: 8,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MyPropertiesShimmer(
+                      index: index,
+                    );
+                  });
             }
             if (getAllState is AllPropertiesLoadedState &&
                 getAllState.properties.isEmpty) {
