@@ -1,10 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:nostra_casa/presentation/view_property/widgets/reviews_list.dart';
-import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
-import 'package:nostra_casa/utility/app_style.dart';
-
 import '../../global_widgets/custom_text_field.dart';
 import '../../global_widgets/elevated_button_widget.dart';
 
@@ -16,7 +12,6 @@ class PropertyRating extends StatefulWidget {
 }
 
 class _PropertyRatingState extends State<PropertyRating> {
-  static final GlobalKey<FormState> _key = GlobalKey<FormState>();
   double _rating = 3;
   TextEditingController reviewController = TextEditingController();
 
@@ -26,20 +21,11 @@ class _PropertyRatingState extends State<PropertyRating> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Form(
-          key: _key,
-          child: CustomTextField(
-            hintText: "it's great property".tr(),
-            passwordBool: false,
-            label: "Your Review".tr(),
-            controller: reviewController,
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return "Name can not be empty".tr();
-              }
-              return null;
-            },
-          ),
+        CustomTextField(
+          hintText: "it's great property".tr(),
+          passwordBool: false,
+          label: "Your Review".tr(),
+          controller: reviewController,
         ),
         SizedBox(
           height: screenHeight * 0.05,
@@ -68,9 +54,8 @@ class _PropertyRatingState extends State<PropertyRating> {
         ElevatedButtonWidget(
           title: "Submit".tr(),
           onPressed: () {
-            if (_key.currentState!.validate()) {
-
-            }
+            // print("rating"+_rating.toString());
+            // print("review"+_rating.toString());
           },
         ),
       ],

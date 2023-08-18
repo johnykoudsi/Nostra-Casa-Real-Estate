@@ -89,23 +89,17 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
                           svgPath: AppAssets.promote,
                           title: "Your request is on pending ".tr(),
                         );
-                        // return Column(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Text(
-                        //       "Your request is on pending ".tr(),
-                        //       style: Theme.of(context).textTheme.headline2,
-                        //     ),
-                        //     const SizedBox(
-                        //       height: 18,
-                        //     ),
-                        //     Text(
-                        //       "We will let you know about your request result "
-                        //           .tr(),
-                        //       style: Theme.of(context).textTheme.headline6,
-                        //     ),
-                        //   ],
-                        // );
+                      }else if(state.status=="Accepted"){
+                        return SomethingWrongWidget(
+                          svgPath: AppAssets.promote,
+                          title: "Your request has been accepted you are an agency now".tr(),
+                        );
+                      }
+                      else if(state.status=="Rejected"){
+                        return SomethingWrongWidget(
+                          svgPath: AppAssets.promote,
+                          title: "sorry, your request has been rejected".tr(),
+                        );
                       }
                     }
                     return SomethingWrongWidget(
