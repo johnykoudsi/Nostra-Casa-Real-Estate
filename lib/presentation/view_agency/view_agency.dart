@@ -28,11 +28,23 @@ class _ViewAgencyState extends State<ViewAgency> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: AppStyle.kBackGroundColor,
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: AppStyle.blackColor,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: AppStyle.kBackGroundColor,
+          ),
+        ),
+      ),
       body: Padding(
         padding: EdgeInsets.all(screenWidth * 0.038),
         child: ListView(
           children: [
+            SizedBox(height: screenHeight*0.02,),
             SizedBox(
               height: screenHeight * 0.2,
               child: ClipRRect(
@@ -60,6 +72,7 @@ class _ViewAgencyState extends State<ViewAgency> {
                 title: "Agency Info".tr(),
                 userInfo: userInfo,
               ),
+            const Spacing(),
           ],
         ),
       ),
