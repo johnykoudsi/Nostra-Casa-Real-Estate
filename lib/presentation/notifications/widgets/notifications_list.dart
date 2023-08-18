@@ -99,9 +99,11 @@ class _NotificationsListState extends State<NotificationsList> {
                         SizedBox(
                           width: screenWidth * 0.02,
                         ),
-                        Expanded(
-                          child: ShimmerLoader(),
-                        ),
+                        ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.7,),
+                        SizedBox(height: screenHeight*0.01,),
+                        ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.5,),
+                        SizedBox(height: screenHeight*0.01,),
+                        ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.4,),
                       ],
                     ),
                   ),
@@ -116,7 +118,6 @@ class _NotificationsListState extends State<NotificationsList> {
       if (state is NotificationsInitial) {
         return ListView.builder(
             controller: scrollController,
-
             itemCount: 8,
             itemBuilder: (BuildContext context, int index) {
               return Container(
@@ -151,8 +152,15 @@ class _NotificationsListState extends State<NotificationsList> {
                       SizedBox(
                         width: screenWidth * 0.02,
                       ),
-                      Expanded(
-                        child: ShimmerLoader(),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.7,),
+                          SizedBox(height: screenHeight*0.01,),
+                          ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.5,),
+                          SizedBox(height: screenHeight*0.01,),
+                          ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.4,),
+                        ],
                       ),
                     ],
                   ),
