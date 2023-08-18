@@ -24,6 +24,7 @@ class WelcomeTags {
 class Tag extends Equatable{
   int id;
   String name;
+  String nameAr;
   String description;
   int active;
   dynamic tagTypeId;
@@ -31,6 +32,7 @@ class Tag extends Equatable{
   Tag({
     this.id = -1,
     this.name = "",
+    this.nameAr = "",
     this.description = "",
     this.active = 0,
     this.tagTypeId,
@@ -39,7 +41,8 @@ class Tag extends Equatable{
 
   factory Tag.fromJson(Map<String, dynamic> json) => Tag(
     id: json["id"] ?? -1,
-    name: json["name"] ?? '',
+    name: json["name_en"] ?? '',
+    nameAr: json["name_ar"] ?? '',
     description: json["description"] ?? '',
     active: json["active"] ?? 0,
     tagTypeId: json["tag_type_id"],
@@ -48,7 +51,7 @@ class Tag extends Equatable{
   );
 
   @override
-  List<Object?> get props => [id,name,description,active,tagTypeId];
+  List<Object?> get props => [id,name,nameAr,description,active,tagTypeId];
 }
 
 class TagsSearchFilter {

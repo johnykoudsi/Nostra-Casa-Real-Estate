@@ -23,6 +23,7 @@ class WelcomeAmenities {
 class Amenity extends Equatable {
   int id;
   String name;
+  String nameAr;
   String description;
   int active;
   String file;
@@ -30,6 +31,7 @@ class Amenity extends Equatable {
   Amenity({
     this.id = -1,
     this.name = "",
+    this.nameAr = "",
     this.description = "",
     this.active = 0,
     this.file = "",
@@ -37,14 +39,15 @@ class Amenity extends Equatable {
 
   factory Amenity.fromJson(Map<String, dynamic> json) => Amenity(
         id: json["id"] ?? -1,
-        name: json["name"] ?? '',
+        name: json["name_en"] ?? '',
+        nameAr: json["name_ar"] ?? '',
         description: json["description"] ?? '',
         active: json["active"] ?? 0,
         file: "${EndPoints.kMainUrlAssets}${json["file"]}",
       );
 
   @override
-  List<Object?> get props => [id, name, description, active];
+  List<Object?> get props => [id,nameAr,name, description, active];
 }
 
 class AmenitiesSearchFilter {

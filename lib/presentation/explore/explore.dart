@@ -15,6 +15,7 @@ import 'package:nostra_casa/utility/app_style.dart';
 import '../../business_logic/get_properties/get_all-properties_search_filter.dart';
 import '../../business_logic/get_properties/get_all_properties_bloc.dart';
 import '../../utility/app_assets.dart';
+import '../../utility/constant_logic_validations.dart';
 import '../global_widgets/elevated_button_widget.dart';
 import '../global_widgets/property_widgets/property_list_view.dart';
 import '../global_widgets/property_widgets/property_shimmer.dart';
@@ -91,18 +92,19 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                 length: state.tags.length + 1,
                 vsync: this,
               );
-              propertiesSearchFilter = propertiesSearchFilter.copyWith(tagsId: -1);
+              propertiesSearchFilter =
+                  propertiesSearchFilter.copyWith(tagsId: -1);
               search();
             });
             tabController?.addListener(() {
               setState(() {
-                if(tabController!.index != 0){
+                if (tabController!.index != 0) {
                   propertiesSearchFilter = propertiesSearchFilter.copyWith(
                       tagsId: state.tags[tabController!.index - 1].id);
                   search();
-                }
-                else{
-                  propertiesSearchFilter = propertiesSearchFilter.copyWith(tagsId: -1);
+                } else {
+                  propertiesSearchFilter =
+                      propertiesSearchFilter.copyWith(tagsId: -1);
                   search();
                 }
               });
@@ -131,7 +133,6 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                           builder: (context, state) {
                             if (state is TagLoadedState) {
                               return TabBar(
-                          
                                 isScrollable: true,
                                 padding: const EdgeInsets.all(0),
                                 // labelStyle: const TextStyle(fontFamily: kBoldFont),
@@ -148,8 +149,8 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                 unselectedLabelColor: AppStyle.kGreyColor,
                                 tabs: List.generate(
                                   state.tags.length + 1,
-                                  (index){
-                                    if(index == 0){
+                                  (index) {
+                                    if (index == 0) {
                                       return Tab(
                                         icon: SvgPicture.asset(
                                           AppAssets.search,
@@ -163,7 +164,9 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                         state.tags[index - 1].file,
                                         height: 22,
                                       ),
-                                      text: state.tags[index - 1].name,
+                                      text: isEnglish(context)
+                                          ? state.tags[index - 1].name
+                                          : state.tags[index - 1].nameAr,
                                     );
                                   },
                                 ),

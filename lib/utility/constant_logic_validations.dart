@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/user/user_bloc.dart';
@@ -13,6 +14,12 @@ const int kProductsGetLimit = 10;
 const int kTagGetLimit = 20;
 
 const double mapRadius = 200;
+bool isEnglish(BuildContext context){
+  if(context.locale.languageCode == "ar"){
+    return false;
+  }
+  return true;
+}
 bool userIsLoggedIn(BuildContext context){
 
   final state = context.read<UserBloc>().state;

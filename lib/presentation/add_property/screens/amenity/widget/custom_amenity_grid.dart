@@ -7,6 +7,7 @@ import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import '../../../../../data/models/amenities_model.dart';
 import '../../../../../utility/app_assets.dart';
 import '../../../../../utility/app_style.dart';
+import '../../../../../utility/constant_logic_validations.dart';
 import '../../../../global_widgets/elevated_button_widget.dart';
 import '../../../../global_widgets/shimmer.dart';
 import '../../../../global_widgets/somthing_wrong.dart';
@@ -136,7 +137,7 @@ class AmenityItemWidget extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        amenity.name,
+                        isEnglish(context)?amenity.name:amenity.nameAr,
                         style: Theme.of(context).textTheme.headline5,
                         //textAlign: TextAlign.center,
                       ),

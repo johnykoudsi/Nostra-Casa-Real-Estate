@@ -7,6 +7,7 @@ import '../../../../../business_logic/tag_bloc/tag_bloc.dart';
 import '../../../../../data/models/tags_model.dart';
 import '../../../../../utility/app_assets.dart';
 import '../../../../../utility/app_style.dart';
+import '../../../../../utility/constant_logic_validations.dart';
 import '../../../../global_widgets/elevated_button_widget.dart';
 import '../../../../global_widgets/shimmer.dart';
 import '../../../../global_widgets/somthing_wrong.dart';
@@ -138,7 +139,7 @@ class TagItemWidget extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        tag.name,
+                        isEnglish(context)?tag.name:tag.nameAr,
                         style: Theme.of(context).textTheme.headline5,
                         //textAlign: TextAlign.center,
                       ),
