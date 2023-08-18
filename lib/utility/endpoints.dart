@@ -34,6 +34,10 @@ class EndPoints{
   static const String requestAgencyStatus = "/agencies/request-status";
   static const String myFavorite = "/properties/my-favorites";
 
+  static String deleteAgriculturalProperty(int id) => "/agriculturals/$id";
+  static String deleteCommercialProperty(int id) => "/commercials/$id";
+  static String deleteResidentialProperty(int id) => "/residentials/$id";
+
 
 
 }

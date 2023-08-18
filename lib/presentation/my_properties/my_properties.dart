@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nostra_casa/business_logic/add_to_favorite/add_favorite_bloc.dart';
+import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
 import 'package:nostra_casa/presentation/my_properties/widgets/my_properties_list.dart';
 import 'package:nostra_casa/presentation/my_properties/widgets/my_properties_shimmer.dart';
 
@@ -15,6 +17,7 @@ import '../explore/widgets/property_service_filter_widget.dart';
 import '../explore/widgets/property_type_filter_widget.dart';
 import '../explore/widgets/search_text_field.dart';
 import '../explore/widgets/sorts_filter_widget.dart';
+import '../global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import '../global_widgets/elevated_button_widget.dart';
 import '../global_widgets/property_widgets/property_shimmer.dart';
 import '../global_widgets/somthing_wrong.dart';
@@ -35,11 +38,11 @@ class _MyPropertiesState extends State<MyProperties> {
 
   GetAllPropertiesBloc propertiesBloc = GetAllPropertiesBloc();
 
-  GetAllPropertiesSearchFilter propertiesSearchFilter = GetAllPropertiesSearchFilter(myProperties: true);
+  GetAllPropertiesSearchFilter propertiesSearchFilter =
+  GetAllPropertiesSearchFilter(myProperties: true);
 
   @override
   void initState() {
-
     print(propertiesSearchFilter.myFavorite);
     search();
     scrollController.addListener(() {
@@ -52,6 +55,7 @@ class _MyPropertiesState extends State<MyProperties> {
         );
       }
     });
+
     super.initState();
   }
 
@@ -72,10 +76,20 @@ class _MyPropertiesState extends State<MyProperties> {
       child: Scaffold(
         backgroundColor: AppStyle.kBackGroundColor,
         appBar: AppBar(
-          title:  Text("My Estates".tr()),
+          title: Text("My Estates".tr()),
         ),
         body: BlocBuilder<GetAllPropertiesBloc, GetAllPropertiesState>(
           builder: (context, getAllState) {
+            final deleteUpdate =context.watch<MyPropertyActionBloc>().state;
+            if(deleteUpdate is MyPropertyActionLoading){
+              return ListView.builder(
+                  itemCount: 8,
+                  itemBuilder: (BuildContext context, int index) {
+                    return MyPropertiesShimmer(
+                      index: index,
+                    );
+                  });
+            }
             if (getAllState is AllPropertiesInitial) {
               return ListView.builder(
                   itemCount: 8,
@@ -142,8 +156,8 @@ class _MyPropertiesState extends State<MyProperties> {
                               children: [
                                 const HandleWidget(),
                                 Padding(
-                                  padding:
-                                  const EdgeInsets.symmetric(vertical: 18),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 18),
                                   child: Column(
                                     crossAxisAlignment:
                                     CrossAxisAlignment.start,
@@ -157,22 +171,23 @@ class _MyPropertiesState extends State<MyProperties> {
 
                                           setState(() {
                                             propertiesSearchFilter =
-                                                propertiesSearchFilter.copyWith(
-                                                    term: "");
+                                                propertiesSearchFilter
+                                                    .copyWith(term: "");
                                             showSearchDeleteIcon = false;
                                           });
                                           search();
                                         },
                                         onSend: (value) {
-                                          if (value == null || value.isEmpty) {
+                                          if (value == null ||
+                                              value.isEmpty) {
                                             return;
                                           }
                                           Navigator.of(context).pop();
 
                                           setState(() {
                                             propertiesSearchFilter =
-                                                propertiesSearchFilter.copyWith(
-                                                    term: value);
+                                                propertiesSearchFilter
+                                                    .copyWith(term: value);
                                             showSearchDeleteIcon = true;
                                           });
                                           search();
@@ -187,13 +202,14 @@ class _MyPropertiesState extends State<MyProperties> {
                                           Navigator.of(context).pop();
                                           setState(() {
                                             propertiesSearchFilter =
-                                                propertiesSearchFilter.copyWith(
+                                                propertiesSearchFilter
+                                                    .copyWith(
                                                     propertyType: value);
                                           });
                                           search();
                                         },
-                                        value:
-                                        propertiesSearchFilter.propertyType,
+                                        value: propertiesSearchFilter
+                                            .propertyType,
                                       ),
                                       const FilterSpacing(),
                                       PropertyServiceFilterExploreWidget(
@@ -201,8 +217,10 @@ class _MyPropertiesState extends State<MyProperties> {
                                           Navigator.of(context).pop();
                                           setState(() {
                                             propertiesSearchFilter =
-                                                propertiesSearchFilter.copyWith(
-                                                    propertyService: value);
+                                                propertiesSearchFilter
+                                                    .copyWith(
+                                                    propertyService:
+                                                    value);
                                           });
                                           search();
                                         },
@@ -247,8 +265,9 @@ class _MyPropertiesState extends State<MyProperties> {
                             onChanged: (value) {
                               Navigator.of(context).pop();
                               setState(() {
-                                propertiesSearchFilter = propertiesSearchFilter
-                                    .copyWith(propertySorts: value);
+                                propertiesSearchFilter =
+                                    propertiesSearchFilter.copyWith(
+                                        propertySorts: value);
                               });
                               search();
                             },
@@ -270,31 +289,31 @@ class _MyPropertiesState extends State<MyProperties> {
       ),
     );
   }
-  // @override
-  // Widget build(BuildContext context) {
-  //   return SafeArea(
-  //       child: Scaffold(
-  //         backgroundColor: AppStyle.kBackGroundColor,
-  //         appBar: AppBar(
-  //           backgroundColor: AppStyle.blackColor,
-  //           leading: GestureDetector(
-  //             onTap: () {
-  //               Navigator.pop(context);
-  //             },
-  //             child: const Icon(
-  //               Icons.arrow_back,
-  //               color: AppStyle.kBackGroundColor,
-  //             ),
-  //           ),
-  //           title: Text(
-  //             "My Estates".tr(),
-  //             style: Theme.of(context)
-  //                 .textTheme
-  //                 .headline4!
-  //                 .copyWith(color: AppStyle.kBackGroundColor),
-  //           ),
-  //         ),
-  //         body: MyPropertiesList(),
-  //       ));
-  // }
+// @override
+// Widget build(BuildContext context) {
+//   return SafeArea(
+//       child: Scaffold(
+//         backgroundColor: AppStyle.kBackGroundColor,
+//         appBar: AppBar(
+//           backgroundColor: AppStyle.blackColor,
+//           leading: GestureDetector(
+//             onTap: () {
+//               Navigator.pop(context);
+//             },
+//             child: const Icon(
+//               Icons.arrow_back,
+//               color: AppStyle.kBackGroundColor,
+//             ),
+//           ),
+//           title: Text(
+//             "My Estates".tr(),
+//             style: Theme.of(context)
+//                 .textTheme
+//                 .headline4!
+//                 .copyWith(color: AppStyle.kBackGroundColor),
+//           ),
+//         ),
+//         body: MyPropertiesList(),
+//       ));
+// }
 }

@@ -12,11 +12,9 @@ class MyPropertyActionLoading extends MyPropertyActionState {
   @override
   List<Object> get props => [];
 }
-class MyPropertyActionDone extends MyPropertyActionState {
+class MyPropertyActionStatus extends MyPropertyActionState {
+  MyPropertyActionStatus({required this.helperResponse});
+  HelperResponse helperResponse;
   @override
-  List<Object> get props => [];
-}
-class MyPropertyActionError extends MyPropertyActionState {
-  @override
-  List<Object> get props => [];
+  List<Object> get props => [helperResponse];
 }

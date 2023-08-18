@@ -5,6 +5,7 @@ import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.d
 import 'package:nostra_casa/business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
+import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
 import 'package:nostra_casa/business_logic/notifications/notifications_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/data/models/properties_model.dart';
@@ -72,7 +73,8 @@ class AppRouter {
 
         case AppRoutes.notifications:
           return BlocProvider(
-            create: (context) => NotificationsBloc()..add(ChangeToLoadingNotificatiosApiEvent()),
+            create: (context) =>
+                NotificationsBloc()..add(ChangeToLoadingNotificatiosApiEvent()),
             child: Notifications(),
           );
 
@@ -132,7 +134,10 @@ class AppRouter {
           return const VirtualRealityScreen();
 
         case AppRoutes.myProperties:
-          return const MyProperties();
+          return BlocProvider(
+            create: (context) => MyPropertyActionBloc(),
+            child: MyProperties(),
+          );
 
         case AppRoutes.viewAgency:
           return const ViewAgency();
