@@ -109,9 +109,14 @@ class _NotificationsListState extends State<NotificationsList> {
                   ),
                 );
               }
-              return NotificationItemWidget(
-                notification: state.notifications[index],
-                index: index,
+              return RefreshIndicator(
+                onRefresh: () async {
+                  search();
+                },
+                child: NotificationItemWidget(
+                  notification: state.notifications[index],
+                  index: index,
+                ),
               );
             });
       }
@@ -224,9 +229,18 @@ class NotificationItemWidget extends StatelessWidget {
               width: screenWidth * 0.02,
             ),
             Expanded(
-              child: Text(
-                notification.notification.body,
-                style: Theme.of(context).textTheme.headline5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    notification.notification.head,
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                  Text(
+                    notification.notification.body,
+                    style: Theme.of(context).textTheme.headline5,
+                  ),
+                ],
               ),
             ),
           ],
