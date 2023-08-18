@@ -41,6 +41,7 @@ class UserInfoPart extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    print(userInfo.agencyModel?.latLng.toString());
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Column(

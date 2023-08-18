@@ -7,6 +7,8 @@ import 'package:nostra_casa/data/models/tags_model.dart';
 import 'package:nostra_casa/data/models/user_model.dart';
 import 'package:nostra_casa/utility/enums.dart';
 
+import 'country_and_city_model.dart';
+
 WelcomeProperties welcomePropertiesFromJson(String str) =>
     WelcomeProperties.fromJson(json.decode(str));
 
@@ -51,6 +53,8 @@ class Property {
   CommercialPropertyAttributes? commercial;
   AgriculturalPropertyAttributes? agricultural;
   List<String> media;
+  City? city;
+  CountryModel? country;
 
   Property({
     this.id = -1,
@@ -69,6 +73,8 @@ class Property {
     this.commercial,
     this.media = const [""],
     this.propertyService,
+    this.country,
+    this.city,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
@@ -100,6 +106,12 @@ class Property {
           : null,
       media: List<String>.from(
           json["media"]?.map((x) => x["original_url"]) ?? [""]),
+      country: json["country"] != null
+          ? CountryModel.fromJson(json["country"])
+          : CountryModel(),
+      city: json["city"] != null
+        ? City.fromJson(json["city"])
+        : City(),
     );
   }
 }

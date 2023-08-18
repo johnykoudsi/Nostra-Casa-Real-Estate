@@ -96,7 +96,7 @@ class PropertyCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Damascus, Syria",
+                  "${property.city?.name} , ${property.country?.name}",
                   style: Theme.of(context).textTheme.headline4,
                 ),
                 Padding(
