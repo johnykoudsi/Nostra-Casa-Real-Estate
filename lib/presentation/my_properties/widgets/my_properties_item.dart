@@ -29,92 +29,110 @@ class MyPropertyItemWidget extends StatelessWidget {
         Navigator.of(context)
             .pushNamed(AppRoutes.viewProperty, arguments: property);
       },
-      child: Container(
-        decoration: BoxDecoration(
-          color: (index % 2 == 1)
-              ? AppStyle.kBackGroundColor
-              : AppStyle.kLightGrey,
-        ),
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: screenWidth * 0.038,
-              right: screenWidth * 0.038,
-              top: screenHeight * 0.02,
-              bottom: screenHeight * 0.02),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: screenWidth * 0.35,
-                height: screenHeight * 0.12,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+      child: BlocListener<MyPropertyActionBloc, MyPropertyActionState>(
+        listener: (context, state) {
+          if (state is MyPropertyActionStatus) {
+            DialogsWidgetsSnackBar.showSnackBarFromStatus(
+              context: context,
+              helperResponse: state.helperResponse,
+              showServerError: true,
+            );
+          }
+        },
+        child: Container(
+          decoration: BoxDecoration(
+            color: (index % 2 == 1)
+                ? AppStyle.kBackGroundColor
+                : AppStyle.kLightGrey,
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: screenWidth * 0.038,
+                right: screenWidth * 0.038,
+                top: screenHeight * 0.02,
+                bottom: screenHeight * 0.02),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: screenWidth * 0.35,
+                  height: screenHeight * 0.12,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: FadeInImage(
+                      placeholder: const AssetImage(AppAssets.greyLogo),
+                      image: NetworkImage(
+                          property.media.isNotEmpty ? property.media[0] : ""),
+                      fit: BoxFit.cover,
+                      imageErrorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                          AppAssets.greyLogo,
+                          fit: BoxFit.cover,
+                        );
+                      },
+                    ),
+                  ),
                 ),
-                child: FadeInImage(
-                  placeholder: const AssetImage(AppAssets.greyLogo),
-                  image: NetworkImage(
-                      property.media.isNotEmpty ? property.media[0] : ""),
-                  fit: BoxFit.cover,
-                  imageErrorBuilder: (context, error, stackTrace) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        AppAssets.greyLogo,
-                        fit: BoxFit.cover,
+                SizedBox(
+                  width: screenWidth * 0.02,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Damascus,Syria",
+                        style: Theme.of(context).textTheme.headline4,
                       ),
-                    );
-                  },
+                      Text(property.name,
+                          style: Theme.of(context).textTheme.headline5),
+                      Text(
+                        "${NumberFormat.decimalPattern().format(property.price)} SYP",
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: screenWidth * 0.02,
-              ),
-              Expanded(
-                child: Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Damascus,Syria",
-                      style: Theme.of(context).textTheme.headline4,
+                    BlocBuilder<MyPropertyActionBloc, MyPropertyActionState>(
+                      builder: (context, state) {
+                        if (state is MyPropertyActionLoading) {
+                          return CircularProgressIndicator();
+                        }
+                        return RoundedElevatedButton(
+                          onTap: () {
+                            context.read<MyPropertyActionBloc>().add(
+                                DeletePropertyEvent(
+                                    propertyType: property.propertyType,
+                                    propertyId: property.id));
+                          },
+                          iconData: Icons.delete_forever,
+                          iconColor: Colors.red,
+                          backgroundColor: AppStyle.kBackGroundColor,
+                        );
+                      },
                     ),
-                    Text(property.name,
-                        style: Theme.of(context).textTheme.headline5),
-                    Text(
-                      "${NumberFormat.decimalPattern().format(property.price)} SYP",
-                      style: Theme.of(context).textTheme.headline5,
+                    RoundedElevatedButton(
+                      onTap: () {},
+                      iconData: Icons.edit,
+                      iconColor: Colors.black45,
+                      backgroundColor: AppStyle.kBackGroundColor,
+                    ),
+                    RoundedElevatedButton(
+                      onTap: () {},
+                      iconData: Icons.sync_alt_sharp,
+                      iconColor: Colors.black45,
+                      backgroundColor: AppStyle.kBackGroundColor,
                     ),
                   ],
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RoundedElevatedButton(
-                    onTap: () {
-                      context.read<MyPropertyActionBloc>().add(
-                          DeletePropertyEvent(
-                              propertyType: property.propertyType,
-                              propertyId: property.id));
-                    },
-                    iconData: Icons.delete_forever,
-                    iconColor: Colors.red,
-                    backgroundColor: AppStyle.kBackGroundColor,
-                  ),
-                  RoundedElevatedButton(
-                    onTap: () {},
-                    iconData: Icons.edit,
-                    iconColor: Colors.black45,
-                    backgroundColor: AppStyle.kBackGroundColor,
-                  ),
-                  RoundedElevatedButton(
-                    onTap: () {},
-                    iconData: Icons.sync_alt_sharp,
-                    iconColor: Colors.black45,
-                    backgroundColor: AppStyle.kBackGroundColor,
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

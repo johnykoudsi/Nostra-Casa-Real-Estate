@@ -5,6 +5,7 @@ abstract class MyPropertyActionEvent extends Equatable {
 }
 class DeletePropertyEvent extends MyPropertyActionEvent{
 
+
   DeletePropertyEvent({required this.propertyType,required this.propertyId});
   int propertyId;
   PropertyType propertyType;
