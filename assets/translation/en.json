@@ -149,5 +149,10 @@
   " per month": " per month",
   " per day": " per day",
   "Your request has been accepted you are an agency now": "Your request has been accepted you are an agency now",
-  "sorry, your request has been rejected": "sorry, your request has been rejected"
+  "sorry, your request has been rejected": "sorry, your request has been rejected",
+  "Your Review": "Your Review",
+  "Please edit the your property price": "Please edit the your property price",
+  "Are you sure you want to delete this property?": "Are you sure you want to delete this property?",
+  "No": "No",
+  "Yes": "Yes"
 }
