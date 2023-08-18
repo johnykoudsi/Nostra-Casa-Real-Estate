@@ -102,9 +102,9 @@ final propertyServiceUI = EnumValues({
   "All Property Services".tr(): PropertyService.all,
 });
 final propertyServicePriceUI = EnumValues({
-  "": PropertyService.sale,
-  "sp per month".tr(): PropertyService.rent,
-  "sp per day".tr(): PropertyService.holiday,
+  " total": PropertyService.sale,
+  " per month".tr(): PropertyService.rent,
+  " per day".tr(): PropertyService.holiday,
 });
 
 final genderValues = EnumValues({

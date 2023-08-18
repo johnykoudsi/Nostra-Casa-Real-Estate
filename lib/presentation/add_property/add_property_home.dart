@@ -2,7 +2,6 @@ import 'package:animations/animations.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nostra_casa/business_logic/country_bloc/country_bloc.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_description.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_images.dart';
 import 'package:nostra_casa/presentation/add_property/screens/add_property_price_and_space.dart';
@@ -14,7 +13,6 @@ import 'package:nostra_casa/presentation/add_property/screens/choose_service.dar
 import 'package:nostra_casa/presentation/add_property/screens/tag/choose_tags.dart';
 import 'package:nostra_casa/presentation/add_property/screens/choose_type.dart';
 import 'package:nostra_casa/presentation/add_property/screens/pin_google_map_screen/GoogleMapsScreen.dart';
-import 'package:nostra_casa/presentation/add_property/screens/submit_property.dart';
 import 'package:nostra_casa/presentation/add_property/widgets/add_property_bottom_navigator.dart';
 import 'package:nostra_casa/utility/app_routes.dart';
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';

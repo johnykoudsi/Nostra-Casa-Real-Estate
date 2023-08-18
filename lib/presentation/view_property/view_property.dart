@@ -111,16 +111,8 @@ class ViewProperty extends StatelessWidget {
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            propertyServiceBackEnd2.reverse[property.propertyService]
-                                .toString() ==
-                                "rent"
-                                ? " per month"
-                                : propertyServiceBackEnd2
-                                .reverse[property.propertyService]
-                                .toString() ==
-                                "holiday"
-                                ? " per day"
-                                : "",
+                            propertyServicePriceUI.reverse[property.propertyService]??'',
+
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5!
