@@ -20,6 +20,8 @@ class CustomAmenityGrid extends StatefulWidget {
 
 class _CustomAmenityGridState extends State<CustomAmenityGrid> {
   ScrollController scrollController = ScrollController();
+  AmenityBloc amenitiesBloc = AmenityBloc();
+
 
   @override
   void initState() {
@@ -35,31 +37,40 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
     });
     super.initState();
   }
-
+  void search() {
+    amenitiesBloc.add(ChangeToLoadingApiEvent(
+      //searchFilterProperties: propertiesSearchFilter,
+    ));
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AmenityBloc, AmenityState>(
       builder: (context, state) {
         if (state is AmenityLoadedState) {
-          return GridView.builder(
-              controller: scrollController,
-              itemCount: state.hasReachedMax
-                  ? state.amenities.length
-                  : state.amenities.length + 2,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1.6,
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                if (index >= state.amenities.length) {
-                  return ShimmerLoader();
-                }
-                return AmenityItemWidget(
-                  amenity: state.amenities[index],
-                );
-              });
+          return RefreshIndicator(
+            onRefresh: () async {
+              search();
+            },
+            child: GridView.builder(
+                controller: scrollController,
+                itemCount: state.hasReachedMax
+                    ? state.amenities.length
+                    : state.amenities.length + 2,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1.6,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  if (index >= state.amenities.length) {
+                    return ShimmerLoader();
+                  }
+                  return AmenityItemWidget(
+                    amenity: state.amenities[index],
+                  );
+                }),
+          );
         }
         if (state is AmenityInitial) {
           return GridView.builder(

@@ -38,9 +38,9 @@ class _CustomTagGridState extends State<CustomTagGrid> {
     super.initState();
   }
   void search() {
-    // tagsBloc.add(ChangeToLoadingApiEvent(
-    //   searchFilterProperties: propertiesSearchFilter,
-    // ));
+    tagsBloc.add(ChangeToLoadingTagApiEvent(
+      //searchFilterProperties: propertiesSearchFilter,
+    ));
   }
   @override
   Widget build(BuildContext context) {
@@ -48,25 +48,31 @@ class _CustomTagGridState extends State<CustomTagGrid> {
     return BlocBuilder<TagBloc, TagState>(
       builder: (context, state) {
         if (state is TagLoadedState) {
-          return GridView.builder(
-              controller: scrollController,
-              itemCount: state.hasReachedMax
-                  ? state.tags.length
-                  : state.tags.length + 2,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1.6,
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                if (index >= state.tags.length) {
-                  return ShimmerLoader();
-                }
-                return TagItemWidget(
-                  tag: state.tags[index],
-                );
-              });
+          return RefreshIndicator(
+            onRefresh: () async {
+              search();
+            },
+            child: GridView.builder(
+                controller: scrollController,
+                itemCount: state.hasReachedMax
+                    ? state.tags.length
+                    : state.tags.length + 2,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1.6,
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                ),
+                itemBuilder: (BuildContext context, int index) {
+                  if (index >= state.tags.length) {
+                    return ShimmerLoader();
+                  }
+                  return TagItemWidget(
+                    tag: state.tags[index],
+                  );
+                }),
+          );
+
         }
         if (state is TagInitial) {
           return GridView.builder(
@@ -76,6 +82,7 @@ class _CustomTagGridState extends State<CustomTagGrid> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
+
               ),
               itemBuilder: (BuildContext context, int index) {
                 return ShimmerLoader();

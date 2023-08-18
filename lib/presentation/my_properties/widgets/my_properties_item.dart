@@ -108,10 +108,16 @@ class MyPropertyItemWidget extends StatelessWidget {
                         }
                         return RoundedElevatedButton(
                           onTap: () {
-                            context.read<MyPropertyActionBloc>().add(
-                                DeletePropertyEvent(
-                                    propertyType: property.propertyType,
-                                    propertyId: property.id));
+                            DialogsWidgetsYesNo.showYesNoDialog(title: "Are you sure you want to delete this property?".tr(),
+                                noTitle: "No".tr(),
+                                yesTitle: "Yes".tr(),
+                                onYesTap: (){     context.read<MyPropertyActionBloc>().add(
+                                    DeletePropertyEvent(
+                                        propertyType: property.propertyType,
+                                        propertyId: property.id));},
+                                onNoTap: (){Navigator.pop(context);},
+                                context: context);
+
                           },
                           iconData: Icons.delete_forever,
                           iconColor: Colors.red,

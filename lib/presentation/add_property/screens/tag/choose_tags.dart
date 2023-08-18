@@ -6,7 +6,6 @@ import '../../../../utility/app_style.dart';
 class ChooseTags extends StatefulWidget {
   const ChooseTags({Key? key}) : super(key: key);
 
-
   @override
   State<ChooseTags> createState() => _ChooseTagsState();
 }
