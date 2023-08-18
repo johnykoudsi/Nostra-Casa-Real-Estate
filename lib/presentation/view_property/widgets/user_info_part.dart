@@ -11,9 +11,10 @@ import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class UserInfoPart extends StatelessWidget {
-  UserInfoPart({required this.userInfo, Key? key}) : super(key: key);
+  UserInfoPart({required this.userInfo, Key? key,this.title}) : super(key: key);
 
   UserInfo userInfo;
+  String? title;
   void openWhatsapp(
       {required BuildContext context, required String number}) async {
     var whatsapp = number; //+92xx enter like this
@@ -47,7 +48,7 @@ class UserInfoPart extends StatelessWidget {
       children: [
         const Spacing(),
         Text(
-          "Host Info".tr(),
+          title == null ? "" : title!,
           style: Theme.of(context).textTheme.headline4,
         ),
         SizedBox(
