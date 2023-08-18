@@ -102,22 +102,22 @@ class _SpecialAttributesListState extends State<SpecialAttributesList> {
       });
     }
 
-    Future<bool> showEditPropertyTypeAttributeDialog(int index) async {
-      editAttributeName.text =
-          widget.propertyTypeAttributes!.entries.toList()[index].key;
-      editAttributeNumber.text = widget.propertyTypeAttributes!.entries
-          .toList()[index]
-          .value
-          .toString();
-      return DialogsWidgetsYesNo.textFieldDialog(
-          key: validationKey,
-          operationName: "Edit",
-          context: context,
-          attributeNameController: editAttributeName,
-          attributeNumberController: editAttributeNumber,
-          changePropertyAttribute: editPropertyTypeAttribute,
-          enable: false);
-    }
+    // Future<bool> showEditPropertyTypeAttributeDialog(int index) async {
+    //   editAttributeName.text =
+    //       widget.propertyTypeAttributes!.entries.toList()[index].key;
+    //   editAttributeNumber.text = widget.propertyTypeAttributes!.entries
+    //       .toList()[index]
+    //       .value
+    //       .toString();
+    //   return DialogsWidgetsYesNo.textFieldDialog(
+    //       key: validationKey,
+    //       operationName: "Edit",
+    //       context: context,
+    //       attributeNameController: editAttributeName,
+    //       attributeNumberController: editAttributeNumber,
+    //       changePropertyAttribute: editPropertyTypeAttribute,
+    //       enable: false);
+    // }
 
     double screenWidth = MediaQuery.of(context).size.width;
 
@@ -146,7 +146,7 @@ class _SpecialAttributesListState extends State<SpecialAttributesList> {
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
                   onLongPress: () {
-                    showEditPropertyTypeAttributeDialog(index);
+                 //   showEditPropertyTypeAttributeDialog(index);
                   },
                   child: Container(
                       decoration: const BoxDecoration(

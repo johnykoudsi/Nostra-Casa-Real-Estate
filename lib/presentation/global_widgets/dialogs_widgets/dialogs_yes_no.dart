@@ -8,14 +8,14 @@ import '../elevated_button_widget.dart';
 
 class DialogsWidgetsYesNo {
   static void showYesNoDialog({
-    TextEditingController? attributeNumberController,
+    TextEditingController? priceController,
     TextEditingController? attributeNameController,
     String? operationName,
     required String title,
     required String noTitle,
     required String yesTitle,
     required Function() onYesTap,
-    Function()? changePropertyAttribute,
+    Function()? onYes,
     required Function() onNoTap,
     required BuildContext context,
     GlobalKey<FormState>? key,
@@ -81,9 +81,8 @@ class DialogsWidgetsYesNo {
       {required BuildContext context,
       key,
       operationName,
-      attributeNameController,
-      attributeNumberController,
-      changePropertyAttribute,
+      priceController,
+      onYes,
       enable}) async {
     double getWidth = MediaQuery.of(context).size.width;
     double getHeight = MediaQuery.of(context).size.height;
@@ -118,23 +117,10 @@ class DialogsWidgetsYesNo {
                               operationName == "Add"
                                   ? "Please add name and number for your special attribute"
                                       .tr()
-                                  : "Please edit the number of the attribute"
+                                  : "Please edit the your property price"
                                       .tr(),
                               style: Theme.of(context).textTheme.headline3,
                               textAlign: TextAlign.center),
-                        ),
-                        Visibility(
-                          visible: enable,
-                          child: CustomTextField(
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return "Name is required".tr();
-                              }
-                            },
-                            hintText: "Special Name".tr(),
-                            passwordBool: false,
-                            controller: attributeNameController,
-                          ),
                         ),
                         Padding(
                           padding:
@@ -152,7 +138,7 @@ class DialogsWidgetsYesNo {
                             hintText: "25",
                             passwordBool: false,
                             textInputType: TextInputType.number,
-                            controller: attributeNumberController,
+                            controller: priceController,
                           ),
                         ),
                         SizedBox(
@@ -176,7 +162,7 @@ class DialogsWidgetsYesNo {
                               flex: 6,
                               child: ElevatedButtonWidget(
                                 title: operationName,
-                                onPressed: changePropertyAttribute,
+                                onPressed: onYes,
                               ),
                             ),
                           ],

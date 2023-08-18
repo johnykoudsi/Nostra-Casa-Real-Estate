@@ -10,6 +10,7 @@ import '../../../utility/app_assets.dart';
 import '../../../utility/app_routes.dart';
 import '../../../utility/app_style.dart';
 import '../../add_property/widgets/rounded_elevated_button.dart';
+import '../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'my_properties_shimmer.dart';
 
 class MyPropertyItemWidget extends StatelessWidget {
@@ -23,6 +24,7 @@ class MyPropertyItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    TextEditingController priceController = TextEditingController();
 
     return GestureDetector(
       onTap: () {
@@ -118,7 +120,28 @@ class MyPropertyItemWidget extends StatelessWidget {
                       },
                     ),
                     RoundedElevatedButton(
-                      onTap: () {},
+                      onTap: () {
+                        priceController.text=property.price.toString();
+                        DialogsWidgetsYesNo.textFieldDialog(
+                            priceController: priceController,
+                            context: context,operationName: "Edit".tr(),
+                            onYes: (){
+                              context.read<MyPropertyActionBloc>().add(
+                                  EditPropertyEvent(
+
+                                      propertyType: property.propertyType,
+                                      propertyId: property.id, price: double.parse(priceController.text)));
+                            },
+
+                        );
+
+                        // context.read<MyPropertyActionBloc>().add(
+                        //     EditPropertyEvent(
+                        //
+                        //         propertyType: property.propertyType,
+                        //         propertyId: property.id, price: 50));
+
+                      },
                       iconData: Icons.edit,
                       iconColor: Colors.black45,
                       backgroundColor: AppStyle.kBackGroundColor,

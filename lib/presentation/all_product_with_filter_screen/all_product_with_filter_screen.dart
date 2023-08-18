@@ -67,8 +67,6 @@ class _AllProductsWithFilterScreenState
 
   @override
   Widget build(BuildContext context) {
-    double getWidth = MediaQuery.of(context).size.width;
-    double getHeight = MediaQuery.of(context).size.height;
 
     return MultiBlocProvider(
       providers: [

@@ -13,3 +13,14 @@ class DeletePropertyEvent extends MyPropertyActionEvent{
   @override
   List<Object?> get props => [propertyType,propertyId];
 }
+class EditPropertyEvent extends MyPropertyActionEvent{
+
+
+  EditPropertyEvent({required this.propertyType,required this.propertyId,required this.price});
+  int propertyId;
+  PropertyType propertyType;
+  double price;
+
+  @override
+  List<Object?> get props => [propertyType,propertyId,price];
+}

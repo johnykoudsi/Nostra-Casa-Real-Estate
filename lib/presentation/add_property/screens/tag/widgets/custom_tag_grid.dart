@@ -21,6 +21,7 @@ class CustomTagGrid extends StatefulWidget {
 
 class _CustomTagGridState extends State<CustomTagGrid> {
   ScrollController scrollController = ScrollController();
+  TagBloc tagsBloc = TagBloc();
 
   @override
   void initState() {
@@ -36,11 +37,14 @@ class _CustomTagGridState extends State<CustomTagGrid> {
     });
     super.initState();
   }
-
+  void search() {
+    // tagsBloc.add(ChangeToLoadingApiEvent(
+    //   searchFilterProperties: propertiesSearchFilter,
+    // ));
+  }
   @override
   Widget build(BuildContext context) {
-    double getWidth = MediaQuery.of(context).size.width;
-    double getHeight = MediaQuery.of(context).size.height;
+
     return BlocBuilder<TagBloc, TagState>(
       builder: (context, state) {
         if (state is TagLoadedState) {
