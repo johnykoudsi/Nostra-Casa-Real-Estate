@@ -9,6 +9,7 @@ import '../../../data/models/properties_model.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_routes.dart';
 import '../../../utility/app_style.dart';
+import '../../../utility/constant_logic_validations.dart';
 import '../../add_property/widgets/rounded_elevated_button.dart';
 import '../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'my_properties_shimmer.dart';
@@ -108,16 +109,25 @@ class MyPropertyItemWidget extends StatelessWidget {
                         }
                         return RoundedElevatedButton(
                           onTap: () {
-                            DialogsWidgetsYesNo.showYesNoDialog(title: "Are you sure you want to delete this property?".tr(),
+                            DialogsWidgetsYesNo.showYesNoDialog(
+                                title:
+                                    "Are you sure you want to delete this property?"
+                                        .tr(),
                                 noTitle: "No".tr(),
                                 yesTitle: "Yes".tr(),
-                                onYesTap: (){     context.read<MyPropertyActionBloc>().add(
-                                    DeletePropertyEvent(
-                                        propertyType: property.propertyType,
-                                        propertyId: property.id));},
-                                onNoTap: (){Navigator.pop(context);},
+                                onYesTap: () {
+                                  context.read<MyPropertyActionBloc>().add(
+                                      DeletePropertyEvent(
+                                          propertyType: property.propertyType,
+                                          propertyId:
+                                              changePropertyIdToPropertyTypeId(
+                                                  property)));
+                                  Navigator.pop(context);
+                                },
+                                onNoTap: () {
+                                  Navigator.pop(context);
+                                },
                                 context: context);
-
                           },
                           iconData: Icons.delete_forever,
                           iconColor: Colors.red,
@@ -125,32 +135,36 @@ class MyPropertyItemWidget extends StatelessWidget {
                         );
                       },
                     ),
-                    RoundedElevatedButton(
-                      onTap: () {
-                        priceController.text=property.price.toString();
-                        DialogsWidgetsYesNo.textFieldDialog(
-                            priceController: priceController,
-                            context: context,operationName: "Edit".tr(),
-                            onYes: (){
-                              context.read<MyPropertyActionBloc>().add(
-                                  EditPropertyEvent(
-
-                                      propertyType: property.propertyType,
-                                      propertyId: property.id, price: double.parse(priceController.text)));
-                            },
-
+                    BlocBuilder<MyPropertyActionBloc, MyPropertyActionState>(
+                      builder: (context, state) {
+                        if(state is MyPropertyActionLoading){
+                          return CircularProgressIndicator();
+                        }
+                        return RoundedElevatedButton(
+                          onTap: () {
+                            priceController.text = property.price.toString();
+                            DialogsWidgetsYesNo.textFieldDialog(
+                              controller: priceController,
+                              context: context,
+                              title: "Please edit your property price".tr(),
+                              operationName: "Edit".tr(),
+                              onYes: () {
+                                context.read<MyPropertyActionBloc>().add(
+                                    EditPropertyEvent(
+                                        propertyType: property.propertyType,
+                                        propertyId:
+                                            changePropertyIdToPropertyTypeId(
+                                                property),
+                                        price: double.parse(
+                                            priceController.text)));
+                              },
+                            );
+                          },
+                          iconData: Icons.edit,
+                          iconColor: Colors.black45,
+                          backgroundColor: AppStyle.kBackGroundColor,
                         );
-
-                        // context.read<MyPropertyActionBloc>().add(
-                        //     EditPropertyEvent(
-                        //
-                        //         propertyType: property.propertyType,
-                        //         propertyId: property.id, price: 50));
-
                       },
-                      iconData: Icons.edit,
-                      iconColor: Colors.black45,
-                      backgroundColor: AppStyle.kBackGroundColor,
                     ),
                     RoundedElevatedButton(
                       onTap: () {},

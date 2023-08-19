@@ -8,7 +8,7 @@ import '../elevated_button_widget.dart';
 
 class DialogsWidgetsYesNo {
   static void showYesNoDialog({
-    TextEditingController? priceController,
+    TextEditingController? controller,
     TextEditingController? attributeNameController,
     String? operationName,
     required String title,
@@ -80,8 +80,9 @@ class DialogsWidgetsYesNo {
   static Future<bool> textFieldDialog(
       {required BuildContext context,
       key,
+        title,
       operationName,
-      priceController,
+      controller,
       onYes,
       enable}) async {
     double getWidth = MediaQuery.of(context).size.width;
@@ -114,11 +115,7 @@ class DialogsWidgetsYesNo {
                       children: [
                         Center(
                           child: Text(
-                              operationName == "Add"
-                                  ? "Please add name and number for your special attribute"
-                                      .tr()
-                                  : "Please edit the your property price"
-                                      .tr(),
+                            title,
                               style: Theme.of(context).textTheme.headline3,
                               textAlign: TextAlign.center),
                         ),
@@ -138,7 +135,7 @@ class DialogsWidgetsYesNo {
                             hintText: "25",
                             passwordBool: false,
                             textInputType: TextInputType.number,
-                            controller: priceController,
+                            controller: controller,
                           ),
                         ),
                         SizedBox(

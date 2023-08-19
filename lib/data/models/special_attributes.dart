@@ -104,14 +104,17 @@ class ResidentialPropertyAttributes extends AbstractPropertyAttributes {
 
 class AgriculturalPropertyAttributes extends AbstractPropertyAttributes {
   AgriculturalPropertyAttributes({
+    this.id = -1,
     this.waterSources = 0
 });
 
   int waterSources;
+  int id;
 
   factory AgriculturalPropertyAttributes.fromJson(Map<String, dynamic> json) =>
       AgriculturalPropertyAttributes(
-        waterSources: json["water_sources"]
+        waterSources: json["water_sources"],
+        id: json["id"],
       );
 
   @override

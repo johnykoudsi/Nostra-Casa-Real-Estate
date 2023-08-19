@@ -30,6 +30,7 @@ class NetworkHelpers {
     required String url,
     body = "",
     bool useUserToken = false,
+    String crud = "POST",
   }) async {
     try {
       Map<String, String> headers;
@@ -49,7 +50,7 @@ class NetworkHelpers {
       var request;
       http.StreamedResponse response;
 
-      request = http.Request('POST', Uri.parse(EndPoints.kMainUrl + url));
+      request = http.Request(crud, Uri.parse(EndPoints.kMainUrl + url));
       request.headers.addAll(headers);
       request.body = body;
 

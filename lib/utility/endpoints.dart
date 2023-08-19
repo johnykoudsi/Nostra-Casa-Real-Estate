@@ -38,6 +38,9 @@ class EndPoints{
   static String deleteCommercialProperty(int id) => "/commercials/$id";
   static String deleteResidentialProperty(int id) => "/residentials/$id";
 
+  static String editAgriculturalProperty(int id) => "/agriculturals/$id";
+  static String editCommercialProperty(int id) => "/commercials/$id";
+  static String editResidentialProperty(int id) => "/residentials/$id";
 
 
 }
