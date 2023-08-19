@@ -22,6 +22,7 @@ import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 import '../../data/models/properties_model.dart';
 import '../../utility/app_assets.dart';
+import '../../utility/constant_logic_validations.dart';
 import '../../utility/enums.dart';
 import '../map_location_square_widget/map_location_widget.dart';
 
@@ -112,8 +113,9 @@ class ViewProperty extends StatelessWidget {
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Text(
-                            propertyServicePriceUI.reverse[property.propertyService]??'',
-
+                            propertyServicePriceUI
+                                    .reverse[property.propertyService] ??
+                                '',
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5!
@@ -220,18 +222,29 @@ class ViewProperty extends StatelessWidget {
                           userInfo: property.userInfo!,
                         ),
                       const Spacing(),
-                      Text(
-                        "Feel free to rate this property".tr(),
-                        style: Theme.of(context).textTheme.headline4,
+
+                      Visibility(
+                        visible: userIsLoggedIn(context),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Feel free to rate this property".tr(),
+                              style: Theme.of(context).textTheme.headline4,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.02,
+                            ),
+                            PropertyRating(
+                              propertyID: property.id,
+                            ),
+                            SizedBox(
+                              height: screenHeight * 0.02,
+                            ),
+                            const Spacing(),
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: screenHeight * 0.02,
-                      ),
-                       PropertyRating(propertyID: property.id,),
-                      SizedBox(
-                        height: screenHeight * 0.02,
-                      ),
-                      const Spacing(),
+
                       Text(
                         "Other people reviews".tr(),
                         style: Theme.of(context).textTheme.headline4,
