@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.dart';
 import 'package:nostra_casa/business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
+import 'package:nostra_casa/business_logic/get_property_reviews/get_property_reviews_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
 import 'package:nostra_casa/business_logic/notifications/notifications_bloc.dart';
@@ -122,6 +123,9 @@ class AppRouter {
       ),
         BlocProvider(
           create: (context) => RatePropertyBloc(),
+        ),
+        BlocProvider(
+          create: (context) => GetPropertyReviewsBloc(),
         ),
       ],
 
