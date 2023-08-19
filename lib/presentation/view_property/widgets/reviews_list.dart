@@ -24,6 +24,12 @@ class _ReviewsListState extends State<ReviewsList> {
 
   @override
   void initState() {
+    context.read<GetPropertyReviewsBloc>().add(
+      GetPropertyReviewsApiEvent(
+        reviewsSearchFilter: ReviewsSearchFilter(),
+        propertyId: widget.propertyId,
+      ),
+    );
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
