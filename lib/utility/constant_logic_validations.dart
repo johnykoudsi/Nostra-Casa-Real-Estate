@@ -17,30 +17,34 @@ const int kProductsGetLimit = 10;
 const int kTagGetLimit = 20;
 
 const double mapRadius = 200;
-bool isEnglish(BuildContext context){
-  if(context.locale.languageCode == "ar"){
+
+bool isEnglish(BuildContext context) {
+  if (context.locale.languageCode == "ar") {
     return false;
   }
   return true;
 }
-bool userIsLoggedIn(BuildContext context){
 
+bool userIsLoggedIn(BuildContext context) {
   final state = context.read<UserBloc>().state;
-  if(state is UserLoggedState){
+  if (state is UserLoggedState) {
     return true;
   }
   return false;
 }
-int changePropertyIdToPropertyTypeId(Property property){
-if(property.residential != null ){
-  return property.residential!.id;
-}else if(property.commercial != null){
-  return property.commercial!.id;
-}else if(property.agricultural != null){
-  return property.agricultural!.id;
+
+int changePropertyIdToPropertyTypeId(Property property) {
+  if (property.residential != null) {
+    print("property id :"+property.residential!.id.toString());
+    return property.residential!.id;
+  } else if (property.commercial != null) {
+    return property.commercial!.id;
+  } else if (property.agricultural != null) {
+    return property.agricultural!.id;
+  }
+ else {return -1;}
 }
- return -1;
-}
+
 bool getStatuesFromResponse(String streamRes) {
   Map<String, dynamic> jsonError = json.decode(streamRes);
   if (jsonError.containsKey("success")) {

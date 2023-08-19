@@ -58,7 +58,11 @@ class _MyPropertiesState extends State<MyProperties> {
 
     super.initState();
   }
-
+@override
+  void dispose() {
+    context.read<MyPropertyActionBloc>().close();
+    super.dispose();
+  }
   void search() {
     propertiesBloc.add(ChangeToLoadingApiEvent(
       searchFilterProperties: propertiesSearchFilter,

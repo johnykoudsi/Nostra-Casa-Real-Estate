@@ -116,7 +116,7 @@ class ReviewProperty extends StatelessWidget {
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
-                          const PropertyRating(),
+
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),

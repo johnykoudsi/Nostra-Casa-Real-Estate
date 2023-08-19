@@ -1,18 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:nostra_casa/business_logic/rate_property/rate_property_bloc.dart';
 import '../../global_widgets/custom_text_field.dart';
 import '../../global_widgets/elevated_button_widget.dart';
 
 class PropertyRating extends StatefulWidget {
-  const PropertyRating({Key? key}) : super(key: key);
-
+   PropertyRating({Key? key,required this.propertyID}) : super(key: key);
+int propertyID;
   @override
   State<PropertyRating> createState() => _PropertyRatingState();
 }
 
 class _PropertyRatingState extends State<PropertyRating> {
-  double _rating = 3;
+  double _rating = 0;
+  bool ratingChanged=false;
   TextEditingController reviewController = TextEditingController();
 
   @override
@@ -45,19 +48,28 @@ class _PropertyRatingState extends State<PropertyRating> {
           ),
           onRatingUpdate: (rating) {
             setState(() {
+              ratingChanged=true;
               _rating = rating;
             });
           },
           updateOnDrag: true,
         ),
         SizedBox(height: screenHeight*0.03,),
-        ElevatedButtonWidget(
+        BlocBuilder<RatePropertyBloc, RatePropertyState>(
+  builder: (context, state) {
+    if(state is RatePropertyLoading){
+    return  const Center(child: CircularProgressIndicator());
+    }
+    return ElevatedButtonWidget(
           title: "Submit".tr(),
-          onPressed: () {
-            // print("rating"+_rating.toString());
-            // print("review"+_rating.toString());
-          },
-        ),
+          onPressed: ratingChanged?() {
+
+              context.read<RatePropertyBloc>().add(RatePropertyApiEvent(rate: _rating.toString(), propertyId: widget.propertyID,review:reviewController.text ));
+
+          }:null,
+        );
+  },
+),
       ],
     );
   }

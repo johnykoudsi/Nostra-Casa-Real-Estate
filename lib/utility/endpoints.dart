@@ -42,5 +42,7 @@ class EndPoints{
   static String editCommercialProperty(int id) => "/commercials/$id";
   static String editResidentialProperty(int id) => "/residentials/$id";
 
+  static String rateProperty(int id) => "/properties/$id/rate";
+
 
 }

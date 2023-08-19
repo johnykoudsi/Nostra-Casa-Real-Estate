@@ -1,5 +1,7 @@
 
 
+import 'dart:convert';
+
 import '../../business_logic/my_property_action/my_property_action_bloc.dart';
 import '../../utility/endpoints.dart';
 import '../../utility/enums.dart';
@@ -44,6 +46,7 @@ class PropertyActionService{
       return EndPoints.editCommercialProperty(event.propertyId);
     }
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      body: jsonEncode(event.toMapBody()),
         url:getEndPoint(),
         useUserToken: true,
         crud: "PUT"

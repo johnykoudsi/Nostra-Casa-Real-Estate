@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/promote_to_agency/promote_to_agency_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/elevated_button_widget.dart';
@@ -201,9 +200,11 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
             builder: (context, state) {
               return BlocBuilder<GoogleMapsBloc, GoogleMapsState>(
                 builder: (context, locationState) {
+                  if (state is PromoteToAgencyLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
                   return ElevatedButtonWidget(
                     title: "Request Promotion".tr(),
-                    isLoading: state is PromoteToAgencyLoading,
                     onPressed: isInfoCompleted(locationState)
                         ? () {
                             if (locationState is GoogleMapsPinSelected) {

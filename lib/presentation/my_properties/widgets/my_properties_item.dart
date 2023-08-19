@@ -42,72 +42,74 @@ class MyPropertyItemWidget extends StatelessWidget {
             );
           }
         },
-        child: Container(
-          decoration: BoxDecoration(
-            color: (index % 2 == 1)
-                ? AppStyle.kBackGroundColor
-                : AppStyle.kLightGrey,
-          ),
-          child: Padding(
-            padding: EdgeInsets.only(
-                left: screenWidth * 0.038,
-                right: screenWidth * 0.038,
-                top: screenHeight * 0.02,
-                bottom: screenHeight * 0.02),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  width: screenWidth * 0.35,
-                  height: screenHeight * 0.12,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: FadeInImage(
-                      placeholder: const AssetImage(AppAssets.greyLogo),
-                      image: NetworkImage(
-                          property.media.isNotEmpty ? property.media[0] : ""),
-                      fit: BoxFit.cover,
-                      imageErrorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                          AppAssets.greyLogo,
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: screenWidth * 0.02,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Damascus,Syria",
-                        style: Theme.of(context).textTheme.headline4,
-                      ),
-                      Text(property.name,
-                          style: Theme.of(context).textTheme.headline5),
-                      Text(
-                        "${NumberFormat.decimalPattern().format(property.price)} SYP",
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                    ],
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: BlocBuilder<MyPropertyActionBloc, MyPropertyActionState>(
+          builder: (context, state) {
+            if (state is MyPropertyActionLoading) {
+              return MyPropertiesShimmer(index: index);
+            }
+            return Container(
+              decoration: BoxDecoration(
+                color: (index % 2 == 1)
+                    ? AppStyle.kBackGroundColor
+                    : AppStyle.kLightGrey,
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: screenWidth * 0.038,
+                    right: screenWidth * 0.038,
+                    top: screenHeight * 0.02,
+                    bottom: screenHeight * 0.02),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    BlocBuilder<MyPropertyActionBloc, MyPropertyActionState>(
-                      builder: (context, state) {
-                        if (state is MyPropertyActionLoading) {
-                          return CircularProgressIndicator();
-                        }
-                        return RoundedElevatedButton(
+                    Container(
+                      width: screenWidth * 0.35,
+                      height: screenHeight * 0.12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: FadeInImage(
+                          placeholder: const AssetImage(AppAssets.greyLogo),
+                          image: NetworkImage(property.media.isNotEmpty
+                              ? property.media[0]
+                              : ""),
+                          fit: BoxFit.cover,
+                          imageErrorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              AppAssets.greyLogo,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: screenWidth * 0.02,
+                    ),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Damascus,Syria",
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          Text(property.name,
+                              style: Theme.of(context).textTheme.headline5),
+                          Text(
+                            "${NumberFormat.decimalPattern().format(property.price)} SYP",
+                            style: Theme.of(context).textTheme.headline5,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+                        RoundedElevatedButton(
                           onTap: () {
                             DialogsWidgetsYesNo.showYesNoDialog(
                                 title:
@@ -132,15 +134,9 @@ class MyPropertyItemWidget extends StatelessWidget {
                           iconData: Icons.delete_forever,
                           iconColor: Colors.red,
                           backgroundColor: AppStyle.kBackGroundColor,
-                        );
-                      },
-                    ),
-                    BlocBuilder<MyPropertyActionBloc, MyPropertyActionState>(
-                      builder: (context, state) {
-                        if(state is MyPropertyActionLoading){
-                          return CircularProgressIndicator();
-                        }
-                        return RoundedElevatedButton(
+                        ),
+
+                        RoundedElevatedButton(
                           onTap: () {
                             priceController.text = property.price.toString();
                             DialogsWidgetsYesNo.textFieldDialog(
@@ -149,34 +145,35 @@ class MyPropertyItemWidget extends StatelessWidget {
                               title: "Please edit your property price".tr(),
                               operationName: "Edit".tr(),
                               onYes: () {
+                                Navigator.pop(context);
                                 context.read<MyPropertyActionBloc>().add(
                                     EditPropertyEvent(
                                         propertyType: property.propertyType,
-                                        propertyId:
-                                            changePropertyIdToPropertyTypeId(
+                                        propertyId: changePropertyIdToPropertyTypeId(
                                                 property),
-                                        price: double.parse(
-                                            priceController.text)));
+                                        price:
+                                            priceController.text));
                               },
                             );
                           },
                           iconData: Icons.edit,
                           iconColor: Colors.black45,
                           backgroundColor: AppStyle.kBackGroundColor,
-                        );
-                      },
-                    ),
-                    RoundedElevatedButton(
-                      onTap: () {},
-                      iconData: Icons.sync_alt_sharp,
-                      iconColor: Colors.black45,
-                      backgroundColor: AppStyle.kBackGroundColor,
+                        ),
+
+                        RoundedElevatedButton(
+                          onTap: () {},
+                          iconData: Icons.sync_alt_sharp,
+                          iconColor: Colors.black45,
+                          backgroundColor: AppStyle.kBackGroundColor,
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         ),
       ),
     );

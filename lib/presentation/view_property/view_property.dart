@@ -227,7 +227,7 @@ class ViewProperty extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
-                      const PropertyRating(),
+                       PropertyRating(propertyID: property.id,),
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),

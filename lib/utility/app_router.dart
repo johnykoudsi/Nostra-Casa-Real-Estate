@@ -7,6 +7,7 @@ import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
 import 'package:nostra_casa/business_logic/notifications/notifications_bloc.dart';
+import 'package:nostra_casa/business_logic/rate_property/rate_property_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/data/models/properties_model.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
@@ -44,142 +45,150 @@ class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       switch (settings.name) {
-        case AppRoutes.splashScreen:
-          return const SplashScreen();
+      case AppRoutes.splashScreen:
+      return const SplashScreen();
 
-        case AppRoutes.welcome:
-          return const WelcomeScreen();
+      case AppRoutes.welcome:
+      return const WelcomeScreen();
 
-        case AppRoutes.policy:
-          return Policy(title: 'Usage and Privacy Policy');
-        case AppRoutes.signup:
-          return const SignUpScreen(title: 'Welcome');
+      case AppRoutes.policy:
+      return Policy(title: 'Usage and Privacy Policy');
+      case AppRoutes.signup:
+      return const SignUpScreen(title: 'Welcome');
 
-        case AppRoutes.bottomNavBar:
-          return const BottomNavBar();
+      case AppRoutes.bottomNavBar:
+      return const BottomNavBar();
 
-        case AppRoutes.login:
-          return const LoginScreen();
+      case AppRoutes.login:
+      return const LoginScreen();
 
-        case AppRoutes.verificationCode:
-          SignUpEvent args = settings.arguments as SignUpEvent;
-          return CodeVerificationScreenPage(signUpEvent: args);
+      case AppRoutes.verificationCode:
+      SignUpEvent args = settings.arguments as SignUpEvent;
+      return CodeVerificationScreenPage(signUpEvent: args);
 
-        case AppRoutes.myProfile:
-          return const MoreScreen();
+      case AppRoutes.myProfile:
+      return const MoreScreen();
 
-        case AppRoutes.addPropertyWelcome:
-          return const WelcomeStep();
+      case AppRoutes.addPropertyWelcome:
+      return const WelcomeStep();
 
-        case AppRoutes.notifications:
-          return BlocProvider(
-            create: (context) =>
-                NotificationsBloc()..add(ChangeToLoadingNotificatiosApiEvent()),
-            child: Notifications(),
-          );
+      case AppRoutes.notifications:
+      return BlocProvider(
+      create: (context) =>
+      NotificationsBloc()..add(ChangeToLoadingNotificatiosApiEvent()),
+      child: Notifications(),
+      );
 
-        case AppRoutes.editProfile:
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => EditUserBloc(),
-              ),
-            ],
-            child: const EditProfile(),
-          );
-        case AppRoutes.addProperty:
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => AddPropertyBloc(),
-              ),
-              BlocProvider(
-                create: (context) =>
-                    AmenityBloc()..add(ChangeToLoadingApiEvent()),
-              ),
-              BlocProvider(
-                create: (context) =>
-                    TagBloc()..add(ChangeToLoadingTagApiEvent()),
-              ),
-              BlocProvider(
-                create: (context) => CountryBloc()..add(GetCountryCityEvent()),
-              ),
-            ],
-            child: const AddPropertyHome(),
-          );
-        case AppRoutes.aboutUs:
-          return const AboutUs();
+      case AppRoutes.editProfile:
+      return MultiBlocProvider(
+      providers: [
+      BlocProvider(
+      create: (context) => EditUserBloc(),
+      ),
+      ],
+      child: const EditProfile(),
+      );
+      case AppRoutes.addProperty:
+      return MultiBlocProvider(
+      providers: [
+      BlocProvider(
+      create: (context) => AddPropertyBloc(),
+      ),
+      BlocProvider(
+      create: (context) =>
+      AmenityBloc()..add(ChangeToLoadingApiEvent()),
+      ),
+      BlocProvider(
+      create: (context) =>
+      TagBloc()..add(ChangeToLoadingTagApiEvent()),
+      ),
+      BlocProvider(
+      create: (context) => CountryBloc()..add(GetCountryCityEvent()),
+      ),
+      ],
+      child: const AddPropertyHome(),
+      );
+      case AppRoutes.aboutUs:
+      return const AboutUs();
 
-        case AppRoutes.viewProperty:
-          Property args = settings.arguments as Property;
-          return BlocProvider(
-            create: (context) => OnePropertyBloc()
-              ..add(GetPropertyFavouriteEvent(productObjectId: args.id)),
-            child: ViewProperty(
-              property: args,
-            ),
-          );
+      case AppRoutes.viewProperty:
+      Property args = settings.arguments as Property;
+      return MultiBlocProvider(
+      providers:[
+      BlocProvider(
+      create: (context) => OnePropertyBloc()
+      ..add(GetPropertyFavouriteEvent(productObjectId: args.id)),
+      ),
+        BlocProvider(
+          create: (context) => RatePropertyBloc(),
+        ),
+      ],
 
-        case AppRoutes.reviewProperty:
-          AddPropertyState args = settings.arguments as AddPropertyState;
-          return BlocProvider(
-            create: (context) => SendPropertyBloc(),
-            child: ReviewProperty(addPropertyState: args),
-          );
+      child: ViewProperty(
+      property: args,
+      ),
+      );
 
-        case AppRoutes.homePage:
-          return const Explore();
+      case AppRoutes.reviewProperty:
+      AddPropertyState args = settings.arguments as AddPropertyState;
+      return BlocProvider(
+      create: (context) => SendPropertyBloc(),
+      child: ReviewProperty(addPropertyState: args),
+      );
 
-        case AppRoutes.virtualReality:
-          return const VirtualRealityScreen();
+      case AppRoutes.homePage:
+      return const Explore();
 
-        case AppRoutes.myProperties:
-          return BlocProvider(
-            create: (context) => MyPropertyActionBloc(),
-            child: MyProperties(),
-          );
+      case AppRoutes.virtualReality:
+      return const VirtualRealityScreen();
 
-        case AppRoutes.viewAgency:
-          return const ViewAgency();
+      case AppRoutes.myProperties:
+      return BlocProvider(
+      create: (context) => MyPropertyActionBloc(),
+      child: MyProperties(),
+      );
 
-        case AppRoutes.staggeredImagesView:
-          List<String> args = settings.arguments as List<String>;
-          return ImagesStaggeredView(images: args);
+      case AppRoutes.viewAgency:
+      return const ViewAgency();
 
-        case AppRoutes.streetViewMaps:
-          LatLng args = settings.arguments as LatLng;
-          return StreetViewPanoramaInitDemo(
-            initial: args,
-          );
+      case AppRoutes.staggeredImagesView:
+      List<String> args = settings.arguments as List<String>;
+      return ImagesStaggeredView(images: args);
 
-        case AppRoutes.welcomeToPromote:
-          return BlocProvider(
-            create: (context) =>
-                AgencyPromotionStatusBloc()..add(GetPromotionStatusEvent()),
-            child: const WelcomeToPromote(),
-          );
-        case AppRoutes.promoteToAgency:
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => GoogleMapsBloc(),
-              ),
-              BlocProvider(create: (context) => PromoteToAgencyBloc())
-            ],
-            child: const PromoteToAgency(),
-          );
-        // case AppRoutes.addAgencyLocation:
-        //   return const AddAgencyLocation();
+      case AppRoutes.streetViewMaps:
+      LatLng args = settings.arguments as LatLng;
+      return StreetViewPanoramaInitDemo(
+      initial: args,
+      );
 
-        default:
-          return const Scaffold(
-            body: Center(
-              child: Text(
-                'Check Named Route',
-                style: TextStyle(fontSize: 30, color: Colors.black),
-              ),
-            ),
-          );
+      case AppRoutes.welcomeToPromote:
+      return BlocProvider(
+      create: (context) =>
+      AgencyPromotionStatusBloc()..add(GetPromotionStatusEvent()),
+      child: const WelcomeToPromote(),
+      );
+      case AppRoutes.promoteToAgency:
+      return MultiBlocProvider(
+      providers: [
+      BlocProvider(
+      create: (context) => GoogleMapsBloc(),
+      ),
+      BlocProvider(create: (context) => PromoteToAgencyBloc())
+      ],
+      child: const PromoteToAgency(),
+      );
+      // case AppRoutes.addAgencyLocation:
+      //   return const AddAgencyLocation();
+
+      default:
+      return const Scaffold(
+      body: Center(
+      child: Text(
+      'Check Named Route',
+      style: TextStyle(fontSize: 30, color: Colors.black),
+      ),
+      ),
+      );
       }
     });
   }

@@ -19,8 +19,14 @@ class EditPropertyEvent extends MyPropertyActionEvent{
   EditPropertyEvent({required this.propertyType,required this.propertyId,required this.price});
   int propertyId;
   PropertyType propertyType;
-  double price;
+  String price;
+  Map<String, dynamic> toMapBody() {
+    Map<String, String> map = {
+      "price": price,
+    };
 
+    return map;
+  }
   @override
   List<Object?> get props => [propertyType,propertyId,price];
 }
