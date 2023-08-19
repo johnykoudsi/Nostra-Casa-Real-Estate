@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/add_to_favorite/add_favorite_bloc.dart';
+import 'package:nostra_casa/business_logic/my_rating/my_rating_bloc.dart';
 import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/data/models/special_attributes.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/property_rating.dart';
@@ -57,6 +58,7 @@ class ViewProperty extends StatelessWidget {
     if (userState is UserLoggedState) {
       myId = userState.user.user.id;
     }
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -226,29 +228,39 @@ class ViewProperty extends StatelessWidget {
                           userInfo: property.userInfo!,
                         ),
                       const Spacing(),
-
-                      Visibility(
-                        visible: userIsLoggedIn(context)&&myId!=property.userInfo!.id,
-                        child: Column(
-                          children: [
-                            Text(
-                              "Feel free to rate this property".tr(),
-                              style: Theme.of(context).textTheme.headline4,
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.02,
-                            ),
-                            PropertyRating(
-                              propertyID: property.id,
-                            ),
-                            SizedBox(
-                              height: screenHeight * 0.02,
-                            ),
-                            const Spacing(),
-                          ],
-                        ),
+                      BlocBuilder<MyRatingBloc, MyRatingState>(
+                        builder: (context, state) {
+                          if (state is MyRatingLoading) {
+                            return const Center(child: CircularProgressIndicator());
+                          }
+                          if (state is MyRatingDone) {
+                            if (state.isRated == true) {
+                              return const Text("");
+                            }else{return Visibility(
+                              visible: userIsLoggedIn(context) &&
+                                  myId != property.userInfo!.id,
+                              child: Column(
+                                children: [
+                                  Text(
+                                    "Feel free to rate this property".tr(),
+                                    style: Theme.of(context).textTheme.headline4,
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * 0.02,
+                                  ),
+                                  PropertyRating(
+                                    propertyID: property.id,
+                                  ),
+                                  SizedBox(
+                                    height: screenHeight * 0.02,
+                                  ),
+                                  const Spacing(),
+                                ],
+                              ),
+                            );}
+                          }else{return const Text("");}
+                        },
                       ),
-
                       Text(
                         "Other people reviews".tr(),
                         style: Theme.of(context).textTheme.headline4,
@@ -256,7 +268,9 @@ class ViewProperty extends StatelessWidget {
                       SizedBox(
                         height: screenHeight * 0.02,
                       ),
-                       ReviewsList(propertyId: property.id,),
+                      ReviewsList(
+                        propertyId: property.id,
+                      ),
                     ],
                   ),
                 ),

@@ -7,6 +7,7 @@ import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/business_logic/get_property_reviews/get_property_reviews_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
+import 'package:nostra_casa/business_logic/my_rating/my_rating_bloc.dart';
 import 'package:nostra_casa/business_logic/notifications/notifications_bloc.dart';
 import 'package:nostra_casa/business_logic/rate_property/rate_property_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
@@ -126,6 +127,9 @@ class AppRouter {
         ),
         BlocProvider(
           create: (context) => GetPropertyReviewsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => MyRatingBloc()..add(GetMyRatingApiEvent(propertyId: args.id)),
         ),
       ],
 
