@@ -1,29 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nostra_casa/business_logic/user/user_bloc.dart';
-import 'package:nostra_casa/utility/constant_logic_validations.dart';
-
+import 'package:nostra_casa/data/models/user_model.dart';
+import 'package:nostra_casa/utility/enums.dart';
 import '../../utility/app_assets.dart';
+import '../../utility/app_routes.dart';
 import '../../utility/app_style.dart';
+import '../map_location_square_widget/map_location_widget.dart';
 import '../view_property/widgets/spacing.dart';
 import '../view_property/widgets/user_info_part.dart';
 
-class ViewAgency extends StatefulWidget {
-  const ViewAgency({Key? key}) : super(key: key);
-
-  @override
-  State<ViewAgency> createState() => _ViewAgencyState();
-}
-
-class _ViewAgencyState extends State<ViewAgency> {
+class ViewAgency extends StatelessWidget {
+  const ViewAgency({required this.userInfo,Key? key}) : super(key: key);
+ final UserInfo userInfo;
   @override
   Widget build(BuildContext context) {
-    var userInfo;
-    final userState = globalUserBloc.state;
-    if(userState is UserLoggedState){
-      userInfo = userState.user.user;
-    }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -56,22 +47,40 @@ class _ViewAgencyState extends State<ViewAgency> {
                     fit: BoxFit.cover,
                   )),
             ),
-            SizedBox(
-              height: screenHeight * 0.02,
-            ),
-            Row(
-              children: [
-              SvgPicture.asset(AppAssets.badge),
-                Text(
-                  "The Future Agency",
-                  style: Theme.of(context).textTheme.headline4,
-                ),
-              ],
-            ),
               UserInfoPart(
                 title: "Agency Info".tr(),
                 userInfo: userInfo,
+                fromViewProperty: false,
+
               ),
+            const Spacing(),
+            Text(
+              "Agency Location".tr(),
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            SizedBox(
+              height: screenHeight * 0.02,
+            ),
+            Stack(
+              children: [
+                MapLocationSquareWidget(
+                  latLng: userInfo.agencyModel!.latLng,
+                  propertyType: PropertyType.commercial,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                        AppRoutes.streetViewMaps,
+                        arguments: userInfo.agencyModel!.latLng);
+                  },
+                  child: Container(
+                    height: 150,
+                    width: screenWidth,
+                    color: Colors.white10,
+                  ),
+                )
+              ],
+            ),
             const Spacing(),
           ],
         ),

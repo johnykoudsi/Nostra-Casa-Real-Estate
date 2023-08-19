@@ -200,11 +200,9 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
             builder: (context, state) {
               return BlocBuilder<GoogleMapsBloc, GoogleMapsState>(
                 builder: (context, locationState) {
-                  if (state is PromoteToAgencyLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
                   return ElevatedButtonWidget(
                     title: "Request Promotion".tr(),
+                    isLoading:state is PromoteToAgencyLoading,
                     onPressed: isInfoCompleted(locationState)
                         ? () {
                             if (locationState is GoogleMapsPinSelected) {

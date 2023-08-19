@@ -10,6 +10,7 @@ import 'package:nostra_casa/business_logic/notifications/notifications_bloc.dart
 import 'package:nostra_casa/business_logic/rate_property/rate_property_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
 import 'package:nostra_casa/data/models/properties_model.dart';
+import 'package:nostra_casa/data/models/user_model.dart';
 import 'package:nostra_casa/presentation/add_property/add_property_home.dart';
 import 'package:nostra_casa/presentation/edit_profile/edit_profile.dart';
 import 'package:nostra_casa/presentation/more/more_screen.dart';
@@ -145,11 +146,12 @@ class AppRouter {
       case AppRoutes.myProperties:
       return BlocProvider(
       create: (context) => MyPropertyActionBloc(),
-      child: MyProperties(),
+      child: const MyProperties(),
       );
 
       case AppRoutes.viewAgency:
-      return const ViewAgency();
+        UserInfo args = settings.arguments as UserInfo;
+        return ViewAgency(userInfo: args,);
 
       case AppRoutes.staggeredImagesView:
       List<String> args = settings.arguments as List<String>;

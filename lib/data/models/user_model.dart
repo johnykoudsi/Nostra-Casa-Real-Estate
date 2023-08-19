@@ -125,12 +125,12 @@ class UserInfo {
 
 class AgencyModel {
   int id;
-  LatLng? latLng;
+  LatLng latLng;
   num rate;
 
   AgencyModel({
     required this.id,
-    this.latLng,
+    this.latLng = const LatLng(0,0),
     this.rate = 0,
   });
 
@@ -144,7 +144,7 @@ class AgencyModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "rate": rate,
-        "latitude": latLng?.latitude ?? 0,
-        "longitude": latLng?.longitude ?? 0,
+        "latitude": latLng.latitude,
+        "longitude": latLng.longitude,
       };
 }

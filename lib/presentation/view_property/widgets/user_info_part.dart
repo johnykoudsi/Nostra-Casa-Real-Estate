@@ -6,39 +6,33 @@ import 'package:flutter_svg/svg.dart';
 import 'package:nostra_casa/data/models/user_model.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
+import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class UserInfoPart extends StatelessWidget {
-  UserInfoPart({required this.userInfo, Key? key,this.title}) : super(key: key);
+  UserInfoPart({this.fromViewProperty = true,required this.userInfo, Key? key, this.title})
+      : super(key: key);
 
   UserInfo userInfo;
   String? title;
+  bool fromViewProperty;
   void openWhatsapp(
       {required BuildContext context, required String number}) async {
     var whatsapp = number; //+92xx enter like this
-    var whatsappURlAndroid = "whatsapp://send?phone=" + whatsapp;
+    var whatsappURlAndroid = "whatsapp://send?phone=$whatsapp";
     var whatsappURLIos = "https://wa.me/$whatsapp}";
-    if (Platform.isIOS) {
-      // for iOS phone only
-      if (await canLaunchUrl(Uri.parse(whatsappURLIos))) {
-        await launchUrl(Uri.parse(
-          whatsappURLIos,
-        ));
-      } else {
-        DialogsWidgetsSnackBar.showScaffoldSnackBar(title: "Whatsapp not installed", context: context);
-      }
-    } else {
-      // android , web
-      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
-        await launchUrl(Uri.parse(whatsappURlAndroid));
-      } else {
-        DialogsWidgetsSnackBar.showScaffoldSnackBar(title: "Whatsapp not installed", context: context);
 
-      }
+    if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+      await launchUrl(Uri.parse(whatsappURlAndroid));
+    } else {
+      DialogsWidgetsSnackBar.showScaffoldSnackBar(
+          title: "Whatsapp not installed", context: context);
     }
+
   }
+
   @override
   Widget build(BuildContext context) {
     print(userInfo.agencyModel?.latLng.toString());
@@ -55,17 +49,31 @@ class UserInfoPart extends StatelessWidget {
         SizedBox(
           height: screenHeight * 0.02,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(userInfo.name ?? "",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4!
-                    .copyWith(fontWeight: AppFontWeight.medium)),
-            Text(userInfo.mobile ?? "",
-                style: Theme.of(context).textTheme.headline5),
-          ],
+        TextButton(
+          onPressed: userInfo.agencyModel != null && fromViewProperty
+              ? () {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes.viewAgency, arguments: userInfo);
+                }
+              : null,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  if (userInfo.agencyModel != null)
+                    SvgPicture.asset(AppAssets.badge),
+                  Text(userInfo.name,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline4!
+                          .copyWith(fontWeight: AppFontWeight.bold)),
+                ],
+              ),
+              Text(userInfo.mobile ?? "",
+                  style: Theme.of(context).textTheme.headline5),
+            ],
+          ),
         ),
         const SizedBox(
           height: 18,
@@ -84,8 +92,7 @@ class UserInfoPart extends StatelessWidget {
               oneContactInfoWidget(
                 onPressed: () {
                   try {
-                    launchUrl(Uri(
-                        scheme: "tel", path: userInfo.mobile));
+                    launchUrl(Uri(scheme: "tel", path: userInfo.mobile));
                     {
                       throw 'Could not launch ${userInfo.mobile}';
                     }
@@ -99,35 +106,33 @@ class UserInfoPart extends StatelessWidget {
               oneContactInfoWidget(
                 onPressed: () {
                   openWhatsapp(
-                      context: context,
-                      number: userInfo.mobile,
+                    context: context,
+                    number: userInfo.mobile,
                   );
                 },
                 svg: AppAssets.whatsapp,
                 title: "WhatsApp",
               ),
-              if(userInfo.facebook.isNotEmpty)
-              oneContactInfoWidget(
-                onPressed: () {
-                  try {
-                    launchUrl(
-                        Uri(
-                        scheme: "https",
-                        path: userInfo.facebook,
-                    ),
-                      mode: LaunchMode.externalApplication
-                    );
-                    {
-                      throw 'Could not launch ${userInfo.facebook}';
+              if (userInfo.facebook.isNotEmpty)
+                oneContactInfoWidget(
+                  onPressed: () {
+                    try {
+                      launchUrl(
+                          Uri(
+                            scheme: "https",
+                            path: userInfo.facebook,
+                          ),
+                          mode: LaunchMode.externalApplication);
+                      {
+                        throw 'Could not launch ${userInfo.facebook}';
+                      }
+                    } catch (e) {
+                      print(e);
                     }
-                  } catch (e) {
-                    print(e);
-                  }
-                },
-                svg: AppAssets.facebook,
-                title: "Facebook",
-              ),
-
+                  },
+                  svg: AppAssets.facebook,
+                  title: "Facebook",
+                ),
             ],
           ),
         ),

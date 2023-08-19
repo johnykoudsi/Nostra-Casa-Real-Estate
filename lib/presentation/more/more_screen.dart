@@ -202,19 +202,19 @@ class _MoreScreenState extends State<MoreScreen> {
                                 context: context);
                           },
                           color: AppStyle.kBackGroundColor),
-                    Visibility(
-                      visible: userIsLoggedIn(context),
-                      child: MyProfileItem(
-                        svgPath: AppAssets.delete,
-                        name: "Delete Account".tr(),
-                        onPressed: () {
-                          Navigator.pushNamed(context, AppRoutes.viewAgency);
-                          //todo delete account
-                        },
-                        color: Colors.white,
-                        isDelete: true,
-                      ),
-                    ),
+                    // Visibility(
+                    //   visible: userIsLoggedIn(context),
+                    //   child: MyProfileItem(
+                    //     svgPath: AppAssets.delete,
+                    //     name: "Delete Account".tr(),
+                    //     onPressed: () {
+                    //       Navigator.pushNamed(context, AppRoutes.viewAgency);
+                    //       //todo delete account
+                    //     },
+                    //     color: Colors.white,
+                    //     isDelete: true,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
