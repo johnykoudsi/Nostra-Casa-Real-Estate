@@ -99,6 +99,7 @@ class _CodeVerificationScreenPagePageState
                 pinAnimationType: PinAnimationType.slide,
                 controller: controller,
                 focusNode: focusNode,
+                androidSmsAutofillMethod: AndroidSmsAutofillMethod.smsUserConsentApi,
                 defaultPinTheme: PinPutTheme.defaultPinTheme,
                 showCursor: true,
                 cursor: PinPutTheme.cursor,
