@@ -52,7 +52,11 @@ class ViewProperty extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool loading = false;
-
+    var myId;
+    final userState = globalUserBloc.state;
+    if (userState is UserLoggedState) {
+      myId = userState.user.user.id;
+    }
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -224,7 +228,7 @@ class ViewProperty extends StatelessWidget {
                       const Spacing(),
 
                       Visibility(
-                        visible: userIsLoggedIn(context),
+                        visible: userIsLoggedIn(context)&&myId!=property.userInfo!.id,
                         child: Column(
                           children: [
                             Text(

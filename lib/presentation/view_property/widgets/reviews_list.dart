@@ -5,6 +5,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nostra_casa/business_logic/get_property_reviews/get_property_reviews_bloc.dart';
 import 'package:nostra_casa/data/models/property_reviews_model.dart';
 import 'package:nostra_casa/presentation/global_widgets/shimmer.dart';
+import 'package:nostra_casa/presentation/view_property/widgets/reviews_list_shimmer.dart';
 
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
@@ -62,7 +63,7 @@ class _ReviewsListState extends State<ReviewsList> {
           if (state is GetPropertyReviewsLoadedState) {
             if (state.propertyReviews.isEmpty) {
               return SomethingWrongWidget(
-                title: "No notification found !".tr(),
+                title: "No reviews found !".tr(),
                 svgPath: AppAssets.search,
                 elevatedButtonWidget: ElevatedButtonWidget(
                   title: "Refresh".tr(),
@@ -80,7 +81,7 @@ class _ReviewsListState extends State<ReviewsList> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 if (index >= state.propertyReviews.length) {
-                  return ShimmerLoader();
+                  return const ReviewsListShimmer();
                 }
                 return ReviewsItemwidget(
                   reviews: state.propertyReviews[index],
@@ -90,10 +91,16 @@ class _ReviewsListState extends State<ReviewsList> {
             );
           }
           if (state is GetPropertyReviewsInitial) {
-            return const Center(child: CircularProgressIndicator());
+            return ListView.builder(
+              itemCount: 3,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return const ReviewsListShimmer();
+              },
+            );
           }
           return SomethingWrongWidget(
-            title: "No notification found !".tr(),
+            title: "No reviews found !".tr(),
             svgPath: AppAssets.search,
             elevatedButtonWidget: ElevatedButtonWidget(
               title: "Refresh".tr(),
@@ -164,11 +171,11 @@ class ReviewsItemwidget extends StatelessWidget {
                     height: screenHeight * 0.01,
                   ),
                   Text(
-                    "Johny Koudsi",
+                    reviews.user.name,
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   Text(
-                    "3 months ago",
+                    "${reviews.createdAt.day}/${reviews.createdAt.month}/${reviews.createdAt.year}",
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ],

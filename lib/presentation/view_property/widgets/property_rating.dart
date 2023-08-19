@@ -7,15 +7,16 @@ import '../../global_widgets/custom_text_field.dart';
 import '../../global_widgets/elevated_button_widget.dart';
 
 class PropertyRating extends StatefulWidget {
-   PropertyRating({Key? key,required this.propertyID}) : super(key: key);
-int propertyID;
+  PropertyRating({Key? key, required this.propertyID}) : super(key: key);
+  int propertyID;
+
   @override
   State<PropertyRating> createState() => _PropertyRatingState();
 }
 
 class _PropertyRatingState extends State<PropertyRating> {
   double _rating = 0;
-  bool ratingChanged=false;
+  bool ratingChanged = false;
   TextEditingController reviewController = TextEditingController();
 
   @override
@@ -48,28 +49,33 @@ class _PropertyRatingState extends State<PropertyRating> {
           ),
           onRatingUpdate: (rating) {
             setState(() {
-              ratingChanged=true;
+              ratingChanged = true;
               _rating = rating;
             });
           },
           updateOnDrag: true,
         ),
-        SizedBox(height: screenHeight*0.03,),
+        SizedBox(
+          height: screenHeight * 0.03,
+        ),
         BlocBuilder<RatePropertyBloc, RatePropertyState>(
-  builder: (context, state) {
-    if(state is RatePropertyLoading){
-    return  const Center(child: CircularProgressIndicator());
-    }
-    return ElevatedButtonWidget(
-          title: "Submit".tr(),
-          onPressed: ratingChanged?() {
-
-              context.read<RatePropertyBloc>().add(RatePropertyApiEvent(rate: _rating.toString(), propertyId: widget.propertyID,review:reviewController.text ));
-
-          }:null,
-        );
-  },
-),
+          builder: (context, state) {
+            if (state is RatePropertyLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return ElevatedButtonWidget(
+              title: "Submit".tr(),
+              onPressed: ratingChanged
+                  ? () {
+                      context.read<RatePropertyBloc>().add(RatePropertyApiEvent(
+                          rate: _rating.toString(),
+                          propertyId: widget.propertyID,
+                          review: reviewController.text));
+                    }
+                  : null,
+            );
+          },
+        ),
       ],
     );
   }
