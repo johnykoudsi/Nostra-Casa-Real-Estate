@@ -40,6 +40,7 @@ import '../presentation/login_screen/login_screen.dart';
 import '../presentation/my_properties/my_properties.dart';
 import '../presentation/notifications/notifications.dart';
 import '../presentation/policy/policy.dart';
+import '../presentation/report_user_screen/report_user_screen.dart';
 import '../presentation/splash_screen/splash_screen.dart';
 import '../presentation/view_property/widgets/google_maps_street_view.dart';
 import '../presentation/view_property/widgets/images_staggered_view.dart';
@@ -193,7 +194,8 @@ class AppRouter {
           return const FavoriteScreen();
 
           case AppRoutes.reportScreen:
-          return const FavoriteScreen();
+            UserInfo args = settings.arguments as UserInfo;
+            return ReportUserScreen(userInfo: args,);
 
         default:
           return const Scaffold(

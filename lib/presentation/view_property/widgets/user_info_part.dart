@@ -12,6 +12,7 @@ import 'package:nostra_casa/utility/app_routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
+import '../../../utility/constant_logic_validations.dart';
 
 class UserInfoPart extends StatelessWidget {
   UserInfoPart(
@@ -54,7 +55,7 @@ class UserInfoPart extends StatelessWidget {
               title == null ? "" : title!,
               style: Theme.of(context).textTheme.headline4,
             ),
-            if(userInfo.id
+            if(userIsLoggedIn(context) &&userInfo.id
                 != (context.read<UserBloc>().state as UserLoggedState).user.user.id)
             TextButton(
               onPressed: () {
