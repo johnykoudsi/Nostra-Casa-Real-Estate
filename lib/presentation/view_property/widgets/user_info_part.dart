@@ -55,20 +55,22 @@ class UserInfoPart extends StatelessWidget {
               title == null ? "" : title!,
               style: Theme.of(context).textTheme.headline4,
             ),
-            if(userIsLoggedIn(context) &&userInfo.id
-                != (context.read<UserBloc>().state as UserLoggedState).user.user.id)
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.reportScreen);
-              },
-              child: Text(
-                "Report User",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6!
-                    .copyWith(color: AppStyle.redColor),
+            if (userIsLoggedIn(context) &&
+                userInfo.id !=
+                    (context.read<UserBloc>().state as UserLoggedState).user.user.id)
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(AppRoutes.reportScreen, arguments: userInfo);
+                },
+                child: Text(
+                  "Report User",
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline6!
+                      .copyWith(color: AppStyle.redColor),
+                ),
               ),
-            ),
           ],
         ),
         SizedBox(

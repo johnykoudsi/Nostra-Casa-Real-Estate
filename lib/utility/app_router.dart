@@ -5,6 +5,7 @@ import 'package:nostra_casa/business_logic/add_property_bloc/add_property_bloc.d
 import 'package:nostra_casa/business_logic/agency_promotion_status/agency_promotion_status_bloc.dart';
 import 'package:nostra_casa/business_logic/amenity_bloc/amenity_bloc.dart';
 import 'package:nostra_casa/business_logic/get_property_reviews/get_property_reviews_bloc.dart';
+import 'package:nostra_casa/business_logic/get_report_categories/report_categories_bloc.dart';
 import 'package:nostra_casa/business_logic/google_maps/google_maps_bloc.dart';
 import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
 import 'package:nostra_casa/business_logic/my_rating/my_rating_bloc.dart';
@@ -30,6 +31,7 @@ import '../business_logic/add_to_favorite/add_favorite_bloc.dart';
 import '../business_logic/country_bloc/country_bloc.dart';
 import '../business_logic/edit_user_bloc/edit_user_bloc.dart';
 import '../business_logic/promote_to_agency/promote_to_agency_bloc.dart';
+import '../business_logic/send_report_bloc/send_report_bloc.dart';
 import '../business_logic/tag_bloc/tag_bloc.dart';
 import '../business_logic/user/user_bloc.dart';
 import '../presentation/about_us/about_us.dart';
@@ -193,9 +195,22 @@ class AppRouter {
         case AppRoutes.favoriteScreen:
           return const FavoriteScreen();
 
-          case AppRoutes.reportScreen:
-            UserInfo args = settings.arguments as UserInfo;
-            return ReportUserScreen(userInfo: args,);
+        case AppRoutes.reportScreen:
+          UserInfo args = settings.arguments as UserInfo;
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (context) =>
+                    ReportCategoriesBloc()..add(GetReportCategoryEvent()),
+              ),
+              BlocProvider(
+                create: (context) => SendReportBloc(),
+              ),
+            ],
+            child: ReportUserScreen(
+              userInfo: args,
+            ),
+          );
 
         default:
           return const Scaffold(

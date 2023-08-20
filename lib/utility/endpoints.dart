@@ -23,6 +23,8 @@ class EndPoints{
   static const String nearbyProperties = "/properties/near-by-places";
 
   static const String country = "/regions/get-all";
+  static const String reportCategory = "/report-categories";
+  static const String reportUser = "/user/report-client";
 
   static const String addAgricultural = "/agriculturals";
   static const String addCommercial = "/commercials";
