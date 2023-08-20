@@ -80,6 +80,9 @@ class _CustomInsertNumberFieldState extends State<CustomInsertNumberField> {
                     //   FilteringTextInputFormatter.digitsOnly,
                     // ],
                     textAlign: TextAlign.center,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
                     keyboardType: TextInputType.number,
                     onChanged: widget.onChange,
                     controller: controller,
