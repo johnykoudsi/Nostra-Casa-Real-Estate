@@ -5,7 +5,7 @@ abstract class RatePropertyEvent extends Equatable {
 }
 class RatePropertyApiEvent extends RatePropertyEvent{
 
-  RatePropertyApiEvent({ this.review, required this.rate,required this.propertyId});
+  RatePropertyApiEvent({this.review,required this.rate,required this.propertyId});
   int propertyId;
   String? review;
   String rate;
@@ -15,7 +15,7 @@ class RatePropertyApiEvent extends RatePropertyEvent{
       "rate": rate.toString(),
       "review": review.toString(),
     };
-    json.removeWhere((key, value) => value==null||value ==""||value.isEmpty||value=="null");
+    json.removeWhere((key, value) => value ==""||value.isEmpty||value=="null");
     return json;
   }
 

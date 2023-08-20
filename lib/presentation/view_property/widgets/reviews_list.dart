@@ -4,9 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nostra_casa/business_logic/get_property_reviews/get_property_reviews_bloc.dart';
 import 'package:nostra_casa/data/models/property_reviews_model.dart';
-import 'package:nostra_casa/presentation/global_widgets/shimmer.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/reviews_list_shimmer.dart';
-
 import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 import '../../global_widgets/elevated_button_widget.dart';
@@ -57,7 +55,7 @@ class _ReviewsListState extends State<ReviewsList> {
     double screenHeight = MediaQuery.of(context).size.height;
     return SizedBox(
       width: screenWidth,
-      height: screenHeight * 0.3,
+     // height: screenHeight * 0.3,
       child: BlocBuilder<GetPropertyReviewsBloc, GetPropertyReviewsState>(
         builder: (context, state) {
           if (state is GetPropertyReviewsLoadedState) {
@@ -73,35 +71,38 @@ class _ReviewsListState extends State<ReviewsList> {
                 ),
               );
             }
-            return ListView.builder(
-              controller: scrollController,
-              itemCount: state.hasReachedMax
-                  ? state.propertyReviews.length
-                  : state.propertyReviews.length + 1,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                if (index >= state.propertyReviews.length) {
-                  return const ReviewsListShimmer();
-                }
-                return ReviewsItemwidget(
-                  reviews: state.propertyReviews[index],
-                  index: index,
-                );
-              },
+            return SizedBox(
+              height: screenHeight * 0.25,
+              child: ListView.builder(
+                controller: scrollController,
+                itemCount: state.hasReachedMax
+                    ? state.propertyReviews.length
+                    : state.propertyReviews.length + 1,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  if (index >= state.propertyReviews.length) {
+                    return const ReviewsListShimmer();
+                  }
+                  return ReviewsItemWidget(
+                    reviews: state.propertyReviews[index],
+                  );
+                },
+              ),
             );
           }
           if (state is GetPropertyReviewsInitial) {
-            return ListView.builder(
-              itemCount: 3,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (BuildContext context, int index) {
-                return const ReviewsListShimmer();
-              },
+            return SizedBox(
+              height: screenHeight * 0.25,
+              child: ListView.builder(
+                itemCount: 3,
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (BuildContext context, int index) {
+                  return const ReviewsListShimmer();
+                },
+              ),
             );
           }
           return SomethingWrongWidget(
-            title: "No reviews found !".tr(),
-            svgPath: AppAssets.search,
             elevatedButtonWidget: ElevatedButtonWidget(
               title: "Refresh".tr(),
               onPressed: () {
@@ -115,19 +116,17 @@ class _ReviewsListState extends State<ReviewsList> {
   }
 }
 
-class ReviewsItemwidget extends StatelessWidget {
-  ReviewsItemwidget({Key? key, required this.reviews, required this.index})
+class ReviewsItemWidget extends StatelessWidget {
+  ReviewsItemWidget({Key? key, required this.reviews})
       : super(key: key);
   PropertyReviewsModel reviews;
-  int index;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Padding(
-      padding:
-          EdgeInsets.only(left: screenWidth * 0.03, right: screenWidth * 0.03),
+      padding: EdgeInsets.only(left: screenWidth * 0.03, right: screenWidth * 0.03),
       child: Container(
         height: screenHeight * 0.2,
         width: screenWidth * 0.65,
@@ -166,16 +165,17 @@ class ReviewsItemwidget extends StatelessWidget {
                 onRatingUpdate: (rat) {},
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(
                     height: screenHeight * 0.01,
                   ),
                   Text(
-                    reviews.user.name,
+                    reviews.user?.name??"",
                     style: Theme.of(context).textTheme.headline4,
                   ),
                   Text(
-                    "${reviews.createdAt.day}/${reviews.createdAt.month}/${reviews.createdAt.year}",
+                    DateFormat.yMd().format(reviews.createdAt!)??'',
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ],

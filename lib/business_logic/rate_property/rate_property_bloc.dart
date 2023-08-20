@@ -15,7 +15,7 @@ class RatePropertyBloc extends Bloc<RatePropertyEvent, RatePropertyState> {
       emit(RatePropertyLoading());
 
       final response =
-      await RatePropertyService.ratePropertyService(event: event);
+          await RatePropertyService.ratePropertyService(event: event);
 
       emit(RatePropertyStatus(helperResponse: response));
     });

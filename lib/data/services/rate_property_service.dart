@@ -14,15 +14,11 @@ class RatePropertyService{
   static Future ratePropertyService({
     required RatePropertyApiEvent event,
   }) async {
-    String getEndPoint(){
-      return EndPoints.rateProperty(event.propertyId);
-    }
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       body: jsonEncode(event.toJson()),
-        url:getEndPoint(),
+        url:EndPoints.rateProperty(event.propertyId),
         useUserToken: true,
     );
-    print(helperResponse.response);
 
     return helperResponse;
 

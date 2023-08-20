@@ -29,7 +29,7 @@ class DialogsWidgetsSnackBar {
         ))
         .closed
         .then((value) {
-      return ScaffoldMessenger.of(context).clearSnackBars();
+      //return ScaffoldMessenger.of(context).clearSnackBars();
     });
   }
 

@@ -2,18 +2,27 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nostra_casa/business_logic/send_property_bloc/send_property_bloc.dart';
+import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
+import 'package:nostra_casa/presentation/review_property/widget/view_property_images_files.dart';
 import '../../business_logic/add_property_bloc/add_property_bloc.dart';
+import '../../utility/app_assets.dart';
+import '../../utility/app_routes.dart';
 import '../../utility/app_style.dart';
+import '../../utility/enums.dart';
 import '../global_widgets/elevated_button_widget.dart';
-import '../view_property/widgets/property_rating.dart';
+import '../map_location_square_widget/map_location_widget.dart';
 import '../view_property/widgets/spacing.dart';
+import '../view_property/widgets/user_info_part.dart';
+import '../view_property/widgets/view_property_amenities.dart';
+import '../view_property/widgets/view_property_attributes.dart';
+import '../view_property/widgets/view_property_images.dart';
 
 class ReviewProperty extends StatelessWidget {
   const ReviewProperty({required this.addPropertyState, Key? key})
       : super(key: key);
 
-  final AddPropertyState? addPropertyState;
+  final AddPropertyState addPropertyState;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,10 @@ class ReviewProperty extends StatelessWidget {
               children: [
                 ListView(
                   children: [
-                    //ViewPropertyImages(),
+                    ViewPropertyImagesFiles(
+                      files: addPropertyState.images,
+                      propertyService: addPropertyState.propertyService,
+                    ),
                     Padding(
                       padding: EdgeInsets.only(
                           left: screenWidth * 0.038,
@@ -48,33 +60,24 @@ class ReviewProperty extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Property Name",
+                            addPropertyState.title,
                             style: Theme.of(context).textTheme.headline2,
                           ),
-                          SizedBox(
-                            height: screenHeight * 0.02,
-                          ),
-                          Row(
-                            children: [
-                              const Icon(Icons.star),
-                              Text(
-                                "4.88",
-                                style: Theme.of(context).textTheme.headline5,
-                              ),
-                            ],
-                          ),
+
                           Text(
-                            "al-malki, Damascus, Syria",
+                            "${addPropertyState.city?.name} , ${addPropertyState.countryModel?.name}",
                             style: Theme.of(context).textTheme.headline5,
                           ),
                           Row(
                             children: [
                               Text(
-                                "90000000 sp",
+                                "${NumberFormat.decimalPattern().format(addPropertyState.price)} SYP",
                                 style: Theme.of(context).textTheme.headline5,
                               ),
                               Text(
-                                " month",
+                                propertyServicePriceUI.reverse[
+                                addPropertyState.propertyService] ??
+                                    '',
                                 style: Theme.of(context)
                                     .textTheme
                                     .headline5!
@@ -84,7 +87,7 @@ class ReviewProperty extends StatelessWidget {
                           ),
                           const Spacing(),
                           Text(
-                            "This house is so great you can see the whole city from the roof ",
+                            addPropertyState.description,
                             style: Theme.of(context)
                                 .textTheme
                                 .headline4!
@@ -98,28 +101,85 @@ class ReviewProperty extends StatelessWidget {
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
-                          //ViewPropertyAttributes(),
+                          ViewPropertyAttributes(
+                            abstractPropertyAttributes: addPropertyState.propertyAttributes!,
+                          ),
+                          if (addPropertyState.selectedAmenity.isNotEmpty)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Spacing(),
+                                Text(
+                                  "And in top of that".tr(),
+                                  style: Theme.of(context).textTheme.headline4,
+                                ),
+                                SizedBox(
+                                  height: screenHeight * 0.02,
+                                ),
+                                ViewPropertyAmenities(
+                                  amenities: addPropertyState.selectedAmenity,
+                                ),
+                              ],
+                            ),
                           const Spacing(),
                           Text(
-                            "And in top of that".tr(),
+                            "Enjoy Virtual Reality View".tr(),
                             style: Theme.of(context).textTheme.headline4,
                           ),
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
-                         // const ViewPropertyAmenities(),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushNamed(AppRoutes.virtualReality);
+                            },
+                            child: Container(
+                              height: 200,
+                              width: double.infinity,
+                              decoration: const BoxDecoration(
+                                  borderRadius: AppStyle.k15BorderRadius,
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      AppAssets.virtualReality,
+                                    ),
+                                    fit: BoxFit.fitWidth,
+                                  )),
+                            ),
+                          ),
                           const Spacing(),
                           Text(
-                            "Feel free to rate this property".tr(),
+                            "Property Location".tr(),
                             style: Theme.of(context).textTheme.headline4,
                           ),
                           SizedBox(
                             height: screenHeight * 0.02,
                           ),
+                          Stack(
+                            children: [
+                              MapLocationSquareWidget(
+                                latLng: addPropertyState.selectedLocation!,
+                                propertyType: addPropertyState.selectedPropertyType!,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(
+                                      AppRoutes.streetViewMaps,
+                                      arguments: addPropertyState.selectedLocation!);
+                                },
+                                child: Container(
+                                  height: 150,
+                                  width: screenWidth,
+                                  color: Colors.white10,
+                                ),
+                              )
+                            ],
+                          ),
+                            UserInfoPart(
+                              title: "Host Info".tr(),
+                              userInfo: (context.read<UserBloc>().state as UserLoggedState).user.user,
+                            ),
 
-                          SizedBox(
-                            height: screenHeight * 0.02,
-                          ),
                         ],
                       ),
                     ),
@@ -142,19 +202,6 @@ class ReviewProperty extends StatelessWidget {
                         Navigator.pop(context);
                       },
                     ),
-                    actions: [
-                      IconButton(
-                        icon: const CircleAvatar(
-                            backgroundColor: AppStyle.kBackGroundColor,
-                            child: Icon(
-                              Icons.favorite_outline_sharp,
-                              color: AppStyle.blackColor,
-                            )),
-                        onPressed: () {
-                          //todo add property to favorite
-                        },
-                      ),
-                    ],
                   ),
                 ),
               ],
@@ -173,7 +220,7 @@ class ReviewProperty extends StatelessWidget {
                     isLoading: state is SendPropertyLoading,
                     onPressed: () {
                       context.read<SendPropertyBloc>().add(SendPropertyApiEvent(
-                          addPropertyState: addPropertyState!));
+                          addPropertyState: addPropertyState));
                     },
                   ),
                 ],

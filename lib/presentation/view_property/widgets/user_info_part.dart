@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:nostra_casa/business_logic/user/user_bloc.dart';
 import 'package:nostra_casa/data/models/user_model.dart';
 import 'package:nostra_casa/presentation/global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import 'package:nostra_casa/presentation/view_property/widgets/spacing.dart';
@@ -12,7 +14,11 @@ import '../../../utility/app_assets.dart';
 import '../../../utility/app_style.dart';
 
 class UserInfoPart extends StatelessWidget {
-  UserInfoPart({this.fromViewProperty = true,required this.userInfo, Key? key, this.title})
+  UserInfoPart(
+      {this.fromViewProperty = true,
+      required this.userInfo,
+      Key? key,
+      this.title})
       : super(key: key);
 
   UserInfo userInfo;
@@ -30,7 +36,6 @@ class UserInfoPart extends StatelessWidget {
       DialogsWidgetsSnackBar.showScaffoldSnackBar(
           title: "Whatsapp not installed", context: context);
     }
-
   }
 
   @override
@@ -42,9 +47,28 @@ class UserInfoPart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Spacing(),
-        Text(
-          title == null ? "" : title!,
-          style: Theme.of(context).textTheme.headline4,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title == null ? "" : title!,
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            if(userInfo.id
+                != (context.read<UserBloc>().state as UserLoggedState).user.user.id)
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(AppRoutes.reportScreen);
+              },
+              child: Text(
+                "Report User",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6!
+                    .copyWith(color: AppStyle.redColor),
+              ),
+            ),
+          ],
         ),
         SizedBox(
           height: screenHeight * 0.02,

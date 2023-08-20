@@ -60,11 +60,9 @@ class _PropertyRatingState extends State<PropertyRating> {
         ),
         BlocBuilder<RatePropertyBloc, RatePropertyState>(
           builder: (context, state) {
-            if (state is RatePropertyLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
             return ElevatedButtonWidget(
               title: "Submit".tr(),
+              isLoading: state is RatePropertyLoading,
               onPressed: ratingChanged
                   ? () {
                       context.read<RatePropertyBloc>().add(RatePropertyApiEvent(

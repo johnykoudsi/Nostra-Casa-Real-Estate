@@ -26,6 +26,8 @@ class AppRoutes {
   static const String virtualReality="/v_r";
   static const String myProperties="/myProperties";
   static const String viewAgency="/viewAgency";
+  static const String favoriteScreen="/favoriteScreen";
+  static const String reportScreen="/reportScreen";
 
 
 

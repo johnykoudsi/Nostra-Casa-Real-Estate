@@ -115,7 +115,7 @@ class _MoreScreenState extends State<MoreScreen> {
                           svgPath: AppAssets.favorites,
                           name: "My Favorites".tr(),
                           onPressed: () {
-                            //todo navigate to my favorite
+                            Navigator.of(context).pushNamed(AppRoutes.favoriteScreen);
                           },
                           color: AppStyle.kBackGroundColor),
                     ),
