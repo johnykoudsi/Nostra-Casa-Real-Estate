@@ -2,11 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:nostra_casa/business_logic/add_to_favorite/add_favorite_bloc.dart';
 import 'package:nostra_casa/business_logic/my_property_action/my_property_action_bloc.dart';
 import 'package:nostra_casa/presentation/my_properties/widgets/my_properties_list.dart';
 import 'package:nostra_casa/presentation/my_properties/widgets/my_properties_shimmer.dart';
-
 import '../../business_logic/get_properties/get_all-properties_search_filter.dart';
 import '../../business_logic/get_properties/get_all_properties_bloc.dart';
 import '../../utility/app_assets.dart';
@@ -17,9 +15,7 @@ import '../explore/widgets/property_service_filter_widget.dart';
 import '../explore/widgets/property_type_filter_widget.dart';
 import '../explore/widgets/search_text_field.dart';
 import '../explore/widgets/sorts_filter_widget.dart';
-import '../global_widgets/dialogs_widgets/dialogs_snackBar.dart';
 import '../global_widgets/elevated_button_widget.dart';
-import '../global_widgets/property_widgets/property_shimmer.dart';
 import '../global_widgets/somthing_wrong.dart';
 
 class MyProperties extends StatefulWidget {

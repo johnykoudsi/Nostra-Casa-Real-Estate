@@ -17,7 +17,7 @@ class GetPropertyReviewsService {
       url: EndPoints.getPropertyReviews(
         propertyId: event.propertyId,
         page: event.reviewsSearchFilter.page,
-        limit: 2,
+        limit: kProductsGetLimit,
       ),
       useUserToken: true,
     );

@@ -20,15 +20,13 @@ class WelcomeToMyNotifications {
 }
 class NotificationModel {
   int id;
-  dynamic createdAt;
-  dynamic updatedAt;
+
   int userId;
   int notificationId;
   UserNotification notification;
 
   NotificationModel({
     required this.id,
-    required this.createdAt,
     required this.userId,
     required this.notificationId,
     required this.notification,
@@ -36,9 +34,8 @@ class NotificationModel {
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) => NotificationModel(
     id: json["id"],
-    createdAt: json["created_at"],
-    userId: json["user_id"],
-    notificationId: json["notification_id"],
+    userId: json["user_id"]??-1,
+    notificationId: json["notification_id"]??-1,
     notification: UserNotification.fromJson(json["notification"]),
   );
 

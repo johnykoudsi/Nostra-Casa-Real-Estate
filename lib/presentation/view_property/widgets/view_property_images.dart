@@ -7,10 +7,11 @@ import '../../../utility/app_style.dart';
 
 class ViewPropertyImages extends StatefulWidget {
   ViewPropertyImages(
-      {required this.propertyService, required this.imagesUrl, Key? key})
+      {required this.propertyMarketStatus,required this.propertyService, required this.imagesUrl, Key? key})
       : super(key: key);
   List<String> imagesUrl;
   PropertyService? propertyService;
+  PropertyMarketStatus propertyMarketStatus;
 
   @override
   State<ViewPropertyImages> createState() => _ViewPropertyImagesState();
@@ -54,21 +55,45 @@ class _ViewPropertyImagesState extends State<ViewPropertyImages> {
             itemCount: widget.imagesUrl.isNotEmpty ? widget.imagesUrl.length : 1,
             control: null,
           ),
-          if (widget.propertyService != null)
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-              decoration: BoxDecoration(
-                borderRadius: AppStyle.k4RadiusLowerPadding,
-                color: AppStyle.mainColor.withOpacity(0.8),
-              ),
-              child: Text(
-                propertyServiceBackEnd2.reverse[widget.propertyService].toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4!
-                    .copyWith(color: AppStyle.kBackGroundColor),
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                if (widget.propertyService != null)
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
+                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: AppStyle.k4RadiusLowerPadding,
+                    color: AppStyle.mainColor.withOpacity(0.8),
+                  ),
+                  child: Text(
+                    propertyServiceBackEnd2.reverse[widget.propertyService].toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: AppStyle.kBackGroundColor),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(
+                      vertical: 8, horizontal: 1.5),
+                  padding:
+                  const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                  decoration: BoxDecoration(
+                    borderRadius: AppStyle.k4RadiusLowerPadding,
+                    color: AppStyle.mainColor.withOpacity(0.8),
+                  ),
+                  child: Text(
+                    propertyMarketUi.reverse[widget.propertyMarketStatus]
+                        .toString(),
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline4!
+                        .copyWith(color: AppStyle.kBackGroundColor),
+                  ),
+                ),
+              ],
             ),
           Positioned(
             bottom: 10,

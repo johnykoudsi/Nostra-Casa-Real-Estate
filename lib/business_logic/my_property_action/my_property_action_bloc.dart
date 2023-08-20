@@ -28,5 +28,14 @@ class MyPropertyActionBloc
 
       emit(MyPropertyActionStatus(helperResponse: response));
     });
+
+    on<ChangePropertyStatusEvent>((event, emit) async {
+      emit(MyPropertyActionLoading());
+
+      final response =
+      await PropertyActionService.editPropertyStatusService(event: event);
+
+      emit(MyPropertyActionStatus(helperResponse: response));
+    });
   }
 }

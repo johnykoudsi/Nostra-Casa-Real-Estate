@@ -23,6 +23,11 @@ enum PropertyService {
   holiday,
   all,
 }
+enum PropertyMarketStatus{
+  inMarket,
+  purchased,
+  rented,
+}
 enum PropertySorts {
   newToOld,
   oldToNew,
@@ -84,16 +89,6 @@ final EnumValues propertyTypeBackEnd2 = EnumValues({
   "commercial": PropertyType.commercial,
 });
 
-final EnumValues propertyServiceBackEnd1 = EnumValues({
-  "SALE": PropertyService.sale,
-  "RENT": PropertyService.rent,
-  "HOLIDAY": PropertyService.holiday,
-});
-final EnumValues propertyServiceBackEnd2 = EnumValues({
-  "sale": PropertyService.sale,
-  "rent": PropertyService.rent,
-  "holiday": PropertyService.holiday,
-});
 
 final propertyServiceUI = EnumValues({
   "Sale".tr(): PropertyService.sale,
@@ -106,6 +101,34 @@ final propertyServicePriceUI = EnumValues({
   " per month".tr(): PropertyService.rent,
   " per day".tr(): PropertyService.holiday,
 });
+final EnumValues propertyServiceBackEnd1 = EnumValues({
+  "SALE": PropertyService.sale,
+  "RENT": PropertyService.rent,
+  "HOLIDAY": PropertyService.holiday,
+});
+final EnumValues propertyServiceBackEnd2 = EnumValues({
+  "sale": PropertyService.sale,
+  "rent": PropertyService.rent,
+  "holiday": PropertyService.holiday,
+});
+
+
+final EnumValues propertyMarketUi = EnumValues({
+  "In Market".tr(): PropertyMarketStatus.inMarket,
+  "Property is purchased".tr(): PropertyMarketStatus.purchased,
+  "Rented for now".tr(): PropertyMarketStatus.rented,
+});
+final EnumValues propertyMarketBackEnd = EnumValues({
+  "IN_MARKET": PropertyMarketStatus.inMarket,
+  "PURCHASED": PropertyMarketStatus.purchased,
+  "RENTED": PropertyMarketStatus.rented,
+});
+final EnumValues propertyMarketBackEnd2 = EnumValues({
+  "in_market": PropertyMarketStatus.inMarket,
+  "purchased": PropertyMarketStatus.purchased,
+  "rented": PropertyMarketStatus.rented,
+});
+
 
 final genderValues = EnumValues({
   "male": Gender.male,

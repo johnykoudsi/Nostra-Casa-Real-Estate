@@ -139,6 +139,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                         child: ViewPropertyImages(
                           imagesUrl: widget.property.media,
                           propertyService: widget.property.propertyService,
+                          propertyMarketStatus: widget.property.propertyMarketStatus,
                         ),
                       )),
                   Padding(
@@ -161,7 +162,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                           children: [
                             const Icon(Icons.star),
                             Text(
-                              "4.88",
+                              widget.property.rate.toString(),
                               style: Theme.of(context).textTheme.headline5,
                             ),
                           ],

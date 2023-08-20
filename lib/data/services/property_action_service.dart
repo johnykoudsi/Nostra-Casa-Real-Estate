@@ -47,7 +47,31 @@ class PropertyActionService{
     }
     HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
       body: jsonEncode(event.toMapBody()),
-        url:getEndPoint(),
+        url: getEndPoint(),
+        useUserToken: true,
+        crud: "PUT"
+    );
+    print(helperResponse.response);
+
+    return helperResponse;
+
+  }
+
+  static Future editPropertyStatusService({
+    required ChangePropertyStatusEvent event,
+  }) async {
+    String getEndPoint(){
+      if(event.propertyType == PropertyType.agricultural){
+        return EndPoints.editAgriculturalProperty(event.propertyId);
+      }
+      if(event.propertyType == PropertyType.residential){
+        return EndPoints.editResidentialProperty(event.propertyId);
+      }
+      return EndPoints.editCommercialProperty(event.propertyId);
+    }
+    HelperResponse helperResponse = await NetworkHelpers.postDataHelper(
+      body: jsonEncode(event.toMapBody()),
+        url: getEndPoint(),
         useUserToken: true,
         crud: "PUT"
     );

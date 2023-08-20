@@ -10,6 +10,7 @@ import '../../../utility/app_assets.dart';
 import '../../../utility/app_routes.dart';
 import '../../../utility/app_style.dart';
 import '../../../utility/constant_logic_validations.dart';
+import '../../../utility/enums.dart';
 import '../../add_property/widgets/rounded_elevated_button.dart';
 import '../../global_widgets/dialogs_widgets/dialogs_yes_no.dart';
 import 'my_properties_shimmer.dart';
@@ -108,7 +109,6 @@ class MyPropertyItemWidget extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         RoundedElevatedButton(
                           onTap: () {
                             DialogsWidgetsYesNo.showYesNoDialog(
@@ -135,7 +135,6 @@ class MyPropertyItemWidget extends StatelessWidget {
                           iconColor: Colors.red,
                           backgroundColor: AppStyle.kBackGroundColor,
                         ),
-
                         RoundedElevatedButton(
                           onTap: () {
                             priceController.text = property.price.toString();
@@ -149,10 +148,10 @@ class MyPropertyItemWidget extends StatelessWidget {
                                 context.read<MyPropertyActionBloc>().add(
                                     EditPropertyEvent(
                                         propertyType: property.propertyType,
-                                        propertyId: changePropertyIdToPropertyTypeId(
+                                        propertyId:
+                                            changePropertyIdToPropertyTypeId(
                                                 property),
-                                        price:
-                                            priceController.text));
+                                        price: priceController.text));
                               },
                             );
                           },
@@ -160,9 +159,17 @@ class MyPropertyItemWidget extends StatelessWidget {
                           iconColor: Colors.black45,
                           backgroundColor: AppStyle.kBackGroundColor,
                         ),
-
                         RoundedElevatedButton(
-                          onTap: () {},
+                          onTap: () {
+                            context
+                                .read<MyPropertyActionBloc>()
+                                .add(ChangePropertyStatusEvent(
+                                  propertyType: property.propertyType,
+                                  propertyId: changePropertyIdToPropertyTypeId(property),
+                                  propertyMarketStatus: property.propertyMarketStatus,
+                                  propertyService: property.propertyService??PropertyService.all,
+                                ));
+                          },
                           iconData: Icons.sync_alt_sharp,
                           iconColor: Colors.black45,
                           backgroundColor: AppStyle.kBackGroundColor,

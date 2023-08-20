@@ -71,25 +71,50 @@ class PropertyCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (property.propertyService != null)
-                  Container(
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 8, horizontal: 1.5),
-                    padding:
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (property.propertyService != null)
+                        Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 1.5),
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+                        decoration: BoxDecoration(
+                          borderRadius: AppStyle.k4RadiusLowerPadding,
+                          color: AppStyle.mainColor.withOpacity(0.8),
+                        ),
+                        child: Text(
+                          propertyServiceBackEnd2.reverse[property.propertyService]
+                              .toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(color: AppStyle.kBackGroundColor),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 1.5),
+                        padding:
                         const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
-                    decoration: BoxDecoration(
-                      borderRadius: AppStyle.k4RadiusLowerPadding,
-                      color: AppStyle.mainColor.withOpacity(0.8),
-                    ),
-                    child: Text(
-                      propertyServiceBackEnd2.reverse[property.propertyService]
-                          .toString(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4!
-                          .copyWith(color: AppStyle.kBackGroundColor),
-                    ),
+                        decoration: BoxDecoration(
+                          borderRadius: AppStyle.k4RadiusLowerPadding,
+                          color: AppStyle.mainColor.withOpacity(0.8),
+                        ),
+                        child: Text(
+                          propertyMarketUi.reverse[property.propertyMarketStatus]
+                              .toString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline4!
+                              .copyWith(color: AppStyle.kBackGroundColor),
+                        ),
+                      ),
+                    ],
                   ),
+
+
               ],
             ),
             Row(
@@ -111,7 +136,7 @@ class PropertyCard extends StatelessWidget {
                         color: Colors.amber,
                       ),
                       Text(
-                        "4.88",
+                        property.rate.toString(),
                         style: Theme.of(context).textTheme.headline5,
                       ),
                     ],

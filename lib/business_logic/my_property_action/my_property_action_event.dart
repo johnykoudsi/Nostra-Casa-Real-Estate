@@ -30,3 +30,30 @@ class EditPropertyEvent extends MyPropertyActionEvent{
   @override
   List<Object?> get props => [propertyType,propertyId,price];
 }
+class ChangePropertyStatusEvent extends MyPropertyActionEvent{
+
+
+  ChangePropertyStatusEvent({required this.propertyType,required this.propertyId,required this.propertyMarketStatus,required this.propertyService});
+  int propertyId;
+  PropertyType propertyType;
+  PropertyService propertyService;
+  PropertyMarketStatus propertyMarketStatus;
+  String togglePropertyService(){
+    if(propertyMarketStatus !=  PropertyMarketStatus.inMarket){
+      return "IN_MARKET";
+    }
+    if(propertyService == PropertyService.sale){
+      return "PURCHASED";
+    }
+    return "RENTED";
+  }
+  Map<String, dynamic> toMapBody() {
+    Map<String, String> map = {
+      "status": togglePropertyService(),
+    };
+
+    return map;
+  }
+  @override
+  List<Object?> get props => [propertyType,propertyId,propertyMarketStatus,propertyService];
+}

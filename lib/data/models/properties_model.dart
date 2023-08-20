@@ -43,7 +43,7 @@ class Property {
   String description;
   LatLng location;
   String status;
-
+  PropertyMarketStatus propertyMarketStatus;
   PropertyType propertyType;
   PropertyService? propertyService;
   List<Tag> tags;
@@ -55,6 +55,7 @@ class Property {
   List<String> media;
   City? city;
   CountryModel? country;
+  num rate;
 
   Property({
     this.id = -1,
@@ -75,12 +76,15 @@ class Property {
     this.propertyService,
     this.country,
     this.city,
+    this.rate = 0,
+    this.propertyMarketStatus = PropertyMarketStatus.inMarket,
   });
 
   factory Property.fromJson(Map<String, dynamic> json) {
     return Property(
       id: json["id"] ?? 0,
       name: json["name"] ?? '',
+      rate: json["rating"]??0,
       area: json["area"] ?? 0,
       price: json["price"] ?? 0,
       description: json["description"] ?? "",
@@ -89,6 +93,7 @@ class Property {
       status: json["status"] ?? '',
       propertyType: propertyTypeBackEnd2.map[json["type"]] ?? PropertyType.all,
       propertyService: propertyServiceBackEnd2.map[json["service"]],
+      propertyMarketStatus: propertyMarketBackEnd2.map[json["status"]]??PropertyMarketStatus.inMarket,
       tags: List<Tag>.from(json["tags"]?.map((x) => Tag.fromJson(x)) ?? []),
       amenities: List<Amenity>.from(
           json["amenities"]?.map((x) => Amenity.fromJson(x)) ?? []),
