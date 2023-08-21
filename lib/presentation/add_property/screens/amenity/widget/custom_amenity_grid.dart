@@ -49,7 +49,7 @@ class _CustomAmenityGridState extends State<CustomAmenityGrid> {
         if (state is AmenityLoadedState) {
           return RefreshIndicator(
             onRefresh: () async {
-              search();
+              context.read<AmenityBloc>().add(ChangeToLoadingApiEvent());
             },
             child: GridView.builder(
                 controller: scrollController,

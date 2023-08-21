@@ -158,6 +158,7 @@ class _ViewPropertyState extends State<ViewProperty> {
                         SizedBox(
                           height: screenHeight * 0.02,
                         ),
+                        if(widget.property.rate != 0)
                         Row(
                           children: [
                             const Icon(Icons.star),

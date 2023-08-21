@@ -50,7 +50,7 @@ class _CustomTagGridState extends State<CustomTagGrid> {
         if (state is TagLoadedState) {
           return RefreshIndicator(
             onRefresh: () async {
-              search();
+              context.read<TagBloc>().add(ChangeToLoadingTagApiEvent());
             },
             child: GridView.builder(
                 controller: scrollController,

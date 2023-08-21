@@ -54,8 +54,14 @@ class DialogsWidgetsSnackBar {
 
     }
     if(showServerError){
+      if (helperResponse.servicesResponse == ServicesResponseStatues.networkError){
+        return DialogsWidgetsSnackBar.showScaffoldSnackBar(
+          title: "${serviceValues.reverse[helperResponse.servicesResponse]}" ,
+          context: context,
+        );
+      }
       return DialogsWidgetsSnackBar.showScaffoldSnackBar(
-          title: helperResponse.response ,
+          title: helperResponse.response,
           color: AppStyle.redColor,
           context: context
       );

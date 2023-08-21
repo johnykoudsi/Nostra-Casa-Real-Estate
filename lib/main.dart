@@ -88,6 +88,11 @@ class _MyAppState extends State<MyApp> {
     return BlocProvider.value(
       value: globalUserBloc..add(CheckUserFromLocalStorage()),
       child: MaterialApp(
+        scrollBehavior: ScrollConfiguration.of(context).copyWith(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+        ),
         localizationsDelegates: context.localizationDelegates,
         locale: context.locale,
         navigatorKey: globalNavigatorKey,

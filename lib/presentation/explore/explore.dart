@@ -154,7 +154,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                       return Tab(
                                         icon: SvgPicture.asset(
                                           AppAssets.search,
-                                          height: 22,
+                                          height: 25,
                                         ),
                                         text: "All",
                                       );
@@ -162,7 +162,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
                                     return Tab(
                                       icon: SvgPicture.network(
                                         state.tags[index - 1].file,
-                                        height: 22,
+                                        height: 35,
                                       ),
                                       text: isEnglish(context)
                                           ? state.tags[index - 1].name

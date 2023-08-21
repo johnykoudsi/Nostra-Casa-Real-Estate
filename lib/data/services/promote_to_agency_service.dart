@@ -10,7 +10,7 @@ class PromoteToAgencyService {
       useUserToken: true,
       body: event.toMapBody(),
       files: event.files,
-      name: 'files',
+      name: 'files[]',
     );
     print(helperResponse);
     return helperResponse;

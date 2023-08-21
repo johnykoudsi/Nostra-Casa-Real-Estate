@@ -60,65 +60,70 @@ class _NotificationsListState extends State<NotificationsList> {
             ),
           );
         }
-        return ListView.builder(
-          controller: scrollController,
-            itemCount: state.hasReachedMax
-                ? state.notifications.length
-                : state.notifications.length + 1,
-            itemBuilder: (BuildContext context, int index) {
-              if (index >= state.notifications.length) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: (index % 2 == 1)
-                        ? AppStyle.kBackGroundColor
-                        : AppStyle.kLightGrey,
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: screenWidth * 0.038,
-                        right: screenWidth * 0.038,
-                        top: screenHeight * 0.02,
-                        bottom: screenHeight * 0.02),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: AppStyle.blackColor),
-                          ),
-                          child: const CircleAvatar(
-                            radius: 37,
-                            backgroundColor: AppStyle.blackColor,
-                            child: CircleAvatar(
-                              radius: 35,
-                              foregroundImage: AssetImage(AppAssets.logo),
+        return RefreshIndicator(
+          onRefresh: () async{
+            search();
+          },
+          child: ListView.builder(
+            controller: scrollController,
+              itemCount: state.hasReachedMax
+                  ? state.notifications.length
+                  : state.notifications.length + 1,
+              itemBuilder: (BuildContext context, int index) {
+                if (index >= state.notifications.length) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: (index % 2 == 1)
+                          ? AppStyle.kBackGroundColor
+                          : AppStyle.kLightGrey,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: screenWidth * 0.038,
+                          right: screenWidth * 0.038,
+                          top: screenHeight * 0.02,
+                          bottom: screenHeight * 0.02),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all(color: AppStyle.blackColor),
+                            ),
+                            child: const CircleAvatar(
+                              radius: 37,
+                              backgroundColor: AppStyle.blackColor,
+                              child: CircleAvatar(
+                                radius: 35,
+                                foregroundImage: AssetImage(AppAssets.logo),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: screenWidth * 0.02,
-                        ),
-                        ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.7,),
-                        SizedBox(height: screenHeight*0.01,),
-                        ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.5,),
-                        SizedBox(height: screenHeight*0.01,),
-                        ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.4,),
-                      ],
+                          SizedBox(
+                            width: screenWidth * 0.02,
+                          ),
+                          ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.7,),
+                          SizedBox(height: screenHeight*0.01,),
+                          ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.5,),
+                          SizedBox(height: screenHeight*0.01,),
+                          ShimmerLoader(height: screenHeight*0.04,width: screenWidth*0.4,),
+                        ],
+                      ),
                     ),
+                  );
+                }
+                return RefreshIndicator(
+                  onRefresh: () async {
+                    search();
+                  },
+                  child: NotificationItemWidget(
+                    notification: state.notifications[index],
+                    index: index,
                   ),
                 );
-              }
-              return RefreshIndicator(
-                onRefresh: () async {
-                  search();
-                },
-                child: NotificationItemWidget(
-                  notification: state.notifications[index],
-                  index: index,
-                ),
-              );
-            });
+              }),
+        );
       }
       if (state is NotificationsInitial) {
         return ListView.builder(

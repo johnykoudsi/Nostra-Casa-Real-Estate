@@ -121,47 +121,47 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: heightBetweenFields,
                         ),
-                        GestureDetector(
-                          onTap: () async {
-                            if (phoneNumberController.text.isEmpty) {
-                              DialogsWidgetsSnackBar.showScaffoldSnackBar(
-                                  title:
-                                      "Please enter phone number first !".tr(),
-                                  context: context);
-                            } else {
-                              DialogsWidgetsYesNo.showYesNoDialog(
-                                  title:
-                                      "${"Verification code will be send to this number :".tr()}"
-                                      "\n ${phoneNumber.phoneNumber?.replaceAllMapped(RegExp(r'(\d{3})(\d{3})(\d+)'), (Match m) => "(${m[1]}) ${m[2]}-${m[3]}")}",
-                                  noTitle: "Cancel".tr(),
-                                  yesTitle: "Send".tr(),
-                                  onYesTap: () {},
-                                  context: context,
-                                  onNoTap: () {
-                                    Navigator.of(context).pop();
-                                  });
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Forgot Password '.tr(),
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                                Text(
-                                  'Send a code'.tr(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2!
-                                      .copyWith(fontWeight: AppFontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                        // GestureDetector(
+                        //   onTap: () async {
+                        //     if (phoneNumberController.text.isEmpty) {
+                        //       DialogsWidgetsSnackBar.showScaffoldSnackBar(
+                        //           title:
+                        //               "Please enter phone number first !".tr(),
+                        //           context: context);
+                        //     } else {
+                        //       DialogsWidgetsYesNo.showYesNoDialog(
+                        //           title:
+                        //               "${"Verification code will be send to this number :".tr()}"
+                        //               "\n ${phoneNumber.phoneNumber?.replaceAllMapped(RegExp(r'(\d{3})(\d{3})(\d+)'), (Match m) => "(${m[1]}) ${m[2]}-${m[3]}")}",
+                        //           noTitle: "Cancel".tr(),
+                        //           yesTitle: "Send".tr(),
+                        //           onYesTap: () {},
+                        //           context: context,
+                        //           onNoTap: () {
+                        //             Navigator.of(context).pop();
+                        //           });
+                        //     }
+                        //   },
+                        //   child: Padding(
+                        //     padding: const EdgeInsets.all(8.0),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.start,
+                        //       children: [
+                        //         Text(
+                        //           'Forgot Password '.tr(),
+                        //           style: Theme.of(context).textTheme.bodyText2,
+                        //         ),
+                        //         Text(
+                        //           'Send a code'.tr(),
+                        //           style: Theme.of(context)
+                        //               .textTheme
+                        //               .bodyText2!
+                        //               .copyWith(fontWeight: AppFontWeight.bold),
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
 

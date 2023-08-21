@@ -94,7 +94,7 @@ class MyPropertyItemWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Damascus,Syria",
+                            "${property.city?.name} , ${property.country?.name}",
                             style: Theme.of(context).textTheme.headline4,
                           ),
                           Text(property.name,

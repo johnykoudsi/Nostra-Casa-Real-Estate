@@ -73,8 +73,7 @@ class TagBloc extends Bloc<TagEvent, TagState> {
       emit(TagInitial());
 
       add(GetTagApiEvent(
-          searchFilterProperties: TagsSearchFilter(page: 1
-          ,)));
+          searchFilterProperties: TagsSearchFilter(page: 1,)));
     });
   }
 }

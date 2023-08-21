@@ -40,84 +40,94 @@ class _WelcomeToPromoteState extends State<WelcomeToPromote> {
           ),
         ),
       ),
-      body: ListView(
-        children: [
-          Column(
-            children: [
-              SizedBox(
-                height: screenHeight * 0.03,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.038,
-                    vertical: screenWidth * 0.038),
-                child: const Image(
-                  image: AssetImage(AppAssets.agency),
+      body: RefreshIndicator(
+        onRefresh: ()async{
+          if(context.read<AgencyPromotionStatusBloc>().state is! AgencyPromotionStatusDoneState){
+            return;
+          }
+          context
+              .read<AgencyPromotionStatusBloc>()
+              .add(GetPromotionStatusEvent());
+        },
+        child: ListView(
+          children: [
+            Column(
+              children: [
+                SizedBox(
+                  height: screenHeight * 0.03,
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: screenWidth * 0.038,
-                    vertical: screenWidth * 0.038),
-                child: BlocBuilder<AgencyPromotionStatusBloc,
-                    AgencyPromotionStatusState>(
-                  builder: (context, state) {
-                    if (state is AgencyPromotionStatusLoadingState) {
-                      return const CircularProgressIndicator();
-                    }
-                    if (state is AgencyPromotionStatusDoneState) {
-                      if (state.status == "No request submitted") {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Promote now and get your badge".tr(),
-                              style: Theme.of(context).textTheme.headline2,
-                            ),
-                            const SizedBox(
-                              height: 18,
-                            ),
-                            Text(
-                              "We will need more information about your agency in order to confirm you promotion request"
-                                  .tr(),
-                              style: Theme.of(context).textTheme.headline6,
-                            ),
-                          ],
-                        );
-                      } else if (state.status == "Pending") {
-                        return SomethingWrongWidget(
-                          svgPath: AppAssets.promote,
-                          title: "Your request is on pending ".tr(),
-                        );
-                      }else if(state.status=="Accepted"){
-                        return SomethingWrongWidget(
-                          svgPath: AppAssets.promote,
-                          title: "Your request has been accepted you are an agency now".tr(),
-                        );
-                      }
-                      else if(state.status=="Rejected"){
-                        return SomethingWrongWidget(
-                          svgPath: AppAssets.promote,
-                          title: "sorry, your request has been rejected".tr(),
-                        );
-                      }
-                    }
-                    return SomethingWrongWidget(
-                      elevatedButtonWidget: ElevatedButtonWidget(
-                        title: "Refresh".tr(),
-                        onPressed: () {
-                          context
-                              .read<AgencyPromotionStatusBloc>()
-                              .add(GetPromotionStatusEvent());
-                        },
-                      ),
-                    );
-                  },
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.038,
+                      vertical: screenWidth * 0.038),
+                  child: const Image(
+                    image: AssetImage(AppAssets.agency),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: screenWidth * 0.038,
+                      vertical: screenWidth * 0.038),
+                  child: BlocBuilder<AgencyPromotionStatusBloc,
+                      AgencyPromotionStatusState>(
+                    builder: (context, state) {
+                      if (state is AgencyPromotionStatusLoadingState) {
+                        return const CircularProgressIndicator();
+                      }
+                      if (state is AgencyPromotionStatusDoneState) {
+                        if (state.status == "No request submitted") {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Promote now and get your badge".tr(),
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                              const SizedBox(
+                                height: 18,
+                              ),
+                              Text(
+                                "We will need more information about your agency in order to confirm you promotion request"
+                                    .tr(),
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
+                            ],
+                          );
+                        } else if (state.status == "Pending") {
+                          return SomethingWrongWidget(
+                            svgPath: AppAssets.promote,
+                            title: "Your request is on pending ".tr(),
+                          );
+                        }else if(state.status=="Accepted"){
+                          return SomethingWrongWidget(
+                            svgPath: AppAssets.promote,
+                            title: "Your request has been accepted you are an agency now".tr(),
+                          );
+                        }
+                        else if(state.status=="Rejected"){
+                          return SomethingWrongWidget(
+                            svgPath: AppAssets.promote,
+                            title: "sorry, your request has been rejected".tr(),
+                          );
+                        }
+                      }
+                      return SomethingWrongWidget(
+                        elevatedButtonWidget: ElevatedButtonWidget(
+                          title: "Refresh".tr(),
+                          onPressed: () {
+                            context
+                                .read<AgencyPromotionStatusBloc>()
+                                .add(GetPromotionStatusEvent());
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       bottomSheet: Padding(
         padding: EdgeInsets.only(
