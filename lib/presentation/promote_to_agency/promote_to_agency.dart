@@ -127,17 +127,17 @@ class _PromoteToAgencyState extends State<PromoteToAgency> {
                 SizedBox(
                   height: screenHeight * 0.03,
                 ),
-                Visibility(
-                  visible: files.isEmpty ? false : true,
-                  child: SizedBox(
-                    width: screenWidth,
-                    height: screenHeight * 0.3,
-                    child: FilesList(
-                      files: files,
-                      onImageRemoved: _removeFile,
-                    ),
-                  ),
-                ),
+                // Visibility(
+                //   visible: false,
+                //   child: SizedBox(
+                //     width: screenWidth,
+                //     height: screenHeight * 0.3,
+                //     child: FilesList(
+                //       files: files,
+                //       onImageRemoved: _removeFile,
+                //     ),
+                //   ),
+                // ),
                 BlocBuilder<GoogleMapsBloc, GoogleMapsState>(
                   builder: (context, state) {
                     if (state is GoogleMapsPinSelected) {
