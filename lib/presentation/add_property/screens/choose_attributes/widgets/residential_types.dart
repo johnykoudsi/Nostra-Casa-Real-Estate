@@ -85,7 +85,7 @@ class ResidentialTypesWidget extends StatelessWidget {
             int newValue =
                 residentialPropertyAttributes.numberOfLivingRooms;
             if(newValue > 0){
-              int newValue =
+               newValue =
                   residentialPropertyAttributes.numberOfLivingRooms-1;
             }
             context.read<AddPropertyBloc>().add(
