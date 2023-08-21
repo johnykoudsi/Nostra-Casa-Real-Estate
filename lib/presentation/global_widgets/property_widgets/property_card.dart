@@ -129,17 +129,20 @@ class PropertyCard extends StatelessWidget {
                       left: screenWidth * 0.03,
                       right: screenWidth * 0.03,
                       top: screenWidth * 0.01),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                      ),
-                      Text(
-                        property.rate.toString(),
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                    ],
+                  child: Visibility(
+                    visible: property.rate>0,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        Text(
+                          property.rate.toString(),
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
