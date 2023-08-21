@@ -154,5 +154,9 @@
   "Please edit your property price": "الرجاء تعديل سعر عقارك",
   "Are you sure you want to delete this property?": "هل أنت متأكد أنك تريد حذف هذا العقار؟",
   "No": "لا",
-  "Yes": "نعم"
+  "Yes": "نعم",
+  "You should only post your own properties or other people properties with there known and acceptance.\nPosting others properties may lead to block you account.\nWhen promoting to agency make sure to add a clear legal files, you only gets to apply once.\nMake sure to describe your property with out exaggeration.":"عليك أن تنشر فقط عقاراتك الشخصية أو عقارات الآخرين بعد الحصول على علمهم وموافقتهم.\nمن الممكن أن يتسبب نشر عقارات الآخرين بحظر حسابك من التطبيق.\nعندما تتقدم بطلب ترقية الى وكالة احرص على أن تكون مستنداتك واضحة وقانونية فيحق لك التقدم بالطلب مرة واحدة.\nاحرص على توصيف عقارك بأفضل طريقة ممكنة بعيداً عن المبالغة.",
+  "Usage and Privacy Policy": "الاستخدام وسياسة الخصوصية"
+
+
 }

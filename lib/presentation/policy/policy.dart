@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nostra_casa/utility/app_style.dart';
 
@@ -25,54 +26,66 @@ class _PolicyState extends State<Policy> {
     final screenWidth = screenSize.width;
     final screenHeight = screenSize.height;
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title:Text(
-            widget.title,
-            style: const TextStyle(
-              fontWeight: AppFontWeight.bold,
-              fontSize: 22,
+        child: Scaffold(
+          backgroundColor: AppStyle.blackColor,
+          appBar: AppBar(
+            backgroundColor: AppStyle.blackColor,
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back,
+                color: AppStyle.kBackGroundColor,
+              ),
+            ),
+            title: Text(
+              "Usage and Privacy Policy".tr(),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline4!
+                  .copyWith(color: AppStyle.kBackGroundColor),
             ),
           ),
-        ),
-        body: ListView(
-          padding: EdgeInsets.all(screenWidth * 0.038),
-          children: [
-
-            Text(
-                "you should only contact with the rea"
-                    "l estate owners in the available hours you should only contact with the "
-                    "real estate owners in the available hours",
-              style: Theme.of(context).textTheme.headline6,
+          body: Padding(
+            padding: EdgeInsets.fromLTRB(screenWidth * 0.038, screenWidth * 0.1,
+                screenWidth * 0.038, screenWidth * 0.038),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenHeight * 0.1,
+                  ),
+                  Text(
+                    "Nostra Casa",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline1!
+                        .copyWith(color: AppStyle.kBackGroundColor),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(top: screenHeight * 0.05),
+                    child: Text(
+                      "You should only post your own properties or other people properties with there known and acceptance.\nPosting others properties may lead to block you account.\nWhen promoting to agency make sure to add a clear legal files, you only gets to apply once.\nMake sure to describe your property with out exaggeration.".tr()                          .tr(),
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: AppStyle.kBackGroundColor, height: 2),
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.fromLTRB(screenWidth * 0.2,
+                          screenWidth * 0.2, screenWidth * 0.2, 0),
+                      child: const Divider(
+                        color: Colors.white,
+                      )),
+                ],
+              ),
             ),
-          ],
-        ),
-        // bottomSheet: Column(
-        //   mainAxisSize: MainAxisSize.min,
-        //   children: [
-        //     CustomCheckbox(
-        //         value: accept,
-        //         onChange: (accept) {
-        //           changeAcceptance();
-        //         },
-        //         text: "I agree"
-        //     ),
-        //     Padding(
-        //       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.038),
-        //       child: ElevatedButtonWidget(
-        //           title: 'Next',
-        //           onPressed: accept!
-        //               ? () {
-        //                   Navigator.pushNamed(context, "/signup");
-        //                 }
-        //               : null),
-        //     ),
-        //     SizedBox(
-        //       height: screenWidth * 0.038,
-        //     ),
-        //   ],
-        // ),
-      ),
-    );
+          ),
+        ));
   }
 }
