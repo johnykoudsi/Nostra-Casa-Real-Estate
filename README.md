@@ -1,4 +1,4 @@
-# File Manager App
+# Real Estates Management App
 
 A comprehensive real estate management system. Users can sign up, log in, view real estates with proficient filtering and sorting methods, search for estates by various criteria including map search, rate and provide feedback on estates, add estates with detailed information, manage profiles, receive notifications for their estates and those they are interested in. The system includes an agency account for publishing estates, and an admin panel for managing users and estate attributes. Users can also submit requests to become an agency, uploading necessary files for review.
 
