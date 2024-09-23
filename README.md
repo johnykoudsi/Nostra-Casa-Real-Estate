@@ -57,5 +57,8 @@ CONTRIBUTORS:
 
 [Rita Rezeq](https://github.com/RitaRezeq)
 
+[Nicolas Alahmar](https://github.com/nicolasalahmar)
+
+[George Nigoghosian](https://github.com/georgeNigoghossian)
 
 
